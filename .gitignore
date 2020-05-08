@@ -1,0 +1,9 @@
+/cocos2d/
+/proj.android/
+/proj.ios_mac/
+/proj.linux/
+/proj.win32/
+/mac-build/
+/win32-build/
+/cmake-build-debug/
+/.idea/
