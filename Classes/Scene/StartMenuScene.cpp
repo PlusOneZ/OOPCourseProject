@@ -3,8 +3,8 @@
 //
 
 #include "StartMenuScene.h"
-#include "ui/UIScale9Sprite.h"
 #include "ui/CocosGUI.h"
+#include "PauseMenuLayer.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -14,19 +14,19 @@ Scene* StartMenu::createScene()
     return StartMenu::create();
 }
 
-// Print useful error message instead of segfaulting when files are not there.
+/**
+ @author Cocos
+ @brief  print file loading error
+ */
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' "
-           "in front of filenames in StartMenuScene.cpp\n");
 }
 
-// on "init" you need to initialize your instance
+
 bool StartMenu::init()
 {
-    //////////////////////////////
-    // 1. super init first
+    // Check if successfully initialized.
     if ( !Scene::init() )
     {
         return false;
@@ -35,107 +35,90 @@ bool StartMenu::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-            "interface/ui_btn_default.png",
-            "interface/ui_btn_default_pressed.png",
-            CC_CALLBACK_1(StartMenu::menuCloseCallback, this));
+    auto btnSetting = Button::create("interface/ui_btn_default.png",
+                                     "interface/ui_btn_default_pressed.png");
+    auto settingImg = Sprite::create("interface/ui_settings.png");
+    const Size kBtnContSize(30, 18);
     
-    auto pic = Scale9Sprite::create("interface/ui_btn_default.png");
-    
-    auto btn1 = Button::create("interface/ui_btn_default.png",
-                               "interface/ui_btn_default_pressed.png");
-    
-    // Check if resource loaded correctly
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
+    if (btnSetting == nullptr || settingImg == nullptr)
     {
         problemLoading("'interface/ui_btn_default.png'");
+        problemLoading("'interface/ui_settings.png'");
     }
     else
     {
-//        closeItem->setScale(10, 10);
-        float x = origin.x + closeItem->getContentSize().width / 2;
-        float y = origin.y + closeItem->getContentSize().height / 2;
-        closeItem->setPosition(Vec2(x,y));
+        btnSetting->setScale9Enabled(true);
+        // 设置素材内容部分贴图大小
+        btnSetting->setCapInsets(Rect(12, 12, kBtnContSize.width, kBtnContSize.height));
+        btnSetting->setContentSize(Size(150, 120));
+        btnSetting->setPosition(Vec2(80, 60));
+        settingImg->setPosition(Vec2(80, 60));
+        btnSetting->addClickEventListener([&](Ref *) {
+            log("Setting Pressed!");
+            auto menu = PauseMenu::create();
+            menu->setTag(88);
+            Director::getInstance()->pause();
+            Director::getInstance()->pushScene(menu);
+        }
+        );
     }
-    
-    if (btn1 == nullptr)
-    {
-        problemLoading("'interface/ui_btn_default.png'");
-    }
-    else
-    {
-        btn1->setContentSize(Size(150, 120));
-        btn1->setPosition(Vec2(200, 200));
-    }
-    
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-    this->addChild(btn1, 1);
-    
-    /////////////////////////////
-    // 3. add your codes below...
 
-    // add "StartMenu" splash screen"
-    auto sprite = Sprite::create("interface/start.png");
-    if (sprite == nullptr)
+    this->addChild(btnSetting, 2);
+    this->addChild(settingImg, 3);
+
+
+    auto startBackground = Sprite::create("interface/start.png");
+    if (startBackground == nullptr)
     {
         problemLoading("'start.png'");
     }
     else
     {
-        auto spriteSize = sprite->getContentSize();
-        sprite->setScale(visibleSize.width / spriteSize.width,
+        auto spriteSize = startBackground->getContentSize();
+        startBackground->setScale(visibleSize.width / spriteSize.width,
                          visibleSize.height / spriteSize.height);
         log("Pic size: %f, %f", spriteSize.width, spriteSize.height);
         log("Vis size: %f, %f", visibleSize.width, visibleSize.height);
         log("Proportion: %f, %f", visibleSize.width / spriteSize.width,
             visibleSize.height / spriteSize.height);
         // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x,
-                visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
+        startBackground->setPosition(Vec2(visibleSize.width / 2 + origin.x,
+                                 visibleSize.height / 2 + origin.y));
     }
 
-    auto listener = EventListenerKeyboard::create();
-    listener->onKeyPressed = CC_CALLBACK_2(StartMenu::onSpacePressed, this);
+    this->addChild(startBackground, 1);
 
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    auto keyboardListener = EventListenerKeyboard::create();
+    keyboardListener->onKeyPressed = CC_CALLBACK_2(StartMenu::onKeyPressed, this);
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
     return true;
 }
 
 
-void StartMenu::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
 
-    /*To navigate back to native iOS screen(if present) without quitting the application
-     * ,do not use Director::getInstance()->end() as given above,instead trigger a custom
-     * event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
-}
-
-
-void StartMenu::onSpacePressed(EventKeyboard::KeyCode keyCode, Event *event) {
+void StartMenu::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event) {
     log("Key with keyCode %d pressed", keyCode);
-    if (event->getType() == Event::Type::KEYBOARD &&
-        keyCode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE) {
-        Director::getInstance()->replaceScene(SafeMap::create());
+    if (event->getType() == Event::Type::KEYBOARD) {
+        if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE)
+        {
+            Director::getInstance()->replaceScene(SafeMap::create());
+        }
+        else if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE)
+        {
+            Director::getInstance()->end();
+        }
     }
 }
 
+/*
+void StartMenu::popSettingMenu(const Size &viSize) {
+    std::unique_ptr<Scale9Sprite> menuBoard(Scale9Sprite::create("interface/ui_pause_board.png"));
+    menuBoard->setCapInsets(Rect(6, 6, 79, 61));
+    menuBoard->setContentSize(Size(400, 300));
+    menuBoard->setPosition(viSize.width / 2, viSize.height / 2);
+
+    this->addChild(menuBoard.get(), 3);
+}
+*/

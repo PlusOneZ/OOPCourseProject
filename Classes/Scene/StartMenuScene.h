@@ -1,11 +1,10 @@
 /**
- * @file Sta
- * @author ZZY
- *
+ * @file   StartMenuScene.h
+ * @author 卓正一
  */
 
-#ifndef SOULKNIGHT_STARTMENUSCENE_H
-#define SOULKNIGHT_STARTMENUSCENE_H
+#ifndef _START_MENU_SCENE_H
+#define _START_MENU_SCENE_H
 
 #include "cocos2d.h"
 #include "SafeMapScene.h"
@@ -16,17 +15,18 @@ class StartMenu : public cocos2d::Scene {
 public:
     static cocos2d::Scene* createScene();
 
+    /**
+    * @author 卓正一
+    * @brief  初始化场景
+    * @return true
+    */
     bool init() override ;
 
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-
-    // implement the "static create()" method manually
     CREATE_FUNC(StartMenu);
 
-    void onSpacePressed(EventKeyboard::KeyCode keyCode, Event* event);
+    void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
 };
 
 
-#endif //SOULKNIGHT_STARTMENUSCENE_H
+#endif //_START_MENU_SCENE_H
