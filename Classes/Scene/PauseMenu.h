@@ -2,13 +2,19 @@
 #define _PAUSE_MENU_H
 
 #include <utility>
+#include "Const/Const.h"
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
+#include "AudioEngine.h"
+#include "StartScene.h"
 
 USING_NS_CC;
 
 class PauseMenu : public cocos2d::Scene{
 public:
+
+    PauseMenu(sk::AudioState &auState, sk::HeroID id);
 
     /**
      * @brief  初始化目录
@@ -19,17 +25,16 @@ public:
 
     /**
      * @brief  自定义的创建函数
-     * @todo   还缺两个参数，决定是否播放音乐音效以及头像用哪个英雄
-     * @param
+     * @param  auState, id 引用的参数
      * @return 一个 PauseMenu 的实例
      * @author 卓正一
      */
-    static PauseMenu* create();
+    static PauseMenu* create(sk::AudioState &auState, sk::HeroID id);
 
 private:
-    bool m_playEffect = true;
-    bool m_playMusic  = true;
-    // sk::HERO_TYPE m_heroType = sk::KNIGHT;
+    bool &m_playEffect;
+    bool &m_playMusic;
+    sk::HeroID m_heroID = sk::kKnight;
 
     /**
      * @brief  改变音效播放状态

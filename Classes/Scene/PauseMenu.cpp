@@ -5,15 +5,22 @@
  */
 
 #include "PauseMenu.h"
-#include "ui/CocosGUI.h"
-#include "AudioEngine.h"
 
 using namespace cocos2d;
 
+extern int sk::gBackgroundMusicID;
 
-PauseMenu* PauseMenu::create()
+PauseMenu::PauseMenu(sk::AudioState &auState, sk::HeroID id)
+    : m_playEffect(auState.auEffectPlaying),
+      m_playMusic(auState.musicPlaying),
+      m_heroID(id)
 {
-    auto *pRet = new(std::nothrow) PauseMenu();
+    // Empty
+}
+
+PauseMenu* PauseMenu::create(sk::AudioState &auState, sk::HeroID id)
+{
+    auto *pRet = new(std::nothrow) PauseMenu(auState, id);
     if (pRet)
     {
         if (pRet->init())
@@ -133,6 +140,7 @@ bool PauseMenu::init() {
     }
     else
     {
+        // TODO: 重新布局或者加入技能栏（大概是重新布局）
         const float kYCenter = kVisibleSize.height / 2 - 130;
         const float kXCenter = kVisibleSize.width / 2;
         normalizeButton(resumeBtn);
@@ -166,9 +174,9 @@ bool PauseMenu::init() {
 
         homeBtn->addClickEventListener([&](Ref* ){
             playClickEffect();
-            // TODO: add raw start scene
             // TODO: 如果有存档功能的话，在这里存档并退出（或是每过一个房间就存一次档）
-//            Director::getInstance()->replaceScene();
+            AudioEngine::pauseAll();
+            Director::getInstance()->replaceScene(Start::create());
         });
 
         effectBtn->addClickEventListener([&](Ref*){ changEffectPlayEvent(); });
@@ -186,7 +194,7 @@ bool PauseMenu::init() {
 }
 
 void PauseMenu::changEffectPlayEvent() {
-    // TODO: 在这里开关音效
+    // 在这里开关音效
     if (m_playEffect)
     {
         m_playEffect = false;
@@ -206,13 +214,13 @@ void PauseMenu::changMusicPlayEvent() {
     if (m_playMusic) {
         m_playMusic = false;
         this->getChildByTag(77)->setColor(Color3B(20, 20, 20));
-//        AudioEngine::pause(sk::BACKGROUND_MUSIC_ID);
+        AudioEngine::pause(sk::gBackgroundMusicID);
     }
     else
     {
         m_playMusic = true;
         this->getChildByTag(77)->setColor(Color3B(240, 240, 240));
-//        AudioEngine::resume(sk::BACKGROUND_MUSIC_ID);
+        AudioEngine::resume(sk::gBackgroundMusicID);
     }
 }
 

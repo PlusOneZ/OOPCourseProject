@@ -23,13 +23,12 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "Scene/StartMenuScene.h"
+#include "Scene/StartScene.h"
 
-// #define USE_AUDIO_ENGINE 1
+#define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
-using namespace cocos2d::experimental;
 #endif
 
 USING_NS_CC;
@@ -108,7 +107,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = StartMenu::createScene();
+    auto scene = Start::createScene();
 
     // run
     director->runWithScene(scene);
