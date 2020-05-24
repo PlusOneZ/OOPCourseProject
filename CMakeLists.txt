@@ -61,13 +61,11 @@ endif ()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
         Classes/AppDelegate.cpp
-        Classes/Scene/SafeMapScene.cpp
         Classes/Scene/StartMenuScene.cpp
         Classes/Scene/PauseMenu.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
-        Classes/Scene/SafeMapScene.h
         Classes/Scene/StartMenuScene.h
         Classes/Scene/PauseMenu.h
         )
