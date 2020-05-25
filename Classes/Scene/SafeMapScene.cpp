@@ -1,7 +1,7 @@
-/**
+﻿/**
 *@file
 *SafeMapScene.cpp
-*@author �Գ��
+*@author 翟晨昊
 */
 
 #include "SafeMapScene.h"
@@ -10,7 +10,7 @@
 /**
 *@brief Call the create function
 *@return A Scene instance
-*@author �Գ��
+*@author 翟晨昊
 */
 Scene *SafeMap::createScene()
 {
@@ -21,7 +21,7 @@ Scene *SafeMap::createScene()
 *@brief Initialize the scene
 *@details Add images to the saferoom
 *@return true
-*@author �Գ��
+*@author 翟晨昊
 */
 bool SafeMap::init()
 {
@@ -236,7 +236,29 @@ bool SafeMap::init()
                                  visibleSize.height / 2 + origin.y - 230.0));
         addChild(canBed, 3, 113);
     }
+
+	addPlayerKnight(this);
  
     return true;
+}
+
+void SafeMap::addPlayerKnight(SafeMap* pMap)
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Sprite* knightSprite = Sprite::create("Actor/knight_rest1.png");
+	if (knightSprite == nullptr)
+	{
+		log("knight_rest1.png not found");
+	}
+	else
+	{
+		Knight* knight = Knight::create();
+		knight->bindSprite(knightSprite);
+		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+			visibleSize.height / 2 + origin.y + 150.0)));
+		pMap->addChild(knight, 3, 500);
+		//knight->rest();bug修复后，请去掉注释
+	}
 }
 
