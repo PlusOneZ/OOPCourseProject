@@ -11,38 +11,10 @@
 USING_NS_CC;
 using namespace cocos2d::ui;
 
-TitleScene::TitleScene(sk::AudioState &auState)
-        : m_audioState(auState)
-{
-    // Empty
-}
+extern int  gBackgroundMusicID;
+extern bool gIsMusicPlaying;
+extern bool gIsEffectPlaying;
 
-
-TitleScene* TitleScene::create(sk::AudioState &auState)
-{
-    auto *pRet = new(std::nothrow) TitleScene(auState);
-    if (pRet)
-    {
-        if (pRet->init())
-        {
-            pRet->autorelease();
-            return pRet;
-        }
-    }
-    delete pRet;
-    pRet = nullptr;
-    return nullptr;
-}
-
-///**
-//*@brief Call the create function
-//*@return A Scene instance
-//*@author �Գ��
-//*/
-//Scene* TitleScene::createScene()
-//{
-//    return TitleScene::create();
-//}
 
 /**
 *@brief Error adding resource
@@ -65,6 +37,21 @@ bool TitleScene::init()
     if ( !Scene::init() )
     {
         return false;
+    }
+
+    // 播放音乐
+    static bool recorded = false;
+    if (!recorded)
+    {
+        gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm1, true, .5);
+        AudioEngine::preload(sk::files::kBtnPressed);
+        recorded = true;
+        gIsMusicPlaying  = true;
+        gIsEffectPlaying = true;
+    }
+    else
+    {
+        AudioEngine::resume(gBackgroundMusicID);
     }
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -201,7 +188,7 @@ void TitleScene::buildSettingBtn() {
         settingImg->setPosition(Vec2(60, 40));
         btnSetting->addClickEventListener([&](Ref *) {
             log("Setting Pressed!");
-            auto menu = PauseMenu::create(m_audioState, sk::kKnight);
+            auto menu = PauseMenu::create(sk::kKnight);
             Director::getInstance()->pause();
             Director::getInstance()->pushScene(menu);
         }

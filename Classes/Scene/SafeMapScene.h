@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file
 *SafeMapScene.h
 *@author 翟晨昊
@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include"Actor/Knight.h"
+
 USING_NS_CC;
 
 /**
@@ -19,13 +20,29 @@ USING_NS_CC;
 class SafeMap : public cocos2d::Scene
 {
 public:
-    static Scene* createScene();
-    bool init() override ;
+
+    /**
+     *@brief Call the create function
+     *@return A Scene instance
+     *@author 翟晨昊
+     */
+    static Scene *createScene();
+
+    /**
+     *@brief Initialize the scene
+     *@details Add images to the saferoom
+     *@return true
+     *@author 翟晨昊
+     */
+    bool init() override;
+
     CREATE_FUNC(SafeMap);
-	/**
-	*@brief 添加骑士
-	*@author 肖杨
-	*/
-	void SafeMap::addPlayerKnight(SafeMap* pMap);
+
+    /**
+    *@brief 添加骑士
+    *@author 肖杨
+    */
+    void addPlayerKnight(SafeMap *pMap);
 };
+
 #endif

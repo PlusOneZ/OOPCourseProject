@@ -6,7 +6,6 @@
 
 #include "StartScene.h"
 
-extern int sk::gBackgroundMusicID;
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -66,17 +65,6 @@ bool Start::init()
 
 
 void Start::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event) {
-    static bool recorded = false;
     log("Key with keyCode %d pressed", keyCode);
-    if (!recorded)
-    {
-        sk::gBackgroundMusicID = AudioEngine::play2d("Audio/bgm_1Low.wav", true, .5);;
-        recorded = true;
-    }
-    else
-    {
-        AudioEngine::resume(sk::gBackgroundMusicID);
-    }
-    static sk::AudioState audioState;
-    Director::getInstance()->replaceScene(TitleScene::create(audioState));
+    Director::getInstance()->replaceScene(TitleScene::create());
 }

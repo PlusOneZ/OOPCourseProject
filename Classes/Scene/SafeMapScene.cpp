@@ -7,22 +7,11 @@
 #include "SafeMapScene.h"
 #include <iostream>
 
-/**
-*@brief Call the create function
-*@return A Scene instance
-*@author 翟晨昊
-*/
 Scene *SafeMap::createScene()
 {
     return SafeMap::create();
 }
 
-/**
-*@brief Initialize the scene
-*@details Add images to the saferoom
-*@return true
-*@author 翟晨昊
-*/
 bool SafeMap::init()
 {
     // 1. super init first
@@ -40,7 +29,7 @@ bool SafeMap::init()
     }
     else
     {
-        safeRoom->setPosition(Vec2(visibleSize.width / 2 + origin.x, 
+        safeRoom->setPosition(Vec2(visibleSize.width / 2 + origin.x,
                                    visibleSize.height / 2 + origin.y));
         addChild(safeRoom, 1, 98);
     }
@@ -52,7 +41,7 @@ bool SafeMap::init()
     }
     else
     {
-        sofa->setPosition(Vec2(visibleSize.width / 2 + origin.x - 100.0, 
+        sofa->setPosition(Vec2(visibleSize.width / 2 + origin.x - 100.0,
                                visibleSize.height / 2 + origin.y + 150.0));
         addChild(sofa, 3, 100);
     }
@@ -76,7 +65,7 @@ bool SafeMap::init()
     }
     else
     {
-        table->setPosition(Vec2(visibleSize.width / 2 + origin.x, 
+        table->setPosition(Vec2(visibleSize.width / 2 + origin.x,
                                 visibleSize.height / 2 + origin.y - 97.0));
         addChild(table, 3, 101);
     }
@@ -238,7 +227,7 @@ bool SafeMap::init()
     }
 
 	addPlayerKnight(this);
- 
+
     return true;
 }
 
@@ -258,7 +247,7 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		pMap->addChild(knight, 3, 500);
-		//knight->rest();bug修复后，请去掉注释
+		knight->rest(); // bug修复后，请去掉注释
 	}
 }
 

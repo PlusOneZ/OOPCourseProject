@@ -1,13 +1,14 @@
 ﻿/**
 *@file Knight.h
 *@author 肖杨
-*@date 2020.5.24
+*@date 5/24/2020
 */
 #ifndef _Knight_H_
 #define _Knight_H_
 
 #include "Hero.h"
-#include <string>
+#include "Const/Const.h"
+
 /**
 *@brief 骑士类
 *@author 肖杨
@@ -16,11 +17,12 @@ class Knight :public Hero
 {
 public:
 	CREATE_FUNC(Knight);
+
 	/**
 	*@brief 生成骑士
 	*@author 肖杨
 	*/
-	virtual bool init();
+	bool init() override ;
 	
 	/**
 	*@brief 生成移动动画
@@ -28,21 +30,24 @@ public:
 	*@return 移动动作
 	*/
 	Animate* creatMoveAnimate();
+
 	/**
 	*@brief 生成静止动画
 	*@author 肖杨
 	*@return 静止动作
 	*/
 	Animate* creatRestAnimate();
+
 	/**
 	*@brief 主角静止
 	*@author 肖杨
 	*/
-	void rest();
+	void rest() override ;
+
 	/**
 	*@brief 主角移动
 	*@author 肖杨
 	*/
-	void move();
+	void move() override ;
 };
 #endif // !_Knight_H__

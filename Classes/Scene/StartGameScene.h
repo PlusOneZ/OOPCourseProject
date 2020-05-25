@@ -20,18 +20,10 @@ class TitleScene : public cocos2d::Scene
 {
 public:
 
-    /**
-     * @note  Added by ZZY
-     */
-    TitleScene(sk::AudioState &auState);
     virtual bool init();
     void menuStartCallback(cocos2d::Ref* pSender);
     void menuEndCallback(cocos2d::Ref* pSender);
-
-    /**
-     * @note Added by ZZY
-     */
-    static TitleScene* create(sk::AudioState &auState);
+    CREATE_FUNC(TitleScene);
 
     /**
      * @brief  Build a setting button on left bottom corner
@@ -40,8 +32,6 @@ public:
      */
     void buildSettingBtn();
 
-private:
-    sk::AudioState &m_audioState;
 };
 
 #endif

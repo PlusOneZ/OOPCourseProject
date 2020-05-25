@@ -10,7 +10,7 @@
     + 类成员变量使用 `m_` 前缀，接小驼峰。
     + 全局变量（避免在代码逻辑中使用全局变量）`g` 开头大驼峰。
     + 常量（全局或局部）`k` 开头大驼峰。
-    + 指针变量/形参 `p` 开头大驼峰。 
+    + 指针变量/指针形参 `p` 开头大驼峰。 
         + 参数应该满足这个规则
         + cocos 自带类用 create 方法产生的返回值都是指针，如果你用 auto 或其他方式来推断这个值的类型，可以不使用 `p` 前缀。
 
@@ -36,9 +36,10 @@ public:
 }
 
 /**
- @brief  开始游戏的回调
- @author zzy
- @param  pSender 暂时没用的指针
+ *@brief   开始游戏的回调
+ *@param   pSender: 暂时没用的指针
+  *@date   05/25/2020 [(modified / bug fixed) by xxx]
+  *@author zzy
 */
 void MyScene::startButtonCallback(Ref *pSender) {
     Director::getInstance()->replaceScene(SafeMap::create())
@@ -54,3 +55,4 @@ void MyScene::startButtonCallback(Ref *pSender) {
 + 减少宏的使用，尽量使用 const。
 + 在保证每个函数都有 Doxygen 注释的情况下，函数间还要有一行或以上的空行。
 + `+ = - * / & | += -= *= /= &= \= == != < > >= <= && || ` 符号前后都要有一个空格，`, ; `前面不空格，后面总是要有一个空格（或换行）。
++ 使用**换行符**尽量阔绰，函数声明间也需要换行，以便区分哪个注释是哪个函数的。预处理与代码之间保持一行或以上的空间。函数与函数之间也要保持一行以上。

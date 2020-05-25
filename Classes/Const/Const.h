@@ -8,24 +8,37 @@
 #define __CONST_H__
 
 
-namespace sk {
-    /// Warning: Below are file scope global variables
-    static int gBackgroundMusicID;
+namespace sk
+{
+    /// State Structures
 
 
-    /**
-     * @brief  用于类之间传递音频播放状态
-     * @author 卓正一
-     */
-    struct AudioState {
-        bool musicPlaying    = true;
-        bool auEffectPlaying = true;
-    };
 
-    enum HeroID {
+    /// Constants, Classify them before adding!
+
+    enum HeroID
+    {
         kKnight,
         kAssassin,
     };
+
+
+    // File names
+    namespace files
+    {
+        // Audio
+        const char kBgm1[]       = "Audio/bgm_1Low.mp3";
+        const char kBtnPressed[] = "Audio/fx_btn1.mp3";
+
+        // Heroes
+        const char kKnightRest[] = "Actor/knight_rest";
+        const char kKnightMove[] = "Actor/knight_move";
+
+        const char kHeroAvatar[2][40] = {
+                "interface/ui2_knight.png",
+                "interface/ui2_assassin.png",
+        };
+    }
 }
 
 

@@ -11,10 +11,15 @@
 
 USING_NS_CC;
 
+// 控制音乐的全局变量
+static int  gBackgroundMusicID;
+static bool gIsMusicPlaying  = true;
+static bool gIsEffectPlaying = true;
+
 class PauseMenu : public cocos2d::Scene{
 public:
 
-    PauseMenu(sk::AudioState &auState, sk::HeroID id);
+    PauseMenu(sk::HeroID id);
 
     /**
      * @brief  初始化目录
@@ -29,11 +34,9 @@ public:
      * @return 一个 PauseMenu 的实例
      * @author 卓正一
      */
-    static PauseMenu* create(sk::AudioState &auState, sk::HeroID id);
+    static PauseMenu* create(sk::HeroID id);
 
 private:
-    bool &m_playEffect;
-    bool &m_playMusic;
     sk::HeroID m_heroID = sk::kKnight;
 
     /**
@@ -52,7 +55,7 @@ private:
      * @brief  按按钮的时候当然要放音效
      * @author 卓正一
      */
-    void playClickEffect();
+    static void playClickEffect();
 };
 
 

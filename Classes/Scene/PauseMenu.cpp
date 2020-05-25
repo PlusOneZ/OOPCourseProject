@@ -8,19 +8,16 @@
 
 using namespace cocos2d;
 
-extern int sk::gBackgroundMusicID;
 
-PauseMenu::PauseMenu(sk::AudioState &auState, sk::HeroID id)
-    : m_playEffect(auState.auEffectPlaying),
-      m_playMusic(auState.musicPlaying),
-      m_heroID(id)
+PauseMenu::PauseMenu(sk::HeroID id)
+    : m_heroID(id)
 {
     // Empty
 }
 
-PauseMenu* PauseMenu::create(sk::AudioState &auState, sk::HeroID id)
+PauseMenu* PauseMenu::create(sk::HeroID id)
 {
-    auto *pRet = new(std::nothrow) PauseMenu(auState, id);
+    auto *pRet = new(std::nothrow) PauseMenu(id);
     if (pRet)
     {
         if (pRet->init())
@@ -102,8 +99,7 @@ bool PauseMenu::init() {
 
     // 放置头像框
     auto avatarPot = ui::Scale9Sprite::create("interface/ui_pot.png");
-    // TODO: 在正式游戏中修改这个头像
-    auto avatar    = Sprite::create("interface/ui2_knight.png",
+    auto avatar    = Sprite::create(sk::files::kHeroAvatar[m_heroID],
             Rect(0, 0, 112, 100));
     if (avatar == nullptr || avatarPot == nullptr)
     {
@@ -154,12 +150,12 @@ bool PauseMenu::init() {
         homeBtn->setPosition(Vec2(kXCenter - 65, kYCenter));
         homeImg->setPosition(Vec2(kXCenter - 65, kYCenter));
 
-        if (!m_playEffect)
+        if (!gIsEffectPlaying)
             effectImg->setColor(Color3B(20, 20, 20));
         effectBtn->setPosition(Vec2(kXCenter + 65, kYCenter));
         effectImg->setPosition(Vec2(kXCenter + 65, kYCenter));
 
-        if (!m_playMusic)
+        if (!gIsMusicPlaying)
             musicImg->setColor(Color3B(20, 20, 20));
         musicBtn->setPosition(Vec2(kXCenter + 190, kYCenter));
         musicImg->setPosition(Vec2(kXCenter + 190, kYCenter));
@@ -189,20 +185,19 @@ bool PauseMenu::init() {
         this->addChild(musicBtn, 1);  this->addChild(musicImg, 2, 77);
     }
 
-
     return true;
 }
 
 void PauseMenu::changEffectPlayEvent() {
     // 在这里开关音效
-    if (m_playEffect)
+    if (gIsEffectPlaying)
     {
-        m_playEffect = false;
+        gIsEffectPlaying = false;
         this->getChildByTag(88)->setColor(Color3B(20, 20, 20));
     }
     else
     {
-        m_playEffect = true;
+        gIsEffectPlaying = true;
         this->getChildByTag(88)->setColor(Color3B(240, 240, 240));
     }
     playClickEffect();
@@ -211,22 +206,21 @@ void PauseMenu::changEffectPlayEvent() {
 void PauseMenu::changMusicPlayEvent() {
     playClickEffect();
     // TODO: 在这里开关音乐
-    if (m_playMusic) {
-        m_playMusic = false;
+    if (gIsMusicPlaying) {
+        gIsMusicPlaying = false;
         this->getChildByTag(77)->setColor(Color3B(20, 20, 20));
-        AudioEngine::pause(sk::gBackgroundMusicID);
+        AudioEngine::pause(gBackgroundMusicID);
     }
     else
     {
-        m_playMusic = true;
+        gIsMusicPlaying = true;
         this->getChildByTag(77)->setColor(Color3B(240, 240, 240));
-        AudioEngine::resume(sk::gBackgroundMusicID);
+        AudioEngine::resume(gBackgroundMusicID);
     }
 }
 
-
 void PauseMenu::playClickEffect() {
-    if (m_playEffect) {
-        AudioEngine::play2d("Audio/fx_btn1.wav");
+    if (gIsEffectPlaying) {
+        AudioEngine::play2d(sk::files::kBtnPressed);
     }
 }

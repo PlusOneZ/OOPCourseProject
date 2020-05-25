@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file Hero.cpp
 *@author 肖杨
 *@date 2020.5.24
@@ -11,22 +11,29 @@ bool Hero::init()
 }
 
 /**
-*@bug 传参错误导致无法正常生成动画
+ * @brief  创建
+ * @bug    传参错误导致无法正常生成动画
+ * @date   05/25/2020 [bug fixed: 卓正一]
+ * @param  pAnimateName 动画文件名（字符串）
+ * @author 肖扬
 */
-Animate* Hero::creatHeroAnimate(std::string pAnimateName)
+Animate* Hero::creatHeroAnimate(const char * pAnimateName)
 {
+    log("Trying to create hero");
 	int moveFrameNum = 4;
-	SpriteFrame*frame = NULL;
+	SpriteFrame*frame = nullptr;
 	Vector<SpriteFrame*> frameVec;
 	for (int i = 1; i <= moveFrameNum; i++)
 	{
-		frame = SpriteFrame::create(StringUtils::format("%s%d.png", pAnimateName.c_str(), i), Rect(0, 0, 64, 55));
+		frame = SpriteFrame::create(StringUtils::format("%s%d.png", pAnimateName, i),
+		                            Rect(0, 0, 64, 60));
 		if (frame == nullptr)
 		{
-			log("animate %s%d.png lost", pAnimateName,i);
+            log("animate %s%d.png lost", pAnimateName, i);
 		}
 		else
 		{
+		    frame->setAnchorPoint(Vec2(0.5, 0.));
 			frameVec.pushBack(frame);
 		}
 	}
