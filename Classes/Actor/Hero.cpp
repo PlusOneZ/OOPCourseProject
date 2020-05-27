@@ -43,3 +43,19 @@ Animate* Hero::creatHeroAnimate(const char * pAnimateName)
 	Animate*action = Animate::create(animation);
 	return action;
 }
+
+void Hero::setController(ControllerBase* controllerbase)
+{
+	m_moveController = controllerbase;
+	m_moveController->setControllerListener(this);
+}
+
+void Hero::setTagPosition(int x, int y)
+{
+	this->setPosition(Point(x, y));
+}
+
+Point Hero::getTagPosition()
+{
+	return this->getPosition();
+}

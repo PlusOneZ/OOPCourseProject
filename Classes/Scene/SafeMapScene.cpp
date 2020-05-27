@@ -247,7 +247,11 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		pMap->addChild(knight, 3, 500);
-		knight->rest(); // bug修复后，请去掉注释
+		knight->rest();
+
+		MoveController* moveController = MoveController::create();
+		this->addChild(moveController);
+		knight->setController(moveController);
 	}
 }
 

@@ -7,11 +7,12 @@
 #define _Hero_H_
 
 #include "Actor.h"
+#include "Controller.h"
 /**
 *@brief 主角类
 *@author 肖杨
 */
-class Hero :public Actor
+class Hero :public Actor,public ControllerListener
 {
 public:
 	/**
@@ -39,5 +40,27 @@ public:
 	@param arg1 要生成的动画对应文件名称
 	*/
 	static Animate* creatHeroAnimate(const char * pAnimateName);
+
+	/**
+	*@brief 实现控制器接口
+	*@author 肖杨
+	*/
+	virtual void setTagPosition(int x, int y);
+
+	/**
+	*@brief 实现控制器接口
+	*@author 肖杨
+	*@return 当前坐标点
+	*/
+	virtual Point getTagPosition();
+
+	/**
+	*@brief 设置控制器
+	*@author 肖杨
+	*/
+	void setController(ControllerBase* controllerBase);
+
+protected:
+	ControllerBase* m_moveController;
 };
 #endif
