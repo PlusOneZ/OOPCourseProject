@@ -68,6 +68,8 @@ list(APPEND GAME_SOURCE
         Classes/Actor/Actor.cpp
         Classes/Actor/Hero.cpp
         Classes/Actor/Knight.cpp
+        Classes/Actor/Controller.cpp
+        Classes/Item/Weapon.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -78,6 +80,9 @@ list(APPEND GAME_HEADER
         Classes/Actor/Actor.h
         Classes/Actor/Hero.h
         Classes/Actor/Knight.h
+        Classes/Actor/Controller.h
+        Classes/Item/Item.h
+        Classes/Item/Weapon.h
 
         Classes/Const/Const.h
         )

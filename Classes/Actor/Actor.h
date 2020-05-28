@@ -2,8 +2,8 @@
 *@file Actor.h
 *@author 肖杨
 */
-#ifndef _Actor_H_
-#define _Actor_H_
+#ifndef _ACTOR_H_
+#define _ACTOR_H_
 #include "cocos2d.h"
 using namespace cocos2d;
 /**

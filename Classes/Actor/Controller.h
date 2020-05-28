@@ -1,46 +1,46 @@
-/**
+ï»¿/**
 *@file Controller.h
-*@author Ğ¤Ñî
+*@author è‚–æ¨
 *@date 2020.5.28
 */
-#ifndef _Controller_H_
-#define _Controller_H_
+#ifndef _CONTROLLER_H_
+#define _CONTROLLER_H_
 
 #include "cocos2d.h"
 #include<Windows.h>
 #define KEY_DOWN(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)
-//ºê¶¨ÒåÀ´Ô´https://blog.csdn.net/everlasting_20141622/article/details/52222006
+//å®å®šä¹‰æ¥æºhttps://blog.csdn.net/everlasting_20141622/article/details/52222006
 using namespace cocos2d;
 /**
-*@brief °ó¶¨½«¿ØÖÆµÄ¶ÔÏó
-*@author Ğ¤Ñî
+*@brief ç»‘å®šå°†æ§åˆ¶çš„å¯¹è±¡
+*@author è‚–æ¨
 */
 class ControllerListener
 {
 public:
 	/**
-	*@brief ÉèÖÃ×ø±ê
-	*@author Ğ¤Ñî
+	*@brief è®¾ç½®åæ ‡
+	*@author è‚–æ¨
 	*/
 	virtual void setTagPosition(int x, int y) = 0;
 
 	/**
-	*@brief »ñÈ¡×ø±ê
-	*@author Ğ¤Ñî
+	*@brief è·å–åæ ‡
+	*@author è‚–æ¨
 	*/
 	virtual Point getTagPosition() = 0;
 };
 
 /**
-*@brief ¿ØÖÆÆ÷µÄ»ù±¾ÄÚÈİ
-*@author Ğ¤Ñî
+*@brief æ§åˆ¶å™¨çš„åŸºæœ¬å†…å®¹
+*@author è‚–æ¨
 */
 class ControllerBase:public Node
 {
 public:
 	/**
-	*@brief ÉèÖÃ¼àÌı¶ÔÏó
-	*@author Ğ¤Ñî
+	*@brief è®¾ç½®ç›‘å¬å¯¹è±¡
+	*@author è‚–æ¨
 	*/
 	void setControllerListener(ControllerListener* controllerListener);
 
@@ -49,31 +49,54 @@ protected:
 };
 
 /**
-*@brief ÒÆ¶¯¿ØÖÆÆ÷
-*@author Ğ¤Ñî
+*@brief ç§»åŠ¨æ§åˆ¶å™¨
+*@author è‚–æ¨
 */
 class MoveController:public ControllerBase
 {
 public:
 	CREATE_FUNC(MoveController);
+
 	/**
-	*@brief Éú³ÉÒÆ¶¯¿ØÖÆÆ÷
-	*@author Ğ¤Ñî
+	*@brief ç”Ÿæˆç§»åŠ¨æ§åˆ¶å™¨
+	*@author è‚–æ¨
 	*/
 	virtual bool init ();
 
 	/**
-	*@brief °ó¶¨Ã¿Ö¡²Ù×÷
-	*@author Ğ¤Ñî
+	*@brief ç»‘å®šæ¯å¸§æ“ä½œ
+	*@author è‚–æ¨
 	*/
 	virtual void update(float dt);
 
 	/**
-	*@brief ÉèÖÃÒÆ¶¯ËÙ¶È
-	*@author Ğ¤Ñî
+	*@brief è®¾ç½®ç§»åŠ¨é€Ÿåº¦
+	*@author è‚–æ¨
 	*/
 	void setSpeed(int speed);
 private:
 	int m_speed;
+};
+
+/**
+*@brief æ”»å‡»æ§åˆ¶å™¨
+*@author è‚–æ¨
+*/
+class AttackController :public ControllerBase
+{
+public:
+	CREATE_FUNC(AttackController);
+
+	/**
+	*@brief ç”Ÿæˆæ”»å‡»æ§åˆ¶å™¨
+	*@author è‚–æ¨
+	*/
+	virtual bool init();
+
+	/**
+	*@brief ç»‘å®šæ¯å¸§æ“ä½œ
+	*@author è‚–æ¨
+	*/
+	virtual void update(float dt);
 };
 #endif // !_Controller_H_
