@@ -21,6 +21,15 @@ namespace sk
         kAssassin,
     };
 
+    enum KeyResponse
+    {
+        kRight,
+        kLeft,
+        kUp,
+        kDown,
+        kSkill,
+        kShiftWeapon
+    };
 
     // File names
     namespace files

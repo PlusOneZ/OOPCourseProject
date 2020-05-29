@@ -259,6 +259,12 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		AttackController* attackController = AttackController::create();
 		this->addChild(attackController);
 		knight->setAttackController(attackController);
+
+        auto keyBoardListener = EventListenerKeyboard::create();
+        keyBoardListener->onKeyPressed  = CC_CALLBACK_2(Hero::onKeyPressed,  knight);
+        keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
 	}
 }
 

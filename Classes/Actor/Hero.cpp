@@ -58,19 +58,19 @@ void Hero::setAttackController(ControllerBase* controllerbase)
 	m_pAttackController->setControllerListener(this);
 }
 
-void Hero::setTagPosition(int x, int y)
+void Hero::setTagPosition(float x, float y)
 {
 	this->setPosition(Point(x, y));
 }
 
-Point Hero::getTagPosition()
+Point Hero::getTargetPosition()
 {
 	return this->getPosition();
 }
 
 void Hero::shiftWeapon()
 {
-	if (m_pSecWeapon != NULL)
+	if (m_pSecWeapon != nullptr)
 	{
 		Weapon* pTemp = m_pSecWeapon;
 		m_pSecWeapon = m_pMainWeapon;
@@ -80,27 +80,27 @@ void Hero::shiftWeapon()
 
 void AttackController::update(float dt)
 {
-	if (m_controllerListener == NULL)
+	if (m_controllerListener == nullptr)
 	{
 		return;
 	}
 
 	Hero* myHero = Hero::m_pPresentHero;
 
-	if (KEY_DOWN(VK_LBUTTON))
-	{
-		myHero->m_pMainWeapon->attack();
-	}
-
-	if (KEY_DOWN(VK_RBUTTON))
-	{
-		myHero->shiftWeapon();
-	}
-
-	if (KEY_DOWN('Q'))
-	{
-		myHero->skill();
-	}
+//	if (KEY_DOWN(VK_LBUTTON))
+//	{
+//		myHero->m_pMainWeapon->attack();
+//	}
+//
+//	if (KEY_DOWN(VK_RBUTTON))
+//	{
+//		myHero->shiftWeapon();
+//	}
+//
+//	if (KEY_DOWN('Q'))
+//	{
+//		myHero->skill();
+//	}
 }
 /*
 左键调用主武器的攻击函数
@@ -110,45 +110,42 @@ q键调用技能
 */
 
 /**
-*@bug 动画调用有问题，本周内修复，暂时注释掉
-*@date 05/29/2020[bug fixed: 肖杨]
+ * @bug  动画调用有问题，本周内修复，暂时注释掉
+ * @date 05/29/2020[bug fixed: 肖杨]
+ * @date 05/29/2020 [modified: 卓正一]
+ *  @note 取消了 Windows API 的使用
 */
 void MoveController::update(float dt)
 {
-	if (m_controllerListener == NULL)
+	if (m_controllerListener == nullptr)
 	{
 		return;
 	}
 
-	Point pos = m_controllerListener->getTagPosition();
+	Point pos = m_controllerListener->getTargetPosition();
 	Hero* myHero = Hero::m_pPresentHero;
+	auto &keyState = myHero->m_isKeyDown;
 	bool checkMove = myHero->ifMove;
 
-	if (KEY_DOWN('W'))
+	if (keyState[sk::kUp])
 	{
 		pos.y += m_speed;
 	}
-	if (KEY_DOWN('S'))
+	if (keyState[sk::kDown])
 	{
 		pos.y -= m_speed;
 	}
-	if (KEY_DOWN('D'))
+	if (keyState[sk::kRight])
 	{
 		pos.x += m_speed;
 	}
-	if (KEY_DOWN('A'))
+	if (keyState[sk::kLeft])
 	{
 		pos.x -= m_speed;
 	}
 
-	if (pos != m_controllerListener->getTagPosition())
-	{
-		myHero->ifMove = 1;
-	}
-	else
-	{
-		myHero->ifMove = 0;
-	}
+    myHero->ifMove = (pos != m_controllerListener->getTargetPosition());
+
 	if (checkMove != myHero->ifMove)
 	{
 		if (myHero->ifMove)//说明在开始移动
@@ -160,9 +157,71 @@ void MoveController::update(float dt)
 			myHero->stopMove();
 			myHero->rest();
 		}
-		
 	}
-
 	m_controllerListener->setTagPosition(pos.x, pos.y);
 
 }//TODO:改变方向，播放动画
+
+
+void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event)
+{
+    using namespace cocos2d;
+    if (keyCode == EventKeyboard::KeyCode::KEY_D ||
+        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+    {
+        m_isKeyDown[sk::kRight] = true;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_W ||
+              keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
+    {
+        m_isKeyDown[sk::kUp] = true;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_A ||
+              keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+    {
+        m_isKeyDown[sk::kLeft] = true;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_S ||
+              keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
+    {
+        m_isKeyDown[sk::kDown] = true;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_Q)
+    {
+        m_isKeyDown[sk::kSkill] = true;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_E)
+    {
+        // TODO: Shift weapon here.
+    }
+}
+
+void Hero::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event)
+{
+    using namespace cocos2d;
+    if (keyCode == EventKeyboard::KeyCode::KEY_D ||
+        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+    {
+        m_isKeyDown[sk::kRight] = false;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_W ||
+              keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
+    {
+        m_isKeyDown[sk::kUp] = false;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_A ||
+              keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+    {
+        m_isKeyDown[sk::kLeft] = false;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_S ||
+              keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
+    {
+        m_isKeyDown[sk::kDown] = false;
+    }
+    else if  (keyCode == EventKeyboard::KeyCode::KEY_Q)
+    {
+        m_isKeyDown[sk::kSkill] = false;
+    }
+}
+

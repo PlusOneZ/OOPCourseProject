@@ -9,11 +9,13 @@
 #include "Actor.h"
 #include "Controller.h"
 #include "../Item/Weapon.h"
+#include "../Const/Const.h"
+#include <vector>
 /**
 *@brief 主角类
 *@author 肖杨
 */
-class Hero :public Actor,public ControllerListener
+class Hero : public Actor, public ControllerListener
 {
 public:
 	/**
@@ -26,19 +28,19 @@ public:
 	*@brief 主角移动
 	*@author 肖杨
 	*/
-	virtual void move()=0;
+	virtual void move() = 0;
 
 	/**
 	*@brief 主角停止移动
 	*@author 肖杨
 	*/
-	virtual void stopMove()=0;
+	virtual void stopMove() = 0;
 
 	/**
 	*@brief 主角静止
 	*@author 肖杨
 	*/
-	virtual void rest()=0;
+	virtual void rest() = 0;
 
 	/**
 	*@brief 生成动画
@@ -52,14 +54,14 @@ public:
 	*@brief 实现控制器接口
 	*@author 肖杨
 	*/
-	virtual void setTagPosition(int x, int y);
+	void setTagPosition(float x, float y) override ;
 
 	/**
 	*@brief 实现控制器接口
 	*@author 肖杨
 	*@return 当前坐标点
 	*/
-	virtual Point getTagPosition();
+	Point getTargetPosition() override ;
 
 	/**
 	*@brief 设置控制器
@@ -85,7 +87,22 @@ public:
 	friend void AttackController::update(float dt);
 	friend void MoveController::update(float dt);
 
+    /**
+     * @brief  监听按钮按下
+     * @param  keyCode 哪个按钮
+     * @author 卓正一
+     */
+    void onKeyPressed (EventKeyboard::KeyCode keyCode, Event* event);
+
+    /**
+     * @brief  监听按钮松开
+	 * @param  keyCode 哪个按钮
+	 * @author 卓正一
+     */
+    void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+
 	static Hero* m_pPresentHero;
+
 protected:
 	ControllerBase* m_pMoveController;
 	ControllerBase* m_pAttackController;
@@ -97,5 +114,6 @@ protected:
 	Animate* m_pMoveAnimate;
 
 	bool ifMove;
+	std::vector<bool> m_isKeyDown = std::vector<bool>(6, false);
 };
 #endif
