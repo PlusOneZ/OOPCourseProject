@@ -12,9 +12,9 @@
 USING_NS_CC;
 
 // 控制音乐的全局变量
-static int  gBackgroundMusicID;
-static bool gIsMusicPlaying  = true;
-static bool gIsEffectPlaying = true;
+extern int  gBackgroundMusicID;
+extern bool gIsMusicPlaying;
+extern bool gIsEffectPlaying;
 
 class PauseMenu : public cocos2d::Scene{
 public:

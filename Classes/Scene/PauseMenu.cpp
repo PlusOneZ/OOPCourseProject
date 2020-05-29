@@ -7,7 +7,9 @@
 #include "PauseMenu.h"
 
 using namespace cocos2d;
-
+int  gBackgroundMusicID;
+bool gIsMusicPlaying  = true;
+bool gIsEffectPlaying = true;
 
 PauseMenu::PauseMenu(sk::HeroID id)
     : m_heroID(id)

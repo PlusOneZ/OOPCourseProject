@@ -17,7 +17,7 @@ bool MoveController::init()
 	return true;
 }
 
-void MoveController::setSpeed(int speed)
+void MoveController::setSpeed(float speed)
 {
 	m_speed = speed;
 }

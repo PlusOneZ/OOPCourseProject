@@ -113,6 +113,8 @@ protected:
 	Animate* m_pRestAnimate;
 	Animate* m_pMoveAnimate;
 
+	sk::HeroID m_ID;
+
 	bool ifMove;
 	std::vector<bool> m_isKeyDown = std::vector<bool>(6, false);
 };

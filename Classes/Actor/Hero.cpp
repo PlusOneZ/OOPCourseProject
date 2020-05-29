@@ -4,6 +4,7 @@
 *@date 2020.5.24
 */
 #include "Hero.h"
+#include "../Scene/PauseMenu.h"
 
 bool Hero::init()
 {
@@ -188,11 +189,16 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event)
     }
     else if  (keyCode == EventKeyboard::KeyCode::KEY_Q)
     {
-        m_isKeyDown[sk::kSkill] = true;
+        this->skill();
     }
     else if  (keyCode == EventKeyboard::KeyCode::KEY_E)
     {
         // TODO: Shift weapon here.
+        this->shiftWeapon();
+    }
+    else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+    {
+        Director::getInstance()->pushScene(PauseMenu::create(m_ID));
     }
 }
 
@@ -218,10 +224,6 @@ void Hero::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event)
               keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
     {
         m_isKeyDown[sk::kDown] = false;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_Q)
-    {
-        m_isKeyDown[sk::kSkill] = false;
     }
 }
 
