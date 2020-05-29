@@ -5,7 +5,7 @@
 */
 #include"Knight.h"
 
-Hero* Hero::pPresentHero = nullptr;
+Hero* Hero::m_pPresentHero = nullptr;
 
 bool Knight::init()
 {
