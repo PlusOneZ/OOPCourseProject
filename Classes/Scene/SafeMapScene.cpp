@@ -231,6 +231,7 @@ bool SafeMap::init()
     return true;
 }
 
+
 void SafeMap::addPlayerKnight(SafeMap* pMap)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -243,11 +244,21 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 	else
 	{
 		Knight* knight = Knight::create();
+		knight->retain();
+		Hero::pPresentHero = knight;
 		knight->bindSprite(knightSprite);
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		pMap->addChild(knight, 3, 500);
-		knight->rest(); // bug修复后，请去掉注释
+		knight->rest();
+
+		MoveController* moveController = MoveController::create();
+		this->addChild(moveController);
+		knight->setMoveController(moveController);
+		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
+		AttackController* attackController = AttackController::create();
+		this->addChild(attackController);
+		knight->setAttackController(attackController);
 	}
 }
 

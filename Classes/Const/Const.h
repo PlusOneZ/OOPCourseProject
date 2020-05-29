@@ -7,7 +7,6 @@
 #ifndef __CONST_H__
 #define __CONST_H__
 
-
 namespace sk
 {
     /// State Structures
@@ -40,6 +39,5 @@ namespace sk
         };
     }
 }
-
 
 #endif // CONST_H

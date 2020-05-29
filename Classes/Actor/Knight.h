@@ -3,8 +3,8 @@
 *@author 肖杨
 *@date 5/24/2020
 */
-#ifndef _Knight_H_
-#define _Knight_H_
+#ifndef _KNIGHT_H_
+#define _KNIGHT_H_
 
 #include "Hero.h"
 #include "Const/Const.h"
@@ -49,5 +49,19 @@ public:
 	*@author 肖杨
 	*/
 	void move() override ;
+
+	/**
+	*@brief 主角停止移动
+	*@author 肖杨
+	*/
+	void stopMove() override;
+
+	/**
+	*@brief 技能接口
+	*@author 肖杨
+	*@return 技能是否释放成功(暂定)
+	*TODO:完成
+	*/
+	bool skill() override;
 };
 #endif // !_Knight_H__

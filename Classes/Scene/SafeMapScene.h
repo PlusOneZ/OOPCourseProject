@@ -8,7 +8,7 @@
 #define SOULKNIGHT_SAFEMAPSCENE_H
 
 #include "cocos2d.h"
-#include"Actor/Knight.h"
+#include "Actor/Knight.h"
 
 USING_NS_CC;
 

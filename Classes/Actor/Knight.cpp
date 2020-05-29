@@ -5,8 +5,12 @@
 */
 #include"Knight.h"
 
+Hero* Hero::pPresentHero = nullptr;
+
 bool Knight::init()
 {
+	m_pMoveAnimate = creatMoveAnimate();
+	m_pRestAnimate = creatRestAnimate();
 	return true;
 }
 
@@ -23,10 +27,21 @@ Animate* Knight::creatRestAnimate()
 
 void Knight::rest()
 {
-	m_sprite->runAction(creatRestAnimate());
+	m_sprite->runAction(m_pRestAnimate);
 }
 
 void Knight::move()
 {
-	m_sprite->runAction(creatMoveAnimate());
+	m_sprite->stopAction(m_pRestAnimate);
+	m_sprite->runAction(m_pMoveAnimate);
+}
+
+void Knight::stopMove()
+{
+	m_sprite->stopAction(m_pMoveAnimate);
+}
+
+bool Knight::skill()
+{
+	return true;
 }
