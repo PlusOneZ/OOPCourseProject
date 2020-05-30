@@ -23,7 +23,7 @@ bool SafeMap::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto safeRoom = Sprite::create("saferoom.png");
+    auto safeRoom = Sprite::create("interface/hire_room_0.png");
     if (safeRoom == nullptr)
     {
         log("saferoom.png not found");
