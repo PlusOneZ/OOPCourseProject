@@ -1,7 +1,7 @@
 /**
 *@file
 *StartGameScene.h
-*@author �Գ��
+*@author 翟晨昊
 */
 
 #ifndef __STARTGAME_SCENE_H__
@@ -14,7 +14,7 @@
 /**
 *@brief Scene at the beginning of the game
 *@fn CREATE_FUNC contains the definition of the create function
-*@author �Գ��
+*@author 翟晨昊
 */
 class TitleScene : public cocos2d::Scene
 {

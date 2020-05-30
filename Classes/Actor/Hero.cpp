@@ -14,7 +14,7 @@ bool Hero::init()
 
 /**
  * @brief  创建
- * @bug    传参错误导致无法正常生成动画
+ * @bug    传参错误导致无法正常生成动
  * @date   05/25/2020 [bug fixed: 卓正一]
  * @param  pAnimateName 动画文件名（字符串）
  * @author 肖杨
@@ -69,6 +69,11 @@ Point Hero::getTargetPosition()
 	return this->getPosition();
 }
 
+Weapon* Hero::getWeapon()
+{
+	return this->m_pMainWeapon;
+}
+
 void Hero::shiftWeapon()
 {
 	if (m_pSecWeapon != nullptr)
@@ -88,20 +93,20 @@ void AttackController::update(float dt)
 
 	Hero* myHero = Hero::m_pPresentHero;
 
-//	if (KEY_DOWN(VK_LBUTTON))
-//	{
-//		myHero->m_pMainWeapon->attack();
-//	}
-//
-//	if (KEY_DOWN(VK_RBUTTON))
-//	{
-//		myHero->shiftWeapon();
-//	}
-//
-//	if (KEY_DOWN('Q'))
-//	{
-//		myHero->skill();
-//	}
+	/*if (KEY_DOWN(VK_LBUTTON))
+	{
+		myHero->m_pMainWeapon->attack();
+	}
+
+	if (KEY_DOWN(VK_RBUTTON))
+	{
+		myHero->shiftWeapon();
+	}
+
+	if (KEY_DOWN('Q'))
+	{
+		myHero->skill();
+	}*/
 }
 /*
 左键调用主武器的攻击函数
@@ -111,10 +116,10 @@ q键调用技能
 */
 
 /**
- * @bug  动画调用有问题，本周内修复，暂时注释掉
- * @date 05/29/2020[bug fixed: 肖杨]
- * @date 05/29/2020 [modified: 卓正一]
- *  @note 取消了 Windows API 的使用
+*@bug 动画调用有问题，本周内修复，暂时注释掉
+*@date 05/29/2020[bug fixed:肖杨]
+*@date 05/29/2020 [modified: 卓正一]
+*@note 取消了 Windows API 的使用
 */
 void MoveController::update(float dt)
 {
@@ -125,7 +130,7 @@ void MoveController::update(float dt)
 
 	Point pos = m_controllerListener->getTargetPosition();
 	Hero* myHero = Hero::m_pPresentHero;
-	auto &keyState = myHero->m_isKeyDown;
+	auto& keyState = myHero->m_isKeyDown;
 	bool checkMove = myHero->ifMove;
 
 	if (keyState[sk::kUp])
@@ -145,7 +150,7 @@ void MoveController::update(float dt)
 		pos.x -= m_speed;
 	}
 
-    myHero->ifMove = (pos != m_controllerListener->getTargetPosition());
+	myHero->ifMove = (pos != m_controllerListener->getTargetPosition());
 
 	if (checkMove != myHero->ifMove)
 	{
@@ -159,71 +164,69 @@ void MoveController::update(float dt)
 			myHero->rest();
 		}
 	}
-	m_controllerListener->setTagPosition(pos.x, pos.y);
+    m_controllerListener->setTagPosition(pos.x, pos.y);
 
 }//TODO:改变方向，播放动画
 
-
-void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event)
+void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    using namespace cocos2d;
-    if (keyCode == EventKeyboard::KeyCode::KEY_D ||
-        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
-    {
-        m_isKeyDown[sk::kRight] = true;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_W ||
-              keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
-    {
-        m_isKeyDown[sk::kUp] = true;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_A ||
-              keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
-    {
-        m_isKeyDown[sk::kLeft] = true;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_S ||
-              keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
-    {
-        m_isKeyDown[sk::kDown] = true;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_Q)
-    {
-        this->skill();
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_E)
-    {
-        // TODO: Shift weapon here.
-        this->shiftWeapon();
-    }
-    else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
-    {
-        Director::getInstance()->pushScene(PauseMenu::create(m_ID));
-    }
+	using namespace cocos2d;
+	if (keyCode == EventKeyboard::KeyCode::KEY_D ||
+		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+	{
+		m_isKeyDown[sk::kRight] = true;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_W ||
+		keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
+	{
+		m_isKeyDown[sk::kUp] = true;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_A ||
+		keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+	{
+		m_isKeyDown[sk::kLeft] = true;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_S ||
+		keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
+	{
+		m_isKeyDown[sk::kDown] = true;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_Q)
+	{
+		this->skill();
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_E)
+	{
+		// TODO: Shift weapon here.
+		this->shiftWeapon();
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+	{
+		Director::getInstance()->pushScene(PauseMenu::create(m_ID));
+	}
 }
 
-void Hero::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event)
+void Hero::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 {
-    using namespace cocos2d;
-    if (keyCode == EventKeyboard::KeyCode::KEY_D ||
-        keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
-    {
-        m_isKeyDown[sk::kRight] = false;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_W ||
-              keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
-    {
-        m_isKeyDown[sk::kUp] = false;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_A ||
-              keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
-    {
-        m_isKeyDown[sk::kLeft] = false;
-    }
-    else if  (keyCode == EventKeyboard::KeyCode::KEY_S ||
-              keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
-    {
-        m_isKeyDown[sk::kDown] = false;
-    }
+	using namespace cocos2d;
+	if (keyCode == EventKeyboard::KeyCode::KEY_D ||
+		keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+	{
+		m_isKeyDown[sk::kRight] = false;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_W ||
+		keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW)
+	{
+		m_isKeyDown[sk::kUp] = false;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_A ||
+		keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+	{
+		m_isKeyDown[sk::kLeft] = false;
+	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_S ||
+		keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
+	{
+		m_isKeyDown[sk::kDown] = false;
+	}
 }
-

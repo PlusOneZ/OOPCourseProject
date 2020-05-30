@@ -16,8 +16,10 @@ using namespace cocos2d;
 */
 class Item:public Node
 {
+public:
+	void bindSprite(Sprite* pSprite);
 private:
-	Sprite* m_sprite;
+	Sprite* m_pSprite;
 };
 
 #endif // !_ITEM_H_

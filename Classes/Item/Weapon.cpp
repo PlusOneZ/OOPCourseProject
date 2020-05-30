@@ -1,11 +1,16 @@
 ﻿/**
 *@file Weapon.cpp
-*@author 肖杨
-*@date 5/28/2020
+*@author 翟晨昊
+*@date 5/30/2020
 */
 #include"Weapon.h"
 
-void Weapon::attack()
+float Weapon::getInterval()
 {
+	return shootInterval;
+}
 
+void Weapon::setInterval(float interval)
+{
+	shootInterval = interval;
 }

@@ -1,7 +1,7 @@
 /**
  * @file   StartGameScene.cpp
  * @date   05/24/2020 [modified ZZY]
- * @author �Գ�� ZZY
+ * @author 翟晨昊 ZZY
 */
 
 #include "StartGameScene.h"
@@ -18,7 +18,7 @@ extern bool gIsEffectPlaying;
 
 /**
 *@brief Error adding resource
-*@author �Գ��
+*@author 翟晨昊
 */
 static void problemLoading(const char* filename)
 {
@@ -30,7 +30,7 @@ static void problemLoading(const char* filename)
 *@brief Initialize the scene
 *@details Add images, buttons, and label to the scene
 *@return true
-*@author �Գ��
+*@author 翟晨昊
 */
 bool TitleScene::init()
 {
@@ -108,7 +108,6 @@ bool TitleScene::init()
         this->addChild(startLabel, 1);
     }
 
-    //��������
     auto gameCover = Sprite::create("interface/start.png");
     auto coverElement = Sprite::create("interface/start_2.png");
     if (gameCover == nullptr || coverElement == nullptr)
@@ -148,7 +147,7 @@ bool TitleScene::init()
 
 /**
 *@brief Go to the next scene
-*@author �Գ��
+*@author 翟晨昊
 */
 void TitleScene::menuStartCallback(Ref* pSender)
 {
@@ -157,7 +156,7 @@ void TitleScene::menuStartCallback(Ref* pSender)
 
 /**
 *@brief Exit the game
-*@author �Գ��
+*@author 翟晨昊
 */
 void TitleScene::menuEndCallback(Ref* pSender)
 {

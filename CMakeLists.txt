@@ -65,11 +65,16 @@ list(APPEND GAME_SOURCE
         Classes/Scene/PauseMenu.cpp
         Classes/Scene/SafeMapScene.cpp
         Classes/Scene/StartGameScene.cpp
+        Classes/Scene/BulletLayer.cpp
         Classes/Actor/Actor.cpp
         Classes/Actor/Hero.cpp
         Classes/Actor/Knight.cpp
         Classes/Actor/Controller.cpp
+        Classes/Item/Item.cpp
         Classes/Item/Weapon.cpp
+        Classes/Item/Gun.cpp
+        Classes/Item/Bullet.cpp
+        Classes/Item/NormalBullet.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -77,12 +82,16 @@ list(APPEND GAME_HEADER
         Classes/Scene/PauseMenu.h
         Classes/Scene/SafeMapScene.h
         Classes/Scene/StartGameScene.h
+        Classes/Scene/BulletLayer.h
         Classes/Actor/Actor.h
         Classes/Actor/Hero.h
         Classes/Actor/Knight.h
         Classes/Actor/Controller.h
         Classes/Item/Item.h
         Classes/Item/Weapon.h
+        Classes/Item/Gun.h
+        Classes/Item/Bullet.h
+        Classes/Item/NormalBullet.h
 
         Classes/Const/Const.h
         )

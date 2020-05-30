@@ -5,6 +5,7 @@
 */
 
 #include "SafeMapScene.h"
+#include "BulletLayer.h"
 #include <iostream>
 
 Scene *SafeMap::createScene()
@@ -252,6 +253,11 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		pMap->addChild(knight, 3, 500);
 		knight->rest();
 
+        BulletLayer* bulletLayer = BulletLayer::create();
+        bulletLayer->retain();
+        bulletLayer->bindHero(knight);
+        pMap->addChild(bulletLayer, 8, 450);
+
 		MoveController* moveController = MoveController::create();
 		this->addChild(moveController);
 		knight->setMoveController(moveController);
@@ -261,7 +267,7 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		knight->setAttackController(attackController);
 
         auto keyBoardListener = EventListenerKeyboard::create();
-        keyBoardListener->onKeyPressed  = CC_CALLBACK_2(Hero::onKeyPressed,  knight);
+        keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
         keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);

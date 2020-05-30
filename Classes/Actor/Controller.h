@@ -7,8 +7,8 @@
 #define _CONTROLLER_H_
 
 #include "cocos2d.h"
-using namespace cocos2d;
 
+using namespace cocos2d;
 
 /**
 *@brief 绑定将控制的对象
@@ -49,7 +49,6 @@ protected:
 };
 
 
-
 /**
 *@brief 移动控制器
 *@author 肖杨
@@ -63,13 +62,13 @@ public:
 	*@brief 生成移动控制器
 	*@author 肖杨
 	*/
-	bool init () override ;
+	bool init() override;
 
 	/**
 	*@brief 绑定每帧操作
 	*@author 肖杨
 	*/
-	void update(float dt) override ;
+	void update(float dt) override;
 
 	/**
 	*@brief 设置移动速度
@@ -77,7 +76,7 @@ public:
 	*/
 	void setSpeed(float speed);
 private:
-    float m_speed;
+	float m_speed;
 };
 
 
@@ -95,12 +94,12 @@ public:
 	*@brief 生成攻击控制器
 	*@author 肖杨
 	*/
-	bool init() override ;
+	bool init() override;
 
 	/**
 	*@brief 绑定每帧操作
 	*@author 肖杨
 	*/
-	void update(float dt)override ;
+	void update(float dt) override;
 };
 #endif // !_Controller_H_

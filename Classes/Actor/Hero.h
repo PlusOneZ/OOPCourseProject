@@ -54,14 +54,16 @@ public:
 	*@brief 实现控制器接口
 	*@author 肖杨
 	*/
-	void setTagPosition(float x, float y) override ;
+	void setTagPosition(float x, float y) override;
 
 	/**
 	*@brief 实现控制器接口
 	*@author 肖杨
 	*@return 当前坐标点
 	*/
-	Point getTargetPosition() override ;
+	Point getTargetPosition() override;
+
+	Weapon* getWeapon();
 
 	/**
 	*@brief 设置控制器
@@ -86,20 +88,19 @@ public:
 	//声明为友元函数
 	friend void AttackController::update(float dt);
 	friend void MoveController::update(float dt);
+	/**
+    * @brief  监听按钮按下
+    * @param  keyCode 哪个按钮
+    * @author 卓正一
+    */
+	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
-    /**
-     * @brief  监听按钮按下
-     * @param  keyCode 哪个按钮
-     * @author 卓正一
-     */
-    void onKeyPressed (EventKeyboard::KeyCode keyCode, Event* event);
-
-    /**
-     * @brief  监听按钮松开
+	/**
+	 * @brief  监听按钮松开
 	 * @param  keyCode 哪个按钮
 	 * @author 卓正一
-     */
-    void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+	 */
+	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
 	static Hero* m_pPresentHero;
 
