@@ -24,4 +24,5 @@ void Bullet::bindSprite(Sprite* pSprite)
 void Bullet::moveEnd()
 {
     isArrive = true;
+    this->autorelease();
 }

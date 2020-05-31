@@ -40,6 +40,7 @@ public:
 	*@author 翟晨昊
 	*/
 	void bindSprite(Sprite* pSprite);
+
 protected:
 	Sprite* m_pBulletSprite;
 	float bulletSpeed;

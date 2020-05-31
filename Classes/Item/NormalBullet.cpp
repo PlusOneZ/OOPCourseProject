@@ -22,12 +22,12 @@ void NormalBullet::attack(float mouseX, float mouseY, Point heroPoint)
 {
 	heroPoint.x += 25.0;
 	heroPoint.y += 20.0;
-	Point mousePoint = Vec2(mouseX, mouseY);
+	auto mousePoint = Point(mouseX - heroPoint.x, mouseY - heroPoint.y);
 	m_pBulletSprite->setPosition(heroPoint);
 	auto moveTo = MoveTo::create(10.0/bulletSpeed, mousePoint);
 	auto callFunc = CallFunc::create([&]() {
 		moveEnd();
 		});
-	auto actions = Sequence::create(moveTo, callFunc, NULL);
+	auto actions = Sequence::create(moveTo, callFunc, nullptr);
 	this->runAction(actions);
 }

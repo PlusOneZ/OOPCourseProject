@@ -28,8 +28,10 @@ void BulletLayer::update(float dt)
 
 bool BulletLayer::onMouseDown(Event* event)
 {
-	EventMouse* e = (EventMouse*)event;
+	auto e = dynamic_cast<EventMouse* >(event);
 	Bullet* pBullet = pHero->getWeapon()->createBullet();
+    log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
+    log("  Hero at: %f, %f", pHero->getPosition().x, pHero->getPosition().y);
 	m_pWeaponBullet.pushBack(pBullet);
 	pBullet->attack(e->getCursorX(), e->getCursorY(), pHero->getPosition());
 	this->addChild(pBullet);

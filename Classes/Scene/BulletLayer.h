@@ -40,7 +40,8 @@ public:
 	*@brief 鼠标按下后的操作
 	*@author 翟晨昊
 	*/
-	bool onMouseDown(Event* event);
+    bool onMouseDown(Event* event);
+
 private:
 	Hero* pHero;
 	Vector<Bullet* > m_pWeaponBullet;
