@@ -141,6 +141,24 @@ void MoveController::update(float dt)
 		pos.x -= m_speed;
 	}
 
+	if (pos.x <= 20 || pos.x >= 1260
+		|| pos.y <= 0 || pos.y >= 670)
+	{
+		return;
+	}
+
+	/*
+	int aimX = (pos.x - 10) / 28;
+	int aimY = (720 - pos.y - 10) / 28;
+	auto objectLayer = map->getLayer("Object1");
+	int gid = objectLayer->getTileGIDAt(Vec2(aimX, aimY));
+	if (gid)
+	{
+		return;
+	}
+	*/
+	//没想好怎么传参先注释掉
+
 	if (pos != m_controllerListener->getTagPosition())
 	{
 		myHero->ifMove = 1;
