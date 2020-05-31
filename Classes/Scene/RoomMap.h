@@ -1,7 +1,7 @@
-/**
+ï»¿/**
 *@file
 *RoomMap.h
-*@author Àî¼ÎÊ÷
+*@author æå˜‰æ ‘
 */
 
 #ifndef _ROOM_MAP_H
@@ -15,7 +15,7 @@ USING_NS_CC;
 /**
 *@brief A roommap scene
 *@fn CREATE_FUNC contains the definition of the create function
-*@author Àî¼ÎÊ÷
+*@author æå˜‰æ ‘
 */
 class RoomMap :public cocos2d::Scene
 {
@@ -24,7 +24,7 @@ public:
 	/**
 	*@brief Call the create function
 	*@return A Scene instance
-	*@author Àî¼ÎÊ÷
+	*@author æå˜‰æ ‘
 	*/
 	static Scene* createScene(TMXTiledMap* map);
 
@@ -32,7 +32,7 @@ public:
 	 *@brief Initialize the scene
 	 *@details Add tilemap to the game map
 	 *@return true
-	 *@author Àî¼ÎÊ÷
+	 *@author æå˜‰æ ‘
 	 */
 	bool init() override;
 
@@ -40,25 +40,25 @@ public:
 
 	/**
 	*@brief close all the doors
-	*@author Àî¼ÎÊ÷
+	*@author æå˜‰æ ‘
 	*/
 	void closeDoor(){}
 
 	/**
 	*@brief open all the doors
-	*@author Àî¼ÎÊ÷
+	*@author æå˜‰æ ‘
 	*/
 	void openDoor(){}
 
 	/**
 	*@brief create the enemies
-	*@author Àî¼ÎÊ÷
+	*@author æå˜‰æ ‘
 	*/
 	void createEnemy() {}
 
 	/**
 	*@brief add the player and start the game
-	*@author Àî¼ÎÊ÷
+	*@author æå˜‰æ ‘
 	*/
 	void addPlayer(RoomMap* pMap) {}
 
