@@ -245,7 +245,7 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 	{
 		Knight* knight = Knight::create();
 		knight->retain();
-		Hero::pPresentHero = knight;
+		Hero::m_pPresentHero = knight;
 		knight->bindSprite(knightSprite);
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));

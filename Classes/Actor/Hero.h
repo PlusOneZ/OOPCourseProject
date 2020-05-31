@@ -85,7 +85,7 @@ public:
 	friend void AttackController::update(float dt);
 	friend void MoveController::update(float dt);
 
-	static Hero* pPresentHero;
+	static Hero* m_pPresentHero;
 protected:
 	ControllerBase* m_pMoveController;
 	ControllerBase* m_pAttackController;

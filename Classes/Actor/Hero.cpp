@@ -7,7 +7,7 @@
 
 bool Hero::init()
 {
-	pPresentHero = nullptr;
+	m_pPresentHero = nullptr;
 	return true;
 }
 
@@ -42,6 +42,7 @@ Animate* Hero::creatHeroAnimate(const char * pAnimateName)
 	animation->setLoops(-1);
 	animation->setDelayPerUnit(0.2f);
 	Animate*action = Animate::create(animation);
+	action->retain();
 	return action;
 }
 
@@ -84,7 +85,7 @@ void AttackController::update(float dt)
 		return;
 	}
 
-	Hero* myHero = Hero::pPresentHero;
+	Hero* myHero = Hero::m_pPresentHero;
 
 	if (KEY_DOWN(VK_LBUTTON))
 	{
@@ -110,6 +111,7 @@ q键调用技能
 
 /**
 *@bug 动画调用有问题，本周内修复，暂时注释掉
+*@date 05/29/2020[bug fixed: 肖杨]
 */
 void MoveController::update(float dt)
 {
@@ -119,7 +121,7 @@ void MoveController::update(float dt)
 	}
 
 	Point pos = m_controllerListener->getTagPosition();
-	Hero* myHero = Hero::pPresentHero;
+	Hero* myHero = Hero::m_pPresentHero;
 	bool checkMove = myHero->ifMove;
 
 	if (KEY_DOWN('W'))
@@ -147,7 +149,7 @@ void MoveController::update(float dt)
 	{
 		myHero->ifMove = 0;
 	}
-	/*if (checkMove != myHero->ifMove)
+	if (checkMove != myHero->ifMove)
 	{
 		if (myHero->ifMove)//说明在开始移动
 		{
@@ -159,7 +161,7 @@ void MoveController::update(float dt)
 			myHero->rest();
 		}
 		
-	}*/
+	}
 
 	m_controllerListener->setTagPosition(pos.x, pos.y);
 
