@@ -65,6 +65,7 @@ list(APPEND GAME_SOURCE
         Classes/Scene/PauseMenu.cpp
         Classes/Scene/SafeMapScene.cpp
         Classes/Scene/StartGameScene.cpp
+        Classes/Scene/RoomMap.cpp
         Classes/Actor/Actor.cpp
         Classes/Actor/Hero.cpp
         Classes/Actor/Knight.cpp
@@ -77,13 +78,13 @@ list(APPEND GAME_HEADER
         Classes/Scene/PauseMenu.h
         Classes/Scene/SafeMapScene.h
         Classes/Scene/StartGameScene.h
+        Classes/Scene/RoomMap.h
         Classes/Actor/Actor.h
         Classes/Actor/Hero.h
         Classes/Actor/Knight.h
         Classes/Actor/Controller.h
         Classes/Item/Item.h
         Classes/Item/Weapon.h
-
         Classes/Const/Const.h
         )
 
