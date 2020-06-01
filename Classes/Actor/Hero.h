@@ -7,15 +7,16 @@
 #define _HERO_H_
 
 #include "Actor.h"
-#include "Controller.h"
 #include "../Item/Weapon.h"
 #include "../Const/Const.h"
 #include <vector>
+
+class BulletLayer;
 /**
 *@brief 主角类
 *@author 肖杨
 */
-class Hero : public Actor, public ControllerListener
+class Hero : public Actor
 {
 public:
 	/**
@@ -23,6 +24,8 @@ public:
 	*@author 肖杨
 	*/
 	bool init() override ;
+
+	void update(float dt) override ;
 
 	/**
 	*@brief 主角移动
@@ -51,26 +54,11 @@ public:
 	static Animate* creatHeroAnimate(const char * pAnimateName);
 
 	/**
-	*@brief 实现控制器接口
-	*@author 肖杨
-	*/
-	void setTagPosition(float x, float y) override;
+	 * @note   Modified : 卓正一
+	 * @return 主武器
+	 */
+	Weapon* getMainWeapon();
 
-	/**
-	*@brief 实现控制器接口
-	*@author 肖杨
-	*@return 当前坐标点
-	*/
-	Point getTargetPosition() override;
-
-	Weapon* getWeapon();
-
-	/**
-	*@brief 设置控制器
-	*@author 肖杨
-	*/
-	void setMoveController(ControllerBase* controllerBase);
-	void setAttackController(ControllerBase* controllerBase);
 
 	/**
 	*@brief 技能接口
@@ -85,9 +73,7 @@ public:
 	*/
 	void shiftWeapon();
 
-	//声明为友元函数
-	friend void AttackController::update(float dt);
-	friend void MoveController::update(float dt);
+
 	/**
     * @brief  监听按钮按下
     * @param  keyCode 哪个按钮
@@ -102,21 +88,27 @@ public:
 	 */
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
+
 	static Hero* m_pPresentHero;
 
-protected:
-	ControllerBase* m_pMoveController;
-	ControllerBase* m_pAttackController;
-	
-	Weapon* m_pMainWeapon;
-	Weapon* m_pSecWeapon;
 
-	Animate* m_pRestAnimate;
-	Animate* m_pMoveAnimate;
+protected:
+
+    Weapon* m_pMainWeapon = nullptr;
+    Weapon* m_pSecWeapon = nullptr;
+
+	Animate* m_pRestAnimate = nullptr;
+	Animate* m_pMoveAnimate = nullptr;
 
 	sk::HeroID m_ID;
 
-	bool ifMove;
+	float m_speed = 150.;
+
+	bool m_ifMoved        = false;
+	bool m_ifStateChanged = false;
+
+	int m_curFacing = sk::kRight;
+
 	std::vector<bool> m_isKeyDown = std::vector<bool>(6, false);
 };
 #endif

@@ -24,6 +24,7 @@
 
 #include "AppDelegate.h"
 #include "Scene/StartScene.h"
+#include "Scene/RoomMap.h"
 
 #define USE_AUDIO_ENGINE 1
 
@@ -107,6 +108,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
+//    auto map = TMXTiledMap::create("map/room1_1.tmx");
+//    log("%p", map);
     auto scene = Start::createScene();
 
     // run

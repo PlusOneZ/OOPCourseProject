@@ -37,8 +37,9 @@ public:
 	*@author 翟晨昊
 	*/
 	void setInterval(float interval);
+
 protected:
-	float shootInterval;
+	float m_shootInterval;
 };
 #endif // !_WEAPON_H_
 

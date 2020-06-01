@@ -14,7 +14,7 @@ bool Gun::init()
 		log("weapons.png not found");
 	}
 	bindSprite(pSprite);
-	setInterval(2.0f);
+	setInterval(.2f);
 	return true;
 }
 

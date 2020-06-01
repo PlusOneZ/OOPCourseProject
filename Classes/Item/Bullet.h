@@ -42,9 +42,10 @@ public:
 	void bindSprite(Sprite* pSprite);
 
 protected:
+
 	Sprite* m_pBulletSprite;
-	float bulletSpeed;
-	bool isArrive;
+	float   m_bulletSpeed;
+	bool    m_isArrive;
 	void moveEnd();
 };
 #endif

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" nextobjectid="17">
+ <tileset firstgid="1" source="room1_1.tsx"/>
+ <layer name="Picture1" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJytl9uOwyAMREkCgf//4u1KGeVkOtA+FMkq5WKPrzhnKaW/aLyovei8iPOOeaJm5w/Mt7Dm59LeN/SPeYf8NpFB/NKVPET9ImI+cC9hcOzHheOfX70oYV7hXtljgIdj2spTT/GivvU6V83+wpFk97DeTb5sRd2IazN7uq7SSxhHedeplidel+26d+y5HQ67J/07bCPZ+h3liZX8uL6FNdfFc4z8hWkvd166jr8YkiX/0Hab7a/i0f1I+27l9sOvMLuNE1Wc1Vw+Vq67DgOY5ZtfYaZNUz4Jc6oZHjPK/1kszuR7bWEN8KFcoFzWUs8pzwXea+WuC/JHw50+wcx60DCf6Sn/CatqDn3rMTqrvf5G1HA2YXbdWP9md3S24aznFfF9g/kwzPJdkp/qMmtWukP/6s30nBx2LunA+Q4crdy5MMNMfrorHCvMJMftccw3spbnm9JtT3eSnRl/zIdVbHivopyf+WrVT43ybjM/54N1kHzYL/lQTdlBXs9W/UCqhzPfjCBfeDvk6/+Y3GEdTPFK3H2x77jZq8nnSf7MDow1H55r3vOkvVmNTrbe8Zvke7y5zJS3WzjHt9jrV+qxpB/xMt5Ou6eR+nDP45QDySc6L57b5D/luH0dc4oprylumxM8El7Gn9vdv8tSn82c8V6AvNhLu44da76XfMv4203ep28xj0Xalr1Gt3kv9zvmdtYb2sCnlne9kz7EvCKe4Xcd+XWTm3KCPmdPMZM7+2ZO8ea+r2Et8ffvrOTfmdwUX05n+F3RrL+mzT69Syus1O9bn7u8P1eMFGc=
+  </data>
+ </layer>
+ <layer name="Object1" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztzzEOACEIBVEqOIP3v6hrsYmlxPUvJvMSOomDGYDb+DNtY1yffH2zJ6ZS86mdL9GsQbMGzRo0a8T0fyzu/N08hK33vu+zd1aQvRNATR28QQjv
+  </data>
+ </layer>
+</map>

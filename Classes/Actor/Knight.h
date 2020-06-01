@@ -13,10 +13,11 @@
 *@brief 骑士类
 *@author 肖杨
 */
-class Knight :public Hero
+class Knight : public Hero
 {
 public:
-	CREATE_FUNC(Knight);
+
+    CREATE_FUNC(Knight)
 
 	/**
 	*@brief 生成骑士

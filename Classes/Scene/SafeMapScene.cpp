@@ -10,7 +10,11 @@
 
 Scene *SafeMap::createScene()
 {
-    return SafeMap::create();
+    auto scene = Scene::createWithPhysics();
+    auto layer = SafeMap::create();
+    scene->addChild(layer);
+    scene->getPhysicsWorld()->setGravity(Vec2::ZERO);
+    return scene;
 }
 
 bool SafeMap::init()
@@ -32,6 +36,8 @@ bool SafeMap::init()
     {
         safeRoom->setPosition(Vec2(visibleSize.width / 2 + origin.x,
                                    visibleSize.height / 2 + origin.y));
+        auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
+        safeRoom->setPhysicsBody(edge);
         addChild(safeRoom, 1, 98);
     }
 
@@ -237,7 +243,8 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	Sprite* knightSprite = Sprite::create("Actor/knight_rest1.png");
+	auto fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
+	Sprite* knightSprite = Sprite::create(fig);
 	if (knightSprite == nullptr)
 	{
 		log("knight_rest1.png not found");
@@ -245,9 +252,9 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 	else
 	{
 		Knight* knight = Knight::create();
-		knight->retain();
-		Hero::m_pPresentHero = knight;
 		knight->bindSprite(knightSprite);
+		Hero::m_pPresentHero = knight;
+		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		pMap->addChild(knight, 3, 500);
@@ -258,13 +265,13 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
         bulletLayer->bindHero(knight);
         pMap->addChild(bulletLayer, 8, 450);
 
-		MoveController* moveController = MoveController::create();
-		this->addChild(moveController);
-		knight->setMoveController(moveController);
-		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
-		AttackController* attackController = AttackController::create();
-		this->addChild(attackController);
-		knight->setAttackController(attackController);
+//		MoveController* moveController = MoveController::create();
+//		this->addChild(moveController);
+//		knight->setMoveController(moveController);
+//		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
+//		AttackController* attackController = AttackController::create();
+//		this->addChild(attackController);
+//		knight->setAttackController(attackController);
 
         auto keyBoardListener = EventListenerKeyboard::create();
         keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
