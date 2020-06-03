@@ -23,9 +23,9 @@ public:
 	*@brief 生成主角
 	*@author 肖杨
 	*/
-	bool init() override ;
+	bool init() override;
 
-	void update(float dt) override ;
+	void update(float dt) override;
 
 	/**
 	*@brief 主角移动
@@ -51,7 +51,7 @@ public:
 	*@return 对应动画
 	@param arg1 要生成的动画对应文件名称
 	*/
-	static Animate* creatHeroAnimate(const char * pAnimateName);
+	static Animate* creatHeroAnimate(const char* pAnimateName);
 
 	/**
 	 * @note   Modified : 卓正一
@@ -75,10 +75,10 @@ public:
 
 
 	/**
-    * @brief  监听按钮按下
-    * @param  keyCode 哪个按钮
-    * @author 卓正一
-    */
+	* @brief  监听按钮按下
+	* @param  keyCode 哪个按钮
+	* @author 卓正一
+	*/
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
 	/**
@@ -94,8 +94,8 @@ public:
 
 protected:
 
-    Weapon* m_pMainWeapon = nullptr;
-    Weapon* m_pSecWeapon = nullptr;
+	Weapon* m_pMainWeapon = nullptr;
+	Weapon* m_pSecWeapon = nullptr;
 
 	Animate* m_pRestAnimate = nullptr;
 	Animate* m_pMoveAnimate = nullptr;
@@ -104,7 +104,7 @@ protected:
 
 	float m_speed = 150.;
 
-	bool m_ifMoved        = false;
+	bool m_ifMoved = false;
 	bool m_ifStateChanged = false;
 
 	int m_curFacing = sk::kRight;

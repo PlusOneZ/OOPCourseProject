@@ -31,18 +31,18 @@ Animate* Knight::creatRestAnimate()
 
 void Knight::rest()
 {
-    m_sprite->runAction(m_pRestAnimate);
+	m_sprite->runAction(m_pRestAnimate);
 }
 
 void Knight::move()
 {
-    m_sprite->stopAction(m_pRestAnimate);
-    m_sprite->runAction(m_pMoveAnimate);
+	m_sprite->stopAction(m_pRestAnimate);
+	m_sprite->runAction(m_pMoveAnimate);
 }
 
 void Knight::stopMove()
 {
-    m_sprite->stopAction(m_pMoveAnimate);
+	m_sprite->stopAction(m_pMoveAnimate);
 }
 
 bool Knight::skill()
