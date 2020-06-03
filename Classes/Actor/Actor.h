@@ -15,8 +15,8 @@ class Actor :public Node
 {
 public:
 
-	bool generatePhysics();
-	/**
+    bool generatePhysics();
+    /**
     *@brief 绑定精灵
     *@author 肖杨
     */

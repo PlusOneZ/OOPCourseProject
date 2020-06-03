@@ -5,7 +5,7 @@
 
 #include "Actor.h"
 
-void Actor::bindSprite(Sprite *pSprite){
+void Actor::bindSprite(Sprite* pSprite) {
     m_sprite = pSprite;
     this->addChild(m_sprite);
 }
@@ -19,4 +19,3 @@ bool Actor::generatePhysics()
 
     return true;
 }
-
