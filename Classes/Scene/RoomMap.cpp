@@ -8,24 +8,9 @@
 
 Scene* RoomMap::createScene(TMXTiledMap* map)
 {
-	auto pRef = RoomMap::create(map);
+	auto pRef = RoomMap::create();
+	pRef->m_pMap = map;
 	return pRef;
-}
-
-RoomMap* RoomMap::create(TMXTiledMap* map)
-{
-    auto *pRet = new(std::nothrow) RoomMap(map);
-    if (pRet)
-    {
-        if (pRet->init())
-        {
-            pRet->autorelease();
-            return pRet;
-        }
-    }
-    delete pRet;
-    pRet = nullptr;
-    return nullptr;
 }
 
 bool RoomMap::init()
@@ -52,24 +37,4 @@ bool RoomMap::init()
     addPlayer(this);
 
     return true;
-}
-
-void RoomMap::closeDoor()
-{
-
-}
-
-void RoomMap::openDoor()
-{
-
-}
-
-void RoomMap::createEnemy()
-{
-
-}
-
-void RoomMap::addPlayer(RoomMap *pMap)
-{
-
 }

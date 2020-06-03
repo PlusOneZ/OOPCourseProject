@@ -9,7 +9,6 @@
 #include "Actor/Hero.h"
 #include "Item/Bullet.h"
 #include <vector>
-#include <ctime>
 
 /*
 *@brief 子弹层
@@ -41,11 +40,9 @@ public:
 	*@brief 鼠标按下后的操作
 	*@author 翟晨昊
 	*/
-    bool onMouseDown(Event* event);
-
+	bool onMouseDown(Event* event);
 private:
-	Hero*            m_pHero;
-    clock_t          m_lastShotTime;
+	Hero* pHero;
 	Vector<Bullet* > m_pWeaponBullet;
 	SpriteBatchNode* m_pBulletBatchNode;
 };

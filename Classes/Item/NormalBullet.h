@@ -16,8 +16,7 @@ public:
 	*@brief 初始化
 	*@author 翟晨昊
 	*/
-	bool init() override;
-
+	bool init();
 	/**
 	*@brief 子弹攻击
 	*@author 翟晨昊

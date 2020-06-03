@@ -16,7 +16,7 @@ bool BulletLayer::init()
 
 void BulletLayer::bindHero(Hero* pNowHero)
 {
-    m_pHero = pNowHero;
+	pHero = pNowHero;
 }
 
 void BulletLayer::update(float dt)
@@ -28,19 +28,10 @@ void BulletLayer::update(float dt)
 
 bool BulletLayer::onMouseDown(Event* event)
 {
-    auto curTime = std::clock();
-    if (static_cast<double>(curTime - m_lastShotTime) / CLOCKS_PER_SEC
-            < m_pHero->getMainWeapon()->getInterval())
-    {
-        return true;
-    }
-    m_lastShotTime = curTime;
-    auto e = dynamic_cast<EventMouse* >(event);
-	Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
-    log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
-    log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
+	EventMouse* e = (EventMouse*)event;
+	Bullet* pBullet = pHero->getWeapon()->createBullet();
 	m_pWeaponBullet.pushBack(pBullet);
-	pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition());
+	pBullet->attack(e->getCursorX(), e->getCursorY(), pHero->getPosition());
 	this->addChild(pBullet);
 	return true;
 }

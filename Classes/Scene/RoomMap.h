@@ -21,13 +21,6 @@ class RoomMap :public cocos2d::Scene
 {
 public:
 
-    /**
-     * @brief Self Defined CTOR
-     * @param map : initialize field m_pMap
-     * @author 卓正一
-     */
-    RoomMap(TMXTiledMap* map) : m_pMap(map) { };
-
 	/**
 	*@brief Call the create function
 	*@return A Scene instance
@@ -43,36 +36,31 @@ public:
 	 */
 	bool init() override;
 
-	/**
-	 * @brief Self defined create
-	 * @param map : initialize field m_pMap
-	 * @return
-	 */
-	static RoomMap* create(TMXTiledMap* map);
+	CREATE_FUNC(RoomMap);
 
 	/**
 	*@brief close all the doors
 	*@author 李嘉树
 	*/
-	void closeDoor();
+	void closeDoor(){}
 
 	/**
 	*@brief open all the doors
 	*@author 李嘉树
 	*/
-	void openDoor();
+	void openDoor(){}
 
 	/**
 	*@brief create the enemies
 	*@author 李嘉树
 	*/
-	void createEnemy();
+	void createEnemy() {}
 
 	/**
 	*@brief add the player and start the game
 	*@author 李嘉树
 	*/
-	void addPlayer(RoomMap* pMap);
+	void addPlayer(RoomMap* pMap) {}
 
 protected:
 	TMXTiledMap* m_pMap;

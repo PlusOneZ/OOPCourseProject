@@ -27,7 +27,7 @@ public:
 	*@brief 初始
 	*@author 翟晨昊
 	*/
-	bool init() override;
+	bool init();
 	CREATE_FUNC(Gun);
 };
 #endif
