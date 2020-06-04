@@ -51,6 +51,12 @@ public:
 	static RoomMap* create(TMXTiledMap* map);
 
 	/**
+	*@brief close all the barriers
+	*@author 李嘉树
+	*/
+	void createBarrier();
+
+	/**
 	*@brief close all the doors
 	*@author 李嘉树
 	*/
