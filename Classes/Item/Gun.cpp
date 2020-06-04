@@ -8,13 +8,13 @@
 
 bool Gun::init()
 {
-	Sprite *pSprite = Sprite::create("item/weapons.png");
+	Sprite* pSprite = Sprite::create("item/weapons.png");
 	if (pSprite == nullptr)
 	{
 		log("weapons.png not found");
 	}
 	bindSprite(pSprite);
-	setInterval(2.0f);
+	setInterval(.2f);
 	return true;
 }
 

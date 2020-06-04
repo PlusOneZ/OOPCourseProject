@@ -9,6 +9,7 @@
 #include "Actor/Hero.h"
 #include "Item/Bullet.h"
 #include <vector>
+#include <ctime>
 
 /*
 *@brief 子弹层
@@ -25,7 +26,7 @@ public:
 	bool init();
 
 	/**
-	*@brief 将当前英雄加入子弹层 
+	*@brief 将当前英雄加入子弹层
 	*@author 翟晨昊
 	*/
 	void bindHero(Hero* pNowHero);
@@ -41,8 +42,10 @@ public:
 	*@author 翟晨昊
 	*/
 	bool onMouseDown(Event* event);
+
 private:
-	Hero* pHero;
+	Hero* m_pHero;
+	clock_t          m_lastShotTime;
 	Vector<Bullet* > m_pWeaponBullet;
 	SpriteBatchNode* m_pBulletBatchNode;
 };

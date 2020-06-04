@@ -10,28 +10,37 @@
 
 bool BulletLayer::init()
 {
-	scheduleUpdate();
-	return true;
+    scheduleUpdate();
+    return true;
 }
 
 void BulletLayer::bindHero(Hero* pNowHero)
 {
-	pHero = pNowHero;
+    m_pHero = pNowHero;
 }
 
 void BulletLayer::update(float dt)
 {
-	auto mouseListener = cocos2d::EventListenerMouse::create();
-	mouseListener->onMouseDown = CC_CALLBACK_1(BulletLayer::onMouseDown, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+    auto mouseListener = cocos2d::EventListenerMouse::create();
+    mouseListener->onMouseDown = CC_CALLBACK_1(BulletLayer::onMouseDown, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
 
 bool BulletLayer::onMouseDown(Event* event)
 {
-	EventMouse* e = (EventMouse*)event;
-	Bullet* pBullet = pHero->getWeapon()->createBullet();
-	m_pWeaponBullet.pushBack(pBullet);
-	pBullet->attack(e->getCursorX(), e->getCursorY(), pHero->getPosition());
-	this->addChild(pBullet);
-	return true;
+    auto curTime = std::clock();
+    if (static_cast<double>(curTime - m_lastShotTime) / CLOCKS_PER_SEC
+        < m_pHero->getMainWeapon()->getInterval())
+    {
+        return true;
+    }
+    m_lastShotTime = curTime;
+    auto e = dynamic_cast<EventMouse*>(event);
+    Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
+    log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
+    log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
+    m_pWeaponBullet.pushBack(pBullet);
+    pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition());
+    this->addChild(pBullet);
+    return true;
 }

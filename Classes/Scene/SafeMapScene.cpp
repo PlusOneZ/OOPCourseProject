@@ -8,7 +8,7 @@
 #include "BulletLayer.h"
 #include <iostream>
 
-Scene *SafeMap::createScene()
+Scene* SafeMap::createScene()
 {
     auto scene = Scene::createWithPhysics();
     auto layer = SafeMap::create();
@@ -20,7 +20,7 @@ Scene *SafeMap::createScene()
 bool SafeMap::init()
 {
     // 1. super init first
-    if ( !Scene::init() )
+    if (!Scene::init())
     {
         return false;
     }
@@ -35,7 +35,7 @@ bool SafeMap::init()
     else
     {
         safeRoom->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                   visibleSize.height / 2 + origin.y));
+            visibleSize.height / 2 + origin.y));
         auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
         safeRoom->setPhysicsBody(edge);
         addChild(safeRoom, 1, 98);
@@ -49,7 +49,7 @@ bool SafeMap::init()
     else
     {
         sofa->setPosition(Vec2(visibleSize.width / 2 + origin.x - 100.0,
-                               visibleSize.height / 2 + origin.y + 150.0));
+            visibleSize.height / 2 + origin.y + 150.0));
         addChild(sofa, 3, 100);
     }
 
@@ -61,7 +61,7 @@ bool SafeMap::init()
     else
     {
         carpet->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                 visibleSize.height / 2 + origin.y - 97.0));
+            visibleSize.height / 2 + origin.y - 97.0));
         addChild(carpet, 2, 99);
     }
 
@@ -73,7 +73,7 @@ bool SafeMap::init()
     else
     {
         table->setPosition(Vec2(visibleSize.width / 2 + origin.x,
-                                visibleSize.height / 2 + origin.y - 97.0));
+            visibleSize.height / 2 + origin.y - 97.0));
         addChild(table, 3, 101);
     }
 
@@ -85,7 +85,7 @@ bool SafeMap::init()
     else
     {
         leftChair->setPosition(Vec2(visibleSize.width / 2 + origin.x - 70.0,
-                                    visibleSize.height / 2 + origin.y - 97.0));
+            visibleSize.height / 2 + origin.y - 97.0));
         addChild(leftChair, 3, 102);
     }
 
@@ -97,7 +97,7 @@ bool SafeMap::init()
     else
     {
         rightChair->setPosition(Vec2(visibleSize.width / 2 + origin.x + 70.0,
-                                     visibleSize.height / 2 + origin.y - 97.0));
+            visibleSize.height / 2 + origin.y - 97.0));
         addChild(rightChair, 3, 101);
     }
 
@@ -108,8 +108,8 @@ bool SafeMap::init()
     }
     else
     {
-        fridge->setPosition(Vec2(visibleSize.width / 2 + origin.x -270.0,
-                                 visibleSize.height / 2 + origin.y + 160.0));
+        fridge->setPosition(Vec2(visibleSize.width / 2 + origin.x - 270.0,
+            visibleSize.height / 2 + origin.y + 160.0));
         addChild(fridge, 3, 103);
     }
 
@@ -121,7 +121,7 @@ bool SafeMap::init()
     else
     {
         board->setPosition(Vec2(visibleSize.width / 2 + origin.x + 170.0,
-                                visibleSize.height / 2 + origin.y + 270.0));
+            visibleSize.height / 2 + origin.y + 270.0));
         addChild(board, 3, 104);
     }
 
@@ -133,7 +133,7 @@ bool SafeMap::init()
     else
     {
         labTable->setPosition(Vec2(visibleSize.width / 2 + origin.x + 280.0,
-                                   visibleSize.height / 2 + origin.y + 50.0));
+            visibleSize.height / 2 + origin.y + 50.0));
         addChild(labTable, 3, 106);
     }
 
@@ -145,7 +145,7 @@ bool SafeMap::init()
     else
     {
         television->setPosition(Vec2(visibleSize.width / 2 + origin.x + 300.0,
-                                     visibleSize.height / 2 + origin.y - 240.0));
+            visibleSize.height / 2 + origin.y - 240.0));
         addChild(television, 3, 105);
     }
 
@@ -157,7 +157,7 @@ bool SafeMap::init()
     else
     {
         part->setPosition(Vec2(visibleSize.width / 2 + origin.x + 300.0,
-                               visibleSize.height / 2 + origin.y - 150.0));
+            visibleSize.height / 2 + origin.y - 150.0));
         addChild(part, 3, 107);
     }
 
@@ -169,7 +169,7 @@ bool SafeMap::init()
     else
     {
         can->setPosition(Vec2(visibleSize.width / 2 + origin.x - 320.0,
-                              visibleSize.height / 2 + origin.y - 230.0));
+            visibleSize.height / 2 + origin.y - 230.0));
         addChild(can, 3, 108);
     }
 
@@ -181,7 +181,7 @@ bool SafeMap::init()
     else
     {
         machine->setPosition(Vec2(visibleSize.width / 2 + origin.x - 320.0,
-                                  visibleSize.height / 2 + origin.y + 10.0));
+            visibleSize.height / 2 + origin.y + 10.0));
         addChild(machine, 3, 109);
     }
 
@@ -193,7 +193,7 @@ bool SafeMap::init()
     else
     {
         plant->setPosition(Vec2(visibleSize.width / 2 + origin.x + 150.0,
-                                visibleSize.height / 2 + origin.y + 170.0));
+            visibleSize.height / 2 + origin.y + 170.0));
         addChild(plant, 3, 110);
     }
 
@@ -205,7 +205,7 @@ bool SafeMap::init()
     else
     {
         box->setPosition(Vec2(visibleSize.width / 2 + origin.x + 200.0,
-                              visibleSize.height / 2 + origin.y + 130.0));
+            visibleSize.height / 2 + origin.y + 130.0));
         addChild(box, 3, 111);
     }
 
@@ -217,7 +217,7 @@ bool SafeMap::init()
     else
     {
         eggTwist->setPosition(Vec2(visibleSize.width / 2 + origin.x - 220.0,
-                                   visibleSize.height / 2 + origin.y + 160.0));
+            visibleSize.height / 2 + origin.y + 160.0));
         addChild(eggTwist, 3, 112);
     }
 
@@ -229,11 +229,11 @@ bool SafeMap::init()
     else
     {
         canBed->setPosition(Vec2(visibleSize.width / 2 + origin.x - 200.0,
-                                 visibleSize.height / 2 + origin.y - 230.0));
+            visibleSize.height / 2 + origin.y - 230.0));
         addChild(canBed, 3, 113);
     }
 
-	addPlayerKnight(this);
+    addPlayerKnight(this);
 
     return true;
 }
@@ -241,43 +241,42 @@ bool SafeMap::init()
 
 void SafeMap::addPlayerKnight(SafeMap* pMap)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
-	Sprite* knightSprite = Sprite::create(fig);
-	if (knightSprite == nullptr)
-	{
-		log("knight_rest1.png not found");
-	}
-	else
-	{
-		Knight* knight = Knight::create();
-		knight->bindSprite(knightSprite);
-		Hero::m_pPresentHero = knight;
-		knight->generatePhysics();
-		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y + 150.0)));
-		pMap->addChild(knight, 3, 500);
-		knight->rest();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
+    Sprite* knightSprite = Sprite::create(fig);
+    if (knightSprite == nullptr)
+    {
+        log("knight_rest1.png not found");
+    }
+    else
+    {
+        Knight* knight = Knight::create();
+        knight->bindSprite(knightSprite);
+        Hero::m_pPresentHero = knight;
+        knight->generatePhysics();
+        knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+            visibleSize.height / 2 + origin.y + 150.0)));
+        pMap->addChild(knight, 3, 500);
+        knight->rest();
 
         BulletLayer* bulletLayer = BulletLayer::create();
         bulletLayer->retain();
         bulletLayer->bindHero(knight);
         pMap->addChild(bulletLayer, 8, 450);
 
-//		MoveController* moveController = MoveController::create();
-//		this->addChild(moveController);
-//		knight->setMoveController(moveController);
-//		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
-//		AttackController* attackController = AttackController::create();
-//		this->addChild(attackController);
-//		knight->setAttackController(attackController);
+        //		MoveController* moveController = MoveController::create();
+        //		this->addChild(moveController);
+        //		knight->setMoveController(moveController);
+        //		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
+        //		AttackController* attackController = AttackController::create();
+        //		this->addChild(attackController);
+        //		knight->setAttackController(attackController);
 
         auto keyBoardListener = EventListenerKeyboard::create();
         keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
         keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
-	}
+    }
 }
-

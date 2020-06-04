@@ -42,4 +42,3 @@ protected:
 	float m_shootInterval;
 };
 #endif // !_WEAPON_H_
-

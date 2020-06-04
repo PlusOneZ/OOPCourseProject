@@ -12,5 +12,5 @@ float Weapon::getInterval()
 
 void Weapon::setInterval(float interval)
 {
-    m_shootInterval = interval;
+	m_shootInterval = interval;
 }
