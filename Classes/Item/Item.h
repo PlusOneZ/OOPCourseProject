@@ -12,13 +12,28 @@ using namespace cocos2d;
 
 /**
 *@brief 物品类
-*@author 肖杨(仅创建)
+*@author 肖杨
 */
 class Item:public Node
 {
 public:
+	/**
+	*@brief 绑定精灵
+	*/
 	void bindSprite(Sprite* pSprite);
-private:
+
+	/**
+	*@brief 交互函数
+	*@author 肖杨
+	*/
+	virtual void interact();
+
+	/**
+	*@brief 空的碰撞函数，用于忽略碰撞体积
+	*@author 肖杨
+	*/
+	bool voidOnContactPreSolve(PhysicsContact& contact);
+protected:
 	Sprite* m_pSprite;
 };
 

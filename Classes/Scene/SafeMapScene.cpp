@@ -259,6 +259,10 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 			visibleSize.height / 2 + origin.y + 150.0)));
 		pMap->addChild(knight, 3, 500);
 		knight->rest();
+		HealthPotion* test=HealthPotion::create();
+		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+			visibleSize.height / 2 + origin.y)));
+		pMap->addChild(test, 3, 400);
 
         BulletLayer* bulletLayer = BulletLayer::create();
         bulletLayer->retain();
