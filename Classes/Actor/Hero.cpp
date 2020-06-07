@@ -10,42 +10,8 @@ bool Hero::init()
 {
     scheduleUpdate();
 	m_pPresentHero = nullptr;
+	m_pPresentContactItem = nullptr;
 	return true;
-}
-
-/**
- * @brief  创建
- * @bug    传参错误导致无法正常生成动
- * @date   05/25/2020 [bug fixed: 卓正一]
- * @param  pAnimateName 动画文件名（字符串）
- * @author 肖杨
-*/
-Animate* Hero::creatHeroAnimate(const char * pAnimateName)
-{
-    log("Trying to create hero");
-	int moveFrameNum = 4;
-	SpriteFrame*frame = nullptr;
-	Vector<SpriteFrame*> frameVec;
-	for (int i = 1; i <= moveFrameNum; i++)
-	{
-		frame = SpriteFrame::create(StringUtils::format("%s%d.png", pAnimateName, i),
-		                            Rect(0, 0, 64, 60));
-		if (frame == nullptr)
-		{
-            log("animate %s%d.png lost", pAnimateName, i);
-		}
-		else
-		{
-		    frame->setAnchorPoint(Vec2(0.5, 0.));
-			frameVec.pushBack(frame);
-		}
-	}
-	Animation*animation = Animation::createWithSpriteFrames(frameVec);
-	animation->setLoops(-1);
-	animation->setDelayPerUnit(0.2f);
-	Animate*action = Animate::create(animation);
-	action->retain();
-	return action;
 }
 
 Weapon* Hero::getMainWeapon()
@@ -53,10 +19,17 @@ Weapon* Hero::getMainWeapon()
 	return this->m_pMainWeapon;
 }
 
+int Hero::getFacing()
+{
+    return m_curFacing;
+}
+
 void Hero::shiftWeapon()
 {
 	if (m_pSecWeapon != nullptr)
 	{
+        m_pMainWeapon->setVisible(false);
+        m_pSecWeapon->setVisible(true);
 		Weapon* pTemp = m_pSecWeapon;
 		m_pSecWeapon = m_pMainWeapon;
 		m_pMainWeapon = pTemp;
@@ -97,6 +70,13 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		// TODO: Shift weapon here.
 		this->shiftWeapon();
 	}
+	else if (keyCode == EventKeyboard::KeyCode::KEY_F)
+	{
+		if (m_pPresentContactItem != nullptr)
+		{
+			m_pPresentContactItem->interact();
+		}
+	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
 	{
 		Director::getInstance()->pushScene(PauseMenu::create(m_ID));
@@ -132,7 +112,8 @@ void Hero::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 void Hero::update(float dt)
 {
     auto v = Vec2(0, 0);
-    if (m_ifStateChanged) {
+    if (m_ifStateChanged) 
+	{
         if (m_isKeyDown[sk::kUp])
             v.y += m_speed;
         if (m_isKeyDown[sk::kDown])
@@ -158,7 +139,7 @@ void Hero::update(float dt)
         m_curFacing = sk::kRight;
     }
 
-    if (v != Vec2::ZERO)
+    if (getPhysicsBody()->getVelocity() != Vec2::ZERO)
     {
         if (!m_ifMoved)
         {
@@ -177,6 +158,61 @@ void Hero::update(float dt)
     }
 
 
+}
+
+void Hero::rest()
+{
+	m_sprite->runAction(m_pRestAnimate);
+}
+
+void Hero::move()
+{
+	m_sprite->stopAction(m_pRestAnimate);
+	m_sprite->runAction(m_pMoveAnimate);
+}
+
+void Hero::stopMove()
+{
+	m_sprite->stopAction(m_pMoveAnimate);
+}
+
+bool Hero::reduceHP(int damage)
+{
+	if (m_armor != 0)
+	{
+		if (damage > m_armor)
+		{
+			damage -= m_armor;
+			m_armor = 0;
+		}
+		else
+		{
+			m_alive -= damage;
+			return true;
+		}
+	}
+	if (damage >= m_HP)
+	{
+		m_alive = false;
+		return false;
+	}
+	else
+	{
+		m_HP -= damage;
+		return true;
+	}
+}
+
+void Hero::recoverHP(int healAmount)
+{
+	if (m_HP + healAmount <= m_maxHP)
+	{
+		m_HP += healAmount;
+	}
+	else
+	{
+		m_HP = m_maxHP;
+	}
 }
 
 /*

@@ -21,6 +21,15 @@ public:
     *@author 肖杨
     */
     void bindSprite(Sprite* pSprite);
+
+	/**
+	*@brief 生成动画
+	*@author 肖杨
+	*@return 对应动画
+	@param arg1 要生成的动画对应文件名称
+	*/
+	static Animate* creatActorAnimate(const char * pAnimateName, int width = 64, int height = 60);
+
 protected:
     Sprite* m_sprite;
 };
