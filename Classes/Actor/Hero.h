@@ -51,6 +51,12 @@ public:
 	 */
 	Weapon* getMainWeapon();
 
+	/**
+	*@brief 获取英雄朝向
+	*@author 翟晨昊
+	*@return 隐含朝向信息的整数
+	*/
+	int getFacing();
 
 	/**
 	*@brief 技能接口
@@ -61,7 +67,7 @@ public:
 
 	/**
 	*@brief 切换武器
-	*@author 肖杨
+	*@author 翟晨昊
 	*/
 	void shiftWeapon();
 

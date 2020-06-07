@@ -23,6 +23,12 @@ public:
 	void bindSprite(Sprite* pSprite);
 
 	/**
+	*@brief 获取精灵
+	*@author 翟晨昊
+	*/
+	Sprite* getSprite();
+
+	/**
 	*@brief 交互函数
 	*@author 肖杨
 	*/

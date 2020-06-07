@@ -19,10 +19,17 @@ Weapon* Hero::getMainWeapon()
 	return this->m_pMainWeapon;
 }
 
+int Hero::getFacing()
+{
+    return m_curFacing;
+}
+
 void Hero::shiftWeapon()
 {
 	if (m_pSecWeapon != nullptr)
 	{
+        m_pMainWeapon->setVisible(false);
+        m_pSecWeapon->setVisible(true);
 		Weapon* pTemp = m_pSecWeapon;
 		m_pSecWeapon = m_pMainWeapon;
 		m_pMainWeapon = pTemp;
