@@ -75,6 +75,7 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (m_pPresentContactItem != nullptr)
 		{
 			m_pPresentContactItem->interact();
+			m_pPresentContactItem = nullptr;
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -131,11 +132,15 @@ void Hero::update(float dt)
     if (v.x < 0 && m_curFacing == sk::kRight)
     {
         m_sprite->setFlippedX(true);
+        m_pMainWeapon->getSprite()->setFlippedX(true);
+        m_pMainWeapon->setPosition(Point(-20.0, 20.0));
         m_curFacing = sk::kLeft;
     }
     else if (v.x > 0 && m_curFacing == sk::kLeft)
     {
         m_sprite->setFlippedX(false);
+        m_pMainWeapon->getSprite()->setFlippedX(false);
+        m_pMainWeapon->setPosition(Point(20.0, 20.0));
         m_curFacing = sk::kRight;
     }
 

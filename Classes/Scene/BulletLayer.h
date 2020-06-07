@@ -43,6 +43,8 @@ public:
 	*/
 	bool onMouseDown(Event* event);
 
+	bool onContactBegin(PhysicsContact& contact);
+
 private:
 	Hero* m_pHero;
 	clock_t          m_lastShotTime;

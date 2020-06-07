@@ -14,14 +14,14 @@ using namespace cocos2d;
 *@brief 子弹类
 *@author 翟晨昊
 */
-class Bullet :public Node {
+class Bullet :public Node{
 public:
 
 	/**
-	*@brief 子弹攻击
-	*@author 翟晨昊
-	*/
-	virtual void attack(float mouseX, float mouseY, Point heroPoint) = 0;
+    *@brief 子弹攻击
+    *@author 翟晨昊
+    */
+	virtual void attack(float mouseX, float mouseY, Point heroPoint, int curFacing) = 0;
 
 	/**
 	*@brief 获取子弹速度

@@ -20,6 +20,10 @@ void Bullet::bindSprite(Sprite* pSprite)
     m_pBulletSprite = pSprite;
     auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
     m_pBulletSprite->setPhysicsBody(body);
+    body->setCategoryBitmask(0x1100);
+    body->setCollisionBitmask(0x0011);
+    body->setContactTestBitmask(0x0011);
+    body->setTag(200);
     this->addChild(m_pBulletSprite);
 }
 

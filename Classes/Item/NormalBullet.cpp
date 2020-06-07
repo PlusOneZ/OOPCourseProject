@@ -18,14 +18,14 @@ bool NormalBullet::init()
 	return true;
 }
 
-void NormalBullet::attack(float mouseX, float mouseY, Point heroPoint)
+void NormalBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
 {
-	heroPoint.x += 25.0;
+	heroPoint.x += (curFacing == 0 ? 25.0 : -25.0);
 	heroPoint.y += 20.0;
 	m_pBulletSprite->setPosition(heroPoint);
 
 	auto v = Vec2(mouseX - heroPoint.x, mouseY - heroPoint.y);
 	v.normalize();
-	v *= 200;
+	v *= 400;
 	m_pBulletSprite->getPhysicsBody()->setVelocity(v);
 }

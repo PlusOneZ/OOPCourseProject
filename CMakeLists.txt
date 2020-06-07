@@ -72,12 +72,18 @@ list(APPEND GAME_SOURCE
         Classes/Actor/Actor.cpp
         Classes/Actor/Hero.cpp
         Classes/Actor/Knight.cpp
+        Classes/Actor/Monster.cpp
+        Classes/Actor/DistantMonster.cpp
 
         Classes/Item/Item.cpp
         Classes/Item/Weapon.cpp
         Classes/Item/Gun.cpp
         Classes/Item/Bullet.cpp
         Classes/Item/NormalBullet.cpp
+        Classes/Item/Shotgun.cpp
+        Classes/Item/Sword.cpp
+        Classes/Item/ShotgunBullet.cpp
+        Classes/Item/HealthPotion.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -92,12 +98,18 @@ list(APPEND GAME_HEADER
         Classes/Actor/Actor.h
         Classes/Actor/Hero.h
         Classes/Actor/Knight.h
+        Classes/Actor/Monster.h
+        Classes/Actor/DistantMonster.h
 
         Classes/Item/Item.h
         Classes/Item/Weapon.h
         Classes/Item/Gun.h
         Classes/Item/Bullet.h
         Classes/Item/NormalBullet.h
+        Classes/Item/Shotgun.h
+        Classes/Item/Sword.h
+        Classes/Item/ShotgunBullet.h
+        Classes/Item/HealthPotion.h
 
         Classes/Const/Const.h
         )
