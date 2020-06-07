@@ -73,6 +73,7 @@ list(APPEND GAME_SOURCE
         Classes/Actor/Hero.cpp
         Classes/Actor/Knight.cpp
         Classes/Actor/Monster.cpp
+        Classes/Actor/DistantMonster.cpp
 
         Classes/Item/Item.cpp
         Classes/Item/Weapon.cpp
@@ -98,6 +99,7 @@ list(APPEND GAME_HEADER
         Classes/Actor/Hero.h
         Classes/Actor/Knight.h
         Classes/Actor/Monster.h
+        Classes/Actor/DistantMonster.h
 
         Classes/Item/Item.h
         Classes/Item/Weapon.h

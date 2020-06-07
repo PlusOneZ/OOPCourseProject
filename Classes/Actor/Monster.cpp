@@ -4,11 +4,6 @@
 
 #include "Monster.h"
 
-bool Monster::init()
-{
-    scheduleUpdate();
-    return true;
-}
 
 Animate *Monster::creatMonsterAnimate(const std::string &textureName, int num)
 {
@@ -21,7 +16,8 @@ Animate *Monster::creatMonsterAnimate(const std::string &textureName, int num)
     Vector<SpriteFrame* > frameVec;
     for ( ;i <= num; ++i)
     {
-        pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(textureName + std::to_string(i));
+        pFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(textureName
+                 + std::to_string(i) + ".png");
         if (pFrame != nullptr)
         {
             pFrame->setAnchorPoint(Vec2(0.5, 0.));
@@ -55,24 +51,37 @@ bool Monster::loadAllAnimate()
     return true;
 }
 
-void Monster::wander()
+void Monster::wanderSpeed(float dt)
 {
-
+    float xSpeed = RandomHelper::random_real(-1., 1.);
+    float ySpeed = RandomHelper::random_real(-1., 1.);
+    auto vTemp   = Vec2(xSpeed, ySpeed);
+    m_curSpeed   = vTemp / vTemp.getLength() * m_wanderSpeed;
+    // TODO 增强随机性
 }
 
-void Monster::follow()
-{
-
-}
 
 void Monster::die()
 {
-
+    this->stopAllActions();
+    if (m_pDieAnimation == nullptr)
+    {
+        log("dead animation not available");
+        return;
+    }
+    else
+    {
+        this->runAction(m_pDieAnimation);
+    }
+    // TODO 回收怪物
 }
 
 void Monster::reduceHealth(int amount)
 {
-
+    if (amount > m_curHealth || m_curHealth <= 0)
+        die();
+    else
+        m_curHealth -= amount;
 }
 
 

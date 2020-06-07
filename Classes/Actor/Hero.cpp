@@ -131,11 +131,15 @@ void Hero::update(float dt)
     if (v.x < 0 && m_curFacing == sk::kRight)
     {
         m_sprite->setFlippedX(true);
+        m_pMainWeapon->getSprite()->setFlippedX(true);
+        m_pMainWeapon->setPosition(Point(-20.0, 20.0));
         m_curFacing = sk::kLeft;
     }
     else if (v.x > 0 && m_curFacing == sk::kLeft)
     {
         m_sprite->setFlippedX(false);
+        m_pMainWeapon->getSprite()->setFlippedX(false);
+        m_pMainWeapon->setPosition(Point(20.0, 20.0));
         m_curFacing = sk::kRight;
     }
 

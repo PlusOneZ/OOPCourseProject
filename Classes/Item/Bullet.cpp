@@ -23,6 +23,7 @@ void Bullet::bindSprite(Sprite* pSprite)
     body->setCategoryBitmask(0x1100);
     body->setCollisionBitmask(0x0011);
     body->setContactTestBitmask(0x0011);
+    body->setTag(200);
     this->addChild(m_pBulletSprite);
 }
 
