@@ -15,6 +15,7 @@ bool Gun::init()
 	}
 	bindSprite(pSprite);
 	setInterval(.2f);
+	setBulletCount(1);
 	return true;
 }
 

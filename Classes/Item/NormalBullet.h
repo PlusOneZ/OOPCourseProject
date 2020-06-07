@@ -22,7 +22,7 @@ public:
 	*@brief 子弹攻击
 	*@author 翟晨昊
 	*/
-	void attack(float mouseX, float mouseY, Point heroPoint) override;
+	void attack(float mouseX, float mouseY, Point heroPoint, int curFacing) override;
 };
 
 #endif

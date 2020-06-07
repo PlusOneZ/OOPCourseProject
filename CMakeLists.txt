@@ -78,6 +78,9 @@ list(APPEND GAME_SOURCE
         Classes/Item/Gun.cpp
         Classes/Item/Bullet.cpp
         Classes/Item/NormalBullet.cpp
+        Classes/Item/Shotgun.cpp
+        Classes/Item/Sword.cpp
+        Classes/Item/ShotgunBullet.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -98,6 +101,9 @@ list(APPEND GAME_HEADER
         Classes/Item/Gun.h
         Classes/Item/Bullet.h
         Classes/Item/NormalBullet.h
+        Classes/Item/Shotgun.h
+        Classes/Item/Sword.h
+        Classes/Item/ShotgunBullet.h
 
         Classes/Const/Const.h
         )
