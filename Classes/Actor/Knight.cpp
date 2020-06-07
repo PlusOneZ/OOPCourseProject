@@ -5,44 +5,27 @@
 */
 #include"Knight.h"
 #include "Item/Gun.h"
+#include "Item/Shotgun.h"
+#include "Item/Sword.h"
 
 Hero* Hero::m_pPresentHero = nullptr;
+Item* Hero::m_pPresentContactItem = nullptr;
 
 bool Knight::init()
 {
-	m_pMainWeapon = Gun::create();
-	m_pMainWeapon->setPosition(Point(this->getPosition().x + 25.0, this->getPosition().y + 20.0));
-	this->addChild(m_pMainWeapon);
-	m_pMoveAnimate = creatMoveAnimate();
-	m_pRestAnimate = creatRestAnimate();
+	auto fig = AutoPolygon::generatePolygon("item/swordaction1.png");
+	Sprite* swordSprite = Sprite::create(fig);
+	m_pMainWeapon = Sword::create();
+	m_pMainWeapon->bindSprite(swordSprite);
+	m_pMainWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
+	m_pSecWeapon = Shotgun::create();
+	m_pSecWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
+	this->addChild(m_pMainWeapon, 2);
+	this->addChild(m_pSecWeapon, 2);
+	m_pSecWeapon->setVisible(false);
+	m_pMoveAnimate = creatActorAnimate(sk::files::kKnightMove);
+	m_pRestAnimate = creatActorAnimate(sk::files::kKnightRest);
 	return true;
-}
-
-
-Animate* Knight::creatMoveAnimate()
-{
-	return creatHeroAnimate(sk::files::kKnightMove);
-}
-
-Animate* Knight::creatRestAnimate()
-{
-	return creatHeroAnimate(sk::files::kKnightRest);
-}
-
-void Knight::rest()
-{
-	m_sprite->runAction(m_pRestAnimate);
-}
-
-void Knight::move()
-{
-	m_sprite->stopAction(m_pRestAnimate);
-	m_sprite->runAction(m_pMoveAnimate);
-}
-
-void Knight::stopMove()
-{
-	m_sprite->stopAction(m_pMoveAnimate);
 }
 
 bool Knight::skill()

@@ -23,35 +23,27 @@ public:
 	*@brief 生成主角
 	*@author 肖杨
 	*/
-	bool init() override;
+	bool init() override ;
 
-	void update(float dt) override;
+	void update(float dt) override ;
 
 	/**
 	*@brief 主角移动
 	*@author 肖杨
 	*/
-	virtual void move() = 0;
+	void move();
 
 	/**
 	*@brief 主角停止移动
 	*@author 肖杨
 	*/
-	virtual void stopMove() = 0;
+	void stopMove();
 
 	/**
 	*@brief 主角静止
 	*@author 肖杨
 	*/
-	virtual void rest() = 0;
-
-	/**
-	*@brief 生成动画
-	*@author 肖杨
-	*@return 对应动画
-	@param arg1 要生成的动画对应文件名称
-	*/
-	static Animate* creatHeroAnimate(const char* pAnimateName);
+	void rest();
 
 	/**
 	 * @note   Modified : 卓正一
@@ -59,6 +51,12 @@ public:
 	 */
 	Weapon* getMainWeapon();
 
+	/**
+	*@brief 获取英雄朝向
+	*@author 翟晨昊
+	*@return 隐含朝向信息的整数
+	*/
+	int getFacing();
 
 	/**
 	*@brief 技能接口
@@ -69,16 +67,16 @@ public:
 
 	/**
 	*@brief 切换武器
-	*@author 肖杨
+	*@author 翟晨昊
 	*/
 	void shiftWeapon();
 
 
 	/**
-	* @brief  监听按钮按下
-	* @param  keyCode 哪个按钮
-	* @author 卓正一
-	*/
+    * @brief  监听按钮按下
+    * @param  keyCode 哪个按钮
+    * @author 卓正一
+    */
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 
 	/**
@@ -88,27 +86,47 @@ public:
 	 */
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
+	/**
+	* @brief 受伤
+	* @param 伤害数值
+	* @arthor 肖杨
+	* @return 是否还活着
+	*/
+	bool reduceHP(int damage = 1);
+
+	/**
+	* @brief 恢复生命
+	* @param 恢复数值
+	* @arthor 肖杨
+	*/
+	void recoverHP(int healAmount = 1);
 
 	static Hero* m_pPresentHero;
-
+	static Item* m_pPresentContactItem;
 
 protected:
 
-	Weapon* m_pMainWeapon = nullptr;
-	Weapon* m_pSecWeapon = nullptr;
+    Weapon* m_pMainWeapon = nullptr;
+    Weapon* m_pSecWeapon = nullptr;
 
 	Animate* m_pRestAnimate = nullptr;
 	Animate* m_pMoveAnimate = nullptr;
 
 	sk::HeroID m_ID;
 
+	bool m_alive = true;
 	float m_speed = 150.;
+	int m_HP = 5;
+	int m_maxHP = 5;
+	//int m_MP;
+	int m_armor = 5;
+	int m_maxArmor = 5;
 
-	bool m_ifMoved = false;
+	bool m_ifMoved        = false;
 	bool m_ifStateChanged = false;
 
 	int m_curFacing = sk::kRight;
 
-	std::vector<bool> m_isKeyDown = std::vector<bool>(6, false);
+	std::vector<bool> m_isKeyDown = std::vector<bool>(7, false);
 };
 #endif

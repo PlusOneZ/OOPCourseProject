@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "Actor/Knight.h"
+#include "Item/HealthPotion.h"
 
 USING_NS_CC;
 

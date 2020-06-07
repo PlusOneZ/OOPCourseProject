@@ -28,7 +28,8 @@ namespace sk
         kUp,
         kDown,
         kSkill,
-        kShiftWeapon
+        kShiftWeapon,
+		kInteract
     };
 
     // File names
