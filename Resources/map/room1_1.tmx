@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" nextobjectid="17">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="4" nextobjectid="13">
  <tileset firstgid="1" source="room1_1.tsx"/>
- <layer name="Picture1" width="45" height="25">
+ <layer id="1" name="图块层 1" width="45" height="25">
   <data encoding="base64" compression="zlib">
-   eJytl9uOwyAMREkCgf//4u1KGeVkOtA+FMkq5WKPrzhnKaW/aLyovei8iPOOeaJm5w/Mt7Dm59LeN/SPeYf8NpFB/NKVPET9ImI+cC9hcOzHheOfX70oYV7hXtljgIdj2spTT/GivvU6V83+wpFk97DeTb5sRd2IazN7uq7SSxhHedeplidel+26d+y5HQ67J/07bCPZ+h3liZX8uL6FNdfFc4z8hWkvd166jr8YkiX/0Hab7a/i0f1I+27l9sOvMLuNE1Wc1Vw+Vq67DgOY5ZtfYaZNUz4Jc6oZHjPK/1kszuR7bWEN8KFcoFzWUs8pzwXea+WuC/JHw50+wcx60DCf6Sn/CatqDn3rMTqrvf5G1HA2YXbdWP9md3S24aznFfF9g/kwzPJdkp/qMmtWukP/6s30nBx2LunA+Q4crdy5MMNMfrorHCvMJMftccw3spbnm9JtT3eSnRl/zIdVbHivopyf+WrVT43ybjM/54N1kHzYL/lQTdlBXs9W/UCqhzPfjCBfeDvk6/+Y3GEdTPFK3H2x77jZq8nnSf7MDow1H55r3vOkvVmNTrbe8Zvke7y5zJS3WzjHt9jrV+qxpB/xMt5Ou6eR+nDP45QDySc6L57b5D/luH0dc4oprylumxM8El7Gn9vdv8tSn82c8V6AvNhLu44da76XfMv4203ep28xj0Xalr1Gt3kv9zvmdtYb2sCnlne9kz7EvCKe4Xcd+XWTm3KCPmdPMZM7+2ZO8ea+r2Et8ffvrOTfmdwUX05n+F3RrL+mzT69Syus1O9bn7u8P1eMFGc=
+   eJztzqENACAMAMEqmKH7L4rFYEhFm5x4+7mMiCxqP6r6361BMTMzMzP3jJmZmZm5Z8zMzMy/5mkdm8skCw==
   </data>
  </layer>
- <layer name="Object1" width="45" height="25">
-  <data encoding="base64" compression="zlib">
-   eJztzzEOACEIBVEqOIP3v6hrsYmlxPUvJvMSOomDGYDb+DNtY1yffH2zJ6ZS86mdL9GsQbMGzRo0a8T0fyzu/N08hK33vu+zd1aQvRNATR28QQjv
-  </data>
- </layer>
+ <objectgroup id="2" name="barrier">
+  <object id="2" x="30.3922" y="-0.980392" width="502.941" height="29.4118"/>
+  <object id="3" x="31.3725" y="672.549" width="1200.98" height="25.4902"/>
+  <object id="5" x="698.039" y="-0.980392" width="530.392" height="28.4314"/>
+  <object id="9" x="1235.29" y="-0.980392" width="23.5294" height="696.078"/>
+  <object id="10" x="0.980392" y="-0.980392" width="20.5882" height="697.059"/>
+ </objectgroup>
+ <objectgroup id="3" name="door">
+  <object id="11" x="537.255" y="0.980392" width="155.882" height="24.5098"/>
+ </objectgroup>
 </map>
