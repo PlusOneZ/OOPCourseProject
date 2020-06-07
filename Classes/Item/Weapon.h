@@ -24,7 +24,9 @@ public:
 	*@brief 创造一枚子弹
 	*@author 翟晨昊
 	*/
-	virtual Bullet* createBullet() = 0;
+	virtual Bullet* createBullet();
+
+	virtual Animate* attack();
 
 	/**
 	*@brief 获取武器发射速度
@@ -33,13 +35,26 @@ public:
 	float getInterval();
 
 	/**
+	*@brief 获取武器一次发射几枚子弹
+	*@author 翟晨昊
+	*/
+	int getBulletCount();
+
+	/**
 	*@brief 设置武器发射速度
 	*@author 翟晨昊
 	*/
 	void setInterval(float interval);
 
+	/**
+	*@brief 设置武器一次发射几枚子弹
+	*@author 翟晨昊
+	*/
+	void setBulletCount(int count);
+
 protected:
-	float m_shootInterval;
+	float m_attackInterval;
+	int m_bulletCount;
 };
 #endif // !_WEAPON_H_
 

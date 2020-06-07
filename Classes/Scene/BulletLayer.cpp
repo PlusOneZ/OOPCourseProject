@@ -10,6 +10,9 @@
 
 bool BulletLayer::init()
 {
+    auto mouseListener = cocos2d::EventListenerMouse::create();
+    mouseListener->onMouseDown = CC_CALLBACK_1(BulletLayer::onMouseDown, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 	scheduleUpdate();
 	return true;
 }
@@ -21,9 +24,9 @@ void BulletLayer::bindHero(Hero* pNowHero)
 
 void BulletLayer::update(float dt)
 {
-	auto mouseListener = cocos2d::EventListenerMouse::create();
-	mouseListener->onMouseDown = CC_CALLBACK_1(BulletLayer::onMouseDown, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(BulletLayer::onContactBegin, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 }
 
 bool BulletLayer::onMouseDown(Event* event)
@@ -36,11 +39,29 @@ bool BulletLayer::onMouseDown(Event* event)
     }
     m_lastShotTime = curTime;
     auto e = dynamic_cast<EventMouse* >(event);
-	Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
-    log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
-    log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
-	m_pWeaponBullet.pushBack(pBullet);
-	pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition());
-	this->addChild(pBullet);
+    if (m_pHero->getMainWeapon()->getBulletCount() == 0)
+    {
+        Animate* pAttackAction = m_pHero->getMainWeapon()->attack();
+    }
+    else
+    {
+        for (int i = 0; i < m_pHero->getMainWeapon()->getBulletCount(); i++)
+        {
+            Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
+            log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
+            log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
+            m_pWeaponBullet.pushBack(pBullet);
+            pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(), m_pHero->getFacing());
+            this->addChild(pBullet);
+        }
+    }
 	return true;
+}
+
+bool BulletLayer::onContactBegin(PhysicsContact& contact)
+{
+    auto body1 = contact.getShapeA()->getBody()->getNode();
+    auto body2 = contact.getShapeB()->getBody()->getNode();
+    body2->setVisible(false);
+    return true;
 }

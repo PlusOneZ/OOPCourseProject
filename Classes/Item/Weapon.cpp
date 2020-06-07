@@ -5,12 +5,32 @@
 */
 #include"Weapon.h"
 
+Bullet* Weapon::createBullet()
+{
+	return nullptr;
+}
+
+Animate* Weapon::attack()
+{
+	return nullptr;
+}
+
 float Weapon::getInterval()
 {
-	return m_shootInterval;
+	return m_attackInterval;
+}
+
+int Weapon::getBulletCount()
+{
+	return m_bulletCount;
 }
 
 void Weapon::setInterval(float interval)
 {
-    m_shootInterval = interval;
+    m_attackInterval = interval;
+}
+
+void Weapon::setBulletCount(int count)
+{
+	m_bulletCount = count;
 }
