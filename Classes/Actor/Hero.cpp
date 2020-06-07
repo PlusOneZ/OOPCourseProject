@@ -75,6 +75,7 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (m_pPresentContactItem != nullptr)
 		{
 			m_pPresentContactItem->interact();
+			m_pPresentContactItem = nullptr;
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)

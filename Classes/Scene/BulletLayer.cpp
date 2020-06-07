@@ -62,6 +62,9 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
 {
     auto body1 = contact.getShapeA()->getBody()->getNode();
     auto body2 = contact.getShapeB()->getBody()->getNode();
-    body2->setVisible(false);
+	if (body2->getTag() == 200)
+	{
+		body2->setVisible(false);
+	}
     return true;
 }
