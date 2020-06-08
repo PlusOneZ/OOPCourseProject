@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "Actor/Knight.h"
+#include "Actor/Assassin.h"
 #include "Item/HealthPotion.h"
 
 USING_NS_CC;
@@ -43,7 +44,13 @@ public:
     *@brief 添加骑士 子弹层 键盘监控
     *@author 肖杨  翟晨昊 卓正一
     */
-    void addPlayerKnight(SafeMap *pMap);
+    void addPlayerKnight();
+
+	/**
+	*@brief 功能同上，角色为刺客
+	*@author 肖杨
+	*/
+	void addPlayerAssassin();
 };
 
 #endif

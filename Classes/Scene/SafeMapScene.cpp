@@ -233,13 +233,13 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-	addPlayerKnight(this);
+	addPlayerKnight();
 
     return true;
 }
 
 
-void SafeMap::addPlayerKnight(SafeMap* pMap)
+void SafeMap::addPlayerKnight()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -257,17 +257,17 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		pMap->addChild(knight, 3, 500);
+		this->addChild(knight, 3, kHeroTag);
 		knight->rest();
 		HealthPotion* test=HealthPotion::create();
 		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y)));
-		pMap->addChild(test, 3, 400);
+		this->addChild(test, 3, 400);
 
         BulletLayer* bulletLayer = BulletLayer::create();
         bulletLayer->retain();
         bulletLayer->bindHero(knight);
-        pMap->addChild(bulletLayer, 8, 450);
+        this->addChild(bulletLayer, 8, 450);
 
 //		MoveController* moveController = MoveController::create();
 //		this->addChild(moveController);
@@ -282,6 +282,44 @@ void SafeMap::addPlayerKnight(SafeMap* pMap)
         keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
+	}
+}
+
+void SafeMap::addPlayerAssassin()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	auto fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
+	Sprite* assassinSprite = Sprite::create(fig);
+	if (assassinSprite == nullptr)
+	{
+		log("assassin_rest1.png not found");
+	}
+	else
+	{
+		Assassin* assassin = Assassin::create();
+		assassin->bindSprite(assassinSprite);
+		Hero::m_pPresentHero = assassin;
+		assassin->generatePhysics();
+		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+			visibleSize.height / 2 + origin.y + 150.0)));
+		this->addChild(assassin, 3, kHeroTag);
+		assassin->rest();
+		HealthPotion* test = HealthPotion::create();
+		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+			visibleSize.height / 2 + origin.y)));
+		this->addChild(test, 3, 400);
+
+		BulletLayer* bulletLayer = BulletLayer::create();
+		bulletLayer->retain();
+		bulletLayer->bindHero(assassin);
+		this->addChild(bulletLayer, 8, 450);
+
+		auto keyBoardListener = EventListenerKeyboard::create();
+		keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
+		keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
+
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
 	}
 }
 

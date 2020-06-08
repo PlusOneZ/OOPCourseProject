@@ -6,28 +6,34 @@
 #include "HealthPotion.h"
 #include "../Actor/Hero.h"
 
+static const std::string kHealthPotionMessage = "Health Potion";
+
 bool HealthPotion::init()
 {
 	m_pSprite = Sprite::create("item/HealthPotion.png");
 	m_pSprite->setTag(10);
 
 	auto size = m_pSprite->getContentSize();
-	size.width *= 1.8;
-	size.height *= 1.8;
+	size.width *= 1.3;
+	size.height *= 1.2;
 	auto body = PhysicsBody::createBox(size);
 	body->setDynamic(false);
 	body->setGravityEnable(false);
-	body->setCategoryBitmask(0x01);
-	body->setCollisionBitmask(0x01);
-	body->setContactTestBitmask(0x01);
+	body->setCategoryBitmask(k_ItemCategoryBitmask);
+	body->setCollisionBitmask(k_ItemCollisionBitmask);
+	body->setContactTestBitmask(k_HeroContactTestBitmask);
 	m_pSprite->setPhysicsBody(body);
 
 	this->addChild(m_pSprite);
 
+	m_pMessage = showMessage(kHealthPotionMessage);
+	m_pMessage->setVisible(false);
+	m_pMessage->setPosition(this->getPosition().x,this->getPosition().y+40);
+	this->addChild(m_pMessage);
+
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(HealthPotion::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(HealthPotion::onContactSeparate, this);
-	contactListener->onContactPreSolve = CC_CALLBACK_1(HealthPotion::voidOnContactPreSolve, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	return true;
@@ -35,8 +41,7 @@ bool HealthPotion::init()
 
 void HealthPotion::interact()
 {
-	Hero::m_pPresentHero->recoverHP();
-	log("message hide");
+	Hero::m_pPresentHero->recoverHP(2);
 	this->removeFromParentAndCleanup(true);//用完就释放
 }
 
@@ -44,23 +49,17 @@ bool HealthPotion::onContactBegin(PhysicsContact& contact)
 {
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
-	if (nodeA->getTag() == 500 || nodeB->getTag() == 500)//确保其中一个是英雄对象的时候执行
+	if (nodeA->getTag() == kHeroTag || nodeB->getTag() == kHeroTag)//确保其中一个是英雄对象的时候执行
 	{
 		Hero::m_pPresentContactItem = this;
-		log("message");
-		//TODO:显示信息
-		return true;
+		m_pMessage->setVisible(true);
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 bool HealthPotion::onContactSeparate(PhysicsContact& contact)
 {
 	Hero::m_pPresentContactItem = nullptr;
-	log("message hide");
-	//TODO:隐藏信息
+	m_pMessage->setVisible(false);
 	return true;
 }

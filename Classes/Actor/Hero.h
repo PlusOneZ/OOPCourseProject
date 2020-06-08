@@ -11,6 +11,8 @@
 #include "../Const/Const.h"
 #include <vector>
 
+static const int kHeroTag = 500;
+
 class BulletLayer;
 /**
 *@brief 主角类
@@ -61,9 +63,15 @@ public:
 	/**
 	*@brief 技能接口
 	*@author 肖杨
-	*@return 技能是否释放成功(暂定)
+	*@return 技能持续时间
 	*/
-	virtual bool skill() = 0;
+	virtual double skill() = 0;
+
+	/**
+	*@brief 技能结束回调
+	*@author 肖杨
+	*/
+	virtual void skillEnd() = 0;
 
 	/**
 	*@brief 切换武器
@@ -121,6 +129,12 @@ protected:
 	//int m_MP;
 	int m_armor = 5;
 	int m_maxArmor = 5;
+	double m_recoverArmorTime = 0;
+	bool m_ifMortal = true;
+
+	int m_skillCD = 8;
+	double m_skillTime = m_skillCD;
+	double m_skillContinueTime = 0;
 
 	bool m_ifMoved        = false;
 	bool m_ifStateChanged = false;

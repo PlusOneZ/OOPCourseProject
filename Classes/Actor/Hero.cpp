@@ -6,11 +6,12 @@
 #include "Hero.h"
 #include "../Scene/PauseMenu.h"
 
+Hero* Hero::m_pPresentHero = nullptr;
+Item* Hero::m_pPresentContactItem = nullptr;
+
 bool Hero::init()
 {
     scheduleUpdate();
-	m_pPresentHero = nullptr;
-	m_pPresentContactItem = nullptr;
 	return true;
 }
 
@@ -63,7 +64,15 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_Q)
 	{
-		this->skill();
+		if (m_skillTime >= m_skillCD)
+		{
+			m_skillContinueTime=this->skill();
+			m_skillTime = -m_skillContinueTime;
+		}
+		else
+		{
+			log("skill CDing");
+		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_E)
 	{
@@ -162,7 +171,29 @@ void Hero::update(float dt)
         }
     }
 
+	if (m_skillTime < m_skillCD)
+	{
+		m_skillTime += dt;
+	}
+	if (m_skillContinueTime > 0)
+	{
+		m_skillContinueTime -= dt;
+		if (m_skillContinueTime <= 0)
+		{
+			skillEnd();
+		}
+	}
 
+	if (m_recoverArmorTime < 1)
+	{
+		m_recoverArmorTime += dt;
+	}
+	else if (m_armor < m_maxArmor)
+	{
+		m_armor += 1;
+	}
+	
+	
 }
 
 void Hero::rest()
@@ -183,28 +214,32 @@ void Hero::stopMove()
 
 bool Hero::reduceHP(int damage)
 {
-	if (m_armor != 0)
+	if (m_ifMortal)
 	{
-		if (damage > m_armor)
+		m_recoverArmorTime = -4;
+		if (m_armor != 0)
 		{
-			damage -= m_armor;
-			m_armor = 0;
+			if (damage > m_armor)
+			{
+				damage -= m_armor;
+				m_armor = 0;
+			}
+			else
+			{
+				m_alive -= damage;
+				return true;
+			}
+		}
+		if (damage >= m_HP)
+		{
+			m_alive = false;
+			return false;
 		}
 		else
 		{
-			m_alive -= damage;
+			m_HP -= damage;
 			return true;
 		}
-	}
-	if (damage >= m_HP)
-	{
-		m_alive = false;
-		return false;
-	}
-	else
-	{
-		m_HP -= damage;
-		return true;
 	}
 }
 

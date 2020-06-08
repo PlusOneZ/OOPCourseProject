@@ -15,9 +15,9 @@ bool Actor::generatePhysics()
     auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(1e10);
     body->setGravityEnable(false);
-	body->setCategoryBitmask(0x01);
-	body->setCollisionBitmask(0x01);
-	body->setContactTestBitmask(0x01);
+	body->setCategoryBitmask(k_HeroCategoryBitmask);
+	body->setCollisionBitmask(k_HeroCollisionBitmask);
+	body->setContactTestBitmask(k_HeroContactTestBitmask);
     this->setPhysicsBody(body);
 
     return true;

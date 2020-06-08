@@ -6,6 +6,10 @@
 #define _ACTOR_H_
 #include "cocos2d.h"
 
+static const int k_HeroCategoryBitmask = 0x01;
+static const int k_HeroCollisionBitmask = 0x01;
+static const int k_HeroContactTestBitmask = 0x01;
+
 using namespace cocos2d;
 /**
 *@brief 可移动类
@@ -15,8 +19,8 @@ class Actor :public Node
 {
 public:
 
-    bool generatePhysics();
-    /**
+	bool generatePhysics();
+	/**
     *@brief 绑定精灵
     *@author 肖杨
     */
