@@ -1,6 +1,7 @@
-//
-// Created by Zhengyi on 2020/6/3.
-//
+/**
+ * @file Monster.h
+ * @date 06/08/2020 [created by 卓正一]
+ */
 
 #include "Monster.h"
 
@@ -84,4 +85,29 @@ void Monster::reduceHealth(int amount)
         m_curHealth -= amount;
 }
 
+bool Monster::generatePhysics(float mass)
+{
+    if (m_sprite == nullptr)
+    {
+        log("No sprite to create physics body");
+        return false;
+    }
+    auto body = PhysicsBody::createCircle(m_sprite->getContentSize().width / 2);
+//    auto body = PhysicsBody::createBox(m_sprite->getContentSize());
+    body->setMass(mass);
+    body->setGravityEnable(false);
+    body->setCategoryBitmask(kMonsterCategoryMask);
+    body->setContactTestBitmask(kMonsterContactMask);
+    body->setCollisionBitmask(kMonsterCollisionMask);
+    this->setPhysicsBody(body);
+
+    return true;
+}
+
+bool Monster::onContactBegin(PhysicsContact &contact)
+{
+    // TODO 碰墙判断
+    m_curSpeed = Vec2(0, 0);
+    return false;
+}
 

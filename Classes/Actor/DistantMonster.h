@@ -1,7 +1,8 @@
-//
-// Created by Zhengyi on 2020/6/7.
-//
-
+/**
+ * @file  DistantMonster.h
+ * @brief 远程攻击怪
+ * @date  06/07/2020 [created by zzy]
+ */
 #ifndef __DISTANT_MONSTER_H__
 #define __DISTANT_MONSTER_H__
 
@@ -10,6 +11,8 @@
 class DistantMonster : public Monster
 {
 public:
+
+    CREATE_FUNC(DistantMonster);
 
     /**
      * @brief 更新函数
@@ -27,7 +30,7 @@ public:
      * @brief 见基类
      * @brief
      */
-    void followSpeed() override ;
+    void followSpeed(float dt) override ;
 
     /**
      * @brief 见基类
@@ -36,9 +39,9 @@ public:
     void attack(float st) override ;
 
 protected:
-    float m_backUpDistant = 100.;
+    float m_backUpDistance = 100.;
 
 };
 
 
-#endif // DISTANTMONSTER_H
+#endif // DISTANT_MONSTER_H

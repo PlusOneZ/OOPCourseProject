@@ -12,6 +12,10 @@
 #include "../Const/Const.h"
 #include <string>
 
+static const int kMonsterCategoryMask  = 0xff;
+static const int kMonsterContactMask   = 0xff;
+static const int kMonsterCollisionMask = 0xff;
+
 class Monster : public Actor
 {
 public:
@@ -30,7 +34,7 @@ public:
      * @date   06/08/2020 [created by 卓正一]
      * @author 卓正一
      */
-    virtual void followSpeed() = 0;
+    virtual void followSpeed(float dt) = 0;
 
     /**
      * @brief   攻击
@@ -69,6 +73,10 @@ public:
      * @author 卓正一
      */
     static bool loadAllAnimate();
+
+    bool generatePhysics(float mass);
+
+    bool onContactBegin(PhysicsContact& contact);
 
 protected:
     Weapon *m_pWeapon = nullptr;
