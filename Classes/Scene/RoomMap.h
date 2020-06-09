@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "Actor/Knight.h"
+#include "Actor/Assassin.h"
 
 USING_NS_CC;
 
@@ -79,10 +80,14 @@ public:
 	*@author 李嘉树
 	*/
 	void addPlayer(RoomMap* pMap);
-
+	void addPlayerAssassin();
+	bool onContactBegin(PhysicsContact& contact);
+	bool ifMoveToAnotherRoom();
+	void moveStatusChange();
 protected:
 	TMXTiledMap* m_pMap;
 	int m_enemyNumber;
+	bool ifMove;
 };
 
 #endif
