@@ -55,6 +55,35 @@ namespace sk
                 "interface/ui2_assassin.png",
         };
     }
+
+    namespace bitMask {
+
+        static const int kMonsterCategory  = 0xff;
+        static const int kMonsterContact   = 0xff;
+        static const int kMonsterCollision = 0xff;
+
+        static const int kItemCategory  = 0x01;
+        static const int kItemCollision = 0x00;
+        static const int kItemContact   = 0x01;
+
+        static const int kMapCategory  = 0x0010;
+        static const int kMapCollision = 0x1100;
+        static const int kMapContact   = 0x1100;
+
+        static const int kHeroCategory  = 0x01;
+        static const int kHeroCollision = 0x01;
+        static const int kHeroContact   = 0x01;
+
+        static const int kBulletCategory = 0x1100;
+        static const int kBulletCollision = 0x0010;
+        static const int kBulletContact = 0x0010;
+    }
+
+    namespace tag {
+
+        static const int kHero   = 500;
+        static const int kBullet = 200;
+    }
 }
 
 #endif // CONST_H

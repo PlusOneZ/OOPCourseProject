@@ -4,6 +4,7 @@
 *@date 5/30/2020
 */
 #include "Bullet.h"
+#include "Const/Const.h"
 
 float Bullet::getSpeed()
 {
@@ -20,10 +21,10 @@ void Bullet::bindSprite(Sprite* pSprite)
     m_pBulletSprite = pSprite;
     auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
     m_pBulletSprite->setPhysicsBody(body);
-    body->setCategoryBitmask(kBulletCategoryBitmask);
-    body->setCollisionBitmask(kBulletCollisionBitmask);
-    body->setContactTestBitmask(kBulletContactTestBitmask);
-    this->addChild(m_pBulletSprite, 3, kBulletTag);
+    body->setCategoryBitmask(sk::bitMask::kBulletCategory);
+    body->setCollisionBitmask(sk::bitMask::kBulletCollision);
+    body->setContactTestBitmask(sk::bitMask::kBulletContact);
+    this->addChild(m_pBulletSprite, 3, sk::tag::kBullet);
 }
 
 void Bullet::moveEnd()

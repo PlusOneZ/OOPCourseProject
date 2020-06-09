@@ -5,7 +5,7 @@
 */
 
 #ifndef _ASSASSIN_H_
-#define _ASSASSIN_H
+#define _ASSASSIN_H_
 
 #include "Hero.h"
 

@@ -4,6 +4,7 @@
 */
 
 #include "Actor.h"
+#include "Const/Const.h"
 
 void Actor::bindSprite(Sprite *pSprite){
     m_sprite = pSprite;
@@ -15,9 +16,9 @@ bool Actor::generatePhysics()
     auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(1e10);
     body->setGravityEnable(false);
-	body->setCategoryBitmask(k_HeroCategoryBitmask);
-	body->setCollisionBitmask(k_HeroCollisionBitmask);
-	body->setContactTestBitmask(k_HeroContactTestBitmask);
+	body->setCategoryBitmask(sk::bitMask::kHeroCategory);
+	body->setCollisionBitmask(sk::bitMask::kHeroCollision);
+	body->setContactTestBitmask(sk::bitMask::kHeroContact);
     this->setPhysicsBody(body);
 
     return true;

@@ -26,6 +26,8 @@ public:
      */
     bool init() override ;
 
+    void move();
+
     /**
      * @brief 见基类
      * @brief

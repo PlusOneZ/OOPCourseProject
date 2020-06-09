@@ -152,7 +152,7 @@ bool TitleScene::init()
 void TitleScene::menuStartCallback(Ref* pSender)
 {
     auto scene = SafeMap::createScene();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     Director::getInstance()->replaceScene(scene);
 }
 

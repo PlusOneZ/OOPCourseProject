@@ -7,6 +7,7 @@
 */
 #include "Actor/Hero.h"
 #include "BulletLayer.h"
+#include "Const/Const.h"
 
 bool BulletLayer::init()
 {
@@ -62,12 +63,12 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
 {
     auto body1 = contact.getShapeA()->getBody()->getNode();
     auto body2 = contact.getShapeB()->getBody()->getNode();
-	if (body1->getTag() == kBulletTag)
+	if (body1->getTag() == sk::tag::kBullet)
 	{
 		body1->setVisible(false);
         body1->removeFromParentAndCleanup(true);
 	}
-    else if (body2->getTag() == kBulletTag)
+    else if (body2->getTag() == sk::tag::kBullet)
     {
         body2->setVisible(false);
         body2->removeFromParentAndCleanup(true);

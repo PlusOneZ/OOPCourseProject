@@ -12,14 +12,17 @@
 #include "../Const/Const.h"
 #include <string>
 
-static const int kMonsterCategoryMask  = 0xff;
-static const int kMonsterContactMask   = 0xff;
-static const int kMonsterCollisionMask = 0xff;
 
 class Monster : public Actor
 {
 public:
     typedef const std::string& cStr;
+
+    /**
+     * @brief  重载一下
+     * @return
+     */
+    bool init() override ;
 
     /**
      * @brief  计算随便走的速度，随机的
@@ -80,7 +83,7 @@ public:
 
 protected:
     Weapon *m_pWeapon = nullptr;
-    float   m_wanderSpeed = 150.;
+    float   m_wanderSpeed = 85.f;
 
     int  m_curHealth;
     int  m_fullHealth = 10;

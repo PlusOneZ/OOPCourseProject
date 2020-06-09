@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file
 *SafeMapScene.cpp
 *@author 翟晨昊
@@ -6,6 +6,7 @@
 
 #include "SafeMapScene.h"
 #include "BulletLayer.h"
+#include "Const/Const.h"
 #include <iostream>
 
 Scene *SafeMap::createScene()
@@ -38,10 +39,10 @@ bool SafeMap::init()
                                    visibleSize.height / 2 + origin.y));
         auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
         safeRoom->setPhysicsBody(edge);
-        edge->setCategoryBitmask(kMapCategoryBitmask);
-        edge->setCollisionBitmask(kMapCollisionBitmask);
-        edge->setContactTestBitmask(kMapContactTestBitmask);
-        addChild(safeRoom, 1, kMapCategoryBitmask);
+        edge->setCategoryBitmask(sk::bitMask::kMapCategory);
+        edge->setCollisionBitmask(sk::bitMask::kMapCollision);
+        edge->setContactTestBitmask(sk::bitMask::kMapContact);
+        addChild(safeRoom, 1, sk::bitMask::kMapCategory);
     }
 
     auto sofa = Sprite::create("sofa.png");
@@ -238,6 +239,15 @@ bool SafeMap::init()
 
 	addPlayerKnight();
 
+    Monster::loadAllAnimate();
+    auto dm  = DistantMonster::create();
+    auto dms = Sprite::create("Actor/Monster/Y_craw_monster1.png");
+    dm->bindSprite(dms);
+    dm->generatePhysics(20.f);
+
+    dm->setPosition(500, 500);
+    addChild(dm, 5);
+    dm->move();
     return true;
 }
 
@@ -260,7 +270,7 @@ void SafeMap::addPlayerKnight()
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(knight, 3, kHeroTag);
+		this->addChild(knight, 3, sk::tag::kHero);
 		knight->rest();
 		HealthPotion* test=HealthPotion::create();
 		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
@@ -306,7 +316,7 @@ void SafeMap::addPlayerAssassin()
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(assassin, 3, kHeroTag);
+		this->addChild(assassin, 3, sk::tag::kHero);
 		assassin->rest();
 		HealthPotion* test = HealthPotion::create();
 		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,

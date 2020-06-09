@@ -7,11 +7,9 @@
 #define _BULLET_H_
 
 #include "cocos2d.h"
+#include "Const/Const.h"
 
-static const int kBulletTag = 200;
-static const int kBulletCategoryBitmask = 0x1100;
-static const int kBulletCollisionBitmask = 0x0010;
-static const int kBulletContactTestBitmask = 0x0010;
+
 
 using namespace cocos2d;
 

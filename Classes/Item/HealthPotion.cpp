@@ -1,10 +1,11 @@
-﻿/**
+/**
 *@file HealthPotion.cpp
 *@author 肖杨
 *@date 6/4/2020
 */
 #include "HealthPotion.h"
 #include "../Actor/Hero.h"
+#include "Const/Const.h"
 
 static const std::string kHealthPotionMessage = "Health Potion";
 
@@ -19,9 +20,9 @@ bool HealthPotion::init()
 	auto body = PhysicsBody::createBox(size);
 	body->setDynamic(false);
 	body->setGravityEnable(false);
-	body->setCategoryBitmask(k_ItemCategoryBitmask);
-	body->setCollisionBitmask(k_ItemCollisionBitmask);
-	body->setContactTestBitmask(k_HeroContactTestBitmask);
+	body->setCategoryBitmask(sk::bitMask::kItemCategory);
+	body->setCollisionBitmask(sk::bitMask::kItemCollision);
+	body->setContactTestBitmask(sk::bitMask::kHeroContact);
 	m_pSprite->setPhysicsBody(body);
 
 	this->addChild(m_pSprite);
@@ -51,7 +52,7 @@ bool HealthPotion::onContactBegin(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 	if (nodeA != nullptr && nodeB != nullptr)
 	{
-		if (nodeA->getTag() == kHeroTag || nodeB->getTag() == kHeroTag)//确保其中一个是英雄对象的时候执行
+		if (nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)//确保其中一个是英雄对象的时候执行
 		{
 			Hero::m_pPresentContactItem = this;
 			m_pMessage->setVisible(true);

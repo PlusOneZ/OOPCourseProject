@@ -9,12 +9,10 @@
 
 #include"cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "../Const/Const.h"
 
 using namespace cocos2d;
 
-static const int k_ItemCategoryBitmask = 0x01;
-static const int k_ItemCollisionBitmask = 0x00;
-static const int k_ItemContactTestBitmask = 0x01;
 
 /**
 *@brief 物品类

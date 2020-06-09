@@ -11,7 +11,6 @@
 #include "../Const/Const.h"
 #include <vector>
 
-static const int kHeroTag = 500;
 
 class BulletLayer;
 /**

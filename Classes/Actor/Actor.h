@@ -5,10 +5,7 @@
 #ifndef _ACTOR_H_
 #define _ACTOR_H_
 #include "cocos2d.h"
-
-static const int k_HeroCategoryBitmask = 0x01;
-static const int k_HeroCollisionBitmask = 0x01;
-static const int k_HeroContactTestBitmask = 0x01;
+#include "Const/Const.h"
 
 using namespace cocos2d;
 /**
