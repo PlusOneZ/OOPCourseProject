@@ -7,7 +7,7 @@
 #ifndef _HEALTH_POTION_H_
 #define _HEALTH_POTION_H_
 
-#include "item.h"
+#include "Item.h"
 
 /**
 *@brief 生命药水类
@@ -22,7 +22,7 @@ public:
 	*@brief 生成一个生命药水
 	*@author 肖杨
 	*/
-	bool init();
+	bool init() override;
 
 	/**
 	*@brief 交互时消耗并恢复生命
@@ -37,7 +37,6 @@ public:
 	bool onContactBegin(PhysicsContact& contact);
 	bool onContactSeparate(PhysicsContact& contact);
 
-	//TODO:显示信息
 };
 #endif // !_HEALTH_POTION_H_
 

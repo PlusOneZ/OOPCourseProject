@@ -27,9 +27,15 @@ public:
 	/**
 	*@brief 技能接口
 	*@author 肖杨
-	*@return 技能是否释放成功(暂定)
+	*@return 技能持续时间
 	*/
 	//TODO:完成
-	bool skill() override;
+	double skill() override;
+
+	/**
+	*@brief 技能结束回调
+	*@author 肖杨
+	*/
+	void skillEnd() override;
 };
 #endif // !_Knight_H__

@@ -8,7 +8,13 @@
 #define _ITEM_H_
 
 #include"cocos2d.h"
+#include "ui/CocosGUI.h"
+
 using namespace cocos2d;
+
+static const int k_ItemCategoryBitmask = 0x01;
+static const int k_ItemCollisionBitmask = 0x00;
+static const int k_ItemContactTestBitmask = 0x01;
 
 /**
 *@brief 物品类
@@ -41,6 +47,12 @@ public:
 	bool voidOnContactPreSolve(PhysicsContact& contact);
 protected:
 	Sprite* m_pSprite;
+	ui::Scale9Sprite* m_pMessage;
 };
 
+/**
+*@brief 辅助函数，用于显示信息
+*@author 肖杨
+*/
+ui::Scale9Sprite* showMessage(const std::string& message);
 #endif // !_ITEM_H_

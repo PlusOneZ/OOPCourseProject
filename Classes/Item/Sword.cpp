@@ -37,6 +37,6 @@ Animate* Sword::attack()
 	Animate* action = Animate::create(animation);
 	action->retain();
 	m_pSprite->runAction(action);
-	log("hhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+	log("sword attack!");
 	return action;
 }

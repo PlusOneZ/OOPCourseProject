@@ -8,9 +8,6 @@
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
 
-Hero* Hero::m_pPresentHero = nullptr;
-Item* Hero::m_pPresentContactItem = nullptr;
-
 bool Knight::init()
 {
 	auto fig = AutoPolygon::generatePolygon("item/swordaction1.png");
@@ -28,7 +25,12 @@ bool Knight::init()
 	return true;
 }
 
-bool Knight::skill()
+double Knight::skill()
 {
-	return true;
+	return 0;
+}
+
+void Knight::skillEnd()
+{
+
 }
