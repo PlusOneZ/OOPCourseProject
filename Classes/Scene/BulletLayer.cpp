@@ -13,7 +13,10 @@ bool BulletLayer::init()
     auto mouseListener = cocos2d::EventListenerMouse::create();
     mouseListener->onMouseDown = CC_CALLBACK_1(BulletLayer::onMouseDown, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
-	scheduleUpdate();
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(BulletLayer::onContactBegin, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+	//scheduleUpdate();
 	return true;
 }
 
@@ -22,12 +25,9 @@ void BulletLayer::bindHero(Hero* pNowHero)
     m_pHero = pNowHero;
 }
 
-void BulletLayer::update(float dt)
+/*void BulletLayer::update(float dt)
 {
-    auto contactListener = EventListenerPhysicsContact::create();
-    contactListener->onContactBegin = CC_CALLBACK_1(BulletLayer::onContactBegin, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-}
+}*/
 
 bool BulletLayer::onMouseDown(Event* event)
 {
@@ -62,9 +62,15 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
 {
     auto body1 = contact.getShapeA()->getBody()->getNode();
     auto body2 = contact.getShapeB()->getBody()->getNode();
-	if (body2->getTag() == 200)
+	if (body1->getTag() == kBulletTag)
 	{
-		body2->setVisible(false);
+		body1->setVisible(false);
+        body1->removeFromParentAndCleanup(true);
 	}
+    else if (body2->getTag() == kBulletTag)
+    {
+        body2->setVisible(false);
+        body2->removeFromParentAndCleanup(true);
+    }
     return true;
 }

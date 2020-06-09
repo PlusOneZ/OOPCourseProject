@@ -49,10 +49,13 @@ bool HealthPotion::onContactBegin(PhysicsContact& contact)
 {
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
-	if (nodeA->getTag() == kHeroTag || nodeB->getTag() == kHeroTag)//确保其中一个是英雄对象的时候执行
+	if (nodeA != nullptr && nodeB != nullptr)
 	{
-		Hero::m_pPresentContactItem = this;
-		m_pMessage->setVisible(true);
+		if (nodeA->getTag() == kHeroTag || nodeB->getTag() == kHeroTag)//确保其中一个是英雄对象的时候执行
+		{
+			Hero::m_pPresentContactItem = this;
+			m_pMessage->setVisible(true);
+		}
 	}
 	return false;
 }

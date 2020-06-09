@@ -35,7 +35,7 @@ public:
 	*@brief 绑定每帧操作
 	*@author 翟晨昊
 	*/
-	void update(float dt);
+	//void update(float dt);
 
 	/*
 	*@brief 鼠标按下后的操作

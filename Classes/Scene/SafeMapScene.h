@@ -12,6 +12,10 @@
 #include "Actor/Assassin.h"
 #include "Item/HealthPotion.h"
 
+static const int kMapCategoryBitmask = 0x0010;
+static const int kMapCollisionBitmask = 0x1100;
+static const int kMapContactTestBitmask = 0x1100;
+
 USING_NS_CC;
 
 /**

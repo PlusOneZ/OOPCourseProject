@@ -38,7 +38,10 @@ bool SafeMap::init()
                                    visibleSize.height / 2 + origin.y));
         auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
         safeRoom->setPhysicsBody(edge);
-        addChild(safeRoom, 1, 98);
+        edge->setCategoryBitmask(kMapCategoryBitmask);
+        edge->setCollisionBitmask(kMapCollisionBitmask);
+        edge->setContactTestBitmask(kMapContactTestBitmask);
+        addChild(safeRoom, 1, kMapCategoryBitmask);
     }
 
     auto sofa = Sprite::create("sofa.png");
