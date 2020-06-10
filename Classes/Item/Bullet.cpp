@@ -21,9 +21,9 @@ void Bullet::bindSprite(Sprite* pSprite)
     m_pBulletSprite = pSprite;
     auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
     m_pBulletSprite->setPhysicsBody(body);
-    body->setCategoryBitmask(sk::bitMask::kBulletCategory);
-    body->setCollisionBitmask(sk::bitMask::kBulletCollision);
-    body->setContactTestBitmask(sk::bitMask::kBulletContact);
+    body->setCategoryBitmask(sk::bitMask::kSelfBulletCategory);
+    body->setCollisionBitmask(sk::bitMask::kSelfBulletCollision);
+    body->setContactTestBitmask(sk::bitMask::kSelfBulletContact);
     this->addChild(m_pBulletSprite, 3, sk::tag::kBullet);
 }
 

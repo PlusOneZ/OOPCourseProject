@@ -57,26 +57,33 @@ namespace sk
     }
 
     namespace bitMask {
+        static const int kHeroCategory  = 0x4;
+        static const int kHeroCollision = 0x1;
+        static const int kHeroContact   = 0x63;
 
-        static const int kMonsterCategory  = 0xff;
-        static const int kMonsterContact   = 0xff;
-        static const int kMonsterCollision = 0xff;
+        static const int kMonsterCategory  = 0x8;
+        static const int kMonsterContact   = 0x13;
+        static const int kMonsterCollision = 0x1b;
 
-        static const int kItemCategory  = 0x01;
+        static const int kItemCategory  = 0x40;
         static const int kItemCollision = 0x00;
-        static const int kItemContact   = 0x01;
+        static const int kItemContact   = 0x4;
 
-        static const int kMapCategory  = 0x0010;
-        static const int kMapCollision = 0x1100;
-        static const int kMapContact   = 0x1100;
+        static const int kMapCategory  = 0x1;
+        static const int kMapCollision = 0x0;
+        static const int kMapContact   = 0x3c;
 
-        static const int kHeroCategory  = 0x01;
-        static const int kHeroCollision = 0x01;
-        static const int kHeroContact   = 0x01;
+        static const int kDoorCategory  = 0x2;
+        static const int kDoorCollision = 0x0;
+        static const int kDoorContact   = 0x34;
 
-        static const int kBulletCategory = 0x1100;
-        static const int kBulletCollision = 0x0010;
-        static const int kBulletContact = 0x0010;
+        static const int kSelfBulletCategory  = 0x10;
+        static const int kSelfBulletCollision = 0xb;
+        static const int kSelfBulletContact   = 0xb;
+
+        static const int kMonsterBulletCategory  = 0x20;
+        static const int kMonsterBulletCollision = 0x3;
+        static const int kMonsterBulletContact   = 0x7;
     }
 
     namespace tag {
