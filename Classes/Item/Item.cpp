@@ -1,4 +1,4 @@
-#include "Item.h"
+ï»¿#include "Item.h"
 
 void Item::bindSprite(Sprite* pSprite)
 {
@@ -9,17 +9,6 @@ void Item::bindSprite(Sprite* pSprite)
 Sprite* Item::getSprite()
 {
     return m_pSprite;
-}
-
-//ÎªweaponÌí¼Ó½»»¥º¯ÊýºóÉ¾µô±¾º¯Êý£¬°ÑÔ­º¯Êý¸Ä³É´¿Ðéº¯Êý
-void Item::interact()
-{
-	return;
-}
-
-bool Item::voidOnContactPreSolve(PhysicsContact& contact)
-{
-	return false;
 }
 
 ui::Scale9Sprite* showMessage(const std::string& message)
@@ -41,3 +30,32 @@ ui::Scale9Sprite* showMessage(const std::string& message)
 	return board;
 }
 
+ui::Scale9Sprite* showMessage(int price)
+{
+	auto board = ui::Scale9Sprite::create("interface/voidboard.png");
+	board->retain();
+
+	char cprice[5];
+	itoa(price, cprice,10);
+	std::string message = "$ ";
+	message += cprice;
+	board->setContentSize(Size(message.size() * 5, 30));
+
+	auto showMessage = Label::createWithTTF(message, "Font/IRANYekanBold.ttf", 20.);
+	const Vec2 messagePos = { message.size() * (float)2.5,15 };
+	showMessage->setPosition(messagePos);
+	board->addChild(showMessage, 3);
+
+	return board;
+}
+
+
+void Item::setShopItem(int price)
+{
+	m_ifShopItem = true;
+	m_price = price;
+	m_pShopMessage=showMessage(m_price);
+	m_pShopMessage->setVisible(false);
+	m_pShopMessage->setPosition(this->getPosition().x, this->getPosition().y - 30);
+	this->addChild(m_pShopMessage);
+}

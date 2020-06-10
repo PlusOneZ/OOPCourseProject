@@ -9,8 +9,6 @@
 #include "Actor.h"
 #include "../Item/Weapon.h"
 #include "../Const/Const.h"
-#include <vector>
-
 
 class BulletLayer;
 /**
@@ -19,12 +17,8 @@ class BulletLayer;
 */
 class Hero : public Actor
 {
+friend class Buff;
 public:
-	/**
-	*@brief 生成主角
-	*@author 肖杨
-	*/
-	bool init() override ;
 
 	void update(float dt) override ;
 
@@ -96,7 +90,7 @@ public:
 	/**
 	* @brief 受伤
 	* @param 伤害数值
-	* @arthor 肖杨
+	* @author 肖杨
 	* @return 是否还活着
 	*/
 	bool reduceHP(int damage = 1);
@@ -104,10 +98,31 @@ public:
 	/**
 	* @brief 恢复生命
 	* @param 恢复数值
-	* @arthor 肖杨
+	* @author 肖杨
 	*/
 	void recoverHP(int healAmount = 1);
 
+	/**
+	*@brief 是否受伤
+	*@author 肖杨
+	*@return 是否受伤
+	*/
+	bool ifInjured();
+
+	/**
+	*@brief 消耗金币
+	*@param 消耗数量
+	*@author 肖杨
+	*@return 是否消耗成功
+	*/
+	bool costCoins(int coin);
+
+	/**
+	*@brief 获取金币
+	*@param 获得数量
+	*@author 肖杨
+	*/
+	void gainCoins(int coin);
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
 
@@ -115,10 +130,10 @@ protected:
 
     Weapon* m_pMainWeapon = nullptr;
     Weapon* m_pSecWeapon = nullptr;
-
+	//武器
 	Animate* m_pRestAnimate = nullptr;
 	Animate* m_pMoveAnimate = nullptr;
-
+	//基本动画
 	sk::HeroID m_ID;
 
 	bool m_alive = true;
@@ -130,16 +145,21 @@ protected:
 	int m_maxArmor = 5;
 	double m_recoverArmorTime = 0;
 	bool m_ifMortal = true;
+	//基本属性
 
-	int m_skillCD = 8;
-	double m_skillTime = m_skillCD;
-	double m_skillContinueTime = 0;
+	int m_skillCD = 8;//技能冷却时间
+	double m_skillTime = m_skillCD;//当前技能冷却
+	double m_skillLastTime = 1.;//技能持续时间
+	double m_skillRemainTime = 0;//技能剩余时间
+	//技能属性
+	int m_coinNumber = 0;
 
 	bool m_ifMoved        = false;
 	bool m_ifStateChanged = false;
-
+	//移动状态
 	int m_curFacing = sk::kRight;
-
+	//面向位置
 	std::vector<bool> m_isKeyDown = std::vector<bool>(7, false);
+	//控制监测
 };
 #endif

@@ -52,6 +52,10 @@ public:
 	*/
 	void setBulletCount(int count);
 
+	bool onContactBegin(PhysicsContact& contact)override;
+	//TODO:完成
+	void interact()override;
+	//TODO:与地面武器交换
 protected:
 	float m_attackInterval;
 	int m_bulletCount;

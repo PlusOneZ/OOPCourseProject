@@ -85,6 +85,7 @@ list(APPEND GAME_SOURCE
         Classes/Item/Sword.cpp
         Classes/Item/ShotgunBullet.cpp
         Classes/Item/HealthPotion.cpp
+        Classes/Item/Coin.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -102,6 +103,7 @@ list(APPEND GAME_HEADER
         Classes/Actor/Assassin.h
         Classes/Actor/Monster.h
         Classes/Actor/DistantMonster.h
+        Classes/Actor/Buff.h
 
         Classes/Item/Item.h
         Classes/Item/Weapon.h
@@ -112,6 +114,7 @@ list(APPEND GAME_HEADER
         Classes/Item/Sword.h
         Classes/Item/ShotgunBullet.h
         Classes/Item/HealthPotion.h
+        Classes/Item/Coin.h
 
         Classes/Const/Const.h
         )

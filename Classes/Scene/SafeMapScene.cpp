@@ -1,4 +1,4 @@
-/**
+﻿/**
 *@file
 *SafeMapScene.cpp
 *@author 翟晨昊
@@ -39,10 +39,10 @@ bool SafeMap::init()
                                    visibleSize.height / 2 + origin.y));
         auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
         safeRoom->setPhysicsBody(edge);
-        edge->setCategoryBitmask(sk::bitMask::kMapCategory);
-        edge->setCollisionBitmask(sk::bitMask::kMapCollision);
-        edge->setContactTestBitmask(sk::bitMask::kMapContact);
-        addChild(safeRoom, 1, sk::bitMask::kMapCategory);
+		edge->setCategoryBitmask(sk::bitMask::kMapCategory);
+		edge->setCollisionBitmask(sk::bitMask::kMapCollision);
+		edge->setContactTestBitmask(sk::bitMask::kMapContact);
+		addChild(safeRoom, 1, sk::bitMask::kMapCategory);
     }
 
     auto sofa = Sprite::create("sofa.png");
@@ -237,17 +237,28 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-	addPlayerKnight();
+	addPlayerAssassin();
 
-    Monster::loadAllAnimate();
-    auto dm  = DistantMonster::create();
-    auto dms = Sprite::create("Actor/Monster/Y_craw_monster1.png");
-    dm->bindSprite(dms);
-    dm->generatePhysics(20.f);
+	Monster::loadAllAnimate();
+	auto dm = DistantMonster::create();
+	auto dms = Sprite::create("Actor/Monster/Y_craw_monster1.png");
+	dm->bindSprite(dms);
+	dm->generatePhysics(20.f);
 
-    dm->setPosition(500, 500);
-    addChild(dm, 5);
-    dm->move();
+	dm->setPosition(500, 500);
+	addChild(dm, 5);
+	dm->move();
+
+	HealthPotion* testHP = HealthPotion::create();
+	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testHP, 3, 400);
+
+	Coin* testCoin = Coin::create();
+	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testCoin, 3, 401);
+
     return true;
 }
 
@@ -266,16 +277,11 @@ void SafeMap::addPlayerKnight()
 	{
 		Knight* knight = Knight::create();
 		knight->bindSprite(knightSprite);
-		Hero::m_pPresentHero = knight;
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		this->addChild(knight, 3, sk::tag::kHero);
 		knight->rest();
-		HealthPotion* test=HealthPotion::create();
-		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y)));
-		this->addChild(test, 3, 400);
 
         BulletLayer* bulletLayer = BulletLayer::create();
         bulletLayer->retain();
@@ -312,16 +318,11 @@ void SafeMap::addPlayerAssassin()
 	{
 		Assassin* assassin = Assassin::create();
 		assassin->bindSprite(assassinSprite);
-		Hero::m_pPresentHero = assassin;
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
 		this->addChild(assassin, 3, sk::tag::kHero);
 		assassin->rest();
-		HealthPotion* test = HealthPotion::create();
-		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y)));
-		this->addChild(test, 3, 400);
 
 		BulletLayer* bulletLayer = BulletLayer::create();
 		bulletLayer->retain();

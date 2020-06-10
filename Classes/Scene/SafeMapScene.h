@@ -11,8 +11,8 @@
 #include "Actor/Knight.h"
 #include "Actor/Assassin.h"
 #include "Item/HealthPotion.h"
+#include "Item/Coin.h"
 #include "Actor/DistantMonster.h"
-
 
 USING_NS_CC;
 

@@ -9,12 +9,6 @@
 Hero* Hero::m_pPresentHero = nullptr;
 Item* Hero::m_pPresentContactItem = nullptr;
 
-bool Hero::init()
-{
-    scheduleUpdate();
-	return true;
-}
-
 Weapon* Hero::getMainWeapon()
 {
 	return this->m_pMainWeapon;
@@ -66,8 +60,8 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (m_skillTime >= m_skillCD)
 		{
-			m_skillContinueTime=this->skill();
-			m_skillTime = -m_skillContinueTime;
+			m_skillRemainTime=this->skill();
+			m_skillTime = -m_skillRemainTime;
 		}
 		else
 		{
@@ -175,10 +169,10 @@ void Hero::update(float dt)
 	{
 		m_skillTime += dt;
 	}
-	if (m_skillContinueTime > 0)
+	if (m_skillRemainTime > 0)
 	{
-		m_skillContinueTime -= dt;
-		if (m_skillContinueTime <= 0)
+		m_skillRemainTime -= dt;
+		if (m_skillRemainTime <= 0)
 		{
 			skillEnd();
 		}
@@ -191,6 +185,7 @@ void Hero::update(float dt)
 	else if (m_armor < m_maxArmor)
 	{
 		m_armor += 1;
+		log("armor regain");
 	}
 	
 	
@@ -255,3 +250,59 @@ void Hero::recoverHP(int healAmount)
 		m_HP = m_maxHP;
 	}
 }
+
+bool Hero::ifInjured()
+{
+	return m_HP < m_maxHP;
+}
+
+bool Hero::costCoins(int coin)
+{
+	if (m_coinNumber >= coin)
+	{
+		m_coinNumber -= coin;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Hero::gainCoins(int coin)
+{
+	m_coinNumber += coin;
+}
+
+//Item中函数的实现
+bool Item::onContactSeparate(PhysicsContact& contact)
+{
+	Hero::m_pPresentContactItem = nullptr;
+	m_pMessage->setVisible(false);
+	if (m_ifShopItem)
+	{
+		m_pShopMessage->setVisible(false);
+	}
+	return true;
+}
+
+bool Item::buyItem()
+{
+	if (m_ifShopItem)
+	{
+		if (Hero::m_pPresentHero->costCoins(m_price))//购买成功
+		{
+			log("buy item");
+			m_ifShopItem = false;
+			m_price = 0;
+			m_pShopMessage->removeFromParentAndCleanup(true);
+			m_pShopMessage = nullptr;
+		}
+		else
+		{
+			log("no enough money");
+		}
+	}
+	return !m_ifShopItem;
+}
+

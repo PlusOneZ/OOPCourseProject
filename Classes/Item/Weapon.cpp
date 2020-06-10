@@ -34,3 +34,19 @@ void Weapon::setBulletCount(int count)
 {
 	m_bulletCount = count;
 }
+
+bool Weapon::onContactBegin(PhysicsContact& contact)
+{
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != nullptr && nodeB != nullptr)
+	{
+		
+	}
+	return false;
+}
+
+void Weapon::interact()
+{
+
+}

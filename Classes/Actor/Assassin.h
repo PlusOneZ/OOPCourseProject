@@ -41,6 +41,8 @@ protected:
 	Animate* m_pSkillAnimate = nullptr;
 	Animate* m_pSkillTempA = nullptr;
 	Animate* m_pSkillTempB = nullptr;
+
+	float m_speedUP = 1.5;
 };
 
 #endif // !_ASSASSIN_H_
