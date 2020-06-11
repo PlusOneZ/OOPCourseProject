@@ -86,6 +86,7 @@ list(APPEND GAME_SOURCE
         Classes/Item/ShotgunBullet.cpp
         Classes/Item/HealthPotion.cpp
         Classes/Item/Coin.cpp
+        Classes/Item/MonsterBullets.cpp
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -115,6 +116,7 @@ list(APPEND GAME_HEADER
         Classes/Item/ShotgunBullet.h
         Classes/Item/HealthPotion.h
         Classes/Item/Coin.h
+        Classes/Item/MonsterBullets.h
 
         Classes/Const/Const.h
         )
@@ -176,7 +178,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        )
+        Classes/Item/MonsterWeapons.cpp Classes/Item/MonsterWeapons.h)
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()
