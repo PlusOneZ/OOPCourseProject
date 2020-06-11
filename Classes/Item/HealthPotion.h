@@ -30,8 +30,6 @@ public:
 	*/
 	void interact() override;
 
-	bool onContactBegin(PhysicsContact& contact)override;
-
 };
 #endif // !_HEALTH_POTION_H_
 

@@ -55,7 +55,7 @@ public:
 	*@brief 修改m_pPresentContactItem
 	*@author 肖杨
 	*/
-	virtual bool onContactBegin(PhysicsContact& contact)=0;
+	virtual bool onContactBegin(PhysicsContact& contact);
 	virtual bool onContactSeparate(PhysicsContact& contact);
 
 protected:

@@ -90,8 +90,9 @@ namespace sk
 
         static const int kHero   = 500;
         static const int kBullet = 200;
-		static const int kCoinTag = 20;
-		static const int kHealthPotionTag = 10;
+		static const int kFreezeTrap = 51;
+		static const int kCoin = 40;
+		static const int kHealthPotion = 10;
     }
 }
 

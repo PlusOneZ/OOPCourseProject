@@ -10,7 +10,8 @@
 #include "../Item/Weapon.h"
 #include "../Const/Const.h"
 
-class BulletLayer;
+static float kHeroSpeed = 150.;
+
 /**
 *@brief 主角类
 *@author 肖杨
@@ -137,7 +138,7 @@ protected:
 	sk::HeroID m_ID;
 
 	bool m_alive = true;
-	float m_speed = 150.;
+	float m_speed = kHeroSpeed;
 	int m_HP = 5;
 	int m_maxHP = 5;
 	//int m_MP;

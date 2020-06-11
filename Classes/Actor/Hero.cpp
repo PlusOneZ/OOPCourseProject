@@ -277,13 +277,48 @@ void Hero::gainCoins(int coin)
 //Item中函数的实现
 bool Item::onContactSeparate(PhysicsContact& contact)
 {
-	Hero::m_pPresentContactItem = nullptr;
-	m_pMessage->setVisible(false);
-	if (m_ifShopItem)
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != nullptr && nodeB != nullptr)
 	{
-		m_pShopMessage->setVisible(false);
+		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
+			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
+		{
+			if (Hero::m_pPresentContactItem == this)
+			{
+				Hero::m_pPresentContactItem = nullptr;
+				m_pMessage->setVisible(false);
+				if (m_ifShopItem)
+				{
+					m_pShopMessage->setVisible(false);
+				}
+			}
+		}
 	}
 	return true;
+}
+
+bool Item::onContactBegin(PhysicsContact& contact)
+{
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != nullptr && nodeB != nullptr)
+	{
+		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
+			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
+		{
+			if (Hero::m_pPresentContactItem == nullptr)
+			{
+				Hero::m_pPresentContactItem = this;
+				m_pMessage->setVisible(true);
+				if (m_ifShopItem)
+				{
+					m_pShopMessage->setVisible(true);
+				}
+			}
+		}
+	}
+	return false;
 }
 
 bool Item::buyItem()

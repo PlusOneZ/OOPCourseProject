@@ -10,7 +10,7 @@ static const std::string kHealthPotionMessage = "Health Potion";
 bool HealthPotion::init()
 {
 	m_pSprite = Sprite::create("item/HealthPotion.png");
-	m_pSprite->setTag(sk::tag::kHealthPotionTag);
+	m_pSprite->setTag(sk::tag::kHealthPotion);
 
 	auto size = m_pSprite->getContentSize();
 	size.width *= 1.3;
@@ -31,7 +31,7 @@ bool HealthPotion::init()
 	this->addChild(m_pMessage);
 
 	auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = CC_CALLBACK_1(HealthPotion::onContactBegin, this);
+	contactListener->onContactBegin = CC_CALLBACK_1(Item::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(Item::onContactSeparate, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 	this->setShopItem(1);
@@ -46,28 +46,4 @@ void HealthPotion::interact()
 		log("HP++");
 		this->removeFromParentAndCleanup(true);//用完就释放
 	}
-}
-
-bool HealthPotion::onContactBegin(PhysicsContact& contact)
-{
-	auto nodeA = contact.getShapeA()->getBody()->getNode();
-	auto nodeB = contact.getShapeB()->getBody()->getNode();
-	if (nodeA != nullptr && nodeB != nullptr)
-	{
-		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
-			&& (nodeA->getTag() == sk::tag::kHealthPotionTag || nodeB->getTag() == sk::tag::kHealthPotionTag))
-			//确保其中一个是英雄一个是血瓶的时候执行
-		{
-			if (Hero::m_pPresentContactItem == nullptr)
-			{
-				Hero::m_pPresentContactItem = this;
-				m_pMessage->setVisible(true);
-				if (m_ifShopItem)
-				{
-					m_pShopMessage->setVisible(true);
-				}
-			}
-		}
-	}
-	return false;
 }

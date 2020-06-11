@@ -24,11 +24,6 @@ public:
 	bool init() override;
 
 	/**
-	*@brief 绑定精灵
-	*/
-	void bindSprite(Sprite* pSprite);
-
-	/**
 	*@brief 设置金币数额
 	*/
 	void setCoinAmount(int amount);

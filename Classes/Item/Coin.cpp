@@ -11,7 +11,7 @@ Animate* Coin::pCoinAnimate = Actor::creatActorAnimate("item/coin_",7,9);
 bool Coin::init()
 {
 	m_pSprite = Sprite::create("item/HealthPotion.png");
-	m_pSprite->setTag(sk::tag::kCoinTag);
+	m_pSprite->setTag(sk::tag::kCoin);
 	auto size = m_pSprite->getContentSize();
 	auto body = PhysicsBody::createBox(size);
 	body->setDynamic(false);
@@ -40,7 +40,7 @@ bool Coin::onContactBegin(PhysicsContact& contact)
 	if (nodeA != nullptr && nodeB != nullptr)
 	{
 		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
-			&& (nodeA->getTag() == sk::tag::kCoinTag || nodeB->getTag() == sk::tag::kCoinTag))
+			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
 			//确保其中一个是英雄一个是金币的时候执行
 		{
 			Hero::m_pPresentHero->gainCoins(m_coinAmount);
