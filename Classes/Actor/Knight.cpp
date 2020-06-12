@@ -7,6 +7,7 @@
 #include "Item/Gun.h"
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
+#include "Buff.h"
 
 bool Knight::init()
 {
@@ -19,6 +20,9 @@ bool Knight::init()
 		m_pSecWeapon->setVisible(false);
 		m_pMoveAnimate = creatActorAnimate(sk::files::kKnightMove);
 		m_pRestAnimate = creatActorAnimate(sk::files::kKnightRest);
+		m_skillCD = 15;
+		m_skillTime = 15;
+		m_skillLastTime = 5;
 		return true;
 	}
 	else
@@ -29,10 +33,11 @@ bool Knight::init()
 
 double Knight::skill()
 {
-	return 0;
+	HeroBuff.increaseATK(m_increaseAmount);
+	return m_skillLastTime;
 }
 
 void Knight::skillEnd()
 {
-
+	HeroBuff.increaseATKEnd(m_increaseAmount);
 }

@@ -34,7 +34,7 @@ bool Actor::generatePhysics()
 */
 Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int height)
 {
-	log("Trying to create hero");
+	log("Trying to create actor");
 	int moveFrameNum = 4;
 	SpriteFrame*frame = nullptr;
 	Vector<SpriteFrame*> frameVec;

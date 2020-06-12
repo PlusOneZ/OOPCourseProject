@@ -63,5 +63,5 @@ void Assassin::skillEnd()
 		move();
 	}
 	HeroBuff.immortalEnd();
-	HeroBuff.speedUpEnd();
+	HeroBuff.speedUpEnd(m_speedUP);
 }

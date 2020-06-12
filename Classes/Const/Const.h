@@ -98,10 +98,12 @@ namespace sk
         static const int kMonster = 300;
         static const int kBullet = 200;
 		static const int kFreezeTrap = 51;
+		static const int kFlameTrap = 52;
 		static const int kCoin = 40;
 		static const int kHealthPotion = 10;
         static const int kGunWeapon = 1;
         static const int kShotgunWeapon = 2;
+		static const int kIncreaseATK = 101;
     }
 }
 

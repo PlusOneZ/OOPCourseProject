@@ -27,6 +27,7 @@ bool Trap::onContactBegin(PhysicsContact& contact)
 		{
 			this->scheduleUpdate();
 			this->trapStart();
+			_eventDispatcher->pauseEventListenersForTarget(this, true);
 		}
 	}
 	return false;
@@ -74,4 +75,41 @@ void FreezeTrap::trapEnd()
 {
 	HeroBuff.rootedEnd(m_trapTime);
 	this->removeFromParentAndCleanup(true);
+}
+
+bool FlameTrap::init()
+{
+	m_pSprite = Sprite::create("item/flame_trap.png");
+	m_trapTime = 3.0;
+	generatePhysicalBody(sk::tag::kFlameTrap);
+	return true;
+}
+
+void FlameTrap::trapStart()
+{
+	HeroBuff.flaming();
+	m_pSprite->setVisible(false);
+}
+
+void FlameTrap::trapEnd()
+{
+	HeroBuff.flamingEnd();
+	this->removeFromParentAndCleanup(true);
+}
+
+void FlameTrap::update(float dt)
+{
+	static double time = m_trapTime;
+	static double flameTime = 0;
+	time -= dt;
+	flameTime += dt;
+	if (flameTime >= 1)
+	{
+		flameTime -= 1;
+		Hero::m_pPresentHero->reduceHP();
+	}
+	if (time <= 0)
+	{
+		trapEnd();
+	}
 }
