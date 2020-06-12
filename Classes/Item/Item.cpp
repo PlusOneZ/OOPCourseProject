@@ -53,7 +53,31 @@ void Item::setShopItem(int price)
 	m_ifShopItem = true;
 	m_price = price;
 	m_pShopMessage=showMessage(m_price);
-	m_pShopMessage->setVisible(false);
 	m_pShopMessage->setPosition(this->getPosition().x, this->getPosition().y - 30);
 	this->addChild(m_pShopMessage);
 }
+
+void Item::generatePhysicalBody(std::string message, const int itemTag)
+{
+	m_pSprite->setTag(itemTag);
+	m_pMessage = showMessage(message);
+	m_pMessage->setVisible(false);
+	m_pMessage->setPosition(this->getPosition().x, this->getPosition().y + 40);
+	this->addChild(m_pMessage);
+	auto size = m_pSprite->getContentSize();
+	size.width *= 1.2;
+	size.height *= 1.2;
+	auto body = PhysicsBody::createBox(size);
+	body->setDynamic(false);
+	body->setGravityEnable(false);
+	body->setCategoryBitmask(sk::bitMask::kItemCategory);
+	body->setCollisionBitmask(sk::bitMask::kItemCollision);
+	body->setContactTestBitmask(sk::bitMask::kItemContact);
+	m_pSprite->setPhysicsBody(body);
+
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(Item::onContactBegin, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(Item::onContactSeparate, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+}
+

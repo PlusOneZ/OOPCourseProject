@@ -58,6 +58,12 @@ public:
 	virtual bool onContactBegin(PhysicsContact& contact);
 	virtual bool onContactSeparate(PhysicsContact& contact);
 
+	/**
+	*@brief 设置物理体积
+	*@author 翟晨昊
+	*/
+	void generatePhysicalBody(std::string message , const int itemTag);
+
 protected:
 	Sprite* m_pSprite;
 	ui::Scale9Sprite* m_pMessage;

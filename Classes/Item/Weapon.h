@@ -54,11 +54,6 @@ public:
 	*/
 	void setBulletCount(int count);
 
-	/**
-	*@brief 设置物理体积
-	*@author 翟晨昊
-	*/
-	void setPhysicalBody(std::string message , const int weaponTag);
 
 	/**
 	*@brief 判断是否被持有
@@ -72,6 +67,10 @@ public:
 	*/
 	virtual Weapon* remake();
 
+	/**
+	*@brief 与手中武器交换
+	@@author 肖杨
+	*/
 	void interact();
 	//TODO:与地面武器交换
 protected:

@@ -37,11 +37,9 @@ void Trap::setTrapTime(double time)
 	m_trapTime = time;
 }
 
-bool FreezeTrap::init()
+void Trap::generatePhysicalBody(const int trapTag)
 {
-	m_pSprite = Sprite::create("item/freeze_trap.png");
-	m_trapTime = 2.0;
-	m_pSprite->setTag(sk::tag::kFreezeTrap);
+	m_pSprite->setTag(trapTag);
 	auto size = m_pSprite->getContentSize();
 	auto body = PhysicsBody::createBox(size);
 	body->setDynamic(false);
@@ -56,6 +54,13 @@ bool FreezeTrap::init()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Trap::onContactBegin, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+}
+
+bool FreezeTrap::init()
+{
+	m_pSprite = Sprite::create("item/freeze_trap.png");
+	m_trapTime = 2.0;
+	generatePhysicalBody(sk::tag::kFreezeTrap);
 	return true;
 }
 

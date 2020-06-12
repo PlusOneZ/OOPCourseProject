@@ -26,6 +26,9 @@ bool Sword::init()
 	}
 	setInterval(.2f);
 	setBulletCount(0);
+	auto fig = AutoPolygon::generatePolygon("item/swordaction1.png");
+	m_pSprite = Sprite::create(fig);
+	this->addChild(m_pSprite);
 	return true;
 }
 

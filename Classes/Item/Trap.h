@@ -40,6 +40,12 @@ public:
 	*@author 肖杨
 	*/
 	void setTrapTime(double time);
+
+	/**
+	*@brief 设置物理体积
+	*@author 肖杨
+	*/
+	void generatePhysicalBody(const int trapTag);
 protected:
 	Sprite* m_pSprite;
 	double m_trapTime;

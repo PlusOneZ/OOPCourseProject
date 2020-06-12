@@ -48,15 +48,19 @@ public:
 	Weapon* getMainWeapon();
 
 	/**
+	*@brief 设置主副武器
+	*@author 肖杨
+	*/
+	void setMainWeapon(Weapon* pNewWeapon);
+	void setSecondWeapon(Weapon* pNewWeapon);
+
+	/**
 	*@brief 获取英雄朝向
 	*@author 翟晨昊
 	*@return 隐含朝向信息的整数
 	*/
 	int getFacing();
 
-	Scene* getScene();
-
-	void setScene(Scene* curScene);
 	/**
 	*@brief 技能接口
 	*@author 肖杨
@@ -129,7 +133,6 @@ public:
 	void gainCoins(int coin);
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
-	static Scene* m_pPresentScene;
 
 protected:
 

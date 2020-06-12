@@ -14,17 +14,8 @@ bool Assassin::init()
 	{
 		m_pPresentHero = this;
 		scheduleUpdate();
-		auto fig = AutoPolygon::generatePolygon("item/swordaction1.png");
-		Sprite* swordSprite = Sprite::create(fig);
-		m_pSecWeapon = Sword::create();
-		m_pSecWeapon->bindSprite(swordSprite);
-		m_pSecWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
-		m_pMainWeapon = Shotgun::create();
-		m_pMainWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
-		m_pMainWeapon->setState(true);
-		m_pSecWeapon->setState(true);
-		this->addChild(m_pMainWeapon, 2);
-		this->addChild(m_pSecWeapon, 2);
+		setMainWeapon(Shotgun::create());
+		setSecondWeapon(Sword::create());
 		m_pSecWeapon->setVisible(false);
 		m_pMoveAnimate = creatActorAnimate("Actor/assassin_move");
 		m_pRestAnimate = creatActorAnimate("Actor/assassin_rest");

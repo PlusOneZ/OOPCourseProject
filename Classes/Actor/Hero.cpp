@@ -9,27 +9,34 @@
 
 Hero* Hero::m_pPresentHero = nullptr;
 Item* Hero::m_pPresentContactItem = nullptr;
-Scene* Hero::m_pPresentScene;
 
 Weapon* Hero::getMainWeapon()
 {
 	return this->m_pMainWeapon;
 }
 
+void Hero::setMainWeapon(Weapon* pNewWeapon)
+{
+	pNewWeapon->setState(true);
+	pNewWeapon->setPosition(Point(20.0, 20.0));
+	m_pMainWeapon = pNewWeapon;
+	this->addChild(pNewWeapon, 2);
+}
+
+void Hero::setSecondWeapon(Weapon* pNewWeapon)
+{
+	pNewWeapon->setState(true);
+	pNewWeapon->setPosition(Point(20.0, 20.0));
+	m_pSecWeapon = pNewWeapon;
+	this->addChild(pNewWeapon, 2);
+}
+
+
 int Hero::getFacing()
 {
     return m_curFacing;
 }
 
-Scene* Hero::getScene()
-{
-	return m_pPresentScene;
-}
-
-void Hero::setScene(Scene* curScene)
-{
-	m_pPresentScene = curScene;
-}
 
 void Hero::shiftWeapon()
 {
@@ -89,27 +96,8 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (m_pPresentContactItem != nullptr)
 		{
-			if (m_pPresentContactItem->getTag() == sk::tag::kHealthPotion)
-			{
 				m_pPresentContactItem->interact();
 				m_pPresentContactItem = nullptr;
-			}
-			else if (m_pPresentContactItem->getTag() < 10)
-			{
-				const int Tag= m_pMainWeapon->getTag();
-				Weapon* exchangeOne = dynamic_cast<Weapon*>(m_pPresentContactItem)->remake();
-				Weapon* exchangeTwo = m_pMainWeapon->remake();
-				m_pMainWeapon->removeFromParentAndCleanup(true);
-				m_pMainWeapon = exchangeOne;
-				m_pMainWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
-				m_pMainWeapon->setState(true);
-				this->addChild(m_pMainWeapon, 2);
-				exchangeTwo->setPosition(Point(m_pPresentContactItem->getPosition()));
-                exchangeTwo->setState(false);
-                m_pPresentContactItem->removeFromParentAndCleanup(true);
-				m_pPresentContactItem = nullptr;
-				this->getScene()->addChild(exchangeTwo, 3, Tag);
-			}
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -320,10 +308,6 @@ bool Item::onContactSeparate(PhysicsContact& contact)
 				log("44444444");
 				Hero::m_pPresentContactItem = nullptr;
 				m_pMessage->setVisible(false);
-				if (m_ifShopItem)
-				{
-					m_pShopMessage->setVisible(false);
-				}
 			}
 		}
 	}
@@ -344,10 +328,6 @@ bool Item::onContactBegin(PhysicsContact& contact)
 				log("22222222222222");
 				Hero::m_pPresentContactItem = this;
 				m_pMessage->setVisible(true);
-				if (m_ifShopItem)
-				{
-					m_pShopMessage->setVisible(true);
-				}
 			}
 		}
 	}
@@ -372,5 +352,27 @@ bool Item::buyItem()
 		}
 	}
 	return !m_ifShopItem;
+}
+
+
+
+void Weapon::interact()
+{
+	if (buyItem())
+	{
+		auto myHero = Hero::m_pPresentHero;
+		const int Tag = myHero->getMainWeapon()->m_pSprite->getTag();
+		auto floorWeapon = myHero->getMainWeapon();
+		floorWeapon->retain();
+		floorWeapon->removeFromParent();
+		floorWeapon->setPosition(Point(this->getPosition()));
+		floorWeapon->setState(false);
+		myHero->getScene()->addChild(floorWeapon, 3, Tag);
+		this->retain();
+		this->removeFromParent();
+		this->m_pMessage->setVisible(false);
+		myHero->setMainWeapon(this);
+		log("weapon changed");
+	}
 }
 

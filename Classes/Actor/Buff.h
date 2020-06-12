@@ -61,6 +61,7 @@ public:
 	void rooted(double rootedTime)
 	{
 		Hero::m_pPresentHero->m_speed = 0;
+		Hero::m_pPresentHero->getPhysicsBody()->setVelocity(Vec2(0, 0));
 		auto freeze = Sprite::create("item/freeze_effect.png");
 		freeze->setTag(sk::tag::kFreezeTrap);
 		Hero::m_pPresentHero->addChild(freeze);

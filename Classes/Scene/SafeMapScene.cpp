@@ -291,7 +291,6 @@ void SafeMap::addPlayerKnight()
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-        knight->setScene(this);
 		this->addChild(knight, 3, sk::tag::kHero);
 		knight->rest();
 
@@ -333,7 +332,6 @@ void SafeMap::addPlayerAssassin()
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-        assassin->setScene(this);
 		this->addChild(assassin, 3, sk::tag::kHero);
 		assassin->rest();
 
