@@ -17,17 +17,34 @@ bool MonFiveWayBullet::init()
 
 void MonFiveWayBullet::attack(float mouseX, float mouseY, Point pos, int curFacing)
 {
-    m_pBulletSprite->setPosition(pos);
+    static int   shotCount = 0;
+    static float lastAngle = 9.2345;
     float k     = (mouseY - pos.y) / (mouseX - pos.x);
     float angle = atan(k) / (2.f * 3.14f) * 180.f;
-    float sign  = (curFacing == 0 ? 1.f : -1.f);
-    angle       = angle + RandomHelper::random_real(-180.f, 180.f);
-    auto random = static_cast<float >(angle * 2 * 3.14 / 180);
+    float sign  = (mouseX - pos.x > 0 ? 1.f : -1.f);
+    if (shotCount % 5 == 0)
+    {
+        lastAngle = angle;
+    }
+    m_pBulletSprite->setAnchorPoint(Vec2(0, 0.5));
+    m_pBulletSprite->getPhysicsBody()->setLinearDamping(0.f);
+    if (abs(lastAngle - angle) < 5.)
+    {
+        lastAngle = angle + RandomHelper::random_real(-180.f, 180.f);
+    }
+    else
+    {
+        lastAngle += 73.92f;
+    }
+    m_pBulletSprite->setRotation(-lastAngle);
+    auto random = lastAngle * 2.f * 3.14f / 180.f;
 
-    auto v = Vec2(sign, sign * random);
+    auto v = Vec2(sign, sign * tan(random));
     v.normalize();
+    m_pBulletSprite->setPosition(pos + v * 20.);
     v *= m_bulletSpeed;
     m_pBulletSprite->getPhysicsBody()->setVelocity(v);
+    ++shotCount;
 }
 
 bool MonOneShotBullet::init()

@@ -8,9 +8,11 @@
 
 #include "Actor.h"
 #include "Hero.h"
-#include "../Item/Weapon.h"
+#include "../Item/MonsterWeapons.h"
 #include "../Const/Const.h"
+#include "../Scene/BulletLayer.h"
 #include <string>
+
 
 
 class Monster : public Actor
@@ -95,6 +97,8 @@ protected:
 
     float m_vision     = 300.;
     float m_shootRange = 300.;
+
+    int m_facing = sk::kRight;
 
 };
 

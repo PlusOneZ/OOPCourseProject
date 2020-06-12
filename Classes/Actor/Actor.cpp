@@ -15,6 +15,7 @@ bool Actor::generatePhysics()
 {
     auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(1e10);
+    body->setPositionOffset(Vec2(0.f, m_sprite->getContentSize().height / 2));
     body->setGravityEnable(false);
 	body->setCategoryBitmask(sk::bitMask::kHeroCategory);
 	body->setCollisionBitmask(sk::bitMask::kHeroCollision);
@@ -47,7 +48,7 @@ Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int heig
 		}
 		else
 		{
-			frame->setAnchorPoint(Vec2(0.5, 0.));
+			frame->setAnchorPoint(Vec2(0.5f, 0.f));
 			frameVec.pushBack(frame);
 		}
 	}

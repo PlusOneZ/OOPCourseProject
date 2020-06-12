@@ -105,6 +105,7 @@ bool Monster::generatePhysics(float mass)
 //    auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(mass);
     body->setGravityEnable(false);
+    body->setPositionOffset(Vec2(0, m_sprite->getContentSize().height / 2));
     body->setCategoryBitmask(sk::bitMask::kMonsterCategory);
     body->setContactTestBitmask(sk::bitMask::kMonsterContact);
     body->setCollisionBitmask(sk::bitMask::kMonsterCollision);

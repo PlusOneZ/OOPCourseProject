@@ -7,6 +7,7 @@
 #define __DISTANT_MONSTER_H__
 
 #include "Monster.h"
+#include "Item/MonsterWeapons.h"
 
 class DistantMonster : public Monster
 {

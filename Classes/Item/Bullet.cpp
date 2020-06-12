@@ -20,6 +20,7 @@ void Bullet::bindSprite(Sprite* pSprite, sk::Kind kind =sk::Kind::kSelf)
 {
     m_pBulletSprite = pSprite;
     auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
+    body->setRotationEnable(false);
     m_pBulletSprite->setPhysicsBody(body);
 
     if (kind == sk::Kind::kSelf)

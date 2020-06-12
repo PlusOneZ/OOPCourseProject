@@ -20,6 +20,26 @@ bool MonInvisibleWithFiveWayGun::init()
     return true;
 }
 
+void MonInvisibleWithFiveWayGun::attackFromTo(Point from, Point to, int facing, Node *pBulletLayer)
+{
+    if (getBulletCount() == 0)
+    {
+        auto* pBullet = createBullet();
+        pBullet->attack(from.x, from.y, to, facing);
+        pBulletLayer->addChild(pBullet);
+    }
+    else
+    {
+        for (int i = 0; i < getBulletCount(); i++)
+        {
+            Bullet *pBullet = nullptr;
+            pBullet = createBullet();
+            pBullet->attack(from.x, from.y, to, facing);
+            pBulletLayer->addChild(pBullet);
+        }
+    }
+}
+
 
 Bullet *MonOneShotGun::createBullet()
 {
@@ -39,3 +59,24 @@ bool MonOneShotGun::init()
     setBulletCount(1);
     return true;
 }
+
+void MonOneShotGun::attackFromTo(Point from, Point to, int facing, Node *pBulletLayer)
+{
+    if (getBulletCount() == 0)
+    {
+        auto* pBullet = createBullet();
+        pBullet->attack(from.x, from.y, to, facing);
+        pBulletLayer->addChild(pBullet);
+    }
+    else
+    {
+        for (int i = 0; i < getBulletCount(); i++)
+        {
+            Bullet *pBullet = nullptr;
+            pBullet = createBullet();
+            pBullet->attack(from.x, from.y, to, facing);
+            pBulletLayer->addChild(pBullet);
+        }
+    }
+}
+

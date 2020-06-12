@@ -10,6 +10,8 @@
 #include "Const/Const.h"
 #include "Actor/Monster.h"
 
+BulletLayer* BulletLayer::m_pPresentBulletLayer = nullptr;
+
 bool BulletLayer::init()
 {
     auto mouseListener = cocos2d::EventListenerMouse::create();
@@ -19,6 +21,7 @@ bool BulletLayer::init()
     contactListener->onContactBegin = CC_CALLBACK_1(BulletLayer::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 	//scheduleUpdate();
+	m_pPresentBulletLayer = this;
 	return true;
 }
 

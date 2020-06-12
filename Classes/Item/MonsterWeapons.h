@@ -9,7 +9,8 @@
 #include "Weapon.h"
 #include "MonsterBullets.h"
 
-class MonInvisibleWithFiveWayGun :public Weapon {
+
+class MonInvisibleWithFiveWayGun : public Weapon {
 public:
 
     CREATE_FUNC(MonInvisibleWithFiveWayGun);
@@ -20,14 +21,18 @@ public:
     */
     Bullet* createBullet() override;
 
+
     /**
     *@brief  初始化
     *@author 卓正一
     */
     bool init() override;
+
+protected:
+    void attackFromTo(Point from, Point to, int facing, Node *pBulletLayer);
 };
 
-class MonOneShotGun :public Weapon {
+class MonOneShotGun : public Weapon {
 public:
 
     CREATE_FUNC(MonOneShotGun);
@@ -43,6 +48,9 @@ public:
     *@author 卓正一
     */
     bool init() override;
+
+protected:
+    void attackFromTo(Point from, Point to, int facing, Node *pBulletLayer);
 };
 
 
