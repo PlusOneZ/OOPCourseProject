@@ -7,6 +7,7 @@
 #include "SafeMapScene.h"
 #include "BulletLayer.h"
 #include "Const/Const.h"
+#include "Item/Gun.h"
 #include <iostream>
 
 Scene *SafeMap::createScene()
@@ -246,13 +247,19 @@ bool SafeMap::init()
 	dm->generatePhysics(20.f);
 
 	dm->setPosition(500, 500);
-	addChild(dm, 5);
+	addChild(dm, 5, sk::tag::kMonster);
 	dm->move();
 
 	HealthPotion* testHP = HealthPotion::create();
 	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testHP, 3, sk::tag::kHealthPotion);
+
+    Weapon* testWeapon = Gun::create();
+    testWeapon->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+        visibleSize.height / 2 + origin.y - 150.0)));
+    testWeapon->setState(false);
+    this->addChild(testWeapon, 3, sk::tag::kGunWeapon);
 
 	Coin* testCoin = Coin::create();
 	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
@@ -284,6 +291,7 @@ void SafeMap::addPlayerKnight()
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
+        knight->setScene(this);
 		this->addChild(knight, 3, sk::tag::kHero);
 		knight->rest();
 
@@ -325,6 +333,7 @@ void SafeMap::addPlayerAssassin()
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
+        assassin->setScene(this);
 		this->addChild(assassin, 3, sk::tag::kHero);
 		assassin->rest();
 
@@ -340,4 +349,3 @@ void SafeMap::addPlayerAssassin()
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
 	}
 }
-

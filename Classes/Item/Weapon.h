@@ -40,6 +40,8 @@ public:
 	*/
 	int getBulletCount();
 
+	bool getState();
+
 	/**
 	*@brief 设置武器发射速度
 	*@author 翟晨昊
@@ -52,10 +54,29 @@ public:
 	*/
 	void setBulletCount(int count);
 
-	void interact()override;
+	/**
+	*@brief 设置物理体积
+	*@author 翟晨昊
+	*/
+	void setPhysicalBody(std::string message , const int weaponTag);
+
+	/**
+	*@brief 判断是否被持有
+	*@author 翟晨昊
+	*/
+	void setState(bool isInHand);
+
+	/**
+	*@brief 再造
+	*@author 翟晨昊
+	*/
+	virtual Weapon* remake();
+
+	void interact();
 	//TODO:与地面武器交换
 protected:
 	float m_attackInterval;
 	int m_bulletCount;
+	bool m_isInHand = false;
 };
 #endif // !_WEAPON_H_

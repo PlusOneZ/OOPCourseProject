@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 
-
+static const std::string kShotgunMessage = "Shotgun";
 /**
 *@brief 初始霰弹枪类
 *@author 翟晨昊
@@ -29,6 +29,12 @@ public:
 	*@author 翟晨昊
 	*/
 	bool init() override;
+
+	/**
+	*@brief 再造
+	*@author 翟晨昊
+	*/
+	Weapon* remake() override;
 	CREATE_FUNC(Shotgun);
 };
 

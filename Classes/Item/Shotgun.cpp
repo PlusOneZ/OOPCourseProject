@@ -14,6 +14,7 @@ bool Shotgun::init()
 		log("shotgun.png not found");
 	}
 	bindSprite(pSprite);
+	setPhysicalBody(kShotgunMessage,sk::tag::kShotgunWeapon);
 	setInterval(.4f);
 	setBulletCount(3);
 	return true;
@@ -23,4 +24,9 @@ Bullet* Shotgun::createBullet()
 {
 	Bullet* pBullet = ShotgunBullet::create();
 	return pBullet;
+}
+
+Weapon* Shotgun::remake()
+{
+	return Shotgun::create();
 }

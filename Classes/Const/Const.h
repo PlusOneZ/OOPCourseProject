@@ -34,6 +34,12 @@ namespace sk
 		kInteract
     };
 
+    enum class Kind
+    {
+        kSelf,
+        kMonster
+    };
+
     // File names
     namespace files
     {
@@ -89,10 +95,13 @@ namespace sk
     namespace tag {
 
         static const int kHero   = 500;
+        static const int kMonster = 300;
         static const int kBullet = 200;
 		static const int kFreezeTrap = 51;
 		static const int kCoin = 40;
 		static const int kHealthPotion = 10;
+        static const int kGunWeapon = 1;
+        static const int kShotgunWeapon = 2;
     }
 }
 

@@ -5,9 +5,11 @@
 */
 #include "Hero.h"
 #include "../Scene/PauseMenu.h"
+#include "Item/Gun.h"
 
 Hero* Hero::m_pPresentHero = nullptr;
 Item* Hero::m_pPresentContactItem = nullptr;
+Scene* Hero::m_pPresentScene;
 
 Weapon* Hero::getMainWeapon()
 {
@@ -17,6 +19,16 @@ Weapon* Hero::getMainWeapon()
 int Hero::getFacing()
 {
     return m_curFacing;
+}
+
+Scene* Hero::getScene()
+{
+	return m_pPresentScene;
+}
+
+void Hero::setScene(Scene* curScene)
+{
+	m_pPresentScene = curScene;
 }
 
 void Hero::shiftWeapon()
@@ -77,8 +89,27 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (m_pPresentContactItem != nullptr)
 		{
-			m_pPresentContactItem->interact();
-			m_pPresentContactItem = nullptr;
+			if (m_pPresentContactItem->getTag() == sk::tag::kHealthPotion)
+			{
+				m_pPresentContactItem->interact();
+				m_pPresentContactItem = nullptr;
+			}
+			else if (m_pPresentContactItem->getTag() < 10)
+			{
+				const int Tag= m_pMainWeapon->getTag();
+				Weapon* exchangeOne = dynamic_cast<Weapon*>(m_pPresentContactItem)->remake();
+				Weapon* exchangeTwo = m_pMainWeapon->remake();
+				m_pMainWeapon->removeFromParentAndCleanup(true);
+				m_pMainWeapon = exchangeOne;
+				m_pMainWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
+				m_pMainWeapon->setState(true);
+				this->addChild(m_pMainWeapon, 2);
+				exchangeTwo->setPosition(Point(m_pPresentContactItem->getPosition()));
+                exchangeTwo->setState(false);
+                m_pPresentContactItem->removeFromParentAndCleanup(true);
+				m_pPresentContactItem = nullptr;
+				this->getScene()->addChild(exchangeTwo, 3, Tag);
+			}
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -286,6 +317,7 @@ bool Item::onContactSeparate(PhysicsContact& contact)
 		{
 			if (Hero::m_pPresentContactItem == this)
 			{
+				log("44444444");
 				Hero::m_pPresentContactItem = nullptr;
 				m_pMessage->setVisible(false);
 				if (m_ifShopItem)
@@ -309,6 +341,7 @@ bool Item::onContactBegin(PhysicsContact& contact)
 		{
 			if (Hero::m_pPresentContactItem == nullptr)
 			{
+				log("22222222222222");
 				Hero::m_pPresentContactItem = this;
 				m_pMessage->setVisible(true);
 				if (m_ifShopItem)

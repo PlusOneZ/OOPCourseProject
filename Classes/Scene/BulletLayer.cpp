@@ -8,6 +8,7 @@
 #include "Actor/Hero.h"
 #include "BulletLayer.h"
 #include "Const/Const.h"
+#include "Actor/Monster.h"
 
 bool BulletLayer::init()
 {
@@ -51,7 +52,7 @@ bool BulletLayer::onMouseDown(Event* event)
             Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
             log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
             log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
-            m_pWeaponBullet.pushBack(pBullet);
+            //m_pWeaponBullet.pushBack(pBullet);
             pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(), m_pHero->getFacing());
             this->addChild(pBullet);
         }
@@ -63,15 +64,26 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
 {
     auto body1 = contact.getShapeA()->getBody()->getNode();
     auto body2 = contact.getShapeB()->getBody()->getNode();
-	if (body1->getTag() == sk::tag::kBullet)
-	{
-		body1->setVisible(false);
-        body1->removeFromParentAndCleanup(true);
-	}
-    else if (body2->getTag() == sk::tag::kBullet)
+    if (body1 != nullptr && body2 != nullptr)
     {
-        body2->setVisible(false);
-        body2->removeFromParentAndCleanup(true);
+        if (body1->getTag() == sk::tag::kBullet)
+        {
+            if (body2->getTag() == sk::tag::kMonster)
+            {
+                dynamic_cast<Monster*>(body2)->reduceHealth(2);
+            }
+            body1->setVisible(false);
+            body1->removeFromParentAndCleanup(true);
+        }
+        else if (body2->getTag() == sk::tag::kBullet)
+        {
+            if (body1->getTag() == sk::tag::kMonster)
+            {
+                dynamic_cast<Monster*>(body1)->reduceHealth(2);
+            }
+            body2->setVisible(false);
+            body2->removeFromParentAndCleanup(true);
+        }
     }
     return true;
 }

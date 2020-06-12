@@ -7,6 +7,7 @@
 #include "Const/Const.h"
 
 bool Monster::init() {
+    m_curHealth = m_fullHealth;
     scheduleUpdate();
     return true;
 }
@@ -107,6 +108,7 @@ bool Monster::generatePhysics(float mass)
     body->setCategoryBitmask(sk::bitMask::kMonsterCategory);
     body->setContactTestBitmask(sk::bitMask::kMonsterContact);
     body->setCollisionBitmask(sk::bitMask::kMonsterCollision);
+    body->setRotationEnable(false);
     this->setPhysicsBody(body);
 
     return true;

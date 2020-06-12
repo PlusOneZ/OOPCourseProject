@@ -9,7 +9,7 @@ bool MonFiveWayBullet::init()
     {
         log("monster_bullet_1.png not found");
     }
-    bindSprite(pSprite);
+    bindSprite(pSprite, sk::Kind::kMonster);
     setSpeed(200);
     m_isArrive = false;
     return true;
@@ -39,7 +39,7 @@ bool MonOneShotBullet::init()
     {
         log("monster_bullet_2.png not found");
     }
-    bindSprite(pSprite);
+    bindSprite(pSprite, sk::Kind::kMonster);
     setSpeed(100);
     m_isArrive = false;
     return true;

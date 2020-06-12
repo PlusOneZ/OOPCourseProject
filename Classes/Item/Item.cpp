@@ -35,10 +35,8 @@ ui::Scale9Sprite* showMessage(int price)
 	auto board = ui::Scale9Sprite::create("interface/voidboard.png");
 	board->retain();
 
-	char cprice[5];
-	itoa(price, cprice,10);
 	std::string message = "$ ";
-	message += cprice;
+	message += std::to_string(price);
 	board->setContentSize(Size(message.size() * 5, 30));
 
 	auto showMessage = Label::createWithTTF(message, "Font/IRANYekanBold.ttf", 20.);

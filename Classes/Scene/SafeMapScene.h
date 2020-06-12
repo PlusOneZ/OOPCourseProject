@@ -14,6 +14,7 @@
 #include "Item/Coin.h"
 #include "Actor/DistantMonster.h"
 #include "Item/Trap.h"
+#include "Item/Weapon.h"
 
 USING_NS_CC;
 

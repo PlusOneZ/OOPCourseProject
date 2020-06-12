@@ -54,6 +54,9 @@ public:
 	*/
 	int getFacing();
 
+	Scene* getScene();
+
+	void setScene(Scene* curScene);
 	/**
 	*@brief 技能接口
 	*@author 肖杨
@@ -126,6 +129,7 @@ public:
 	void gainCoins(int coin);
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
+	static Scene* m_pPresentScene;
 
 protected:
 

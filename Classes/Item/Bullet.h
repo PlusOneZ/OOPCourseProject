@@ -42,7 +42,7 @@ public:
 	*@brief 绑定图像
 	*@author 翟晨昊
 	*/
-	void bindSprite(Sprite* pSprite);
+	void bindSprite(Sprite* pSprite, sk::Kind kind);
 
 protected:
 
@@ -50,5 +50,7 @@ protected:
 	float   m_bulletSpeed;
 	bool    m_isArrive;
 	void moveEnd();
+
+	sk::Kind m_kind;
 };
 #endif
