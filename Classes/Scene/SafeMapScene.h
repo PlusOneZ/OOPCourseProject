@@ -13,6 +13,7 @@
 #include "Item/HealthPotion.h"
 #include "Item/Coin.h"
 #include "Actor/DistantMonster.h"
+#include "Item/Trap.h"
 
 USING_NS_CC;
 

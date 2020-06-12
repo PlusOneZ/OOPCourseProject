@@ -252,13 +252,17 @@ bool SafeMap::init()
 	HealthPotion* testHP = HealthPotion::create();
 	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 		visibleSize.height / 2 + origin.y)));
-	this->addChild(testHP, 3, 400);
+	this->addChild(testHP, 3, sk::tag::kHealthPotion);
 
 	Coin* testCoin = Coin::create();
 	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
 		visibleSize.height / 2 + origin.y)));
-	this->addChild(testCoin, 3, 401);
+	this->addChild(testCoin, 3, sk::tag::kCoin);
 
+	FreezeTrap* testFreeze = FreezeTrap::create();
+	testFreeze->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
     return true;
 }
 
