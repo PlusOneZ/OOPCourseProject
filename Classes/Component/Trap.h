@@ -6,7 +6,7 @@
 #ifndef _TRAP_H_
 #define _TRAP_H_
 
-#include "Actor/Buff.h"
+#include "Component/Buff.h"
 
 /**
 *@brief 陷阱类
@@ -39,7 +39,7 @@ public:
 	*@brief 设置陷阱时间
 	*@author 肖杨
 	*/
-	void setTrapTime(double time);
+	void setTrapTime(float time);
 
 	/**
 	*@brief 设置物理体积
@@ -48,7 +48,7 @@ public:
 	void generatePhysicalBody(const int trapTag);
 protected:
 	Sprite* m_pSprite;
-	double m_trapTime;
+	float m_trapTime;
 };
 
 

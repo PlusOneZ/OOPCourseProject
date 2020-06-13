@@ -9,6 +9,7 @@
 #include "Const/Const.h"
 #include "Item/Gun.h"
 #include <iostream>
+#include "Component/HeroUI.h"
 
 Scene *SafeMap::createScene()
 {
@@ -273,9 +274,15 @@ bool SafeMap::init()
 	this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
 
 	FlameTrap* testFlame = FlameTrap::create();
+	testFlame->setTrapTime(8);
 	testFlame->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
 		visibleSize.height / 2 + origin.y - 75.0)));
 	this->addChild(testFlame, 3, sk::tag::kFlameTrap);
+
+	HeroUI* testUI = HeroUI::create();
+	testUI->setPosition(118.5f, 661.5f);
+	this->addChild(testUI, 5, sk::tag::kHeroUI);
+
     return true;
 }
 

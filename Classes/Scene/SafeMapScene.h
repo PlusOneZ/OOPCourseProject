@@ -11,9 +11,9 @@
 #include "Actor/Knight.h"
 #include "Actor/Assassin.h"
 #include "Item/HealthPotion.h"
-#include "Item/Coin.h"
+#include "Component/Coin.h"
 #include "Actor/DistantMonster.h"
-#include "Item/Trap.h"
+#include "Component/Trap.h"
 #include "Item/Weapon.h"
 
 USING_NS_CC;

@@ -7,7 +7,7 @@
 #include "Item/Gun.h"
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
-#include "Buff.h"
+#include "Component/Buff.h"
 
 bool Knight::init()
 {
@@ -31,7 +31,7 @@ bool Knight::init()
 	}
 }
 
-double Knight::skill()
+float Knight::skill()
 {
 	HeroBuff.increaseATK(m_increaseAmount);
 	return m_skillLastTime;

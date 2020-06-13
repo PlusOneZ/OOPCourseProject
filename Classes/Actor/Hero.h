@@ -19,6 +19,7 @@ static float kHeroSpeed = 150.;
 class Hero : public Actor
 {
 friend class Buff;
+friend class HeroUI;
 public:
 
 	void update(float dt) override ;
@@ -66,7 +67,7 @@ public:
 	*@author 肖杨
 	*@return 技能持续时间
 	*/
-	virtual double skill() = 0;
+	virtual float skill() = 0;
 
 	/**
 	*@brief 技能结束回调
@@ -159,15 +160,15 @@ protected:
 	//int m_MP;
 	int m_armor = 5;
 	int m_maxArmor = 5;
-	double m_recoverArmorTime = 0;
+	float m_recoverArmorTime = 0;
 	bool m_ifMortal = true;
 	int m_ATK = 5;
 	//基本属性
 
 	int m_skillCD = 8;//技能冷却时间
-	double m_skillTime = m_skillCD;//当前技能冷却
-	double m_skillLastTime = 1.;//技能持续时间
-	double m_skillRemainTime = 0;//技能剩余时间
+	float m_skillTime = m_skillCD;//当前技能冷却
+	float m_skillLastTime = 1.;//技能持续时间
+	float m_skillRemainTime = 0;//技能剩余时间
 	//技能属性
 	int m_coinNumber = 0;
 

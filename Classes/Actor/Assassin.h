@@ -30,7 +30,7 @@ public:
 	*@return 技能是否释放成功(暂定)
 	*/
 	//TODO:完成
-	double skill() override;
+	float skill() override;
 
 	/**
 	*@brief 技能结束回调

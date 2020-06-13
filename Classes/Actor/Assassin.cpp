@@ -6,7 +6,7 @@
 #include "Assassin.h"
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
-#include "Buff.h"
+#include "Component/Buff.h"
 
 bool Assassin::init()
 {
@@ -30,7 +30,7 @@ bool Assassin::init()
 	}
 }
 
-double Assassin::skill()
+float Assassin::skill()
 {
 	if (m_ifMoved)
 	{

@@ -7,7 +7,7 @@
 
 void Trap::update(float dt)
 {
-	static double time = m_trapTime;
+	static float time = m_trapTime;
 	time -= dt;
 	if (time <= 0)
 	{
@@ -33,7 +33,7 @@ bool Trap::onContactBegin(PhysicsContact& contact)
 	return false;
 }
 
-void Trap::setTrapTime(double time)
+void Trap::setTrapTime(float time)
 {
 	m_trapTime = time;
 }
@@ -99,8 +99,8 @@ void FlameTrap::trapEnd()
 
 void FlameTrap::update(float dt)
 {
-	static double time = m_trapTime;
-	static double flameTime = 0;
+	static float time = m_trapTime;
+	static float flameTime = 0;
 	time -= dt;
 	flameTime += dt;
 	if (flameTime >= 1)
