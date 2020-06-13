@@ -19,21 +19,23 @@ void Bullet::setSpeed(float speed)
 void Bullet::bindSprite(Sprite* pSprite, sk::Kind kind =sk::Kind::kSelf)
 {
     m_pBulletSprite = pSprite;
-    auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
-    body->setRotationEnable(false);
-    m_pBulletSprite->setPhysicsBody(body);
-
     if (kind == sk::Kind::kSelf)
     {
+        auto body = PhysicsBody::createCircle(m_pBulletSprite->getContentSize().width / 2);
         body->setCategoryBitmask(sk::bitMask::kSelfBulletCategory);
         body->setCollisionBitmask(sk::bitMask::kSelfBulletCollision);
         body->setContactTestBitmask(sk::bitMask::kSelfBulletContact);
+        body->setRotationEnable(false);
+        m_pBulletSprite->setPhysicsBody(body);
     }
-    else if (kind == sk::Kind::kSelf)
+    else if (kind == sk::Kind::kMonster)
     {
+        auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
         body->setCategoryBitmask(sk::bitMask::kMonsterBulletCategory);
         body->setCollisionBitmask(sk::bitMask::kMonsterBulletCollision);
         body->setContactTestBitmask(sk::bitMask::kMonsterBulletContact);
+        body->setRotationEnable(false);
+        m_pBulletSprite->setPhysicsBody(body);
     }
     this->addChild(m_pBulletSprite, 3, sk::tag::kBullet);
 }

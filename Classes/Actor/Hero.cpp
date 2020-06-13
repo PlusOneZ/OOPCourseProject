@@ -28,6 +28,7 @@ void Hero::setSecondWeapon(Weapon* pNewWeapon)
 	pNewWeapon->setState(true);
 	pNewWeapon->setPosition(Point(20.0, 20.0));
 	m_pSecWeapon = pNewWeapon;
+	m_pSecWeapon->getSprite()->getPhysicsBody()->setEnabled(false);
 	this->addChild(pNewWeapon, 2);
 }
 
@@ -44,6 +45,8 @@ void Hero::shiftWeapon()
 	{
         m_pMainWeapon->setVisible(false);
         m_pSecWeapon->setVisible(true);
+		m_pMainWeapon->getSprite()->getPhysicsBody()->setEnabled(false);
+		m_pSecWeapon->getSprite()->getPhysicsBody()->setEnabled(true);
 		Weapon* pTemp = m_pSecWeapon;
 		m_pSecWeapon = m_pMainWeapon;
 		m_pMainWeapon = pTemp;

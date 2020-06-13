@@ -26,8 +26,6 @@ public:
 	*/
 	virtual Bullet* createBullet();
 
-	virtual Animate* attack();
-
 	/**
 	*@brief 获取武器发射速度
 	*@author 翟晨昊
@@ -39,8 +37,18 @@ public:
 	*@author 翟晨昊
 	*/
 	int getBulletCount();
-
+	
+	/**
+	*@brief 获取状态
+	*@author 翟晨昊
+	*/
 	bool getState();
+
+	/**
+	*@brief 获取攻击力
+	*@author 翟晨昊
+	*/
+	int getATK();
 
 	/**
 	*@brief 设置武器发射速度
@@ -62,10 +70,10 @@ public:
 	void setState(bool isInHand);
 
 	/**
-	*@brief 再造
+	*@brief 设置攻击力
 	*@author 翟晨昊
 	*/
-	virtual Weapon* remake();
+	void setATK(int ATK);
 
 	/**
 	*@brief 与手中武器交换
@@ -77,5 +85,6 @@ protected:
 	float m_attackInterval;
 	int m_bulletCount;
 	bool m_isInHand = false;
+	int m_weaponATK;
 };
 #endif // !_WEAPON_H_

@@ -259,6 +259,7 @@ bool SafeMap::init()
     testWeapon->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
         visibleSize.height / 2 + origin.y - 150.0)));
     testWeapon->setState(false);
+    testWeapon->setTag(sk::tag::kGunWeapon);
     this->addChild(testWeapon, 3, sk::tag::kGunWeapon);
 
 	Coin* testCoin = Coin::create();

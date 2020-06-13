@@ -29,12 +29,6 @@ public:
 	*@author 翟晨昊
 	*/
 	bool init() override;
-
-	/**
-	*@brief 再造
-	*@author 翟晨昊
-	*/
-	Weapon* remake() override;
 	CREATE_FUNC(Gun);
 };
 #endif

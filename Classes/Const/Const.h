@@ -103,6 +103,7 @@ namespace sk
 		static const int kHealthPotion = 10;
         static const int kGunWeapon = 1;
         static const int kShotgunWeapon = 2;
+        static const int kSwordWeapon = 3;
 		static const int kIncreaseATK = 101;
     }
 }

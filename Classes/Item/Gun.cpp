@@ -17,6 +17,7 @@ bool Gun::init()
 	generatePhysicalBody(kGunMessage, sk::tag::kGunWeapon);
 	setInterval(.2f);
 	setBulletCount(1);
+	setATK(1);
 	return true;
 }
 
@@ -24,9 +25,4 @@ Bullet* Gun::createBullet()
 {
 	Bullet* pBullet = NormalBullet::create();
 	return pBullet;
-}
-
-Weapon* Gun::remake()
-{
-	return Gun::create();
 }

@@ -10,16 +10,6 @@ Bullet* Weapon::createBullet()
 	return nullptr;
 }
 
-Animate* Weapon::attack()
-{
-	return nullptr;
-}
-
- Weapon* Weapon::remake()
-{
-	return nullptr;
-}
-
 float Weapon::getInterval()
 {
 	return m_attackInterval;
@@ -33,6 +23,11 @@ int Weapon::getBulletCount()
 bool Weapon::getState()
 {
 	return m_isInHand;
+}
+
+int Weapon::getATK()
+{
+	return m_weaponATK;
 }
 
 void Weapon::setInterval(float interval)
@@ -58,4 +53,7 @@ void Weapon::setState(bool isInHand)
 	}
 }
 
-
+void Weapon::setATK(int ATK)
+{
+	m_weaponATK = ATK;
+}

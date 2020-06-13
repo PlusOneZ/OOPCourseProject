@@ -88,6 +88,8 @@ list(APPEND GAME_SOURCE
         Classes/Item/Coin.cpp
         Classes/Item/MonsterBullets.cpp
         Classes/Item/Trap.cpp
+        Classes/Item/SwordBullet.cpp
+
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -119,6 +121,7 @@ list(APPEND GAME_HEADER
         Classes/Item/Coin.h
         Classes/Item/MonsterBullets.h
         Classes/Item/Trap.h
+        Classes/Item/SwordBullet.h
 
         Classes/Const/Const.h
         )

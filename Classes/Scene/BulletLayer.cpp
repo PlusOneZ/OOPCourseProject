@@ -46,7 +46,11 @@ bool BulletLayer::onMouseDown(Event* event)
     auto e = dynamic_cast<EventMouse* >(event);
     if (m_pHero->getMainWeapon()->getBulletCount() == 0)
     {
-        Animate* pAttackAction = m_pHero->getMainWeapon()->attack();
+        m_pHero->getMainWeapon()->getSprite()->setVisible(false);
+        Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
+        pBullet->attack(0, 0, m_pHero->getPosition(), m_pHero->getFacing());
+        this->addChild(pBullet);
+        m_pHero->getMainWeapon()->getSprite()->setVisible(true);
     }
     else
     {
@@ -73,7 +77,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
         {
             if (body2->getTag() == sk::tag::kMonster)
             {
-                dynamic_cast<Monster*>(body2)->reduceHealth(2);
+                dynamic_cast<Monster*>(body2)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
             }
             body1->setVisible(false);
             body1->removeFromParentAndCleanup(true);
@@ -82,7 +86,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
         {
             if (body1->getTag() == sk::tag::kMonster)
             {
-                dynamic_cast<Monster*>(body1)->reduceHealth(2);
+                dynamic_cast<Monster*>(body1)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
             }
             body2->setVisible(false);
             body2->removeFromParentAndCleanup(true);
