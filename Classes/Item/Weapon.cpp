@@ -43,14 +43,7 @@ void Weapon::setBulletCount(int count)
 void Weapon::setState(bool isInHand)
 {
 	m_isInHand = isInHand;
-	if (isInHand == true)
-	{
-		_eventDispatcher->pauseEventListenersForTarget(this, true);
-	}
-	else
-	{
-		_eventDispatcher->resumeEventListenersForTarget(this, true);
-	}
+	m_pSprite->getPhysicsBody()->setEnabled(!isInHand);
 }
 
 void Weapon::setATK(int ATK)
