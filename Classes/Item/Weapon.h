@@ -48,7 +48,7 @@ public:
 	*@brief 获取攻击力
 	*@author 翟晨昊
 	*/
-	int getATK();
+	int getDamage();
 
 	/**
 	*@brief 设置武器发射速度
@@ -73,7 +73,7 @@ public:
 	*@brief 设置攻击力
 	*@author 翟晨昊
 	*/
-	void setATK(int ATK);
+	void setDamage(int ATK);
 
 	/**
 	*@brief 与手中武器交换
@@ -81,10 +81,14 @@ public:
 	*/
 	void interact();
 	//TODO:与地面武器交换
+
 protected:
+
+    Sprite * m_weaponSprite = nullptr;
+
 	float m_attackInterval;
-	int m_bulletCount;
-	bool m_isInHand = false;
-	int m_weaponATK;
+	int   m_bulletCount;
+	bool  m_isInHand = false;
+	int   m_weaponDamage;
 };
 #endif // !_WEAPON_H_

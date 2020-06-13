@@ -20,7 +20,7 @@ void HealthPotion::interact()
 {
 	if (buyItem())
 	{
-		Hero::m_pPresentHero->recoverHP(2);
+        Hero::m_pPresentHero->recoverHealth(2);
 		log("HP++");
 		this->removeFromParentAndCleanup(true);//用完就释放
 	}

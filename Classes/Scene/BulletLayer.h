@@ -37,7 +37,7 @@ public:
 	*/
 	//void update(float dt);
 
-	/*
+	/**
 	*@brief 鼠标按下后的操作
 	*@author 翟晨昊
 	*/

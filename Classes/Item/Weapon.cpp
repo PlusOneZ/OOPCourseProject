@@ -25,9 +25,9 @@ bool Weapon::getState()
 	return m_isInHand;
 }
 
-int Weapon::getATK()
+int Weapon::getDamage()
 {
-	return m_weaponATK;
+	return m_weaponDamage;
 }
 
 void Weapon::setInterval(float interval)
@@ -46,7 +46,7 @@ void Weapon::setState(bool isInHand)
 	m_pSprite->getPhysicsBody()->setEnabled(!isInHand);
 }
 
-void Weapon::setATK(int ATK)
+void Weapon::setDamage(int ATK)
 {
-	m_weaponATK = ATK;
+    m_weaponDamage = ATK;
 }

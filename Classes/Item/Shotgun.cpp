@@ -17,7 +17,7 @@ bool Shotgun::init()
 	generatePhysicalBody(kShotgunMessage,sk::tag::kShotgunWeapon);
 	setInterval(.4f);
 	setBulletCount(3);
-	setATK(3);
+    setDamage(3);
 	return true;
 }
 

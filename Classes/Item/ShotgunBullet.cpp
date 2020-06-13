@@ -12,7 +12,7 @@ bool ShotgunBullet::init()
 	{
 		log("shotgunbullet.png not found");
 	}
-	bindSprite(pSprite, sk::Kind::kSelf);
+    bindSprite(pSprite, sk::Kind::kSelf);
 	setSpeed(4);
 	m_isArrive = false;
 	return true;

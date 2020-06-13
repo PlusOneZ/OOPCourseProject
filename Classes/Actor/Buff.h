@@ -133,10 +133,10 @@ public:
 
 	void increaseATK(int amount)
 	{
-		Hero::m_pPresentHero->m_ATK += amount;
+		Hero::m_pPresentHero->m_baseDamage += amount;
 		log("atk up");
 		auto angry = Sprite::create("Actor/atk_up.png");
-		angry->setTag(sk::tag::kIncreaseATK);
+		angry->setTag(sk::tag::kIncreaseDamage);
 		angry->setPosition(0., 60.);
 		Hero::m_pPresentHero->addChild(angry, 3);
 		m_increaseATK++;
@@ -146,9 +146,9 @@ public:
 	{
 		if (m_increaseATK > 0)
 		{
-			Hero::m_pPresentHero->m_ATK -= amount;
+			Hero::m_pPresentHero->m_baseDamage -= amount;
 			log("atk up end");
-			Hero::m_pPresentHero->getChildByTag(sk::tag::kIncreaseATK)->removeFromParentAndCleanup(true);
+			Hero::m_pPresentHero->getChildByTag(sk::tag::kIncreaseDamage)->removeFromParentAndCleanup(true);
 			m_increaseATK--;
 		}
 	}

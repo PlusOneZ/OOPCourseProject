@@ -42,7 +42,7 @@ public:
 	*@brief 绑定图像
 	*@author 翟晨昊
 	*/
-	void bindSprite(Sprite* pSprite, sk::Kind kind);
+    void bindSprite(Sprite *pSprite, sk::Kind kind = sk::Kind::kSelf, int tag = sk::tag::kBullet);
 
 protected:
 

@@ -101,14 +101,14 @@ public:
 	* @author 肖杨
 	* @return 是否还活着
 	*/
-	bool reduceHP(int damage = 1);
+	bool reduceHealth(int damage = 1);
 
 	/**
 	* @brief 恢复生命
 	* @param 恢复数值
 	* @author 肖杨
 	*/
-	void recoverHP(int healAmount = 1);
+	void recoverHealth(int healAmount = 1);
 
 	/**
 	*@brief 是否受伤
@@ -137,46 +137,51 @@ public:
 	*@author 肖杨
 	*@return 攻击力
 	*/
-	int getATK();
+	int getBaseDamage();
 
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
 
 protected:
-
+    /// 武器
     Weapon* m_pMainWeapon = nullptr;
     Weapon* m_pSecWeapon = nullptr;
-	//武器
+
+    /// 基本动画
 	Animate* m_pRestAnimate = nullptr;
 	Animate* m_pMoveAnimate = nullptr;
-	//基本动画
+
 	sk::HeroID m_ID;
 
 	bool m_alive = true;
 	float m_speed = kHeroSpeed;
-	int m_HP = 5;
-	int m_maxHP = 5;
-	//int m_MP;
+	int m_health = 5;
+	int m_maxHealth = 5;
+
+    /// 基本属性
+	//int m_magicPoint;
 	int m_armor = 5;
 	int m_maxArmor = 5;
 	double m_recoverArmorTime = 0;
 	bool m_ifMortal = true;
-	int m_ATK = 5;
-	//基本属性
+	int m_baseDamage = 5;
 
-	int m_skillCD = 8;//技能冷却时间
-	double m_skillTime = m_skillCD;//当前技能冷却
-	double m_skillLastTime = 1.;//技能持续时间
-	double m_skillRemainTime = 0;//技能剩余时间
-	//技能属性
+    /// 技能属性
+	int m_skillCD = 8;                // 技能冷却时间
+	double m_skillTime = m_skillCD;   // 当前技能冷却
+	double m_skillLastTime = 1.;      // 技能持续时间
+	double m_skillRemainTime = 0;     // 技能剩余时间
+
 	int m_coinNumber = 0;
 
+    /// 移动状态
 	bool m_ifMoved        = false;
 	bool m_ifStateChanged = false;
-	//移动状态
-	int m_curFacing = sk::kRight;
-	//面向位置
+
+	int m_curFacing = sk::kRight;     // 面向位置
+
+    /// 控制监测
 	std::vector<bool> m_isKeyDown = std::vector<bool>(7, false);
-	//控制监测
+
 };
 #endif

@@ -3,8 +3,8 @@
 *@author 翟晨昊
 *@date 6/13/2020
 */
-#ifndef _SWORDBULLET_H_
-#define _SWORDLBULLET_H_
+#ifndef __SWORDBULLET_H__
+#define __SWORDBULLET_H__
 
 #include "Bullet.h"
 
@@ -28,7 +28,8 @@ public:
 	*/
 	void attack(float mouseX, float mouseY, Point heroPoint, int curFacing) override;
 protected:
-	Vector<SpriteFrame*> actionVec;
+	Vector<SpriteFrame*> m_rightActionVec;
+    Vector<SpriteFrame*> m_leftActionVec;
 };
 
 #endif

@@ -73,23 +73,31 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
     auto body2 = contact.getShapeB()->getBody()->getNode();
     if (body1 != nullptr && body2 != nullptr)
     {
-        if (body1->getTag() == sk::tag::kBullet)
+        if (body1->getTag() == sk::tag::kBullet || body1->getTag() == sk::tag::kCloseDamage)
         {
             if (body2->getTag() == sk::tag::kMonster)
             {
-                dynamic_cast<Monster*>(body2)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
+                dynamic_cast<Monster*>(body2)->reduceHealth(
+                        m_pHero->getBaseDamage() + m_pHero->getMainWeapon()->getDamage());
             }
-            body1->setVisible(false);
-            body1->removeFromParentAndCleanup(true);
+            if (body1->getTag() == sk::tag::kBullet)
+            {
+                body1->setVisible(false);
+                body1->removeFromParentAndCleanup(true);
+            }
         }
-        else if (body2->getTag() == sk::tag::kBullet)
+        else if (body2->getTag() == sk::tag::kBullet || body1->getTag() == sk::tag::kCloseDamage)
         {
             if (body1->getTag() == sk::tag::kMonster)
             {
-                dynamic_cast<Monster*>(body1)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
+                dynamic_cast<Monster*>(body1)->reduceHealth(
+                        m_pHero->getBaseDamage() + m_pHero->getMainWeapon()->getDamage());
             }
-            body2->setVisible(false);
-            body2->removeFromParentAndCleanup(true);
+            if (body1->getTag() == sk::tag::kBullet)
+            {
+                body2->setVisible(false);
+                body2->removeFromParentAndCleanup(true);
+            }
         }
     }
     return true;

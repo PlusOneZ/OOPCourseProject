@@ -16,7 +16,7 @@ void Bullet::setSpeed(float speed)
     m_bulletSpeed = speed;
 }
 
-void Bullet::bindSprite(Sprite* pSprite, sk::Kind kind =sk::Kind::kSelf)
+void Bullet::bindSprite(Sprite *pSprite, sk::Kind kind, int tag)
 {
     m_pBulletSprite = pSprite;
     if (kind == sk::Kind::kSelf)
@@ -37,7 +37,7 @@ void Bullet::bindSprite(Sprite* pSprite, sk::Kind kind =sk::Kind::kSelf)
         body->setRotationEnable(false);
         m_pBulletSprite->setPhysicsBody(body);
     }
-    this->addChild(m_pBulletSprite, 3, sk::tag::kBullet);
+    this->addChild(m_pBulletSprite, 3, tag);
 }
 
 
