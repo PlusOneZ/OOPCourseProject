@@ -81,4 +81,34 @@ public:
 };
 
 
+/**
+*@brief 火焰陷阱类
+*@author 肖杨
+*/
+class FlameTrap :public Trap
+{
+public:
+	CREATE_FUNC(FlameTrap)
+
+	/**
+	*@brief 生成函数
+	*@author 肖杨
+	*/
+	bool init()override;
+
+	void update(float dt)override;
+
+	/**
+	*@brief 持续燃烧
+	*@author 肖杨
+	*/
+	void trapStart()override;
+
+	/**
+	*@brief 停止燃烧
+	*@author 肖杨
+	*/
+	void trapEnd()override;
+};
+
 #endif // !_TRAP_H_

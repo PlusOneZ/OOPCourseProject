@@ -37,5 +37,7 @@ public:
 	*@author 肖杨
 	*/
 	void skillEnd() override;
+protected:
+	int m_increaseAmount = 5;
 };
 #endif // !_Knight_H__

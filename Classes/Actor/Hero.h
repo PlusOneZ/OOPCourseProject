@@ -131,6 +131,14 @@ public:
 	*@author 肖杨
 	*/
 	void gainCoins(int coin);
+
+	/**
+	*@brief 获取英雄攻击力
+	*@author 肖杨
+	*@return 攻击力
+	*/
+	int getATK();
+
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
 
@@ -153,6 +161,7 @@ protected:
 	int m_maxArmor = 5;
 	double m_recoverArmorTime = 0;
 	bool m_ifMortal = true;
+	int m_ATK = 5;
 	//基本属性
 
 	int m_skillCD = 8;//技能冷却时间

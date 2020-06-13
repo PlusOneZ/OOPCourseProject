@@ -270,6 +270,11 @@ bool SafeMap::init()
 	testFreeze->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
+
+	FlameTrap* testFlame = FlameTrap::create();
+	testFlame->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y - 75.0)));
+	this->addChild(testFlame, 3, sk::tag::kFlameTrap);
     return true;
 }
 

@@ -240,7 +240,7 @@ bool Hero::reduceHP(int damage)
 			}
 			else
 			{
-				m_alive -= damage;
+				m_armor -= damage;
 				return true;
 			}
 		}
@@ -293,6 +293,11 @@ void Hero::gainCoins(int coin)
 	m_coinNumber += coin;
 }
 
+int Hero::getATK()
+{
+	return m_ATK;
+}
+
 //Item中函数的实现
 bool Item::onContactSeparate(PhysicsContact& contact)
 {
@@ -305,7 +310,7 @@ bool Item::onContactSeparate(PhysicsContact& contact)
 		{
 			if (Hero::m_pPresentContactItem == this)
 			{
-				log("44444444");
+				log("item seperate");
 				Hero::m_pPresentContactItem = nullptr;
 				m_pMessage->setVisible(false);
 			}
@@ -325,7 +330,7 @@ bool Item::onContactBegin(PhysicsContact& contact)
 		{
 			if (Hero::m_pPresentContactItem == nullptr)
 			{
-				log("22222222222222");
+				log("near item");
 				Hero::m_pPresentContactItem = this;
 				m_pMessage->setVisible(true);
 			}
