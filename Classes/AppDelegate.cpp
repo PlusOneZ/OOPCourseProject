@@ -25,7 +25,6 @@
 #include "AppDelegate.h"
 #include "Scene/StartScene.h"
 #include "Scene/RoomMap.h"
-#include "Scene/GameMap.h"
 
 #define USE_AUDIO_ENGINE 1
 

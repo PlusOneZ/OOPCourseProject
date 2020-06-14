@@ -144,8 +144,8 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
     auto nodeB = contact.getShapeB()->getBody()->getNode();
     if (nodeA != nullptr && nodeB != nullptr)
     {
-        if ((nodeA->getTag() == kHeroTag && nodeB->getTag()==300)
-            || (nodeB->getTag() == kHeroTag && nodeA->getTag() == 300))
+        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag()==300)
+            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == 300))
         {
             m_mapNumber++;
             //Hero::m_pPresentHero->retain();
@@ -182,7 +182,7 @@ void RoomMap::addPlayerAssassin()
         assassin->generatePhysics();
         assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
             visibleSize.height / 2 + origin.y + 150.0)));
-        this->addChild(assassin, 3, kHeroTag);
+        this->addChild(assassin, 3, sk::tag::kHero);
         assassin->rest();
 
         auto keyBoardListener = EventListenerKeyboard::create();
