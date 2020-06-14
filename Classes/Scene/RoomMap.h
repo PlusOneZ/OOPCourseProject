@@ -10,6 +10,7 @@
 #include "cocos2d.h"
 #include "Actor/Knight.h"
 #include "Actor/Assassin.h"
+#include "Const/Const.h"
 
 USING_NS_CC;
 
@@ -27,7 +28,7 @@ public:
 	 * @param map : initialize field m_pMap
 	 * @author 卓正一
 	 */
-	RoomMap(TMXTiledMap* map) : m_pMap(map) { };
+	RoomMap(TMXTiledMap* map) : m_pMap(map){ };
 
 	/**
 	*@brief Call the create function
@@ -58,36 +59,33 @@ public:
 	void createBarrier();
 
 	/**
-	*@brief close all the doors
+	*@brief create all the doors
 	*@author 李嘉树
 	*/
-	void closeDoor();
+	void createDoor();
 
 	/**
-	*@brief open all the doors
-	*@author 李嘉树
+	*@brief 添加刺客
+	*@author 肖杨
 	*/
-	void openDoor();
-
-	/**
-	*@brief create the enemies
-	*@author 李嘉树
-	*/
-	void createEnemy();
-
-	/**
-	*@brief add the player and start the game
-	*@author 李嘉树
-	*/
-	void addPlayer(RoomMap* pMap);
 	void addPlayerAssassin();
+
+	/**
+	*@brief 触碰门切换房间
+	*@author 李嘉树
+	*/
 	bool onContactBegin(PhysicsContact& contact);
-	bool ifMoveToAnotherRoom();
-	void moveStatusChange();
+
+	/**
+	*@brief 获取瓦片地图
+	*@author 李嘉树
+	*/
+	static TMXTiledMap* createTiled(int mapNumber);
+
+	static int m_mapNumber;
 protected:
 	TMXTiledMap* m_pMap;
-	int m_enemyNumber;
-	bool ifMove;
+	Assassin* myHero;
 };
 
 #endif

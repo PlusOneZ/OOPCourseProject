@@ -6,10 +6,15 @@
 
 #include "RoomMap.h"
 
+int RoomMap::m_mapNumber = 1;
+
 Scene* RoomMap::createScene(TMXTiledMap* map)
 {
-    auto pRef = RoomMap::create(map);
-    return pRef;
+    auto scene = Scene::createWithPhysics();
+    auto layer = RoomMap::create(map);
+    scene->addChild(layer);
+    scene->getPhysicsWorld()->setGravity(Vec2::ZERO);
+    return scene;
 }
 
 RoomMap* RoomMap::create(TMXTiledMap* map)
@@ -34,10 +39,6 @@ bool RoomMap::init()
     {
         return false;
     }
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    ifMove = false;
 
     if (m_pMap == nullptr)
     {
@@ -56,8 +57,25 @@ bool RoomMap::init()
     edgeMap->setVisible(false);
     this->addChild(edgeMap, 0, 98);
 
-    createBarrier();
-    closeDoor();
+    //createBarrier();
+    createDoor();
+
+    addPlayerAssassin();
+    
+    //this->addChild(Hero::m_pPresentHero, 3, kHeroTag);
+    //Hero::m_pPresentHero->setPosition(Vec2(900, 300));
+
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+
+    /*
+    auto keyBoardListener = EventListenerKeyboard::create();
+    keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, Hero::m_pPresentHero);
+    keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, Hero::m_pPresentHero);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
+    */
+    
 
     return true;
 }
@@ -77,16 +95,21 @@ void RoomMap::createBarrier()
 
         PhysicsBody* tmpPhysicsBody = PhysicsBody::createBox(Size(width, height));
         tmpPhysicsBody->setDynamic(false);
+        tmpPhysicsBody->setCategoryBitmask(sk::bitMask::kMapCategory);
+        tmpPhysicsBody->setCollisionBitmask(sk::bitMask::kMapCollision);
+        tmpPhysicsBody->setContactTestBitmask(sk::bitMask::kMapContact);
+
         Sprite* tmpSprite = Sprite::create();
         tmpSprite->setPosition(Vec2(x, y));
         tmpSprite->setAnchorPoint(Vec2::ZERO);
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
-        this->addChild(tmpSprite);
+
+        this->addChild(tmpSprite, 2, 200);
     }
 }
 
-void RoomMap::closeDoor()
+void RoomMap::createDoor()
 {
     auto group = m_pMap->getObjectGroup("door");
     ValueVector doorObjects = group->getObjects();
@@ -101,17 +124,17 @@ void RoomMap::closeDoor()
 
         PhysicsBody* tmpPhysicsBody = PhysicsBody::createBox(Size(width, height));
         tmpPhysicsBody->setDynamic(false);
+        tmpPhysicsBody->setCategoryBitmask(sk::bitMask::kDoorCategory);
+        tmpPhysicsBody->setCollisionBitmask(sk::bitMask::kDoorCollision);
+        tmpPhysicsBody->setContactTestBitmask(sk::bitMask::kDoorContact);
+
         Sprite* tmpSprite = Sprite::create();
         tmpSprite->setPosition(Vec2(x, y));
         tmpSprite->setAnchorPoint(Vec2::ZERO);
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
 
-        auto contactListener = EventListenerPhysicsContact::create();
-        contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-
-        this->addChild(tmpSprite);
+        this->addChild(tmpSprite, 2, 300);
     }
 }
 
@@ -121,22 +144,23 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
     auto nodeB = contact.getShapeB()->getBody()->getNode();
     if (nodeA != nullptr && nodeB != nullptr)
     {
-        if (nodeA->getTag() == kHeroTag || nodeB->getTag() == kHeroTag)
+        if ((nodeA->getTag() == kHeroTag && nodeB->getTag()==300)
+            || (nodeB->getTag() == kHeroTag && nodeA->getTag() == 300))
         {
-            ifMove = true;
+            m_mapNumber++;
+            //Hero::m_pPresentHero->retain();
+            //this->removeChildByTag(kHeroTag);
+            auto map = createTiled(m_mapNumber);
+            if (!map)
+            {
+                return false;
+            }
+            auto nextRoom = createScene(map);
+            Director::getInstance()->replaceScene(nextRoom);
+            return true;
         }
     }
     return false;
-}
-
-bool RoomMap::ifMoveToAnotherRoom()
-{
-    return ifMove;
-}
-
-void RoomMap::moveStatusChange()
-{
-    ifMove = false;
 }
 
 void RoomMap::addPlayerAssassin()
@@ -154,6 +178,7 @@ void RoomMap::addPlayerAssassin()
         Assassin* assassin = Assassin::create();
         assassin->bindSprite(assassinSprite);
         Hero::m_pPresentHero = assassin;
+        this->myHero = assassin;
         assassin->generatePhysics();
         assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
             visibleSize.height / 2 + origin.y + 150.0)));
@@ -168,17 +193,10 @@ void RoomMap::addPlayerAssassin()
     }
 }
 
-void RoomMap::openDoor()
+TMXTiledMap* RoomMap::createTiled(int mapNumber)
 {
-
-}
-
-void RoomMap::createEnemy()
-{
-
-}
-
-void RoomMap::addPlayer(RoomMap* pMap)
-{
-
+    if (mapNumber == 1) return TMXTiledMap::create("map/test1.tmx");
+    if (mapNumber == 2) return TMXTiledMap::create("map/test2.tmx");
+    if (mapNumber == 3) return TMXTiledMap::create("map/test3.tmx");
+    return nullptr;
 }
