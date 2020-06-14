@@ -41,7 +41,7 @@ void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFac
 	{
 		m_pBulletSprite->setFlippedX(true);
 	}
-	auto point = heroPoint + Vec2((curFacing == sk::kRight ? 25.f : -25.f), 20.f);
+	auto point = heroPoint + Vec2((curFacing == sk::kRight ? 15.f : -15.f), 20.f);
 	m_pBulletSprite->setPosition(point);
 
     auto joint = PhysicsJointFixed::construct(Hero::m_pPresentHero->getPhysicsBody(),
@@ -59,7 +59,7 @@ void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFac
         animation = Animation::createWithSpriteFrames(m_leftActionVec);
     }
     animation->setLoops(1);
-	animation->setDelayPerUnit(0.25f);
+	animation->setDelayPerUnit(0.1f);
 	Animate* actionOne = Animate::create(animation);
 	auto end = CallFunc::create([&](){
 //        getScene()->getPhysicsWorld()->removeJoint(joint);
@@ -71,6 +71,3 @@ void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFac
 	log("sword attack!");
 }
 
-/*
-PhysicsJointFixed* joint = PhysicsJointFixed::construct(sp1PhysicsBody, sp2PhysicsBody, offset);
- */

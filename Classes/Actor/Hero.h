@@ -146,7 +146,7 @@ public:
 protected:
     /// 武器
     Weapon* m_pMainWeapon = nullptr;
-    Weapon* m_pSecWeapon = nullptr;
+    Weapon* m_pSecWeapon  = nullptr;
 
     /// 基本动画
 	Animate* m_pRestAnimate = nullptr;
@@ -154,24 +154,24 @@ protected:
 
 	sk::HeroID m_ID;
 
-	bool m_alive = true;
-	float m_speed = kHeroSpeed;
-	int m_health = 5;
+	bool m_alive    = true;
+	float m_speed   = kHeroSpeed;
+	int m_health    = 5;
 	int m_maxHealth = 5;
 
     /// 基本属性
 	//int m_magicPoint;
-	int m_armor = 5;
-	int m_maxArmor = 5;
-	double m_recoverArmorTime = 0;
-	bool m_ifMortal = true;
-	int m_baseDamage = 5;
+	int m_armor              = 5;
+	int m_maxArmor           = 5;
+    float m_recoverArmorTime = 0;
+	bool m_ifMortal          = true;
+	int m_baseDamage         = 5;
 
     /// 技能属性
-	int m_skillCD = 8;                // 技能冷却时间
-	double m_skillTime = m_skillCD;   // 当前技能冷却
-	double m_skillLastTime = 1.;      // 技能持续时间
-	double m_skillRemainTime = 0;     // 技能剩余时间
+	float m_skillCD         = 8.f;       // 技能冷却时间
+    float m_skillTime       = m_skillCD; // 当前技能冷却
+    float m_skillLastTime   = 1.;        // 技能持续时间
+    float m_skillRemainTime = 0;         // 技能剩余时间
 
 	int m_coinNumber = 0;
 
@@ -179,7 +179,7 @@ protected:
 	bool m_ifMoved        = false;
 	bool m_ifStateChanged = false;
 
-	int m_curFacing = sk::kRight;     // 面向位置
+	int m_curFacing = sk::kRight;        // 面向位置
 
     /// 控制监测
 	std::vector<bool> m_isKeyDown = std::vector<bool>(7, false);

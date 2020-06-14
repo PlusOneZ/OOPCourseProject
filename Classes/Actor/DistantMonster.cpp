@@ -38,11 +38,12 @@ void DistantMonster::followSpeed(float dt)
     getPhysicsBody()->setVelocity(m_curSpeed);
 }
 
-void DistantMonster::attack(float st)
+void DistantMonster::attack(float dt)
 {
     const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
     // TODO 接口完整之后再射击
      CCASSERT(m_pWeapon != nullptr, "Monster no weapon");
+    AudioEngine::play2d(sk::files::kMonThorn);
     for (int i = 0; i < m_pWeapon->getBulletCount(); i++)
     {
         Bullet* pBullet = m_pWeapon->createBullet();

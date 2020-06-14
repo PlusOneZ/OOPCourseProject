@@ -67,6 +67,7 @@ bool FreezeTrap::init()
 
 void FreezeTrap::trapStart()
 {
+    AudioEngine::play2d(sk::files::kIceTrap);
 	HeroBuff.rooted(m_trapTime);
 	m_pSprite->setVisible(false);
 }
@@ -87,6 +88,7 @@ bool FlameTrap::init()
 
 void FlameTrap::trapStart()
 {
+    AudioEngine::play2d(sk::files::kFireTrap);
 	HeroBuff.flaming();
 	m_pSprite->setVisible(false);
 }

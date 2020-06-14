@@ -47,6 +47,7 @@ void Hero::shiftWeapon()
 		Weapon* pTemp = m_pSecWeapon;
 		m_pSecWeapon = m_pMainWeapon;
 		m_pMainWeapon = pTemp;
+		AudioEngine::play2d(sk::files::kWeaponSwitch);
 	}
 }
 
@@ -146,6 +147,8 @@ void Hero::update(float dt)
         if (m_isKeyDown[sk::kRight])
             v.x += m_speed;
 
+        v = v.getNormalized() * m_speed;
+
         getPhysicsBody()->setVelocity(v);
     }
     m_ifStateChanged = false;
@@ -156,6 +159,12 @@ void Hero::update(float dt)
         m_sprite->setFlippedX(true);
         m_pMainWeapon->getSprite()->setFlippedX(true);
         m_pMainWeapon->setPosition(Point(-20.0, 20.0));
+        m_pSecWeapon->getSprite()->setFlippedX(true);
+        m_pSecWeapon->setPosition(Point(-20.0, 20.0));
+        if (m_pMainWeapon->getSprite()->getTag() == sk::tag::kSwordWeapon)
+        {
+            m_pMainWeapon->getSprite()->setRotation(60.f);
+        }
         m_curFacing = sk::kLeft;
     }
     else if (v.x > 0 && m_curFacing == sk::kLeft)
@@ -163,6 +172,12 @@ void Hero::update(float dt)
         m_sprite->setFlippedX(false);
         m_pMainWeapon->getSprite()->setFlippedX(false);
         m_pMainWeapon->setPosition(Point(20.0, 20.0));
+        m_pSecWeapon->getSprite()->setFlippedX(false);
+        m_pSecWeapon->setPosition(Point(20.0, 20.0));
+        if (m_pMainWeapon->getSprite()->getTag() == sk::tag::kSwordWeapon)
+        {
+            m_pMainWeapon->getSprite()->setRotation(-60.f);
+        }
         m_curFacing = sk::kRight;
     }
 
@@ -242,6 +257,7 @@ bool Hero::reduceHealth(int damage)
 			else
 			{
 				m_armor -= damage;
+				AudioEngine::play2d(sk::files::kHeroHurt);
 				return true;
 			}
 		}
@@ -253,6 +269,7 @@ bool Hero::reduceHealth(int damage)
 		else
 		{
             m_health -= damage;
+            AudioEngine::play2d(sk::files::kHeroHurt);
 			return true;
 		}
 	}
@@ -347,6 +364,10 @@ bool Item::buyItem()
 		if (Hero::m_pPresentHero->costCoins(m_price))//购买成功
 		{
 			log("buy item");
+            if (m_price != 0)
+            {
+                AudioEngine::play2d(sk::files::kBuy);
+            }
 			m_ifShopItem = false;
 			m_price = 0;
 			m_pShopMessage->removeFromParentAndCleanup(true);
@@ -354,6 +375,7 @@ bool Item::buyItem()
 		}
 		else
 		{
+            AudioEngine::play2d(sk::files::kHeroNoMoney);
 			log("no enough money");
 		}
 	}
@@ -379,6 +401,7 @@ void Weapon::interact()
 		this->m_pMessage->setVisible(false);
 		myHero->setMainWeapon(this);
 		log("weapon changed");
+		AudioEngine::play2d(sk::files::kWeaponPickup);
 	}
 }
 

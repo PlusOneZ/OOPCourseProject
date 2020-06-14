@@ -20,7 +20,7 @@ bool ShotgunBullet::init()
 
 void ShotgunBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
 {
-	heroPoint.x += (curFacing == 0 ? 25.0 : -25.0);
+	heroPoint.x += (curFacing == 0 ? 25.0f : -25.0f);
 	heroPoint.y += 20.0;
 	m_pBulletSprite->setPosition(heroPoint);
 	float k = (mouseY - heroPoint.y) / (mouseX - heroPoint.x);
@@ -29,8 +29,8 @@ void ShotgunBullet::attack(float mouseX, float mouseY, Point heroPoint, int curF
 
 void ShotgunBullet::launchPath(float k, float shootDirection)
 {
-	int sign = (shootDirection > 0 ? 1 : -1);
-	float random = ((rand() % (200)) + (k - 0.1) * 1000) / 1000;
+    float sign = (shootDirection > 0 ? 1.f : -1.f);
+	float random = (static_cast<float >(rand() % (200)) + (k - 0.1f) * 1000.f) / 1000;
 	auto v = Vec2(sign, sign * random);
 	v.normalize();
 	v *= 700;

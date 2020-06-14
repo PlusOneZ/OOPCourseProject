@@ -21,7 +21,7 @@ public:
 	*@brief 初始
 	*@author 翟晨昊
 	*/
-	bool init();
+	bool init() override;
 
 	/**
     *@brief 创造子弹

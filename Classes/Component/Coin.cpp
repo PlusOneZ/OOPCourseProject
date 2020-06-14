@@ -6,7 +6,7 @@
 
 #include "Coin.h"
 
-Animate* Coin::pCoinAnimate = Actor::creatActorAnimate("item/coin_",7,9);
+Animate* Coin::pCoinAnimate = Actor::creatActorAnimate("item/coin_", 7, 9);
 
 bool Coin::init()
 {
@@ -45,6 +45,7 @@ bool Coin::onContactBegin(PhysicsContact& contact)
 		{
 			Hero::m_pPresentHero->gainCoins(m_coinAmount);
 			this->removeFromParentAndCleanup(true);
+			AudioEngine::play2d(sk::files::kCoin);
 			log("coin collected");
 		}
 	}

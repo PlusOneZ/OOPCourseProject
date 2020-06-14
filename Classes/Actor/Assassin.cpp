@@ -17,9 +17,9 @@ bool Assassin::init()
 		setMainWeapon(Shotgun::create());
 		setSecondWeapon(Sword::create());
 		m_pSecWeapon->setVisible(false);
-		m_pMoveAnimate = creatActorAnimate("Actor/assassin_move");
-		m_pRestAnimate = creatActorAnimate("Actor/assassin_rest");
-		m_pSkillAnimate = creatActorAnimate("Actor/assassin_skill");
+		m_pMoveAnimate = creatActorAnimate("Actor/assassin_move", 46, 54);
+		m_pRestAnimate = creatActorAnimate("Actor/assassin_rest", 50, 54);
+		m_pSkillAnimate = creatActorAnimate("Actor/assassin_skill", 52, 56);
 		m_pSkillTempA = m_pMoveAnimate;
 		m_pSkillTempB = m_pRestAnimate;
 		return true;

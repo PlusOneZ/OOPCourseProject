@@ -44,19 +44,34 @@ namespace sk
     namespace files
     {
         // Audio
-        const char kBgm1[]       = "Audio/bgm_1Low.mp3";
-        const char kBtnPressed[] = "Audio/fx_btn1.mp3";
+        static const char kBgm1[]         = "Audio/bgm_1Low.mp3";
+        static const char kBtnPressed[]   = "Audio/fx_btn1.mp3";
+        static const char kBgm2[]         = "Audio/bgm_room.mp3";
+        static const char kWeaponPickup[] = "Audio/fx_pickup.mp3";
+        static const char kWeaponSwitch[] = "Audio/fx_switch.mp3";
+        static const char kSwordAttack[]  = "Audio/fx_sword.mp3";
+        static const char kGunShot[]      = "Audio/fx_normal_gun.mp3";
+        static const char kShotGunShot[]  = "Audio/fx_shotgun.mp3";
+        static const char kTakePotion[]   = "Audio/fx_health_potion.mp3";
+        static const char kBuy[]          = "Audio/fx_buy.mp3";
+        static const char kMonThorn[]     = "Audio/fx_mon_atk1.mp3";
+        static const char kCoin[]         = "Audio/fx_coin.mp3";
+        static const char kIceTrap[]      = "Audio/fx_ice.mp3";
+        static const char kFireTrap[]     = "Audio/fx_fire.mp3";
+        static const char kHeroHurt[]     = "Audio/fx_hurt.mp3";
+        static const char kHeroNoMoney[]  = "Audio/fx_ero_hurt.mp3";
+
 
         // Heroes
-        const char kKnightRest[] = "Actor/knight_rest";
-        const char kKnightMove[] = "Actor/knight_move";
+        static const char kKnightRest[] = "Actor/knight_rest";
+        static const char kKnightMove[] = "Actor/knight_move";
 
-        const std::string kYellowCrawPlist = "Actor/Monster/yellowCraw.plist";
-        const std::string kYellowCrawPng   = "Actor/Monster/yellowCraw.png";
-        const std::string kYellowCrawName  = "Y_craw_monster";
-        const std::string kYellowCrawDie   = "Y_craw_monster_dead";
+        static const std::string kYellowCrawPlist = "Actor/Monster/yellowCraw.plist";
+        static const std::string kYellowCrawPng   = "Actor/Monster/yellowCraw.png";
+        static const std::string kYellowCrawName  = "Y_craw_monster";
+        static const std::string kYellowCrawDie   = "Y_craw_monster_dead";
 
-        const char kHeroAvatar[2][40] = {
+        static const char kHeroAvatar[2][40] = {
                 "interface/ui2_knight.png",
                 "interface/ui2_assassin.png",
         };

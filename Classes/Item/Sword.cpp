@@ -33,5 +33,6 @@ Bullet* Sword::createBullet()
     auto seq   = Sequence::create(begin, delay, end, nullptr);
 	Bullet* pBullet = SwordBullet::create();
     m_pSprite->runAction(seq);
+    AudioEngine::play2d(sk::files::kSwordAttack);
 	return pBullet;
 }

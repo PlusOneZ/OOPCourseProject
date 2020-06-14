@@ -28,8 +28,6 @@ public:
     */
     bool init() override;
 
-protected:
-    void attackFromTo(Point from, Point to, int facing, Node *pBulletLayer);
 };
 
 class MonOneShotGun : public Weapon {
@@ -49,8 +47,6 @@ public:
     */
     bool init() override;
 
-protected:
-    void attackFromTo(Point from, Point to, int facing, Node *pBulletLayer);
 };
 
 

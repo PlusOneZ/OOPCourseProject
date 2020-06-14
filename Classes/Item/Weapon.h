@@ -7,8 +7,9 @@
 #ifndef _WEAPON_H_
 #define _WEAPON_H_
 
-#include"Item.h"
-#include"Bullet.h"
+#include "Item.h"
+#include "Bullet.h"
+#include "AudioEngine.h"
 
 using namespace cocos2d;
 
@@ -79,7 +80,7 @@ public:
 	*@brief 与手中武器交换
 	@@author 肖杨
 	*/
-	void interact();
+	void interact() override ;
 	//TODO:与地面武器交换
 
 protected:

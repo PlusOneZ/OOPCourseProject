@@ -23,6 +23,8 @@ bool Gun::init()
 
 Bullet* Gun::createBullet()
 {
+
 	Bullet* pBullet = NormalBullet::create();
+	AudioEngine::play2d(sk::files::kGunShot);
 	return pBullet;
 }

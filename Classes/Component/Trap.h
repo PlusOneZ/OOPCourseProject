@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file   Trap.h
 *@author 肖杨
 *@date   6/12/2020
@@ -12,7 +12,7 @@
 *@brief 陷阱类
 *@author 肖杨
 */
-class Trap:public Node
+class Trap: public Node
 {
 public:
 	/**
@@ -47,8 +47,8 @@ public:
 	*/
 	void generatePhysicalBody(const int trapTag);
 protected:
-	Sprite* m_pSprite;
-	float m_trapTime;
+	Sprite* m_pSprite = nullptr;
+    float m_trapTime  = 0.;
 };
 
 

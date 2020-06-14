@@ -23,5 +23,6 @@ void HealthPotion::interact()
         Hero::m_pPresentHero->recoverHealth(2);
 		log("HP++");
 		this->removeFromParentAndCleanup(true);//用完就释放
+		AudioEngine::play2d(sk::files::kTakePotion);
 	}
 }
