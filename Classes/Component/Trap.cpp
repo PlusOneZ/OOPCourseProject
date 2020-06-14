@@ -1,6 +1,6 @@
 /**
 *@file   Trap.cpp
-*@author Ð¤Ñî
+*@author Ð¤ï¿½ï¿½
 *@date   6/12/2020
 */
 #include "Trap.h"
@@ -106,7 +106,7 @@ void FlameTrap::update(float dt)
 	if (flameTime >= 1)
 	{
 		flameTime -= 1;
-		Hero::m_pPresentHero->reduceHP();
+        Hero::m_pPresentHero->reduceHealth();
 	}
 	if (time <= 0)
 	{

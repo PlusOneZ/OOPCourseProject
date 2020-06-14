@@ -227,7 +227,7 @@ void Hero::stopMove()
 	m_sprite->stopAction(m_pMoveAnimate);
 }
 
-bool Hero::reduceHP(int damage)
+bool Hero::reduceHealth(int damage)
 {
 	if (m_ifMortal)
 	{
@@ -245,35 +245,35 @@ bool Hero::reduceHP(int damage)
 				return true;
 			}
 		}
-		if (damage >= m_HP)
+		if (damage >= m_health)
 		{
 			m_alive = false;
 			return false;
 		}
 		else
 		{
-			m_HP -= damage;
+            m_health -= damage;
 			return true;
 		}
 	}
 	return true;
 }
 
-void Hero::recoverHP(int healAmount)
+void Hero::recoverHealth(int healAmount)
 {
-	if (m_HP + healAmount <= m_maxHP)
+	if (m_health + healAmount <= m_maxHealth)
 	{
-		m_HP += healAmount;
+        m_health += healAmount;
 	}
 	else
 	{
-		m_HP = m_maxHP;
+        m_health = m_maxHealth;
 	}
 }
 
 bool Hero::ifInjured()
 {
-	return m_HP < m_maxHP;
+	return m_health < m_maxHealth;
 }
 
 bool Hero::costCoins(int coin)
@@ -294,9 +294,9 @@ void Hero::gainCoins(int coin)
 	m_coinNumber += coin;
 }
 
-int Hero::getATK()
+int Hero::getBaseDamage()
 {
-	return m_ATK;
+	return m_baseDamage;
 }
 
 //Item中函数的实现
