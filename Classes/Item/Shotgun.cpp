@@ -14,8 +14,10 @@ bool Shotgun::init()
 		log("shotgun.png not found");
 	}
 	bindSprite(pSprite);
+	generatePhysicalBody(kShotgunMessage,sk::tag::kShotgunWeapon);
 	setInterval(.4f);
 	setBulletCount(3);
+	setATK(3);
 	return true;
 }
 

@@ -34,6 +34,12 @@ namespace sk
 		kInteract
     };
 
+    enum class Kind
+    {
+        kSelf,
+        kMonster
+    };
+
     // File names
     namespace files
     {
@@ -54,6 +60,52 @@ namespace sk
                 "interface/ui2_knight.png",
                 "interface/ui2_assassin.png",
         };
+    }
+
+    namespace bitMask {
+        static const int kHeroCategory  = 0x4;
+        static const int kHeroCollision = 0x1;
+        static const int kHeroContact   = 0x63;
+
+        static const int kMonsterCategory  = 0x8;
+        static const int kMonsterContact   = 0x13;
+        static const int kMonsterCollision = 0x1b;
+
+        static const int kItemCategory  = 0x40;
+        static const int kItemCollision = 0x00;
+        static const int kItemContact   = 0x4;
+
+        static const int kMapCategory  = 0x1;
+        static const int kMapCollision = 0x0;
+        static const int kMapContact   = 0x3c;
+
+        static const int kDoorCategory  = 0x2;
+        static const int kDoorCollision = 0x0;
+        static const int kDoorContact   = 0x34;
+
+        static const int kSelfBulletCategory  = 0x10;
+        static const int kSelfBulletCollision = 0xb;
+        static const int kSelfBulletContact   = 0xb;
+
+        static const int kMonsterBulletCategory  = 0x20;
+        static const int kMonsterBulletCollision = 0x3;
+        static const int kMonsterBulletContact   = 0x7;
+    }
+
+    namespace tag {
+
+        static const int kHero   = 500;
+        static const int kMonster = 300;
+        static const int kBullet = 200;
+		static const int kFreezeTrap = 51;
+		static const int kFlameTrap = 52;
+		static const int kCoin = 40;
+		static const int kHealthPotion = 10;
+        static const int kGunWeapon = 1;
+        static const int kShotgunWeapon = 2;
+        static const int kSwordWeapon = 3;
+		static const int kIncreaseATK = 101;
+		static const int kHeroUI = 600;
     }
 }
 

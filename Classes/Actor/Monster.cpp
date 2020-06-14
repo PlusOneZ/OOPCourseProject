@@ -4,7 +4,13 @@
  */
 
 #include "Monster.h"
+#include "Const/Const.h"
 
+bool Monster::init() {
+    m_curHealth = m_fullHealth;
+    scheduleUpdate();
+    return true;
+}
 
 Animate *Monster::creatMonsterAnimate(const std::string &textureName, int num)
 {
@@ -31,10 +37,12 @@ Animate *Monster::creatMonsterAnimate(const std::string &textureName, int num)
     }
     if (frameVec.empty())
         return nullptr;
+    log("created with %ld frames.", frameVec.size());
     auto animation = Animation::createWithSpriteFrames(frameVec);
     animation->setLoops(-1);
     animation->setDelayPerUnit(0.2f);
     auto action = Animate::create(animation);
+
     action->retain();
     return action;
 }
@@ -58,6 +66,7 @@ void Monster::wanderSpeed(float dt)
     float ySpeed = RandomHelper::random_real(-1., 1.);
     auto vTemp   = Vec2(xSpeed, ySpeed);
     m_curSpeed   = vTemp / vTemp.getLength() * m_wanderSpeed;
+    getPhysicsBody()->setVelocity(m_curSpeed);
     // TODO 增强随机性
 }
 
@@ -96,9 +105,11 @@ bool Monster::generatePhysics(float mass)
 //    auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(mass);
     body->setGravityEnable(false);
-    body->setCategoryBitmask(kMonsterCategoryMask);
-    body->setContactTestBitmask(kMonsterContactMask);
-    body->setCollisionBitmask(kMonsterCollisionMask);
+    body->setPositionOffset(Vec2(0, m_sprite->getContentSize().height / 2));
+    body->setCategoryBitmask(sk::bitMask::kMonsterCategory);
+    body->setContactTestBitmask(sk::bitMask::kMonsterContact);
+    body->setCollisionBitmask(sk::bitMask::kMonsterCollision);
+    body->setRotationEnable(false);
     this->setPhysicsBody(body);
 
     return true;

@@ -5,25 +5,38 @@
 */
 #include "Hero.h"
 #include "../Scene/PauseMenu.h"
+#include "Item/Gun.h"
 
 Hero* Hero::m_pPresentHero = nullptr;
 Item* Hero::m_pPresentContactItem = nullptr;
-
-bool Hero::init()
-{
-    scheduleUpdate();
-	return true;
-}
 
 Weapon* Hero::getMainWeapon()
 {
 	return this->m_pMainWeapon;
 }
 
+void Hero::setMainWeapon(Weapon* pNewWeapon)
+{
+	pNewWeapon->setState(true);
+	pNewWeapon->setPosition(Point(20.0, 20.0));
+	m_pMainWeapon = pNewWeapon;
+	this->addChild(pNewWeapon, 2);
+}
+
+void Hero::setSecondWeapon(Weapon* pNewWeapon)
+{
+	pNewWeapon->setState(true);
+	pNewWeapon->setPosition(Point(20.0, 20.0));
+	m_pSecWeapon = pNewWeapon;
+	this->addChild(pNewWeapon, 2);
+}
+
+
 int Hero::getFacing()
 {
     return m_curFacing;
 }
+
 
 void Hero::shiftWeapon()
 {
@@ -66,8 +79,8 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (m_skillTime >= m_skillCD)
 		{
-			m_skillContinueTime=this->skill();
-			m_skillTime = -m_skillContinueTime;
+			m_skillRemainTime=this->skill();
+			m_skillTime = -m_skillRemainTime;
 		}
 		else
 		{
@@ -83,8 +96,8 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (m_pPresentContactItem != nullptr)
 		{
-			m_pPresentContactItem->interact();
-			m_pPresentContactItem = nullptr;
+				m_pPresentContactItem->interact();
+				m_pPresentContactItem = nullptr;
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -175,10 +188,10 @@ void Hero::update(float dt)
 	{
 		m_skillTime += dt;
 	}
-	if (m_skillContinueTime > 0)
+	if (m_skillRemainTime > 0)
 	{
-		m_skillContinueTime -= dt;
-		if (m_skillContinueTime <= 0)
+		m_skillRemainTime -= dt;
+		if (m_skillRemainTime <= 0)
 		{
 			skillEnd();
 		}
@@ -191,6 +204,8 @@ void Hero::update(float dt)
 	else if (m_armor < m_maxArmor)
 	{
 		m_armor += 1;
+		log("armor regain");
+		m_recoverArmorTime = 0;
 	}
 	
 	
@@ -226,7 +241,7 @@ bool Hero::reduceHP(int damage)
 			}
 			else
 			{
-				m_alive -= damage;
+				m_armor -= damage;
 				return true;
 			}
 		}
@@ -241,6 +256,7 @@ bool Hero::reduceHP(int damage)
 			return true;
 		}
 	}
+	return true;
 }
 
 void Hero::recoverHP(int healAmount)
@@ -255,120 +271,114 @@ void Hero::recoverHP(int healAmount)
 	}
 }
 
-/*
-
-void AttackController::update(float dt)
+bool Hero::ifInjured()
 {
-	if (m_controllerListener == nullptr)
-	{
-		return;
-	}
-
-	Hero* myHero = Hero::m_pPresentHero;
-
-	/if (KEY_DOWN(VK_LBUTTON))
-	{
-		myHero->m_pMainWeapon->attack();
-	}
-
-	if (KEY_DOWN(VK_RBUTTON))
-	{
-		myHero->shiftWeapon();
-	}
-
-	if (KEY_DOWN('Q'))
-	{
-		myHero->skill();
-	}/
-}
-/
-左键调用主武器的攻击函数
-右键调用切换武器
-q键调用技能
-请务必完善相应函数
-/
-
-/
-*@bug 动画调用有问题，本周内修复，暂时注释掉
-*@date 05/29/2020[bug fixed:肖杨]
-*@date 05/29/2020 [modified: 卓正一]
-*@note 取消了 Windows API 的使用
-/
-void MoveController::update(float dt)
-{
-    if (m_controllerListener == nullptr)
-    {
-        return;
-    }
-
-    Hero* myHero = Hero::m_pPresentHero;
-    auto& keyState = myHero->m_isKeyDown;
-    bool checkMove = myHero->m_ifMove;
-    auto v = Vec2(0, 0);
-
-    if (keyState[sk::kUp])
-    {
-        pos.y += m_speed;
-    }
-    if (keyState[sk::kDown])
-    {
-        pos.y -= m_speed;
-    }
-    if (keyState[sk::kRight])
-    {
-        pos.x += m_speed;
-    }
-    if (keyState[sk::kLeft])
-    {
-        pos.x -= m_speed;
-    }
-
-    if (pos.x <= 20 || pos.x >= 1260
-        || pos.y <= 0 || pos.y >= 670)
-    {
-        return;
-    }
-
-    /*
-    int aimX = (pos.x - 10) / 28;
-    int aimY = (720 - pos.y - 10) / 28;
-    auto objectLayer = map->getLayer("Object1");
-    int gid = objectLayer->getTileGIDAt(Vec2(aimX, aimY));
-    if (gid)
-    {
-        return;
-    }
-    /
-    //没想好怎么传参先注释掉
-
-    myHero->m_ifMove = (pos != m_controllerListener->getTargetPosition());
-
-    if (checkMove != myHero->m_ifMove)
-    {
-        if (myHero->m_ifMove)//说明在开始移动
-        {
-            myHero->move();
-        }
-        else
-        {
-            myHero->stopMove();
-            myHero->rest();
-        }
-    }
-    m_controllerListener->setTargetPosition(pos.x, pos.y);
-
-}//TODO:改变方向，播放动画
-
- void Hero::setMoveController(ControllerBase* controllerbase)
-{
-	m_pMoveController = controllerbase;
-	m_pMoveController->setControllerListener(this);
+	return m_HP < m_maxHP;
 }
 
-void Hero::setAttackController(ControllerBase* controllerbase)
+bool Hero::costCoins(int coin)
 {
-	m_pAttackController = controllerbase;
-	m_pAttackController->setControllerListener(this);
+	if (m_coinNumber >= coin)
+	{
+		m_coinNumber -= coin;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
- */
+void Hero::gainCoins(int coin)
+{
+	m_coinNumber += coin;
+}
+
+int Hero::getATK()
+{
+	return m_ATK;
+}
+
+//Item中函数的实现
+bool Item::onContactSeparate(PhysicsContact& contact)
+{
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != nullptr && nodeB != nullptr)
+	{
+		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
+			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
+		{
+			if (Hero::m_pPresentContactItem == this)
+			{
+				log("item seperate");
+				Hero::m_pPresentContactItem = nullptr;
+				m_pMessage->setVisible(false);
+			}
+		}
+	}
+	return true;
+}
+
+bool Item::onContactBegin(PhysicsContact& contact)
+{
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != nullptr && nodeB != nullptr)
+	{
+		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
+			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
+		{
+			if (Hero::m_pPresentContactItem == nullptr)
+			{
+				log("near item");
+				Hero::m_pPresentContactItem = this;
+				m_pMessage->setVisible(true);
+			}
+		}
+	}
+	return false;
+}
+
+bool Item::buyItem()
+{
+	if (m_ifShopItem)
+	{
+		if (Hero::m_pPresentHero->costCoins(m_price))//购买成功
+		{
+			log("buy item");
+			m_ifShopItem = false;
+			m_price = 0;
+			m_pShopMessage->removeFromParentAndCleanup(true);
+			m_pShopMessage = nullptr;
+		}
+		else
+		{
+			log("no enough money");
+		}
+	}
+	return !m_ifShopItem;
+}
+
+
+
+void Weapon::interact()
+{
+	if (buyItem())
+	{
+		auto myHero = Hero::m_pPresentHero;
+		const int Tag = myHero->getMainWeapon()->m_pSprite->getTag();
+		auto floorWeapon = myHero->getMainWeapon();
+		floorWeapon->retain();
+		floorWeapon->removeFromParent();
+		floorWeapon->setPosition(Point(this->getPosition()));
+		floorWeapon->setState(false);
+		myHero->getScene()->addChild(floorWeapon, 3, Tag);
+		this->retain();
+		this->removeFromParent();
+		this->m_pMessage->setVisible(false);
+		myHero->setMainWeapon(this);
+		log("weapon changed");
+	}
+}
+

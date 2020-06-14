@@ -8,13 +8,10 @@
 #define _ITEM_H_
 
 #include"cocos2d.h"
+#include "Const/Const.h"
 #include "ui/CocosGUI.h"
 
 using namespace cocos2d;
-
-static const int k_ItemCategoryBitmask = 0x01;
-static const int k_ItemCollisionBitmask = 0x00;
-static const int k_ItemContactTestBitmask = 0x01;
 
 /**
 *@brief 物品类
@@ -38,16 +35,42 @@ public:
 	*@brief 交互函数
 	*@author 肖杨
 	*/
-	virtual void interact();
+	virtual void interact()=0;
+
 
 	/**
-	*@brief 空的碰撞函数，用于忽略碰撞体积
+	*@brief 设置商店物品属性
 	*@author 肖杨
 	*/
-	bool voidOnContactPreSolve(PhysicsContact& contact);
+	void setShopItem(int price);
+
+	/**
+	*@brief 购买后回调商品
+	*@author 肖杨
+	*@return 是否可使用
+	*/
+	bool buyItem();
+
+	/**
+	*@brief 修改m_pPresentContactItem
+	*@author 肖杨
+	*/
+	virtual bool onContactBegin(PhysicsContact& contact);
+	virtual bool onContactSeparate(PhysicsContact& contact);
+
+	/**
+	*@brief 设置物理体积
+	*@author 翟晨昊
+	*/
+	void generatePhysicalBody(std::string message , const int itemTag);
+
 protected:
 	Sprite* m_pSprite;
 	ui::Scale9Sprite* m_pMessage;
+	ui::Scale9Sprite* m_pShopMessage;
+
+	bool m_ifShopItem=false;
+	int m_price;
 };
 
 /**

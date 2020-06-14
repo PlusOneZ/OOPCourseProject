@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 
-
+static const std::string kShotgunMessage = "Shotgun";
 /**
 *@brief 初始霰弹枪类
 *@author 翟晨昊

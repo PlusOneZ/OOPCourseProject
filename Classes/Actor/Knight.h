@@ -30,12 +30,14 @@ public:
 	*@return 技能持续时间
 	*/
 	//TODO:完成
-	double skill() override;
+	float skill() override;
 
 	/**
 	*@brief 技能结束回调
 	*@author 肖杨
 	*/
 	void skillEnd() override;
+protected:
+	int m_increaseAmount = 5;
 };
 #endif // !_Knight_H__

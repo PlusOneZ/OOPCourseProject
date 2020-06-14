@@ -7,30 +7,37 @@
 #include "Item/Gun.h"
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
+#include "Component/Buff.h"
 
 bool Knight::init()
 {
-	auto fig = AutoPolygon::generatePolygon("item/swordaction1.png");
-	Sprite* swordSprite = Sprite::create(fig);
-	m_pMainWeapon = Sword::create();
-	m_pMainWeapon->bindSprite(swordSprite);
-	m_pMainWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
-	m_pSecWeapon = Shotgun::create();
-	m_pSecWeapon->setPosition(Point(this->getPosition().x + 20.0, this->getPosition().y + 20.0));
-	this->addChild(m_pMainWeapon, 2);
-	this->addChild(m_pSecWeapon, 2);
-	m_pSecWeapon->setVisible(false);
-	m_pMoveAnimate = creatActorAnimate(sk::files::kKnightMove);
-	m_pRestAnimate = creatActorAnimate(sk::files::kKnightRest);
-	return true;
+	if (m_pPresentHero == nullptr)
+	{
+		m_pPresentHero = this;
+		scheduleUpdate();
+		setMainWeapon(Shotgun::create());
+		setSecondWeapon(Sword::create());
+		m_pSecWeapon->setVisible(false);
+		m_pMoveAnimate = creatActorAnimate(sk::files::kKnightMove);
+		m_pRestAnimate = creatActorAnimate(sk::files::kKnightRest);
+		m_skillCD = 15;
+		m_skillTime = 15;
+		m_skillLastTime = 5;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
-double Knight::skill()
+float Knight::skill()
 {
-	return 0;
+	HeroBuff.increaseATK(m_increaseAmount);
+	return m_skillLastTime;
 }
 
 void Knight::skillEnd()
 {
-
+	HeroBuff.increaseATKEnd(m_increaseAmount);
 }

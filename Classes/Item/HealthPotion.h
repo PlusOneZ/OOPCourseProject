@@ -30,13 +30,6 @@ public:
 	*/
 	void interact() override;
 
-	/**
-	*@brief 修改m_pPresentContactItem
-	*@author 肖杨
-	*/
-	bool onContactBegin(PhysicsContact& contact);
-	bool onContactSeparate(PhysicsContact& contact);
-
 };
 #endif // !_HEALTH_POTION_H_
 

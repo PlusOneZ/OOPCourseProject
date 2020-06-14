@@ -4,6 +4,7 @@
 */
 
 #include "Actor.h"
+#include "Const/Const.h"
 
 void Actor::bindSprite(Sprite *pSprite){
     m_sprite = pSprite;
@@ -14,10 +15,11 @@ bool Actor::generatePhysics()
 {
     auto body = PhysicsBody::createBox(m_sprite->getContentSize());
     body->setMass(1e10);
+    body->setPositionOffset(Vec2(0.f, m_sprite->getContentSize().height / 2));
     body->setGravityEnable(false);
-	body->setCategoryBitmask(k_HeroCategoryBitmask);
-	body->setCollisionBitmask(k_HeroCollisionBitmask);
-	body->setContactTestBitmask(k_HeroContactTestBitmask);
+	body->setCategoryBitmask(sk::bitMask::kHeroCategory);
+	body->setCollisionBitmask(sk::bitMask::kHeroCollision);
+	body->setContactTestBitmask(sk::bitMask::kHeroContact);
     this->setPhysicsBody(body);
 
     return true;
@@ -32,7 +34,7 @@ bool Actor::generatePhysics()
 */
 Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int height)
 {
-	log("Trying to create hero");
+	log("Trying to create actor");
 	int moveFrameNum = 4;
 	SpriteFrame*frame = nullptr;
 	Vector<SpriteFrame*> frameVec;
@@ -46,7 +48,7 @@ Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int heig
 		}
 		else
 		{
-			frame->setAnchorPoint(Vec2(0.5, 0.));
+			frame->setAnchorPoint(Vec2(0.5f, 0.f));
 			frameVec.pushBack(frame);
 		}
 	}

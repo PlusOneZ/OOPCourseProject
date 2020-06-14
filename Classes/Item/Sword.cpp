@@ -5,38 +5,22 @@
 */
 
 #include "Sword.h"
+#include "SwordBullet.h"
 
 bool Sword::init()
 {
 	log("Trying to create sword");
-	int actionStep = 5;
-	SpriteFrame* frame = nullptr;
-	for (int i = 1; i <= actionStep; i++)
-	{
-		frame = SpriteFrame::create(StringUtils::format("item/swordaction%d.png", i), Rect(0, 0, 50, 50));
-		if (frame == nullptr)
-		{
-			log("animate swordaction%d.png lost", i);
-		}
-		else
-		{
-			frame->setAnchorPoint(Vec2(0.5, 0.));
-			actionVec.pushBack(frame);
-		}
-	}
+	Sprite* pSprite = Sprite::create("item/swordaction1.png");
+	bindSprite(pSprite);
+	generatePhysicalBody(kSwordMessage, sk::tag::kSwordWeapon);
 	setInterval(.2f);
 	setBulletCount(0);
+	setATK(4);
 	return true;
 }
 
-Animate* Sword::attack()
+Bullet* Sword::createBullet()
 {
-	Animation* animation = Animation::createWithSpriteFrames(actionVec);
-	animation->setLoops(1);
-	animation->setDelayPerUnit(0.1f);
-	Animate* action = Animate::create(animation);
-	action->retain();
-	m_pSprite->runAction(action);
-	log("sword attack!");
-	return action;
+	Bullet* pBullet = SwordBullet::create();
+	return pBullet;
 }

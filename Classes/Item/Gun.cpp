@@ -14,8 +14,10 @@ bool Gun::init()
 		log("weapons.png not found");
 	}
 	bindSprite(pSprite);
+	generatePhysicalBody(kGunMessage, sk::tag::kGunWeapon);
 	setInterval(.2f);
 	setBulletCount(1);
+	setATK(1);
 	return true;
 }
 

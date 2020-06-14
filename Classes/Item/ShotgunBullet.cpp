@@ -12,7 +12,7 @@ bool ShotgunBullet::init()
 	{
 		log("shotgunbullet.png not found");
 	}
-	bindSprite(pSprite);
+	bindSprite(pSprite, sk::Kind::kSelf);
 	setSpeed(4);
 	m_isArrive = false;
 	return true;
@@ -24,12 +24,12 @@ void ShotgunBullet::attack(float mouseX, float mouseY, Point heroPoint, int curF
 	heroPoint.y += 20.0;
 	m_pBulletSprite->setPosition(heroPoint);
 	float k = (mouseY - heroPoint.y) / (mouseX - heroPoint.x);
-	launchPath(k, curFacing);
+	launchPath(k, mouseX - heroPoint.x);
 }
 
-void ShotgunBullet::launchPath(float k, int curFacing)
+void ShotgunBullet::launchPath(float k, float shootDirection)
 {
-	int sign = (curFacing == 0 ? 1 : -1);
+	int sign = (shootDirection > 0 ? 1 : -1);
 	float random = ((rand() % (200)) + (k - 0.1) * 1000) / 1000;
 	auto v = Vec2(sign, sign * random);
 	v.normalize();

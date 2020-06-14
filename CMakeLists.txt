@@ -86,6 +86,13 @@ list(APPEND GAME_SOURCE
         Classes/Item/Sword.cpp
         Classes/Item/ShotgunBullet.cpp
         Classes/Item/HealthPotion.cpp
+        Classes/Item/MonsterBullets.cpp
+        Classes/Item/SwordBullet.cpp
+
+        Classes/Component/Coin.cpp
+        Classes/Component/Trap.cpp
+        Classes/Component/HeroUI.cpp
+
         )
 list(APPEND GAME_HEADER
         Classes/AppDelegate.h
@@ -114,6 +121,13 @@ list(APPEND GAME_HEADER
         Classes/Item/Sword.h
         Classes/Item/ShotgunBullet.h
         Classes/Item/HealthPotion.h
+        Classes/Item/MonsterBullets.h
+        Classes/Item/SwordBullet.h
+
+        Classes/Component/Trap.h
+        Classes/Component/Buff.h
+        Classes/Component/Coin.h
+        Classes/Component/HeroUI.h
 
         Classes/Const/Const.h
         )
@@ -175,7 +189,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        )
+        Classes/Item/MonsterWeapons.cpp Classes/Item/MonsterWeapons.h)
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()

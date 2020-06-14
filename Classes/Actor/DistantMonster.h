@@ -7,6 +7,7 @@
 #define __DISTANT_MONSTER_H__
 
 #include "Monster.h"
+#include "Item/MonsterWeapons.h"
 
 class DistantMonster : public Monster
 {
@@ -25,6 +26,8 @@ public:
      * @return
      */
     bool init() override ;
+
+    void move();
 
     /**
      * @brief 见基类

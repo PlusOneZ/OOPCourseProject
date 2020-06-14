@@ -33,7 +33,7 @@ public:
 	*@brief 子弹攻击路径
 	*@author 翟晨昊
 	*/
-	void launchPath(float k, int curFacing);
+	void launchPath(float k, float shootDirection);
 };
 
 #endif

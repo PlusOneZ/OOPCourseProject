@@ -8,6 +8,7 @@
 
 #include "Weapon.h"
 
+static const std::string kSwordMessage = "Sword";
 /**
 *@brief 初始剑类
 *@author 翟晨昊
@@ -23,12 +24,10 @@ public:
 	bool init();
 
 	/**
-	*@brief 近战攻击
-	*@author 翟晨昊
-	*/
-	Animate* attack() override;
-protected:
-	Vector<SpriteFrame*> actionVec;
+    *@brief 创造子弹
+    *@author 翟晨昊
+    */
+	Bullet* createBullet() override;
 };
 
 #endif

@@ -7,6 +7,10 @@
 */
 #include "Actor/Hero.h"
 #include "BulletLayer.h"
+#include "Const/Const.h"
+#include "Actor/Monster.h"
+
+BulletLayer* BulletLayer::m_pPresentBulletLayer = nullptr;
 
 bool BulletLayer::init()
 {
@@ -17,6 +21,7 @@ bool BulletLayer::init()
     contactListener->onContactBegin = CC_CALLBACK_1(BulletLayer::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 	//scheduleUpdate();
+	m_pPresentBulletLayer = this;
 	return true;
 }
 
@@ -41,7 +46,11 @@ bool BulletLayer::onMouseDown(Event* event)
     auto e = dynamic_cast<EventMouse* >(event);
     if (m_pHero->getMainWeapon()->getBulletCount() == 0)
     {
-        Animate* pAttackAction = m_pHero->getMainWeapon()->attack();
+        m_pHero->getMainWeapon()->getSprite()->setVisible(false);
+        Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
+        pBullet->attack(0, 0, m_pHero->getPosition(), m_pHero->getFacing());
+        this->addChild(pBullet);
+        m_pHero->getMainWeapon()->getSprite()->setVisible(true);
     }
     else
     {
@@ -50,7 +59,7 @@ bool BulletLayer::onMouseDown(Event* event)
             Bullet* pBullet = m_pHero->getMainWeapon()->createBullet();
             log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
             log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
-            m_pWeaponBullet.pushBack(pBullet);
+            //m_pWeaponBullet.pushBack(pBullet);
             pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(), m_pHero->getFacing());
             this->addChild(pBullet);
         }
@@ -62,15 +71,26 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
 {
     auto body1 = contact.getShapeA()->getBody()->getNode();
     auto body2 = contact.getShapeB()->getBody()->getNode();
-	if (body1->getTag() == kBulletTag)
-	{
-		body1->setVisible(false);
-        body1->removeFromParentAndCleanup(true);
-	}
-    else if (body2->getTag() == kBulletTag)
+    if (body1 != nullptr && body2 != nullptr)
     {
-        body2->setVisible(false);
-        body2->removeFromParentAndCleanup(true);
+        if (body1->getTag() == sk::tag::kBullet)
+        {
+            if (body2->getTag() == sk::tag::kMonster)
+            {
+                dynamic_cast<Monster*>(body2)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
+            }
+            body1->setVisible(false);
+            body1->removeFromParentAndCleanup(true);
+        }
+        else if (body2->getTag() == sk::tag::kBullet)
+        {
+            if (body1->getTag() == sk::tag::kMonster)
+            {
+                dynamic_cast<Monster*>(body1)->reduceHealth(m_pHero->getATK() + m_pHero->getMainWeapon()->getATK());
+            }
+            body2->setVisible(false);
+            body2->removeFromParentAndCleanup(true);
+        }
     }
     return true;
 }

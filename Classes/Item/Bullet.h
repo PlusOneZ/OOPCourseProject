@@ -7,11 +7,9 @@
 #define _BULLET_H_
 
 #include "cocos2d.h"
+#include "Const/Const.h"
 
-static const int kBulletTag = 200;
-static const int kBulletCategoryBitmask = 0x1100;
-static const int kBulletCollisionBitmask = 0x0010;
-static const int kBulletContactTestBitmask = 0x0010;
+
 
 using namespace cocos2d;
 
@@ -44,7 +42,7 @@ public:
 	*@brief 绑定图像
 	*@author 翟晨昊
 	*/
-	void bindSprite(Sprite* pSprite);
+	void bindSprite(Sprite* pSprite, sk::Kind kind);
 
 protected:
 
@@ -52,5 +50,7 @@ protected:
 	float   m_bulletSpeed;
 	bool    m_isArrive;
 	void moveEnd();
+
+	sk::Kind m_kind;
 };
 #endif

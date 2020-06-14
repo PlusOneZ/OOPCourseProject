@@ -6,7 +6,10 @@
 
 #include "SafeMapScene.h"
 #include "BulletLayer.h"
+#include "Const/Const.h"
+#include "Item/Gun.h"
 #include <iostream>
+#include "Component/HeroUI.h"
 
 Scene *SafeMap::createScene()
 {
@@ -38,10 +41,10 @@ bool SafeMap::init()
                                    visibleSize.height / 2 + origin.y));
         auto edge = PhysicsBody::createEdgeBox(safeRoom->getContentSize());
         safeRoom->setPhysicsBody(edge);
-        edge->setCategoryBitmask(kMapCategoryBitmask);
-        edge->setCollisionBitmask(kMapCollisionBitmask);
-        edge->setContactTestBitmask(kMapContactTestBitmask);
-        addChild(safeRoom, 1, kMapCategoryBitmask);
+		edge->setCategoryBitmask(sk::bitMask::kMapCategory);
+		edge->setCollisionBitmask(sk::bitMask::kMapCollision);
+		edge->setContactTestBitmask(sk::bitMask::kMapContact);
+		addChild(safeRoom, 1, sk::bitMask::kMapCategory);
     }
 
     auto sofa = Sprite::create("sofa.png");
@@ -236,7 +239,49 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-	addPlayerKnight();
+	addPlayerAssassin();
+
+	Monster::loadAllAnimate();
+	auto dm = DistantMonster::create();
+	auto dms = Sprite::create("Actor/Monster/Y_craw_monster1.png");
+	dm->bindSprite(dms);
+	dm->generatePhysics(20.f);
+
+	dm->setPosition(500, 500);
+	addChild(dm, 5, sk::tag::kMonster);
+	dm->move();
+
+	HealthPotion* testHP = HealthPotion::create();
+	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testHP, 3, sk::tag::kHealthPotion);
+
+    Weapon* testWeapon = Gun::create();
+    testWeapon->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+        visibleSize.height / 2 + origin.y - 150.0)));
+    testWeapon->setState(false);
+    testWeapon->setTag(sk::tag::kGunWeapon);
+    this->addChild(testWeapon, 3, sk::tag::kGunWeapon);
+
+	Coin* testCoin = Coin::create();
+	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testCoin, 3, sk::tag::kCoin);
+
+	FreezeTrap* testFreeze = FreezeTrap::create();
+	testFreeze->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y)));
+	this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
+
+	FlameTrap* testFlame = FlameTrap::create();
+	testFlame->setTrapTime(8);
+	testFlame->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y - 75.0)));
+	this->addChild(testFlame, 3, sk::tag::kFlameTrap);
+
+	HeroUI* testUI = HeroUI::create();
+	testUI->setPosition(118.5f, 661.5f);
+	this->addChild(testUI, 5, sk::tag::kHeroUI);
 
     return true;
 }
@@ -256,16 +301,11 @@ void SafeMap::addPlayerKnight()
 	{
 		Knight* knight = Knight::create();
 		knight->bindSprite(knightSprite);
-		Hero::m_pPresentHero = knight;
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(knight, 3, kHeroTag);
+		this->addChild(knight, 3, sk::tag::kHero);
 		knight->rest();
-		HealthPotion* test=HealthPotion::create();
-		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y)));
-		this->addChild(test, 3, 400);
 
         BulletLayer* bulletLayer = BulletLayer::create();
         bulletLayer->retain();
@@ -302,16 +342,11 @@ void SafeMap::addPlayerAssassin()
 	{
 		Assassin* assassin = Assassin::create();
 		assassin->bindSprite(assassinSprite);
-		Hero::m_pPresentHero = assassin;
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(assassin, 3, kHeroTag);
+		this->addChild(assassin, 3, sk::tag::kHero);
 		assassin->rest();
-		HealthPotion* test = HealthPotion::create();
-		test->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y)));
-		this->addChild(test, 3, 400);
 
 		BulletLayer* bulletLayer = BulletLayer::create();
 		bulletLayer->retain();
@@ -325,4 +360,3 @@ void SafeMap::addPlayerAssassin()
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
 	}
 }
-

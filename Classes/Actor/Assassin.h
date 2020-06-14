@@ -5,7 +5,7 @@
 */
 
 #ifndef _ASSASSIN_H_
-#define _ASSASSIN_H
+#define _ASSASSIN_H_
 
 #include "Hero.h"
 
@@ -30,7 +30,7 @@ public:
 	*@return 技能是否释放成功(暂定)
 	*/
 	//TODO:完成
-	double skill() override;
+	float skill() override;
 
 	/**
 	*@brief 技能结束回调
@@ -41,6 +41,8 @@ protected:
 	Animate* m_pSkillAnimate = nullptr;
 	Animate* m_pSkillTempA = nullptr;
 	Animate* m_pSkillTempB = nullptr;
+
+	float m_speedUP = 1.5;
 };
 
 #endif // !_ASSASSIN_H_
