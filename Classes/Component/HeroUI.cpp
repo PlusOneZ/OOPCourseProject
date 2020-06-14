@@ -12,7 +12,7 @@ bool HeroUI::init()
 	this->addChild(m_pSprite, 1);
 
 	m_pHero = Hero::m_pPresentHero;
-	m_presentHP = m_pHero->m_HP;
+	m_presentHP = m_pHero->m_health;
 	m_presentArmor = m_pHero->m_armor;
 	m_presntCoin = m_pHero->m_coinNumber;
 
@@ -32,12 +32,14 @@ bool HeroUI::init()
 	m_pArmor->setPercentage(100.f);
 	this->addChild(m_pArmor, 2);
 
-	std::string healthMessage = std::to_string(m_pHero->m_HP) + "/" + std::to_string(m_pHero->m_maxHP);
+	std::string healthMessage = std::to_string(m_pHero->m_health) + "/" +
+	        std::to_string(m_pHero->m_maxHealth);
 	m_pHealthMessage = Label::createWithTTF(healthMessage, "Font/IRANYekanBold.ttf", 18.f);
 	m_pHealthMessage->setPosition(16.5f, 33.f);
 	this->addChild(m_pHealthMessage, 3);
 
-	std::string armorMessage = std::to_string(m_pHero->m_armor) + "/" + std::to_string(m_pHero->m_maxArmor);
+	std::string armorMessage = std::to_string(m_pHero->m_armor) + "/" +
+	        std::to_string(m_pHero->m_maxArmor);
 	m_pArmorMessage= Label::createWithTTF(armorMessage, "Font/IRANYekanBold.ttf", 18.f);
 	m_pArmorMessage->setPosition(16.5f, 3.f);
 	this->addChild(m_pArmorMessage, 3);
@@ -54,19 +56,23 @@ bool HeroUI::init()
 
 void HeroUI::scheduleUI(float dt)
 {
-	if (m_pHero->m_HP != m_presentHP)
+	if (m_pHero->m_health != m_presentHP)
 	{
-		m_presentHP = m_pHero->m_HP;
-		m_pHealth->setPercentage((float)m_pHero->m_HP / m_pHero->m_maxHP * 100);
-		std::string healthMessage = std::to_string(m_pHero->m_HP) + "/" + std::to_string(m_pHero->m_maxHP);
+		m_presentHP = m_pHero->m_health;
+		m_pHealth->setPercentage(static_cast<float >(m_pHero->m_health)
+		                         / static_cast<float >(m_pHero->m_maxHealth) * 100);
+		std::string healthMessage = std::to_string(m_pHero->m_health) + "/" +
+		        std::to_string(m_pHero->m_maxHealth);
 		m_pHealthMessage->setString(healthMessage);
 	}
 
 	if (m_pHero->m_armor != m_presentArmor)
 	{
 		m_presentArmor = m_pHero->m_armor;
-		m_pArmor->setPercentage((float)m_pHero->m_armor / m_pHero->m_maxArmor * 100);
-		std::string armorMessage = std::to_string(m_pHero->m_armor) + "/" + std::to_string(m_pHero->m_maxArmor);
+		m_pArmor->setPercentage(static_cast<float >(m_pHero->m_armor)
+		                       / static_cast<float >(m_pHero->m_maxArmor) * 100);
+		std::string armorMessage = std::to_string(m_pHero->m_armor) + "/" +
+		        std::to_string(m_pHero->m_maxArmor);
 		m_pArmorMessage->setString(armorMessage);
 	}
 

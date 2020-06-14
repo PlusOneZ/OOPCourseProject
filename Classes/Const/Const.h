@@ -106,6 +106,7 @@ namespace sk
         static const int kShotgunWeapon  = 2;
         static const int kSwordWeapon    = 3;
 		static const int kIncreaseDamage = 101;
+        static const int kHeroUI         = 600;
     }
 }
 

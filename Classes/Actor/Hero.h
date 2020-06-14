@@ -18,7 +18,8 @@ static float kHeroSpeed = 150.;
 */
 class Hero : public Actor
 {
-friend class Buff;
+    friend class Buff;
+    friend class HeroUI;
 public:
 
 	void update(float dt) override ;
@@ -66,7 +67,7 @@ public:
 	*@author 肖杨
 	*@return 技能持续时间
 	*/
-	virtual double skill() = 0;
+	virtual float skill() = 0;
 
 	/**
 	*@brief 技能结束回调
