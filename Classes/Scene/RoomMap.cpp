@@ -48,34 +48,25 @@ bool RoomMap::init()
     {
         m_pMap->setAnchorPoint(Vec2::ZERO);
         m_pMap->setPosition(Vec2(10, 10));
-        this->addChild(m_pMap, 1, 99);
+        this->addChild(m_pMap, 0, 99);
     }
 
+    /*
     auto edgeMap = Sprite::create("map/SafeMap.png");
     auto mapFrame = PhysicsBody::createEdgeBox(edgeMap->getContentSize());
     edgeMap->setPhysicsBody(mapFrame);
     edgeMap->setVisible(false);
     this->addChild(edgeMap, 0, 98);
+    */
 
     createBarrier();
     createDoor();
 
     addPlayerAssassin();
-    
-    //this->addChild(Hero::m_pPresentHero, 3, kHeroTag);
-    //Hero::m_pPresentHero->setPosition(Vec2(900, 300));
 
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-
-    /*
-    auto keyBoardListener = EventListenerKeyboard::create();
-    keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, Hero::m_pPresentHero);
-    keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, Hero::m_pPresentHero);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
-    */
-    
 
     return true;
 }
@@ -105,7 +96,7 @@ void RoomMap::createBarrier()
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
 
-        this->addChild(tmpSprite, 2, 200);
+        this->addChild(tmpSprite, 2, sk::tag::kBarrier);
     }
 }
 
@@ -134,7 +125,7 @@ void RoomMap::createDoor()
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
 
-        this->addChild(tmpSprite, 2, 300);
+        this->addChild(tmpSprite, 2, sk::tag::kDoor);
     }
 }
 
@@ -144,12 +135,10 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
     auto nodeB = contact.getShapeB()->getBody()->getNode();
     if (nodeA != nullptr && nodeB != nullptr)
     {
-        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag()==300)
-            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == 300))
+        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag()== sk::tag::kDoor)
+            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kDoor))
         {
             m_mapNumber++;
-            //Hero::m_pPresentHero->retain();
-            //this->removeChildByTag(kHeroTag);
             auto map = createTiled(m_mapNumber);
             if (!map)
             {
@@ -158,6 +147,22 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
             auto nextRoom = createScene(map);
             Director::getInstance()->replaceScene(nextRoom);
             return true;
+        }
+        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
+            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kBarrier))
+        {
+            if (nodeA->getTag() == sk::tag::kHero)
+            {
+                auto v = nodeA->getPhysicsBody()->getVelocity();
+                nodeA->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+            else
+            {
+                auto v = nodeB->getPhysicsBody()->getVelocity();
+                nodeB->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
         }
     }
     return false;
