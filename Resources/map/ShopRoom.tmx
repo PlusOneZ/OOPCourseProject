@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="6" nextobjectid="16">
+ <tileset firstgid="1" source="tiles1.tsx"/>
+ <tileset firstgid="50" source="trader.tsx"/>
+ <tileset firstgid="51" source="shelter.tsx"/>
+ <layer id="1" name="图块层 1" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlkEOhCAMRTmAmznDjLoQE+9/Ol20CWmgfBDqkLh4MZpWX6R8nZxzU2O+Fz+i9b0Zf/FJ4IGakIOcZ+IA+5DncE0PZ/ZdBnBeiYXg897OO1H7nlcB0pN6TsqltXMtd5xL1myr9Iv1Wc3zVuGd6rF2Rr21ektnT+S8c7VWuRF6sEsKWYc498gN6YLS2rl0zaT3TtfCY87Xcp5j3pqzNvPWzrE9Juc4t0efcNbmG8lCq9xAvNHstsoNzbv0G2mZG5p3Sf1T83yH1/n/nUf85x/FeTRO665lkQ==
+  </data>
+ </layer>
+ <objectgroup id="2" name="npc">
+  <object id="1" gid="50" x="549.608" y="322.804" width="162.232" height="160.286"/>
+  <object id="2" gid="51" x="381.844" y="430.213" width="65.9584" height="55.1503"/>
+  <object id="3" gid="51" x="597.759" y="530.39" width="65.9584" height="55.1503"/>
+  <object id="4" gid="51" x="805.893" y="427.296" width="65.9584" height="55.1503"/>
+ </objectgroup>
+ <objectgroup id="3" name="barrier">
+  <object id="5" x="252.873" y="29.1777" width="26.2599" height="638.991"/>
+  <object id="6" x="982.315" y="30.1503" width="24.3147" height="637.046"/>
+  <object id="8" x="1.94518" y="674.004" width="1257.56" height="22.3696"/>
+  <object id="10" x="0.972589" y="0.972589" width="585.499" height="24.3147"/>
+  <object id="11" x="671.087" y="2.91777" width="585.499" height="20.4244"/>
+  <object id="12" x="561.184" y="31.1229" width="25.2873" height="52.5198"/>
+  <object id="14" x="671.087" y="32.0954" width="29.1777" height="51.5472"/>
+ </objectgroup>
+ <objectgroup id="5" name="door">
+  <object id="15" x="590.362" y="4.86295" width="76.8346" height="48.6295"/>
+ </objectgroup>
+</map>
