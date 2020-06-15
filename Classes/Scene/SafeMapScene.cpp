@@ -11,6 +11,8 @@
 #include <iostream>
 #include "Component/HeroUI.h"
 
+EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
+EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
 Scene *SafeMap::createScene()
 {
     auto scene = Scene::createWithPhysics();
@@ -283,6 +285,18 @@ bool SafeMap::init()
 	testUI->setPosition(118.5f, 661.5f);
 	this->addChild(testUI, 5, sk::tag::kHeroUI);
 
+    Board* informationBoard = Board::create();
+    informationBoard->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 100.0,
+        visibleSize.height / 2 + origin.y - 225.0)));
+    this->addChild(informationBoard, 3, sk::tag::kBoard);
+    auto keyBoardListenerBoard = EventListenerKeyboard::create();
+    keyBoardListenerBoard->onKeyPressed = CC_CALLBACK_2(Board::onKeyPressed, informationBoard);
+    //keyBoardListenerBoard->onKeyReleased = CC_CALLBACK_2(Board::onKeyReleased, informationBoard);
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerBoard, this);
+    keyBoardListenerBoard->setEnabled(false);
+    SafeMap::keyBoardListenerTwo = keyBoardListenerBoard;
+    
     return true;
 }
 
@@ -304,7 +318,7 @@ void SafeMap::addPlayerKnight()
 		knight->generatePhysics();
 		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(knight, 3, sk::tag::kHero);
+		this->addChild(knight, 4, sk::tag::kHero);
 		knight->rest();
 
         BulletLayer* bulletLayer = BulletLayer::create();
@@ -320,11 +334,12 @@ void SafeMap::addPlayerKnight()
 //		this->addChild(attackController);
 //		knight->setAttackController(attackController);
 
-        auto keyBoardListener = EventListenerKeyboard::create();
-        keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
-        keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
+        auto keyBoardListenerKnight = EventListenerKeyboard::create();
+        keyBoardListenerKnight->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
+        keyBoardListenerKnight->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
 
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerKnight, this);
+        SafeMap::keyBoardListenerOne = keyBoardListenerKnight;
 	}
 }
 
@@ -345,7 +360,7 @@ void SafeMap::addPlayerAssassin()
 		assassin->generatePhysics();
 		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(assassin, 3, sk::tag::kHero);
+		this->addChild(assassin, 4, sk::tag::kHero);
 		assassin->rest();
 
 		BulletLayer* bulletLayer = BulletLayer::create();
@@ -353,10 +368,27 @@ void SafeMap::addPlayerAssassin()
 		bulletLayer->bindHero(assassin);
 		this->addChild(bulletLayer, 8, 450);
 
-		auto keyBoardListener = EventListenerKeyboard::create();
-		keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
-		keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
-
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
+		auto keyBoardListenerAssassin = EventListenerKeyboard::create();
+		keyBoardListenerAssassin->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
+		keyBoardListenerAssassin->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerAssassin, this);
+        SafeMap::keyBoardListenerOne = keyBoardListenerAssassin;
 	}
+}
+
+void Board::interact()
+{
+    SafeMap::keyBoardListenerOne->setEnabled(false);
+    SafeMap::keyBoardListenerTwo->setEnabled(true);
+    m_pMessage->setVisible(false);
+    m_message.at(0)->setVisible(true);
+}
+
+void Board::controlListener()
+{
+    SafeMap::keyBoardListenerOne->setEnabled(true);
+    SafeMap::keyBoardListenerTwo->setEnabled(false);
+    m_message.at(curNumber)->setVisible(false);
+    m_pMessage->setVisible(true);
+    curNumber = 0;
 }

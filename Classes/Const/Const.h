@@ -122,6 +122,15 @@ namespace sk
         static const int kSwordWeapon    = 3;
 		static const int kIncreaseDamage = 101;
         static const int kHeroUI         = 600;
+		static const int kBoard          = 800;
+    }
+
+	namespace message {
+        static const std::string kGunMessage = "Normal Gun\nDamage:1";
+        static const std::string kShotgunMessage = "Shotgun\nDamage:3";
+        static const std::string kSwordMessage = "Sword\nDamage:4";
+        static const std::string kHealthPotionMessage = "Health Potion\nHP:++2";
+        static const std::string kMonsterMessage = "Monster\nHealth:10";
     }
 }
 
