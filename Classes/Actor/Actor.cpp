@@ -32,13 +32,12 @@ bool Actor::generatePhysics()
  * @param  pAnimateName 动画文件名（字符串）
  * @author 肖杨
 */
-Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int height)
+Animate* Actor::creatActorAnimate(const char * pAnimateName, int width, int height, int frames)
 {
 	log("Trying to create actor");
-	int moveFrameNum = 4;
 	SpriteFrame*frame = nullptr;
 	Vector<SpriteFrame*> frameVec;
-	for (int i = 1; i <= moveFrameNum; i++)
+	for (int i = 1; i <= frames; i++)
 	{
 		frame = SpriteFrame::create(StringUtils::format("%s%d.png", pAnimateName, i),
 			Rect(0, 0, width, height));

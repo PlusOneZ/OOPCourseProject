@@ -24,5 +24,6 @@ void HealthPotion::interact()
 		log("HP++");
 		this->removeFromParentAndCleanup(true);//用完就释放
 		AudioEngine::play2d(sk::files::kTakePotion);
+		Hero::m_pPresentContactItem = nullptr;
 	}
 }

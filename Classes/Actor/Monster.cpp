@@ -53,8 +53,8 @@ bool Monster::loadAllAnimate()
     if (isAllLoaded)
         return true;
 
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile(sk::files::kYellowCrawPlist,
-            sk::files::kYellowCrawPng);
+//    SpriteFrameCache::getInstance()->addSpriteFramesWithFile(sk::files::kYellowCrawPlist,
+//            sk::files::kYellowCrawPng);
 
     isAllLoaded = true;
     return true;
@@ -68,22 +68,34 @@ void Monster::wanderSpeed(float dt)
     m_curSpeed   = vTemp / vTemp.getLength() * m_wanderSpeed;
     getPhysicsBody()->setVelocity(m_curSpeed);
     // TODO 增强随机性
+
+    m_facing = (m_curSpeed.x > 0 ? sk::kRight : sk::kLeft);
+    if (m_facing == sk::kRight)
+    {
+        m_sprite->setFlippedX(false);
+    }
+    else
+    {
+        m_sprite->setFlippedX(true);
+    }
 }
 
 
 void Monster::die()
 {
     this->stopAllActions();
-    if (m_pDieAnimation == nullptr)
+    auto dieSprite = Sprite::create(m_pDieSprite);
+    if (dieSprite == nullptr)
     {
-        log("dead animation not available");
-        return;
+        log("dead not available");
     }
     else
     {
-        this->runAction(m_pDieAnimation);
+        dieSprite->setPosition(this->getPosition());
+        this->getScene()->addChild(dieSprite);
     }
-    // TODO 回收怪物
+
+    this->removeFromParentAndCleanup(true);
 }
 
 void Monster::reduceHealth(int amount)

@@ -79,26 +79,39 @@ public:
      */
     static bool loadAllAnimate();
 
+    /**
+     * @brief 用质量创建物理体积
+     * @param mass
+     * @return
+     * @author 卓正一
+     */
     bool generatePhysics(float mass);
 
+    /**
+     * @brief 撞墙判断
+     * @todo  还没写完
+     * @param contact
+     * @return
+     */
     bool onContactBegin(PhysicsContact& contact);
 
 protected:
     Weapon *m_pWeapon = nullptr;
     float   m_wanderSpeed = 85.f;
 
-    int  m_curHealth;
-    int  m_fullHealth = 10;
+    int  m_curHealth  = 30;
+    int  m_fullHealth = 30;
 
-    Animate* m_pMoveAnimation = nullptr;
-    Animate* m_pDieAnimation  = nullptr;
+    Animate* m_pMoveAnimation   = nullptr;
+    std::string m_pDieSprite ;
 
-    Vec2 m_curSpeed;
+    Vec2 m_curSpeed = Vec2::ZERO;
 
     float m_vision     = 300.;
     float m_shootRange = 300.;
 
-    int m_facing = sk::kRight;
+    int m_facing    = sk::kRight;
+    int m_canFollow = false;
 
 };
 

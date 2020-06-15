@@ -8,7 +8,7 @@
 
 bool SwordBullet::init()
 {
-	int actionStep = 5;
+	int actionStep = 4;
 	SpriteFrame* frame_r = nullptr;
     SpriteFrame* frame_l = nullptr;
 	for (int i = 1; i <= actionStep; i++)

@@ -29,7 +29,8 @@ public:
 	*@return 对应动画
 	@param arg1 要生成的动画对应文件名称
 	*/
-	static Animate* creatActorAnimate(const char * pAnimateName, int width = 64, int height = 60);
+	static Animate* creatActorAnimate(const char * pAnimateName, int width = 64, int height = 60
+            , int frames = 4);
 
 protected:
     Sprite* m_sprite;

@@ -19,11 +19,11 @@ class Buff
 private:
 	int m_immortal = 0;
 
-	int m_speedUP = 0;
+	int m_speedUp = 0;
 
 	double m_rootedTime = 0;
 
-	int m_increaseATK = 0;
+	int m_increaseDamage = 0;
 
 	int m_flaming = 0;
 
@@ -83,24 +83,24 @@ public:
 		Hero::m_pPresentHero->m_speed *= up;
 		Hero::m_pPresentHero->m_ifStateChanged = true;
 		log("speedup");
-		m_speedUP++;
+		m_speedUp++;
 	}
 
 	void speedUpEnd(float up)
 	{
-		if (m_speedUP > 1)
+		if (m_speedUp > 1)
 		{
 			Hero::m_pPresentHero->m_speed /=up;
 		}
-		else if (m_speedUP == 1)
+		else if (m_speedUp == 1)
 		{
-			Hero::m_pPresentHero->m_speed = kHeroSpeed;
+			Hero::m_pPresentHero->m_speed = gHeroSpeed;
 		}
-		if (m_speedUP > 0)
+		if (m_speedUp > 0)
 		{
 			Hero::m_pPresentHero->m_ifStateChanged = true;
 			log("speedup end");
-			m_speedUP--;
+			m_speedUp--;
 		}
 	}
 
@@ -108,10 +108,13 @@ public:
 	{
 		Hero::m_pPresentHero->m_speed = 0;
 		Hero::m_pPresentHero->m_ifStateChanged = true;
-		auto freeze = Sprite::create("item/freeze_effect.png");
-		freeze->setTag(sk::tag::kFreezeTrap);
-		freeze->setPosition(10., 0.);
-		Hero::m_pPresentHero->addChild(freeze);
+		if (m_rootedTime == 0)
+		{
+			auto freeze = Sprite::create("item/freeze_effect.png");
+			freeze->setTag(sk::tag::kFreezeTrap);
+			freeze->setPosition(10., 0.);
+			Hero::m_pPresentHero->addChild(freeze);
+		}
 		log("rooted");
 		m_rootedTime = m_rootedTime > rootedTime ? m_rootedTime : rootedTime;
 	}
@@ -120,7 +123,7 @@ public:
 	{
 		if (m_rootedTime - rootedTime <= 0.1)
 		{
-			Hero::m_pPresentHero->m_speed = kHeroSpeed;
+			Hero::m_pPresentHero->m_speed = gHeroSpeed;
 			m_rootedTime = 0;
 			log("rooted end");
 			Hero::m_pPresentHero->getChildByTag(sk::tag::kFreezeTrap)->removeFromParentAndCleanup(true);
@@ -135,21 +138,24 @@ public:
 	{
 		Hero::m_pPresentHero->m_baseDamage += amount;
 		log("atk up");
-		auto angry = Sprite::create("Actor/atk_up.png");
-		angry->setTag(sk::tag::kIncreaseDamage);
-		angry->setPosition(0., 60.);
-		Hero::m_pPresentHero->addChild(angry, 3);
-		m_increaseATK++;
+		if (m_increaseDamage == 0)
+		{
+			auto angry = Sprite::create("Actor/atk_up.png");
+			angry->setTag(sk::tag::kIncreaseDamage);
+			angry->setPosition(0., 60.);
+			Hero::m_pPresentHero->addChild(angry, 3);
+		}
+		m_increaseDamage++;
 	}
 
 	void increaseATKEnd(int amount)
 	{
-		if (m_increaseATK > 0)
+		if (m_increaseDamage > 0)
 		{
 			Hero::m_pPresentHero->m_baseDamage -= amount;
 			log("atk up end");
 			Hero::m_pPresentHero->getChildByTag(sk::tag::kIncreaseDamage)->removeFromParentAndCleanup(true);
-			m_increaseATK--;
+			m_increaseDamage--;
 		}
 	}
 

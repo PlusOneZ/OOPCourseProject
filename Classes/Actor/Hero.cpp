@@ -98,7 +98,6 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		if (m_pPresentContactItem != nullptr)
 		{
 				m_pPresentContactItem->interact();
-				m_pPresentContactItem = nullptr;
 		}
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
@@ -364,10 +363,7 @@ bool Item::buyItem()
 		if (Hero::m_pPresentHero->costCoins(m_price))//购买成功
 		{
 			log("buy item");
-            if (m_price != 0)
-            {
-                AudioEngine::play2d(sk::files::kBuy);
-            }
+            AudioEngine::play2d(sk::files::kBuy);
 			m_ifShopItem = false;
 			m_price = 0;
 			m_pShopMessage->removeFromParentAndCleanup(true);
@@ -402,6 +398,7 @@ void Weapon::interact()
 		myHero->setMainWeapon(this);
 		log("weapon changed");
 		AudioEngine::play2d(sk::files::kWeaponPickup);
+		Hero::m_pPresentContactItem = nullptr;
 	}
 }
 

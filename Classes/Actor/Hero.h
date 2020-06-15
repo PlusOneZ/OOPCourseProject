@@ -10,7 +10,8 @@
 #include "../Item/Weapon.h"
 #include "../Const/Const.h"
 
-static float kHeroSpeed = 150.;
+static float gHeroSpeed = 150.;
+static int gHeroDamage = 5;
 
 /**
 *@brief 主角类
@@ -155,7 +156,7 @@ protected:
 	sk::HeroID m_ID;
 
 	bool m_alive    = true;
-	float m_speed   = kHeroSpeed;
+	float m_speed   = gHeroSpeed;
 	int m_health    = 5;
 	int m_maxHealth = 5;
 
@@ -165,7 +166,7 @@ protected:
 	int m_maxArmor           = 5;
     float m_recoverArmorTime = 0;
 	bool m_ifMortal          = true;
-	int m_baseDamage         = 5;
+	int m_baseDamage         = gHeroDamage;
 
     /// 技能属性
 	float m_skillCD         = 8.f;       // 技能冷却时间

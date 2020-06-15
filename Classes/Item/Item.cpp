@@ -62,7 +62,7 @@ void Item::generatePhysicalBody(std::string message, const int itemTag)
 	m_pSprite->setTag(itemTag);
 	m_pMessage = showMessage(message);
 	m_pMessage->setVisible(false);
-	m_pMessage->setPosition(this->getPosition().x, this->getPosition().y + 40);
+	m_pMessage->setPosition(0., 40.);
 	this->addChild(m_pMessage);
 	auto size = m_pSprite->getContentSize();
 	size.width *= 1.2;
