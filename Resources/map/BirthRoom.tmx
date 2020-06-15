@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="4" nextobjectid="11">
+ <tileset firstgid="1" source="tiles1.tsx"/>
+ <layer id="1" name="图块层 1" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFmEsKwzAMRJNFP1fIMgRa6Cr3P10bsMEYfWZkpVnMoqktPUuKJbJM07Qk6i4o037VJ0m7wryD+9cia43EvHZ7+9/a2rWwzT89Gj0V5t6mxds+Z+JssbdxnotuhVdiRvkk3xm10fpomd8Ks3du7z+P2dvf+6/MB++rSKsNxKfkv2XWcsL4Otg2QRYzWycWM/IOM+fz2Kw6tpi9vKC2kfMi/qTnWj2zMYnWFZNHhDnDlxe7TOazheRFy3U0zmecAa0vq3cjNhl/kT7i3RsIG+ofuUc0e959ws4bFlck79K76OU4ynylLGa2D6LxZm2ytTGa/4w68mpjZL6I5oXt+9K8MdrjRngRafczYjfjbIyNuhZhZmMWmfE0OxLTVfPGiM747vAPfQGjRqYh
+  </data>
+ </layer>
+ <objectgroup id="2" name="barrier">
+  <object id="1" x="0" y="0.972589" width="25.2873" height="696.374"/>
+  <object id="2" x="29.1777" y="0" width="529.089" height="26.2599"/>
+  <object id="3" x="30.1503" y="673.032" width="1197.26" height="25.2873"/>
+  <object id="4" x="1233.24" y="1.94518" width="28.2051" height="695.401"/>
+  <object id="5" x="699.292" y="0.972589" width="529.089" height="26.2599"/>
+  <object id="7" x="531.034" y="32.0954" width="28.2051" height="165.34"/>
+  <object id="8" x="699.292" y="32.0954" width="31.1229" height="164.368"/>
+ </objectgroup>
+ <objectgroup id="3" name="door">
+  <object id="10" x="567.992" y="2.91777" width="119.628" height="48.6295"/>
+ </objectgroup>
+</map>

@@ -118,11 +118,15 @@ namespace sk
 		static const int kFlameTrap      = 52;
 		static const int kCoin           = 40;
 		static const int kHealthPotion   = 10;
+		static const int kWarStatue      = 11;
+		static const int kAssassinStatue = 12;
         static const int kGunWeapon      = 1;
         static const int kShotgunWeapon  = 2;
         static const int kSwordWeapon    = 3;
 		static const int kIncreaseDamage = 101;
         static const int kHeroUI         = 600;
+        static const int kBoard          = 800;
+        static const int kDoor           = 150;
         static const int kBarrier        = 160;
     }
 

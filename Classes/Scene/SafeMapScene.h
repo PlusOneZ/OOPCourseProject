@@ -15,6 +15,7 @@
 #include "Actor/DistantMonster.h"
 #include "Component/Trap.h"
 #include "Item/Weapon.h"
+#include "Item/Board.h"
 
 USING_NS_CC;
 
@@ -55,6 +56,9 @@ public:
 	*@author 肖杨
 	*/
 	void addPlayerAssassin();
+
+    static EventListenerKeyboard* keyBoardListenerOne;
+    static EventListenerKeyboard* keyBoardListenerTwo;
 };
 
 #endif

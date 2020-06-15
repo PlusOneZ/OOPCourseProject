@@ -57,7 +57,7 @@ bool RoomMap::init()
     edgeMap->setVisible(false);
     this->addChild(edgeMap, 0, 98);
 
-    //createBarrier();
+    createBarrier();
     createDoor();
 
     addPlayerAssassin();
@@ -180,8 +180,7 @@ void RoomMap::addPlayerAssassin()
         Hero::m_pPresentHero = assassin;
         this->myHero = assassin;
         assassin->generatePhysics();
-        assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-            visibleSize.height / 2 + origin.y + 150.0)));
+        assassin->setPosition(Vec2(640, 200));
         this->addChild(assassin, 3, sk::tag::kHero);
         assassin->rest();
 
@@ -195,8 +194,10 @@ void RoomMap::addPlayerAssassin()
 
 TMXTiledMap* RoomMap::createTiled(int mapNumber)
 {
-    if (mapNumber == 1) return TMXTiledMap::create("map/test1.tmx");
-    if (mapNumber == 2) return TMXTiledMap::create("map/test2.tmx");
-    if (mapNumber == 3) return TMXTiledMap::create("map/test3.tmx");
+    if (mapNumber == 1) return TMXTiledMap::create("map/BirthRoom.tmx");
+    if (mapNumber == 2) return TMXTiledMap::create("map/MonsterRoom1.tmx");
+    if (mapNumber == 3) return TMXTiledMap::create("map/MonsterRoom2.tmx");
+    if (mapNumber == 4) return TMXTiledMap::create("map/ShopRoom.tmx");
+    if (mapNumber == 5) return TMXTiledMap::create("map/BossRoom.tmx");
     return nullptr;
 }

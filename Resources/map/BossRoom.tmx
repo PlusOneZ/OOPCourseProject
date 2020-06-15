@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="4" nextobjectid="9">
+ <tileset firstgid="1" source="tiles1.tsx"/>
+ <layer id="1" name="图块层 1" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzVl0tuwzAMRH0Ao10G6dafrHr/67UBPMDDZCjLNVwgCwKJTFFP5Iiy78Mw3N/Qvjps/LUHbN6M/x+dtoSxsZMjMX9vtsdcsdCc7/l7KuYm5sRylFm51Lrk8bzTby1YFzw/w9yrDWejVc9aOjqjjRaz65cs0/Cq0xU+a9gHc32Ueew0cawhV6n20+ZHHWu+76OXQczab4vjGf+2GfNXacXHKk0rJv10NtIaZG6x+pjWYX2TRrm2jyvGgvjKPeP5eaiYWVdyzxbLc8T4n5u55jmHGkl6mYdXHYqZfpzrvUznjP5eX/F+bCZu+kjfe/cQ9SRf17P3Ip4bj59qdwOvequ4E4/Xx3Oxx1ydH9dDWpP5bjGn2L6u9KA89Z7BJcRMrPLzurs2Fvg4Z9Vj1sLHmafwW/2VmlYd2T98fzqDjMc5Kbeei1TXVt9YbT7HvF+kuvtd7fpKfblV05Rn5cr9NOb1Zb6T7px/705RPZPGmf+/3N3UW9IS43Mvsz3zvnD07j76Xpfe2Xs1Us258r3O7yne3y1e36f//4/vlHQ+qncOZ0y6vuo7xVmoS899S+t+vs8y9+iZvOk7pPpW4TOvyVV6bvWzPXNte6yjzO9mP4OJjZs=
+  </data>
+ </layer>
+ <objectgroup id="2" name="barrier">
+  <object id="1" x="2.91777" y="1.94518" width="304.42" height="194.518"/>
+  <object id="2" x="953.138" y="3.89036" width="304.42" height="191.6"/>
+  <object id="3" x="1.94518" y="479.487" width="302.475" height="215.915"/>
+  <object id="4" x="955.083" y="477.541" width="301.503" height="217.86"/>
+  <object id="5" x="0.972589" y="201.326" width="27.2325" height="272.325"/>
+  <object id="6" x="311.229" y="0.972589" width="636.073" height="25.2873"/>
+  <object id="7" x="310.256" y="673.032" width="637.046" height="24.3147"/>
+  <object id="8" x="1232.27" y="201.326" width="27.2325" height="269.407"/>
+ </objectgroup>
+ <objectgroup id="3" name="door"/>
+</map>
