@@ -66,10 +66,9 @@ namespace sk
         static const char kKnightRest[] = "Actor/knight_rest";
         static const char kKnightMove[] = "Actor/knight_move";
 
-        static const std::string kYellowCrawPlist = "Actor/Monster/yellowCraw.plist";
-        static const std::string kYellowCrawPng   = "Actor/Monster/yellowCraw.png";
-        static const std::string kYellowCrawName  = "Y_craw_monster";
-        static const std::string kYellowCrawDie   = "Y_craw_monster_dead";
+        static const char kYellowCrawMove[]  = "Actor/Monster/Y_craw_monster";
+        static const char kYellowCrawDie[]   = "Actor/Monster/Y_craw_monster_dead.png";
+
 
         static const char kHeroAvatar[2][40] = {
                 "interface/ui2_knight.png",
@@ -112,7 +111,9 @@ namespace sk
         static const int kHero           = 500;
         static const int kMonster        = 300;
         static const int kBullet         = 200;
+        static const int kMonsterBullet  = 250;
         static const int kCloseDamage    = 201;
+        static const int kMonsterClose   = 251;
 		static const int kFreezeTrap     = 51;
 		static const int kFlameTrap      = 52;
 		static const int kCoin           = 40;
@@ -122,6 +123,15 @@ namespace sk
         static const int kSwordWeapon    = 3;
 		static const int kIncreaseDamage = 101;
         static const int kHeroUI         = 600;
+        static const int kBarrier        = 160;
+    }
+
+    namespace message {
+        static const std::string kGunMessage = "Normal Gun\nDamage:1";
+        static const std::string kShotgunMessage = "Shotgun\nDamage:3";
+        static const std::string kSwordMessage = "Sword\nDamage:4";
+        static const std::string kHealthPotionMessage = "Health Potion\nHP:++2";
+        static const std::string kMonsterMessage = "Monster\nHealth:10";
     }
 }
 

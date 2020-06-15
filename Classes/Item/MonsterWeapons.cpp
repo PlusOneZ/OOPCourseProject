@@ -4,6 +4,7 @@
 Bullet *MonInvisibleWithFiveWayGun::createBullet()
 {
     Bullet* pBullet = MonFiveWayBullet::create();
+    pBullet->setDamage(m_weaponDamage);
     return pBullet;
 }
 
@@ -17,6 +18,7 @@ bool MonInvisibleWithFiveWayGun::init()
     bindSprite(pSprite);
     setInterval(1.5f);
     setBulletCount(5);
+    m_weaponDamage = 1;
     return true;
 }
 
@@ -24,6 +26,7 @@ bool MonInvisibleWithFiveWayGun::init()
 Bullet *MonOneShotGun::createBullet()
 {
     Bullet* pBullet = MonOneShotBullet::create();
+    pBullet->setDamage(m_weaponDamage);
     return pBullet;
 }
 
@@ -37,6 +40,7 @@ bool MonOneShotGun::init()
     bindSprite(pSprite);
     setInterval(1.f);
     setBulletCount(1);
+    m_weaponDamage = 2;
     return true;
 }
 

@@ -44,13 +44,26 @@ public:
 	*/
     void bindSprite(Sprite *pSprite, sk::Kind kind = sk::Kind::kSelf, int tag = sk::tag::kBullet);
 
+    /**
+     * @brief 设置伤害
+     * @param damage
+     */
+    void setDamage(int damage);
+
+    /**
+     * @brief  获取伤害
+     * @return
+     */
+    int getDamage();
+
 protected:
 
 	Sprite* m_pBulletSprite;
 	float   m_bulletSpeed;
 	bool    m_isArrive;
-	void moveEnd();
-
+	int     m_damage;
 	sk::Kind m_kind;
+
+	void moveEnd();
 };
 #endif

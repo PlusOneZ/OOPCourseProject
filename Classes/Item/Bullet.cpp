@@ -47,3 +47,13 @@ void Bullet::moveEnd()
     this->removeAllChildrenWithCleanup(true);
     this->autorelease();
 }
+
+void Bullet::setDamage(int damage)
+{
+    m_damage = damage;
+}
+
+int Bullet::getDamage()
+{
+    return m_damage;
+}

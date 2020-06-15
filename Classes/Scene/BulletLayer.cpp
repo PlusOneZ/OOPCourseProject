@@ -75,6 +75,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
     {
         if (body1->getTag() == sk::tag::kBullet || body1->getTag() == sk::tag::kCloseDamage)
         {
+            log("Monster shot");
             if (body2->getTag() == sk::tag::kMonster)
             {
                 dynamic_cast<Monster*>(body2)->reduceHealth(
@@ -86,14 +87,43 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
                 body1->removeFromParentAndCleanup(true);
             }
         }
-        else if (body2->getTag() == sk::tag::kBullet || body1->getTag() == sk::tag::kCloseDamage)
+        else if (body2->getTag() == sk::tag::kBullet || body2->getTag() == sk::tag::kCloseDamage)
         {
+            log("Monster shot");
             if (body1->getTag() == sk::tag::kMonster)
             {
                 dynamic_cast<Monster*>(body1)->reduceHealth(
                         m_pHero->getBaseDamage() + m_pHero->getMainWeapon()->getDamage());
             }
             if (body1->getTag() == sk::tag::kBullet)
+            {
+                body2->setVisible(false);
+                body2->removeFromParentAndCleanup(true);
+            }
+        }
+        else if (body1->getTag() == sk::tag::kMonsterBullet || body1->getTag() == sk::tag::kMonsterClose)
+        {
+            log("Hero shot");
+            if (body2->getTag() == sk::tag::kHero)
+            {
+                Hero::m_pPresentHero->reduceHealth(
+                        dynamic_cast<Bullet* >(body1->getParent())->getDamage());
+            }
+            if (body1->getTag() == sk::tag::kMonsterBullet)
+            {
+                body1->setVisible(false);
+                body1->removeFromParentAndCleanup(true);
+            }
+        }
+        else if (body2->getTag() == sk::tag::kMonsterBullet || body2->getTag() == sk::tag::kMonsterClose)
+        {
+            log("Hero shot");
+            if (body1->getTag() == sk::tag::kHero)
+            {
+                Hero::m_pPresentHero->reduceHealth(
+                        dynamic_cast<Bullet* >(body2->getParent())->getDamage());
+            }
+            if (body2->getTag() == sk::tag::kMonsterBullet)
             {
                 body2->setVisible(false);
                 body2->removeFromParentAndCleanup(true);
