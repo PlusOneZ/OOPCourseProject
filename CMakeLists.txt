@@ -87,6 +87,7 @@ list(APPEND GAME_SOURCE
         Classes/Item/HealthPotion.cpp
         Classes/Item/MonsterBullets.cpp
         Classes/Item/SwordBullet.cpp
+        Classes/Item/Board.cpp
 
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
@@ -121,6 +122,7 @@ list(APPEND GAME_HEADER
         Classes/Item/HealthPotion.h
         Classes/Item/MonsterBullets.h
         Classes/Item/SwordBullet.h
+        Classes/Item/Board.h
 
         Classes/Component/Trap.h
         Classes/Component/Buff.h
