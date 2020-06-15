@@ -10,6 +10,7 @@
 #include "Item/Gun.h"
 #include <iostream>
 #include "Component/HeroUI.h"
+#include "Item/Statue.h"
 
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
@@ -266,6 +267,7 @@ bool SafeMap::init()
     this->addChild(testWeapon, 3, sk::tag::kGunWeapon);
 
 	Coin* testCoin = Coin::create();
+	testCoin->setCoinAmount(20);
 	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testCoin, 3, sk::tag::kCoin);
@@ -280,6 +282,16 @@ bool SafeMap::init()
 	testFlame->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
 		visibleSize.height / 2 + origin.y - 75.0)));
 	this->addChild(testFlame, 3, sk::tag::kFlameTrap);
+
+	WarStatue* testWar = WarStatue::create();
+	testWar->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y - 200.0)));
+	this->addChild(testWar, 3, sk::tag::kWarStatue);
+
+	AssassinStatue* testSpeed = AssassinStatue::create();
+	testSpeed->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 100.0,
+		visibleSize.height / 2 + origin.y - 200.0)));
+	this->addChild(testSpeed, 3, sk::tag::kAssassinStatue);
 
 	HeroUI* testUI = HeroUI::create();
 	testUI->setPosition(118.5f, 661.5f);
