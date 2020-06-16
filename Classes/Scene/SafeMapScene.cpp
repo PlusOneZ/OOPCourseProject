@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Component/HeroUI.h"
 #include "Item/Statue.h"
+#include "Item/Treasure.h"
 
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
@@ -255,6 +256,7 @@ bool SafeMap::init()
 	HealthPotion* testHP = HealthPotion::create();
 	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 		visibleSize.height / 2 + origin.y)));
+	testHP->setShopItem(1);
 	this->addChild(testHP, 3, sk::tag::kHealthPotion);
 
     Weapon* testWeapon = Gun::create();
@@ -269,6 +271,11 @@ bool SafeMap::init()
 	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testCoin, 3, sk::tag::kCoin);
+
+	Treasure* testTreasure = Treasure::create();
+	testTreasure->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
+		visibleSize.height / 2 + origin.y + 75)));
+	this->addChild(testTreasure, 3, sk::tag::kTreasure);
 
 	FreezeTrap* testFreeze = FreezeTrap::create();
 	testFreeze->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,

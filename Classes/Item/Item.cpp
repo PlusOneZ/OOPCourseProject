@@ -53,7 +53,7 @@ void Item::setShopItem(int price)
 	m_ifShopItem = true;
 	m_price = price;
 	m_pShopMessage=showMessage(m_price);
-	m_pShopMessage->setPosition(this->getPosition().x, this->getPosition().y - 30);
+	m_pShopMessage->setPosition(0.f, -30.f);
 	this->addChild(m_pShopMessage);
 }
 
