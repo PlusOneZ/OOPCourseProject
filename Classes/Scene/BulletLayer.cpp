@@ -95,7 +95,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
                 dynamic_cast<Monster*>(body1)->reduceHealth(
                         m_pHero->getBaseDamage() + m_pHero->getMainWeapon()->getDamage());
             }
-            if (body1->getTag() == sk::tag::kBullet)
+            if (body2->getTag() == sk::tag::kBullet)
             {
                 body2->setVisible(false);
                 body2->removeFromParentAndCleanup(true);

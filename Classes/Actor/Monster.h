@@ -95,6 +95,12 @@ public:
      */
     bool onContactBegin(PhysicsContact& contact);
 
+    /**
+     * @brief  播放移动动画
+     * @author 卓正一
+     */
+    void move();
+
 protected:
     Weapon *m_pWeapon = nullptr;
     float   m_wanderSpeed = 85.f;

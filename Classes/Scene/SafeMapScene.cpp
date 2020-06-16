@@ -245,14 +245,12 @@ bool SafeMap::init()
 	addPlayerAssassin();
 
 	Monster::loadAllAnimate();
-	auto dm = DistantMonster::create();
-	auto dms = Sprite::create("Actor/Monster/Y_craw_monster1.png");
-	dm->bindSprite(dms);
+	auto dm = MonsterWithGun::create();
 	dm->generatePhysics(20.f);
 
 	dm->setPosition(500, 500);
 	addChild(dm, 5, sk::tag::kMonster);
-	dm->move();
+
 
 	HealthPotion* testHP = HealthPotion::create();
 	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,

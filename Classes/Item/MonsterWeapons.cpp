@@ -16,7 +16,6 @@ bool MonInvisibleWithFiveWayGun::init()
         log("Empty sprite not initialized");
     }
     bindSprite(pSprite);
-    setInterval(1.5f);
     setBulletCount(5);
     m_weaponDamage = 1;
     return true;
@@ -32,13 +31,12 @@ Bullet *MonOneShotGun::createBullet()
 
 bool MonOneShotGun::init()
 {
-    Sprite* pSprite = Sprite::create();
+    Sprite* pSprite = Sprite::create("item/monster_shoot.png");
     if (pSprite == nullptr)
     {
         log("Empty sprite not initialized");
     }
     bindSprite(pSprite);
-    setInterval(1.f);
     setBulletCount(1);
     m_weaponDamage = 2;
     return true;

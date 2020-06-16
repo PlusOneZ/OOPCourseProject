@@ -134,3 +134,9 @@ bool Monster::onContactBegin(PhysicsContact &contact)
     return false;
 }
 
+void Monster::move()
+{
+    if (m_pMoveAnimation)
+        m_sprite->runAction(m_pMoveAnimation);
+}
+

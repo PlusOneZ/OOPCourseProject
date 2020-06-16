@@ -9,42 +9,89 @@
 #include "Monster.h"
 #include "Item/MonsterWeapons.h"
 
-class DistantMonster : public Monster
+class MonsterCrawShoot : public Monster
 {
 public:
 
-    CREATE_FUNC(DistantMonster);
+    CREATE_FUNC(MonsterCrawShoot);
 
     /**
      * @brief 更新函数
      * @param dt
+     * @author 卓正一
      */
     void update(float dt) override ;
 
     /**
      * @brief  重载初始化
-     * @return
+     * @return true for success
+     * @author 卓正一
      */
     bool init() override ;
 
+    /**
+     * @brief  播放移动动画
+     * @author 卓正一
+     */
     void move();
 
     /**
-     * @brief 见基类
-     * @brief
+     * @brief  见基类
+     * @author 卓正一
      */
     void followSpeed(float dt) override ;
 
     /**
-     * @brief 见基类
-     * @param st
+     * @brief  见基类
+     * @param  dt
+     * @author 卓正一
      */
-    void attack(float st) override ;
+    void attack(float dt) override ;
 
 protected:
     float m_backUpDistance = 100.;
 
 };
 
+
+
+class MonsterWithGun : public Monster
+{
+public:
+
+    CREATE_FUNC(MonsterWithGun);
+
+    /**
+     * @brief 更新函数
+     * @param dt
+     * @author 卓正一
+     */
+    void update(float dt) override ;
+
+    /**
+     * @brief  重载初始化
+     * @return true for success
+     * @author 卓正一
+     */
+    bool init() override ;
+
+
+    /**
+     * @brief  见基类
+     * @author 卓正一
+     */
+    void followSpeed(float dt) override ;
+
+    /**
+     * @brief  见基类
+     * @param  dt
+     * @author 卓正一
+     */
+    void attack(float dt) override ;
+
+protected:
+    float m_backUpDistance = 100.;
+
+};
 
 #endif // DISTANT_MONSTER_H
