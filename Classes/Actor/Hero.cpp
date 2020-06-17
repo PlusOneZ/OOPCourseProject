@@ -391,7 +391,7 @@ void Weapon::interact()
 		floorWeapon->removeFromParent();
 		floorWeapon->setPosition(Point(this->getPosition()));
 		floorWeapon->setState(false);
-		myHero->getScene()->addChild(floorWeapon, 3, Tag);
+		myHero->getParent()->addChild(floorWeapon, 3, Tag);
 		this->retain();
 		this->removeFromParent();
 		this->m_pMessage->setVisible(false);

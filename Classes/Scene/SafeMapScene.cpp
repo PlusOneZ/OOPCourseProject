@@ -275,6 +275,7 @@ bool SafeMap::init()
 	Treasure* testTreasure = Treasure::create();
 	testTreasure->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
 		visibleSize.height / 2 + origin.y + 75)));
+	testTreasure->setShopItem(5);
 	this->addChild(testTreasure, 3, sk::tag::kTreasure);
 
 	FreezeTrap* testFreeze = FreezeTrap::create();
