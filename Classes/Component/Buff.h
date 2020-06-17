@@ -126,7 +126,11 @@ public:
 			Hero::m_pPresentHero->m_speed = gHeroSpeed;
 			m_rootedTime = 0;
 			log("rooted end");
-			Hero::m_pPresentHero->getChildByTag(sk::tag::kFreezeTrap)->removeFromParentAndCleanup(true);
+			auto ice = Hero::m_pPresentHero->getChildByTag(sk::tag::kFreezeTrap);
+			if (ice != nullptr)
+			{
+				ice->removeFromParentAndCleanup(true);
+			}
 		}
 		else
 		{
@@ -154,7 +158,14 @@ public:
 		{
 			Hero::m_pPresentHero->m_baseDamage -= amount;
 			log("atk up end");
-			Hero::m_pPresentHero->getChildByTag(sk::tag::kIncreaseDamage)->removeFromParentAndCleanup(true);
+			if (m_increaseDamage == 1)
+			{
+				auto atkup = Hero::m_pPresentHero->getChildByTag(sk::tag::kIncreaseDamage);
+				if (atkup != nullptr)
+				{
+					atkup->removeFromParentAndCleanup(true);
+				}
+			}
 			m_increaseDamage--;
 		}
 	}
@@ -179,7 +190,11 @@ public:
 		{
 			if (m_flaming == 1)
 			{
-				Hero::m_pPresentHero->getChildByTag(sk::tag::kFlameTrap)->removeFromParentAndCleanup(true);
+				auto flame=Hero::m_pPresentHero->getChildByTag(sk::tag::kFlameTrap);
+				if (flame != nullptr)
+				{
+					flame->removeFromParentAndCleanup(true);
+				}
 				log("flaming end");
 			}
 			m_flaming--;

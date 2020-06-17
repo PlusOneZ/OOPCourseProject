@@ -262,6 +262,7 @@ bool Hero::reduceHealth(int damage)
 		}
 		if (damage >= m_health)
 		{
+			m_health = 0;
 			m_alive = false;
 			return false;
 		}
@@ -313,6 +314,11 @@ void Hero::gainCoins(int coin)
 int Hero::getBaseDamage()
 {
 	return m_baseDamage;
+}
+
+sk::HeroID Hero::getHeroID()
+{
+	return m_ID;
 }
 
 //Item中函数的实现

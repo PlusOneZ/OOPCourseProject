@@ -132,6 +132,8 @@ namespace sk
 		static const int kBoard          = 800;
 		static const int kDoor           = 150;
 		static const int kBarrier        = 160;
+		static const int kChangeHero     = 50;
+		static const int kBulletLayer    = 450;
     }
 
 	namespace message {

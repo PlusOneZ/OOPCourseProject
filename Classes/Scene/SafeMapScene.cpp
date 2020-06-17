@@ -12,6 +12,7 @@
 #include "Component/HeroUI.h"
 #include "Item/Statue.h"
 #include "Item/Treasure.h"
+#include "Item/ChangeHero.h"
 
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
@@ -243,7 +244,12 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-	addPlayerAssassin();
+	addPlayer(sk::HeroID::kAssassin);
+
+	ChangeHero* testChangeHero = ChangeHero::create();
+	testChangeHero->setPosition(Vec2(visibleSize.width / 2 + origin.x + 280.0,
+		visibleSize.height / 2 + origin.y));
+	this->addChild(testChangeHero, 3, sk::tag::kChangeHero);
 
 	Monster::loadAllAnimate();
 	auto dm = MonsterWithGun::create();
@@ -319,79 +325,59 @@ bool SafeMap::init()
 }
 
 
-void SafeMap::addPlayerKnight()
+void SafeMap::addPlayer(sk::HeroID id)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
-	Sprite* knightSprite = Sprite::create(fig);
-	if (knightSprite == nullptr)
+	PolygonInfo fig;
+	Hero* hero;
+	if (id == sk::HeroID::kAssassin)
 	{
-		log("knight_rest1.png not found");
+		fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
 	}
 	else
 	{
-		Knight* knight = Knight::create();
-		knight->bindSprite(knightSprite);
-		knight->generatePhysics();
-		knight->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(knight, 4, sk::tag::kHero);
-		knight->rest();
-
-        BulletLayer* bulletLayer = BulletLayer::create();
-        bulletLayer->retain();
-        bulletLayer->bindHero(knight);
-        this->addChild(bulletLayer, 8, 450);
-
-//		MoveController* moveController = MoveController::create();
-//		this->addChild(moveController);
-//		knight->setMoveController(moveController);
-//		//这里在安全地图不应该加载这个控制器，为了调试方便先加上
-//		AttackController* attackController = AttackController::create();
-//		this->addChild(attackController);
-//		knight->setAttackController(attackController);
-
-        auto keyBoardListenerKnight = EventListenerKeyboard::create();
-        keyBoardListenerKnight->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, knight);
-        keyBoardListenerKnight->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, knight);
-
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerKnight, this);
-        SafeMap::keyBoardListenerOne = keyBoardListenerKnight;
+		fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
 	}
-}
-
-void SafeMap::addPlayerAssassin()
-{
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	auto fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
-	Sprite* assassinSprite = Sprite::create(fig);
-	if (assassinSprite == nullptr)
+	Sprite* heroSprite = Sprite::create(fig);
+	
+	if (heroSprite == nullptr)
 	{
-		log("assassin_rest1.png not found");
+		log("hero picture not found");
 	}
 	else
 	{
-		Assassin* assassin = Assassin::create();
-		assassin->bindSprite(assassinSprite);
-		assassin->generatePhysics();
-		assassin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+		if (id == sk::HeroID::kAssassin)
+		{
+			hero = Assassin::create();
+		}
+		else
+		{
+			hero = Knight::create();
+		}
+		hero->bindSprite(heroSprite);
+		hero->generatePhysics();
+		hero->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
 			visibleSize.height / 2 + origin.y + 150.0)));
-		this->addChild(assassin, 4, sk::tag::kHero);
-		assassin->rest();
+		this->addChild(hero, 4, sk::tag::kHero);
+		hero->rest();
 
 		BulletLayer* bulletLayer = BulletLayer::create();
 		bulletLayer->retain();
-		bulletLayer->bindHero(assassin);
-		this->addChild(bulletLayer, 8, 450);
+		bulletLayer->bindHero(hero);
+		this->addChild(bulletLayer, 8, sk::tag::kBulletLayer);
 
-		auto keyBoardListenerAssassin = EventListenerKeyboard::create();
-		keyBoardListenerAssassin->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
-		keyBoardListenerAssassin->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerAssassin, this);
-        SafeMap::keyBoardListenerOne = keyBoardListenerAssassin;
+		auto keyBoardListenerHero = EventListenerKeyboard::create();
+		keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
+		keyBoardListenerHero->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
+		this->keyBoardListenerOne = keyBoardListenerHero;
 	}
+}
+
+void SafeMap::removeKeyboard(Node* node)
+{
+	_eventDispatcher->removeEventListenersForTarget(node);
 }
 
 void Board::interact()

@@ -22,6 +22,9 @@ bool Assassin::init()
 		m_pSkillAnimate = creatActorAnimate("Actor/assassin_skill", 52, 56);
 		m_pSkillTempA = m_pMoveAnimate;
 		m_pSkillTempB = m_pRestAnimate;
+		m_maxArmor = 3;
+		m_armor = 3;
+		m_ID = sk::HeroID::kAssassin;
 		return true;
 	}
 	else

@@ -23,6 +23,7 @@ bool Knight::init()
 		m_skillCD = 15;
 		m_skillTime = 15;
 		m_skillLastTime = 5;
+		m_ID = sk::HeroID::kKnight;
 		return true;
 	}
 	else

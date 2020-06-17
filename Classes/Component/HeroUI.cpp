@@ -83,8 +83,3 @@ void HeroUI::scheduleUI(float dt)
 		m_pCoinMessage->setString(coinMessage);
 	}
 }
-
-void HeroUI::changeHero(Hero* newHero)
-{
-	m_pHero = newHero;
-}
