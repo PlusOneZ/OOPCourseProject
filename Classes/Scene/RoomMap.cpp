@@ -51,22 +51,47 @@ bool RoomMap::init()
         this->addChild(m_pMap, 0, 99);
     }
 
-    /*
-    auto edgeMap = Sprite::create("map/SafeMap.png");
-    auto mapFrame = PhysicsBody::createEdgeBox(edgeMap->getContentSize());
-    edgeMap->setPhysicsBody(mapFrame);
-    edgeMap->setVisible(false);
-    this->addChild(edgeMap, 0, 98);
-    */
+    ifDoor = false;
 
     createBarrier();
-    createDoor();
+    //createDoor();
 
     addPlayerAssassin();
 
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
+
+    HeroUI* testUI = HeroUI::create();
+    testUI->setPosition(118.5f, 661.5f);
+    this->addChild(testUI, 5, sk::tag::kHeroUI);
+
+    Monster::loadAllAnimate();
+    auto dm1 = MonsterWithGun::create();
+    dm1->generatePhysics(20.f);
+
+    dm1->setPosition(500, 400);
+    this->addChild(dm1, 9, sk::tag::kMonster);
+
+    auto dm2 = MonsterWithGun::create();
+    dm2->generatePhysics(20.f);
+
+    dm2->setPosition(700, 400);
+    this->addChild(dm2, 9, sk::tag::kMonster);
+
+    auto dm3 = MonsterCrawShoot::create();
+    dm3->generatePhysics(20.f);
+
+    dm3->setPosition(300, 200);
+    this->addChild(dm3, 9, sk::tag::kMonster);
+
+    auto dm4 = MonsterCrawShoot::create();
+    dm4->generatePhysics(20.f);
+
+    dm4->setPosition(900, 200);
+    this->addChild(dm4, 9, sk::tag::kMonster);
+
+    this->scheduleUpdate();
 
     return true;
 }
@@ -164,6 +189,22 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
                 return true;
             }
         }
+        if ((nodeA->getTag() == sk::tag::kMonster && nodeB->getTag() == sk::tag::kBarrier)
+            || (nodeB->getTag() == sk::tag::kMonster && nodeA->getTag() == sk::tag::kBarrier))
+        {
+            if (nodeA->getTag() == sk::tag::kMonster)
+            {
+                auto v = nodeA->getPhysicsBody()->getVelocity();
+                nodeA->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+            else
+            {
+                auto v = nodeB->getPhysicsBody()->getVelocity();
+                nodeB->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+        }
     }
     return false;
 }
@@ -189,6 +230,11 @@ void RoomMap::addPlayerAssassin()
         this->addChild(assassin, 3, sk::tag::kHero);
         assassin->rest();
 
+        BulletLayer* bulletLayer = BulletLayer::create();
+        bulletLayer->retain();
+        bulletLayer->bindHero(assassin);
+        this->addChild(bulletLayer, 8, 450);
+
         auto keyBoardListener = EventListenerKeyboard::create();
         keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
         keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
@@ -205,4 +251,20 @@ TMXTiledMap* RoomMap::createTiled(int mapNumber)
     if (mapNumber == 4) return TMXTiledMap::create("map/ShopRoom.tmx");
     if (mapNumber == 5) return TMXTiledMap::create("map/BossRoom.tmx");
     return nullptr;
+}
+
+void RoomMap::update(float dt)
+{
+    auto node = this->getChildByTag(sk::tag::kMonster);
+    if (node == nullptr)
+    {
+        if (!ifDoor)
+        {
+            Treasure* testTreasure = Treasure::create();
+            testTreasure->setPosition(640, 200);
+            this->addChild(testTreasure, 3, sk::tag::kTreasure);
+            createDoor();
+            ifDoor = true;
+        }
+    }
 }
