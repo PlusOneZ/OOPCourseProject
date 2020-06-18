@@ -177,9 +177,8 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
 			auto hero = Hero::m_pPresentHero;
 			hero->retain();
 			hero->removeFromParentAndCleanup(false);
-			hero->setPosition(640, 100);
+			hero->setPosition(640.f, 100.f);
 			hero->generatePhysics();
-			hero->getPhysicsBody()->setEnabled(false);
 			nextRoom->addChild(Hero::m_pPresentHero, 3);
 			auto keyBoardListener = EventListenerKeyboard::create();
 			keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
@@ -262,8 +261,7 @@ void RoomMap::addPlayer(sk::HeroID id)
 		}
 		hero->bindSprite(heroSprite);
 		hero->generatePhysics();
-		hero->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y + 150.0)));
+		hero->setPosition(640.f, 500.f);
 		this->addChild(hero, 4, sk::tag::kHero);
 		hero->rest();
 
@@ -303,8 +301,4 @@ void RoomMap::update(float dt)
             ifDoor = true;
         }
     }
-	if (!Hero::m_pPresentHero->getPhysicsBody()->isEnabled())
-	{
-		Hero::m_pPresentHero->getPhysicsBody()->setEnabled(true);
-	}
 }
