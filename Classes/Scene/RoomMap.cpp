@@ -5,6 +5,7 @@
 */
 
 #include "RoomMap.h"
+#include "Actor/Knight.h"
 
 int RoomMap::m_mapNumber = 1;
 
@@ -56,7 +57,10 @@ bool RoomMap::init()
     createBarrier();
     //createDoor();
 
-    addPlayerAssassin();
+	if (Hero::m_pPresentHero == nullptr)
+	{
+		addPlayer(sk::HeroID::kAssassin);
+	}
 
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
@@ -170,7 +174,24 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
                 return false;
             }
             auto nextRoom = createScene(map);
+			auto hero = Hero::m_pPresentHero;
+			hero->retain();
+			hero->removeFromParentAndCleanup(false);
+			hero->setPosition(640, 100);
+			hero->generatePhysics();
+			hero->getPhysicsBody()->setEnabled(false);
+			nextRoom->addChild(Hero::m_pPresentHero, 3);
+			auto keyBoardListener = EventListenerKeyboard::create();
+			keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
+			keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
+			_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, nextRoom);
+
+			BulletLayer* bulletLayer = BulletLayer::create();
+			bulletLayer->retain();
+			bulletLayer->bindHero(hero);
+			nextRoom->addChild(bulletLayer, 8, 450);
             Director::getInstance()->replaceScene(nextRoom);
+
             return true;
         }
         if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
@@ -209,38 +230,53 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
     return false;
 }
 
-void RoomMap::addPlayerAssassin()
+void RoomMap::addPlayer(sk::HeroID id)
 {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
-    Sprite* assassinSprite = Sprite::create(fig);
-    if (assassinSprite == nullptr)
-    {
-        log("assassin_rest1.png not found");
-    }
-    else
-    {
-        Assassin* assassin = Assassin::create();
-        assassin->bindSprite(assassinSprite);
-        Hero::m_pPresentHero = assassin;
-        this->myHero = assassin;
-        assassin->generatePhysics();
-        assassin->setPosition(Vec2(640, 200));
-        this->addChild(assassin, 3, sk::tag::kHero);
-        assassin->rest();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	PolygonInfo fig;
+	Hero* hero;
+	if (id == sk::HeroID::kAssassin)
+	{
+		fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
+	}
+	else
+	{
+		fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
+	}
+	Sprite* heroSprite = Sprite::create(fig);
 
-        BulletLayer* bulletLayer = BulletLayer::create();
-        bulletLayer->retain();
-        bulletLayer->bindHero(assassin);
-        this->addChild(bulletLayer, 8, 450);
+	if (heroSprite == nullptr)
+	{
+		log("hero picture not found");
+	}
+	else
+	{
+		if (id == sk::HeroID::kAssassin)
+		{
+			hero = Assassin::create();
+		}
+		else
+		{
+			hero = Knight::create();
+		}
+		hero->bindSprite(heroSprite);
+		hero->generatePhysics();
+		hero->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+			visibleSize.height / 2 + origin.y + 150.0)));
+		this->addChild(hero, 4, sk::tag::kHero);
+		hero->rest();
 
-        auto keyBoardListener = EventListenerKeyboard::create();
-        keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, assassin);
-        keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, assassin);
+		BulletLayer* bulletLayer = BulletLayer::create();
+		bulletLayer->retain();
+		bulletLayer->bindHero(hero);
+		this->addChild(bulletLayer, 8, sk::tag::kBulletLayer);
 
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
-    }
+		auto keyBoardListenerHero = EventListenerKeyboard::create();
+		keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
+		keyBoardListenerHero->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
+	}
 }
 
 TMXTiledMap* RoomMap::createTiled(int mapNumber)
@@ -267,4 +303,8 @@ void RoomMap::update(float dt)
             ifDoor = true;
         }
     }
+	if (!Hero::m_pPresentHero->getPhysicsBody()->isEnabled())
+	{
+		Hero::m_pPresentHero->getPhysicsBody()->setEnabled(true);
+	}
 }

@@ -74,10 +74,10 @@ public:
 	void createDoor();
 
 	/**
-	*@brief 添加刺客
-	*@author 肖杨
-	*/
-	void addPlayerAssassin();
+	 *@brief 添加玩家 子弹层 键盘监控
+	*@author 肖杨  翟晨昊 卓正一
+	 */
+	void addPlayer(sk::HeroID id);
 
 	/**
 	*@brief 触碰门切换房间
