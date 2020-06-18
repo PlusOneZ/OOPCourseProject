@@ -141,6 +141,13 @@ public:
 	*/
 	int getBaseDamage();
 
+	/**
+	*@brief 获取英雄ID
+	*@author 肖杨
+	*@return 英雄ID
+	*/
+	sk::HeroID getHeroID();
+
 	static Hero* m_pPresentHero;
 	static Item* m_pPresentContactItem;
 

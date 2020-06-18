@@ -10,8 +10,7 @@ bool MonsterPig::init()
 {
     if (!Monster::init())
         return false;
-    schedule(CC_SCHEDULE_SELECTOR(MonsterPig::wanderSpeed), 0.5);
-    schedule(CC_SCHEDULE_SELECTOR(MonsterPig::followSpeed), 1.5f);
+    schedule(CC_SCHEDULE_SELECTOR(MonsterPig::followSpeed), .5f);
     schedule(CC_SCHEDULE_SELECTOR(MonsterPig::attack), 2.f);
     m_pMoveAnimation = creatActorAnimate(sk::files::kPigMove,
                                          50, 48, 5);
@@ -60,6 +59,7 @@ void MonsterPig::followSpeed(float dt)
     else
     {
         m_canFollow = false;
+        wanderSpeed(0.);
     }
 }
 

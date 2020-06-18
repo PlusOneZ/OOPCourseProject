@@ -8,9 +8,18 @@
 #define _ROOM_MAP_H
 
 #include "cocos2d.h"
-#include "Actor/Knight.h"
-#include "Actor/Assassin.h"
+#include "BulletLayer.h"
 #include "Const/Const.h"
+#include "Item/Gun.h"
+#include <iostream>
+#include "Component/HeroUI.h"
+#include "Item/Statue.h"
+#include "Item/Treasure.h"
+#include "Actor/Assassin.h"
+#include "Component/Trap.h"
+#include "Item/HealthPotion.h"
+#include "Actor/DistantMonster.h"
+#include "Actor/Monster.h"
 
 USING_NS_CC;
 
@@ -65,10 +74,10 @@ public:
 	void createDoor();
 
 	/**
-	*@brief 添加刺客
-	*@author 肖杨
-	*/
-	void addPlayerAssassin();
+	 *@brief 添加玩家 子弹层 键盘监控
+	*@author 肖杨  翟晨昊 卓正一
+	 */
+	void addPlayer(sk::HeroID id);
 
 	/**
 	*@brief 触碰门切换房间
@@ -82,10 +91,17 @@ public:
 	*/
 	static TMXTiledMap* createTiled(int mapNumber);
 
+	/**
+	*@brief 绑定逐帧检测
+	*@author 李嘉树
+	*/
+	void update(float dt) override;
+
 	static int m_mapNumber;
 protected:
 	TMXTiledMap* m_pMap;
 	Assassin* myHero;
+	bool ifDoor;
 };
 
 #endif

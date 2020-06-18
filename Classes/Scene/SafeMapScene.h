@@ -45,17 +45,18 @@ public:
 
     CREATE_FUNC(SafeMap);
 
-    /**
-    *@brief 添加骑士 子弹层 键盘监控
-    *@author 肖杨  翟晨昊 卓正一
-    */
-    void addPlayerKnight();
+	/**
+	 *@brief 添加玩家 子弹层 键盘监控
+	*@author 肖杨  翟晨昊 卓正一
+	 */
+	void addPlayer(sk::HeroID id);
+
 
 	/**
-	*@brief 功能同上，角色为刺客
+	*@brief 去除多余的键盘监控
 	*@author 肖杨
 	*/
-	void addPlayerAssassin();
+	void removeKeyboard(Node* node);
 
     static EventListenerKeyboard* keyBoardListenerOne;
     static EventListenerKeyboard* keyBoardListenerTwo;

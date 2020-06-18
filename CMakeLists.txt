@@ -91,6 +91,9 @@ list(APPEND GAME_SOURCE
         Classes/Item/Board.cpp
         Classes/Item/Statue.cpp
         Classes/Item/MonsterWeapons.cpp
+        Classes/Item/Treasure.cpp
+        Classes/Item/ChangeHero.cpp
+
 
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
@@ -129,6 +132,9 @@ list(APPEND GAME_HEADER
         Classes/Item/Board.h
         Classes/Item/Statue.h
         Classes/Item/MonsterWeapons.h
+        Classes/Item/Treasure.h
+        Classes/Item/ChangeHero.h
+
 
         Classes/Component/Trap.h
         Classes/Component/Buff.h

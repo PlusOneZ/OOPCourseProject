@@ -11,7 +11,7 @@ bool MonsterCrawShoot::init()
         return false;
     schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::wanderSpeed), 0.5);
     schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::followSpeed), 1.5f);
-    schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::attack), 5.f);
+    schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::attack), 3.f);
     // TODO 参数化
     m_pMoveAnimation = creatActorAnimate(sk::files::kYellowCrawMove,
             50, 48, 6);
@@ -55,6 +55,7 @@ void MonsterCrawShoot::followSpeed(float dt)
         {
             m_sprite->setFlippedX(true);
         }
+        log("following");
     }
     else
     {
@@ -64,11 +65,13 @@ void MonsterCrawShoot::followSpeed(float dt)
 
 void MonsterCrawShoot::attack(float dt)
 {
+    log("Try attacking.");
     if (!m_canFollow || m_pWeapon == nullptr || Hero::m_pPresentHero == nullptr
-        || BulletLayer::getInstance() != nullptr)
+        || BulletLayer::getInstance() == nullptr)
         return;
     const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
 
+    log("att");
     AudioEngine::play2d(sk::files::kMonThorn, false, 0.25);
     auto num = m_pWeapon->getBulletCount();
     for (int i = 0; i < num; i++)

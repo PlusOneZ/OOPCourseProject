@@ -29,11 +29,6 @@ public:
 	*/
 	void scheduleUI(float dt);
 
-	/**
-	*@brief 绑定新英雄状态
-	*@author 肖杨
-	*/
-	void changeHero(Hero* newHero);
 protected:
 	Sprite* m_pSprite;
 	ProgressTimer* m_pHealth;

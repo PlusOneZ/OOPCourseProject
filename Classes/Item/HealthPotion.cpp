@@ -12,7 +12,6 @@ bool HealthPotion::init()
 	m_pSprite = Sprite::create("item/HealthPotion.png");
 	this->addChild(m_pSprite);
 	generatePhysicalBody(kHealthPotionMessage, sk::tag::kHealthPotion);
-	this->setShopItem(1);
 	return true;
 }
 
