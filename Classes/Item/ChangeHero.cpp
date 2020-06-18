@@ -13,7 +13,7 @@ static const std::string kChangeToAssassin = "change to assassin";
 
 bool ChangeHero::init()
 {
-	if (Hero::m_pPresentHero->getHeroID() == sk::HeroID::kAssassin)
+	if (Hero::getInstance()->getHeroID() == sk::HeroID::kAssassin)
 	{
 		m_ID = sk::HeroID::kKnight;
 		m_pSprite = Sprite::create("Actor/knight_down.png");
@@ -33,20 +33,20 @@ bool ChangeHero::init()
 void ChangeHero::interact()
 {
 	SafeMap* pMap;
-	pMap = dynamic_cast<SafeMap*>(Hero::m_pPresentHero->getParent());
+	pMap = dynamic_cast<SafeMap*>(Hero::getInstance()->getParent());
 	if (pMap != nullptr)
 	{
 		pMap->getChildByTag(sk::tag::kHeroUI)->removeFromParentAndCleanup(true);
 		pMap->getChildByTag(sk::tag::kBulletLayer)->removeFromParentAndCleanup(true);
 		pMap->keyBoardListenerOne->setEnabled(false);
-		pMap->removeKeyboard(Hero::m_pPresentHero);
-		Hero::m_pPresentHero->unscheduleUpdate();
+		pMap->removeKeyboard(Hero::getInstance());
+        Hero::getInstance()->unscheduleUpdate();
 
-		Hero::m_pPresentHero->removeFromParentAndCleanup(true);
-		Hero::m_pPresentHero = nullptr;
+        Hero::getInstance()->removeFromParentAndCleanup(true);
+        Hero::clearPresentHero();
 
 		pMap->addPlayer(m_ID);
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 
 		this->removeFromParentAndCleanup(true);
 

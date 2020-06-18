@@ -106,7 +106,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
             log("Hero shot");
             if (body2->getTag() == sk::tag::kHero)
             {
-                Hero::m_pPresentHero->reduceHealth(
+                Hero::getInstance()->reduceHealth(
                         dynamic_cast<Bullet* >(body1->getParent())->getDamage());
             }
             if (body1->getTag() == sk::tag::kMonsterBullet)
@@ -120,7 +120,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
             log("Hero shot");
             if (body1->getTag() == sk::tag::kHero)
             {
-                Hero::m_pPresentHero->reduceHealth(
+                Hero::getInstance()->reduceHealth(
                         dynamic_cast<Bullet* >(body2->getParent())->getDamage());
             }
             if (body2->getTag() == sk::tag::kMonsterBullet)

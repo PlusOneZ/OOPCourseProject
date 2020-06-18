@@ -53,7 +53,6 @@ private:
 	Hero* m_pHero;
 	clock_t          m_lastShotTime;
 	//Vector<Bullet* > m_pWeaponBullet;
-	SpriteBatchNode* m_pBulletBatchNode;
 };
 
 #endif

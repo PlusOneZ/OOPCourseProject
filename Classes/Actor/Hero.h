@@ -148,10 +148,20 @@ public:
 	*/
 	sk::HeroID getHeroID();
 
-	static Hero* m_pPresentHero;
-	static Item* m_pPresentContactItem;
+    static Hero* getInstance();
+
+    static void clearPresentHero();
+
+    static Item* getPresentContactItem();
+
+    static void setPresentContactItem(Item *pItem);
+
+
 
 protected:
+
+    static Hero* m_pPresentHero;
+    static Item* m_pPresentContactItem;
     /// 武器
     Weapon* m_pMainWeapon = nullptr;
     Weapon* m_pSecWeapon  = nullptr;

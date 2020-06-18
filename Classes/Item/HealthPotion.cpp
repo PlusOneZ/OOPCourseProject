@@ -19,10 +19,10 @@ void HealthPotion::interact()
 {
 	if (buyItem())
 	{
-        Hero::m_pPresentHero->recoverHealth(2);
+        Hero::getInstance()->recoverHealth(2);
 		log("HP++");
 		this->removeFromParentAndCleanup(true);//用完就释放
 		AudioEngine::play2d(sk::files::kTakePotion);
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 	}
 }

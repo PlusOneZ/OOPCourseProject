@@ -29,9 +29,9 @@ bool MonsterCrawShoot::init()
 
 void MonsterCrawShoot::followSpeed(float dt)
 {
-    if (Hero::m_pPresentHero == nullptr)
+    if (Hero::getInstance() == nullptr)
         return;
-    auto targetPos = Hero::m_pPresentHero->getPosition();
+    auto targetPos = Hero::getInstance()->getPosition();
     auto selfPos = getPosition();
 
     auto d = targetPos - selfPos;
@@ -66,7 +66,7 @@ void MonsterCrawShoot::followSpeed(float dt)
 void MonsterCrawShoot::attack(float dt)
 {
     log("Try attacking.");
-    if (!m_canFollow || m_pWeapon == nullptr || Hero::m_pPresentHero == nullptr
+    if (!m_canFollow || m_pWeapon == nullptr || Hero::getInstance() == nullptr
         || BulletLayer::getInstance() == nullptr)
         return;
     const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
@@ -78,7 +78,7 @@ void MonsterCrawShoot::attack(float dt)
     {
         Bullet *pBullet = m_pWeapon->createBullet();
 
-        auto pos = Hero::m_pPresentHero->getPosition();
+        auto pos = Hero::getInstance()->getPosition();
         pBullet->attack(pos.x, pos.y, getPosition() + kOffSet, m_facing);
         BulletLayer::getInstance()->addChild(pBullet);
     }
@@ -124,9 +124,9 @@ bool MonsterWithGun::init()
 
 void MonsterWithGun::followSpeed(float dt)
 {
-    if (Hero::m_pPresentHero == nullptr)
+    if (Hero::getInstance() == nullptr)
         return;
-    auto targetPos = Hero::m_pPresentHero->getPosition();
+    auto targetPos = Hero::getInstance()->getPosition();
     auto selfPos = getPosition();
 
     auto d = targetPos - selfPos;
@@ -159,7 +159,7 @@ void MonsterWithGun::followSpeed(float dt)
 
 void MonsterWithGun::attack(float dt)
 {
-    if (!m_canFollow || m_pWeapon == nullptr || Hero::m_pPresentHero == nullptr
+    if (!m_canFollow || m_pWeapon == nullptr || Hero::getInstance() == nullptr
         || BulletLayer::getInstance() == nullptr)
         return;
 
@@ -167,7 +167,7 @@ void MonsterWithGun::attack(float dt)
 
     Bullet *pBullet = m_pWeapon->createBullet();
 
-    auto pos = Hero::m_pPresentHero->getPosition();
+    auto pos = Hero::getInstance()->getPosition();
     pBullet->attack(pos.x, pos.y, getPosition(), m_facing);
     BulletLayer::getInstance()->addChild(pBullet);
 }

@@ -30,9 +30,9 @@ bool MonsterPig::init()
 
 void MonsterPig::followSpeed(float dt)
 {
-    if (Hero::m_pPresentHero == nullptr || m_isDashing)
+    if (Hero::getInstance() == nullptr || m_isDashing)
         return;
-    auto targetPos = Hero::m_pPresentHero->getPosition();
+    auto targetPos = Hero::getInstance()->getPosition();
     auto selfPos = getPosition();
 
     auto d = targetPos - selfPos;
@@ -65,7 +65,7 @@ void MonsterPig::followSpeed(float dt)
 
 void MonsterPig::attack(float dt)
 {
-    if (!m_canAttack || m_pWeapon == nullptr || Hero::m_pPresentHero == nullptr
+    if (!m_canAttack || m_pWeapon == nullptr || Hero::getInstance() == nullptr
         || BulletLayer::getInstance() == nullptr || m_isDashing)
         return;
 
@@ -73,7 +73,7 @@ void MonsterPig::attack(float dt)
 
     Bullet *pBullet = m_pWeapon->createBullet();
 
-    auto pos = Hero::m_pPresentHero->getPosition();
+    auto pos = Hero::getInstance()->getPosition();
     pBullet->attack(pos.x, pos.y, getPosition(), m_facing, this);
     BulletLayer::getInstance()->addChild(pBullet);
     dash();
@@ -81,10 +81,10 @@ void MonsterPig::attack(float dt)
 
 void MonsterPig::dash()
 {
-    if (Hero::m_pPresentHero == nullptr)
+    if (Hero::getInstance() == nullptr)
         return;
     m_isDashing = true;
-    auto d = Hero::m_pPresentHero->getPosition() - getPosition();
+    auto d = Hero::getInstance()->getPosition() - getPosition();
     d.normalize();
     d *= m_dashSpeed;
 

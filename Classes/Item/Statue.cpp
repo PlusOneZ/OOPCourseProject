@@ -31,7 +31,7 @@ void WarStatue::interact()
 	{
 		HeroBuff.increaseATK(m_damage);
 		m_pSprite->getPhysicsBody()->setEnabled(false);
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 		m_pMessage->setVisible(false);
 	}
 }
@@ -58,7 +58,7 @@ void AssassinStatue::interact()
 	{
 		HeroBuff.speedUp(m_increaseSpeed);
 		m_pSprite->getPhysicsBody()->setEnabled(false);
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 		m_pMessage->setVisible(false);
 	}
 }
