@@ -60,7 +60,7 @@ bool BulletLayer::onMouseDown(Event* event)
             log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
             log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
             //m_pWeaponBullet.pushBack(pBullet);
-            pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(), m_pHero->getFacing());
+            pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(),m_pHero->getFacing());
             this->addChild(pBullet);
         }
     }
@@ -131,4 +131,9 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
         }
     }
     return true;
+}
+
+BulletLayer *BulletLayer::getInstance()
+{
+    return m_pPresentBulletLayer;
 }

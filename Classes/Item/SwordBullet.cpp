@@ -35,8 +35,10 @@ bool SwordBullet::init()
 	return true;
 }
 
-void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
+void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite)
 {
+    if (Hero::m_pPresentHero == nullptr)
+        return;
 	if (curFacing == sk::kLeft)
 	{
 		m_pBulletSprite->setFlippedX(true);

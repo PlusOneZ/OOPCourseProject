@@ -42,4 +42,25 @@ bool MonOneShotGun::init()
     return true;
 }
 
+/// ------- Close -------
 
+bool MonInvisiblePigDash::init()
+{
+    Sprite* pSprite = Sprite::create("item/bullets/effect_dash.png");
+    m_weaponSprite = pSprite;
+    if (pSprite == nullptr)
+    {
+        log("Empty sprite not initialized");
+    }
+    bindSprite(pSprite);
+    setInterval(.2f);
+    setBulletCount(0);
+    setDamage(3);
+    return true;
+}
+Bullet *MonInvisiblePigDash::createBullet()
+{
+    Bullet* pBullet = MonPigDashAttack::create();
+    pBullet->setDamage(m_weaponDamage);
+    return pBullet;
+}

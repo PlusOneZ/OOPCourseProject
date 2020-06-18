@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Component/HeroUI.h"
 #include "Item/Statue.h"
+#include "Actor/CloseMonster.h"
 
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
@@ -245,8 +246,8 @@ bool SafeMap::init()
 	addPlayerAssassin();
 
 	Monster::loadAllAnimate();
-	auto dm = MonsterWithGun::create();
-	dm->generatePhysics(20.f);
+	auto dm = MonsterPig::create();
+
 
 	dm->setPosition(500, 500);
 	addChild(dm, 5, sk::tag::kMonster);

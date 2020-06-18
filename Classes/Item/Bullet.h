@@ -24,7 +24,8 @@ public:
     *@brief 子弹攻击
     *@author 翟晨昊
     */
-	virtual void attack(float mouseX, float mouseY, Point heroPoint, int curFacing) = 0;
+	virtual void attack(float mouseX, float mouseY, Point heroPoint, int curFacing,
+                        Node *p_sprite = nullptr) = 0;
 
 	/**
 	*@brief 获取子弹速度

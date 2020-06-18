@@ -75,6 +75,7 @@ list(APPEND GAME_SOURCE
         Classes/Actor/Assassin.cpp
         Classes/Actor/Monster.cpp
         Classes/Actor/DistantMonster.cpp
+        Classes/Actor/CloseMonster.cpp
 
         Classes/Item/Item.cpp
         Classes/Item/Weapon.cpp
@@ -89,6 +90,7 @@ list(APPEND GAME_SOURCE
         Classes/Item/SwordBullet.cpp
         Classes/Item/Board.cpp
         Classes/Item/Statue.cpp
+        Classes/Item/MonsterWeapons.cpp
 
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
@@ -111,6 +113,7 @@ list(APPEND GAME_HEADER
         Classes/Actor/Assassin.h
         Classes/Actor/Monster.h
         Classes/Actor/DistantMonster.h
+        Classes/Actor/CloseMonster.h
 
         Classes/Item/Item.h
         Classes/Item/Weapon.h
@@ -125,6 +128,7 @@ list(APPEND GAME_HEADER
         Classes/Item/SwordBullet.h
         Classes/Item/Board.h
         Classes/Item/Statue.h
+        Classes/Item/MonsterWeapons.h
 
         Classes/Component/Trap.h
         Classes/Component/Buff.h
@@ -191,7 +195,7 @@ endif ()
 set(all_code_files
         ${GAME_HEADER}
         ${GAME_SOURCE}
-        Classes/Item/MonsterWeapons.cpp Classes/Item/MonsterWeapons.h)
+        )
 if (NOT ANDROID)
     add_executable(${APP_NAME} ${all_code_files})
 else ()

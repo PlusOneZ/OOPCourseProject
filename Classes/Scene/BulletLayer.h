@@ -45,6 +45,9 @@ public:
 
 	bool onContactBegin(PhysicsContact& contact);
 
+    static BulletLayer* getInstance();
+
+protected:
     static BulletLayer* m_pPresentBulletLayer;
 private:
 	Hero* m_pHero;
