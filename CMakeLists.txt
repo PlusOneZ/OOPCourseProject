@@ -93,7 +93,8 @@ list(APPEND GAME_SOURCE
         Classes/Item/MonsterWeapons.cpp
         Classes/Item/Treasure.cpp
         Classes/Item/ChangeHero.cpp
-
+        Classes/Item/Spear.cpp
+        Classes/Item/SpearBullet.cpp
 
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
@@ -134,7 +135,8 @@ list(APPEND GAME_HEADER
         Classes/Item/MonsterWeapons.h
         Classes/Item/Treasure.h
         Classes/Item/ChangeHero.h
-
+        Classes/Item/Spear.h
+        Classes/Item/SpearBullet.h
 
         Classes/Component/Trap.h
         Classes/Component/Buff.h

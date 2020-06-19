@@ -40,6 +40,12 @@ namespace sk
         kMonster
     };
 
+    enum class BulletShape
+    {
+        kCircle,
+        kRectangle
+    };
+
     // File names
     namespace files
     {
@@ -127,6 +133,7 @@ namespace sk
 		static const int kGunWeapon      = 1002;
 		static const int kShotgunWeapon  = 1003;
 		static const int kSwordWeapon    = 1004;
+        static const int kSpearWeapon    = 1005;
 		static const int kTreasure       = 1030;
 		static const int kWarStatue      = 31;
 		static const int kAssassinStatue = 32;

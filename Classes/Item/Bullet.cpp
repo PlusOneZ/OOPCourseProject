@@ -16,12 +16,20 @@ void Bullet::setSpeed(float speed)
     m_bulletSpeed = speed;
 }
 
-void Bullet::bindSprite(Sprite *pSprite, sk::Kind kind, int tag)
+void Bullet::bindSprite(Sprite *pSprite, sk::Kind kind, sk::BulletShape shape, int tag)
 {
+    PhysicsBody* body = nullptr;
     m_pBulletSprite = pSprite;
+    if (shape == sk::BulletShape::kCircle)
+    {
+        body = PhysicsBody::createCircle(m_pBulletSprite->getContentSize().width / 2);
+    }
+    else if (shape == sk::BulletShape::kRectangle)
+    {
+        body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
+    }
     if (kind == sk::Kind::kSelf)
     {
-        auto body = PhysicsBody::createCircle(m_pBulletSprite->getContentSize().width / 2);
         body->setCategoryBitmask(sk::bitMask::kSelfBulletCategory);
         body->setCollisionBitmask(sk::bitMask::kSelfBulletCollision);
         body->setContactTestBitmask(sk::bitMask::kSelfBulletContact);
@@ -30,7 +38,6 @@ void Bullet::bindSprite(Sprite *pSprite, sk::Kind kind, int tag)
     }
     else if (kind == sk::Kind::kMonster)
     {
-        auto body = PhysicsBody::createBox(m_pBulletSprite->getContentSize());
         body->setCategoryBitmask(sk::bitMask::kMonsterBulletCategory);
         body->setCollisionBitmask(sk::bitMask::kMonsterBulletCollision);
         body->setContactTestBitmask(sk::bitMask::kMonsterBulletContact);

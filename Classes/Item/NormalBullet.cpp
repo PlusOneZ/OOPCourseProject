@@ -12,7 +12,7 @@ bool NormalBullet::init()
 	{
 		log("gunbullet.png not found");
 	}
-    bindSprite(pSprite, sk::Kind::kSelf);
+    bindSprite(pSprite, sk::Kind::kSelf, sk::BulletShape::kCircle);
 	setSpeed(3);
 	m_isArrive = false;
 	return true;

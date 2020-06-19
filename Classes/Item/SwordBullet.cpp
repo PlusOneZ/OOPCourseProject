@@ -31,7 +31,7 @@ bool SwordBullet::init()
 	}
 	auto fig ="item/sword1.png";
 	m_pBulletSprite = Sprite::create(fig);
-    bindSprite(m_pBulletSprite, sk::Kind::kSelf, sk::tag::kCloseDamage);
+    bindSprite(m_pBulletSprite, sk::Kind::kSelf, sk::BulletShape::kCircle, sk::tag::kCloseDamage);
 	return true;
 }
 

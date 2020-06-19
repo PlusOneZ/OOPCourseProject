@@ -43,7 +43,7 @@ public:
 	*@brief 绑定图像
 	*@author 翟晨昊
 	*/
-    void bindSprite(Sprite *pSprite, sk::Kind kind = sk::Kind::kSelf, int tag = sk::tag::kBullet);
+    void bindSprite(Sprite *pSprite, sk::Kind kind, sk::BulletShape shape, int tag = sk::tag::kBullet);
 
     /**
      * @brief 设置伤害

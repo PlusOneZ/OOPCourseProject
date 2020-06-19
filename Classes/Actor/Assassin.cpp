@@ -5,7 +5,7 @@
 */
 #include "Assassin.h"
 #include "Item/Shotgun.h"
-#include "Item/Sword.h"
+#include "Item/Spear.h"
 #include "Component/Buff.h"
 
 bool Assassin::init()
@@ -15,7 +15,7 @@ bool Assassin::init()
 		m_pPresentHero = this;
 		scheduleUpdate();
 		setMainWeapon(Shotgun::create());
-		setSecondWeapon(Sword::create());
+		setSecondWeapon(Spear::create());
 		m_pSecWeapon->setVisible(false);
 		m_pMoveAnimate = creatActorAnimate("Actor/assassin_move", 46, 54);
 		m_pRestAnimate = creatActorAnimate("Actor/assassin_rest", 50, 54);

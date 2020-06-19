@@ -9,7 +9,7 @@ bool MonFiveWayBullet::init()
     {
         log("monster_bullet_1.png not found");
     }
-    bindSprite(pSprite, sk::Kind::kMonster, sk::tag::kMonsterBullet);
+    bindSprite(pSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle, sk::tag::kMonsterBullet);
     setSpeed(200);
     m_isArrive = false;
     return true;
@@ -56,7 +56,7 @@ bool MonOneShotBullet::init()
     {
         log("monster_bullet_2.png not found");
     }
-    bindSprite(pSprite, sk::Kind::kMonster, sk::tag::kMonsterBullet);
+    bindSprite(pSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle, sk::tag::kMonsterBullet);
     setSpeed(100);
     m_isArrive = false;
     return true;
@@ -104,7 +104,7 @@ bool MonPigDashAttack::init()
     }
     auto fig ="item/bullets/effect_dash1.png";
     m_pBulletSprite = Sprite::create(fig);
-    bindSprite(m_pBulletSprite, sk::Kind::kMonster, sk::tag::kMonsterClose);
+    bindSprite(m_pBulletSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle, sk::tag::kMonsterClose);
     return true;
 }
 
