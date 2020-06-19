@@ -49,5 +49,22 @@ public:
 
 };
 
+class MonInvisiblePigDash : public Weapon {
+
+public:
+    CREATE_FUNC(MonInvisiblePigDash);
+
+    /**
+    *@brief  创造子弹
+    *@author 卓正一
+    */
+    Bullet* createBullet() override;
+
+    /**
+    *@brief  初始化
+    *@author 卓正一
+    */
+    bool init() override;
+};
 
 #endif // MONSTER_WEAPONS_H

@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Component/HeroUI.h"
 #include "Item/Statue.h"
+#include "Actor/CloseMonster.h"
 #include "Item/Treasure.h"
 #include "Item/ChangeHero.h"
 
@@ -252,8 +253,8 @@ bool SafeMap::init()
 	this->addChild(testChangeHero, 3, sk::tag::kChangeHero);
 
 	Monster::loadAllAnimate();
-	auto dm = MonsterWithGun::create();
-	dm->generatePhysics(20.f);
+	auto dm = MonsterPig::create();
+
 
 	dm->setPosition(500, 500);
 	addChild(dm, 5, sk::tag::kMonster);

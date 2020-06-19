@@ -18,7 +18,7 @@ bool NormalBullet::init()
 	return true;
 }
 
-void NormalBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
+void NormalBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite)
 {
 	heroPoint.x += (curFacing == 0 ? 25.0 : -25.0);
 	heroPoint.y += 20.0;

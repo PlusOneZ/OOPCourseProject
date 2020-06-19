@@ -108,7 +108,7 @@ void FlameTrap::update(float dt)
 	if (flameTime >= 1)
 	{
 		flameTime -= 1;
-        Hero::m_pPresentHero->reduceHealth();
+        Hero::getInstance()->reduceHealth();
 	}
 	if (time <= 0)
 	{

@@ -18,7 +18,7 @@ bool ShotgunBullet::init()
 	return true;
 }
 
-void ShotgunBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
+void ShotgunBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite)
 {
 	heroPoint.x += (curFacing == 0 ? 25.0f : -25.0f);
 	heroPoint.y += 20.0;

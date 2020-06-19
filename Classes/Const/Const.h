@@ -66,12 +66,15 @@ namespace sk
         static const char kKnightRest[] = "Actor/knight_rest";
         static const char kKnightMove[] = "Actor/knight_move";
 
+        // Monsters
         static const char kYellowCrawMove[] = "Actor/Monster/Y_craw_monster";
         static const char kYellowCrawDie[]  = "Actor/Monster/Y_craw_monster_dead.png";
 
         static const char kOrangeSmallMove[] = "Actor/Monster/O_small_monster";
         static const char kOrangeSmallDie[]  = "Actor/Monster/O_small_monster_dead.png";
 
+        static const char kPigMove[] = "Actor/Monster/pig_monster";
+        static const char kPigDie[]  = "Actor/Monster/pig_monster_dead.png";
 
         static const char kHeroAvatar[2][40] = {
                 "interface/ui2_knight.png",

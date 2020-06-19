@@ -29,11 +29,6 @@ public:
      */
     bool init() override ;
 
-    /**
-     * @brief  播放移动动画
-     * @author 卓正一
-     */
-    void move();
 
     /**
      * @brief  见基类

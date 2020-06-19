@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file
 *RoomMap.cpp
 *@author 李嘉树
@@ -57,7 +57,7 @@ bool RoomMap::init()
     createBarrier();
     //createDoor();
 
-	if (Hero::m_pPresentHero == nullptr)
+	if (Hero::getInstance() == nullptr)
 	{
 		addPlayer(sk::HeroID::kAssassin);
 	}
@@ -174,12 +174,12 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
                 return false;
             }
             auto nextRoom = createScene(map);
-			auto hero = Hero::m_pPresentHero;
+			auto hero = Hero::getInstance();
 			hero->retain();
 			hero->removeFromParentAndCleanup(false);
 			hero->setPosition(640.f, 100.f);
 			hero->generatePhysics();
-			nextRoom->addChild(Hero::m_pPresentHero, 3);
+			nextRoom->addChild(Hero::getInstance(), 3);
 			auto keyBoardListener = EventListenerKeyboard::create();
 			keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
 			keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
@@ -231,8 +231,6 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
 
 void RoomMap::addPlayer(sk::HeroID id)
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	PolygonInfo fig;
 	Hero* hero;
 	if (id == sk::HeroID::kAssassin)
@@ -302,6 +300,7 @@ void RoomMap::update(float dt)
         }
     }
 }
+<<<<<<< HEAD
 
 void RoomMap::addPlayer(sk::HeroID id)
 {
@@ -351,3 +350,5 @@ void RoomMap::addPlayer(sk::HeroID id)
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
     }
 }
+=======
+>>>>>>> ZZY

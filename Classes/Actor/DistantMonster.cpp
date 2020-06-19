@@ -11,7 +11,7 @@ bool MonsterCrawShoot::init()
         return false;
     schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::wanderSpeed), 0.5);
     schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::followSpeed), 1.5f);
-    schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::attack), 5.f);
+    schedule(CC_SCHEDULE_SELECTOR(MonsterCrawShoot::attack), 3.f);
     // TODO 参数化
     m_pMoveAnimation = creatActorAnimate(sk::files::kYellowCrawMove,
             50, 48, 6);
@@ -29,9 +29,9 @@ bool MonsterCrawShoot::init()
 
 void MonsterCrawShoot::followSpeed(float dt)
 {
-    if (Hero::m_pPresentHero == nullptr)
+    if (Hero::getInstance() == nullptr)
         return;
-    auto targetPos = Hero::m_pPresentHero->getPosition();
+    auto targetPos = Hero::getInstance()->getPosition();
     auto selfPos = getPosition();
 
     auto d = targetPos - selfPos;
@@ -55,6 +55,7 @@ void MonsterCrawShoot::followSpeed(float dt)
         {
             m_sprite->setFlippedX(true);
         }
+        log("following");
     }
     else
     {
@@ -64,19 +65,22 @@ void MonsterCrawShoot::followSpeed(float dt)
 
 void MonsterCrawShoot::attack(float dt)
 {
-    if (!m_canFollow || m_pWeapon == nullptr)
+    log("Try attacking.");
+    if (!m_canFollow || m_pWeapon == nullptr || Hero::getInstance() == nullptr
+        || BulletLayer::getInstance() == nullptr)
         return;
     const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
 
+    log("att");
     AudioEngine::play2d(sk::files::kMonThorn, false, 0.25);
     auto num = m_pWeapon->getBulletCount();
     for (int i = 0; i < num; i++)
     {
         Bullet *pBullet = m_pWeapon->createBullet();
 
-        auto pos = Hero::m_pPresentHero->getPosition();
+        auto pos = Hero::getInstance()->getPosition();
         pBullet->attack(pos.x, pos.y, getPosition() + kOffSet, m_facing);
-        BulletLayer::m_pPresentBulletLayer->addChild(pBullet);
+        BulletLayer::getInstance()->addChild(pBullet);
     }
 }
 
@@ -120,9 +124,9 @@ bool MonsterWithGun::init()
 
 void MonsterWithGun::followSpeed(float dt)
 {
-    if (Hero::m_pPresentHero == nullptr)
+    if (Hero::getInstance() == nullptr)
         return;
-    auto targetPos = Hero::m_pPresentHero->getPosition();
+    auto targetPos = Hero::getInstance()->getPosition();
     auto selfPos = getPosition();
 
     auto d = targetPos - selfPos;
@@ -155,16 +159,17 @@ void MonsterWithGun::followSpeed(float dt)
 
 void MonsterWithGun::attack(float dt)
 {
-    if (!m_canFollow || m_pWeapon == nullptr)
+    if (!m_canFollow || m_pWeapon == nullptr || Hero::getInstance() == nullptr
+        || BulletLayer::getInstance() == nullptr)
         return;
 
     AudioEngine::play2d(sk::files::kGunShot, false, 0.25);
 
     Bullet *pBullet = m_pWeapon->createBullet();
 
-    auto pos = Hero::m_pPresentHero->getPosition();
+    auto pos = Hero::getInstance()->getPosition();
     pBullet->attack(pos.x, pos.y, getPosition(), m_facing);
-    BulletLayer::m_pPresentBulletLayer->addChild(pBullet);
+    BulletLayer::getInstance()->addChild(pBullet);
 }
 
 

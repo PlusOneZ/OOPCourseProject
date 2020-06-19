@@ -35,8 +35,10 @@ bool SwordBullet::init()
 	return true;
 }
 
-void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing)
+void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite)
 {
+    if (Hero::getInstance() == nullptr)
+        return;
 	if (curFacing == sk::kLeft)
 	{
 		m_pBulletSprite->setFlippedX(true);
@@ -44,10 +46,10 @@ void SwordBullet::attack(float mouseX, float mouseY, Point heroPoint, int curFac
 	auto point = heroPoint + Vec2((curFacing == sk::kRight ? 15.f : -15.f), 20.f);
 	m_pBulletSprite->setPosition(point);
 
-    auto joint = PhysicsJointFixed::construct(Hero::m_pPresentHero->getPhysicsBody(),
+    auto joint = PhysicsJointFixed::construct(Hero::getInstance()->getPhysicsBody(),
             m_pBulletSprite->getPhysicsBody(), heroPoint);
     joint->setCollisionEnable(false);
-    Hero::m_pPresentHero->getScene()->getPhysicsWorld()->addJoint(joint);
+    Hero::getInstance()->getScene()->getPhysicsWorld()->addJoint(joint);
 
     Animation* animation = nullptr;
     if (curFacing == sk::kRight)

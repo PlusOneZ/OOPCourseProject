@@ -54,6 +54,6 @@ void Treasure::interact()
 			this->getParent()->addChild(m_pUnknownItem, 3, TagNumber);
 		}
 
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 	}
 }

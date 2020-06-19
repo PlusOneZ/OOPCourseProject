@@ -32,7 +32,7 @@ public:
      * @date 06/08/2020 [created by 卓正一]
      * @author 卓正一
      */
-    void wanderSpeed(float dt);
+    virtual void wanderSpeed(float dt);
 
     /**
      * @brief  计算跟随英雄的速度

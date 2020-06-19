@@ -43,7 +43,7 @@ bool Coin::onContactBegin(PhysicsContact& contact)
 			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
 			//确保其中一个是英雄一个是金币的时候执行
 		{
-			Hero::m_pPresentHero->gainCoins(m_coinAmount);
+            Hero::getInstance()->gainCoins(m_coinAmount);
 			this->removeFromParentAndCleanup(true);
 			AudioEngine::play2d(sk::files::kCoin);
 			log("coin collected");

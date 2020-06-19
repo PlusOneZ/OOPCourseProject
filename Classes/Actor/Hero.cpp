@@ -321,6 +321,26 @@ sk::HeroID Hero::getHeroID()
 	return m_ID;
 }
 
+Hero *Hero::getInstance()
+{
+    return m_pPresentHero;
+}
+
+void Hero::clearPresentHero()
+{
+    m_pPresentHero = nullptr;
+}
+
+Item *Hero::getPresentContactItem()
+{
+    return m_pPresentContactItem;
+}
+
+void Hero::setPresentContactItem(Item *pItem)
+{
+    m_pPresentContactItem = pItem;
+}
+
 //Item中函数的实现
 bool Item::onContactSeparate(PhysicsContact& contact)
 {
@@ -331,10 +351,10 @@ bool Item::onContactSeparate(PhysicsContact& contact)
 		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
 			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
 		{
-			if (Hero::m_pPresentContactItem == this)
+			if (Hero::getPresentContactItem() == this)
 			{
 				log("item seperate");
-				Hero::m_pPresentContactItem = nullptr;
+				Hero::setPresentContactItem(nullptr);
 				m_pMessage->setVisible(false);
 			}
 		}
@@ -351,10 +371,10 @@ bool Item::onContactBegin(PhysicsContact& contact)
 		if ((nodeA->getTag() == sk::tag::kHero || nodeB->getTag() == sk::tag::kHero)
 			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
 		{
-			if (Hero::m_pPresentContactItem == nullptr)
+			if (Hero::getPresentContactItem() == nullptr)
 			{
 				log("near item");
-				Hero::m_pPresentContactItem = this;
+				Hero::setPresentContactItem(this);
 				m_pMessage->setVisible(true);
 			}
 		}
@@ -366,7 +386,7 @@ bool Item::buyItem()
 {
 	if (m_ifShopItem)
 	{
-		if (Hero::m_pPresentHero->costCoins(m_price))//购买成功
+		if (Hero::getInstance()->costCoins(m_price))//购买成功
 		{
 			log("buy item");
             AudioEngine::play2d(sk::files::kBuy);
@@ -390,7 +410,7 @@ void Weapon::interact()
 {
 	if (buyItem())
 	{
-		auto myHero = Hero::m_pPresentHero;
+		auto myHero = Hero::getInstance();
 		const int Tag = myHero->getMainWeapon()->m_pSprite->getTag();
 		auto floorWeapon = myHero->getMainWeapon();
 		floorWeapon->retain();
@@ -404,7 +424,7 @@ void Weapon::interact()
 		myHero->setMainWeapon(this);
 		log("weapon changed");
 		AudioEngine::play2d(sk::files::kWeaponPickup);
-		Hero::m_pPresentContactItem = nullptr;
+		Hero::setPresentContactItem(nullptr);
 	}
 }
 

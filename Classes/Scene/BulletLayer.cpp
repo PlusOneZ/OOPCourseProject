@@ -60,7 +60,7 @@ bool BulletLayer::onMouseDown(Event* event)
             log("Cursor at: %f, %f", e->getCursorX(), e->getCursorY());
             log("  Hero at: %f, %f", m_pHero->getPosition().x, m_pHero->getPosition().y);
             //m_pWeaponBullet.pushBack(pBullet);
-            pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(), m_pHero->getFacing());
+            pBullet->attack(e->getCursorX(), e->getCursorY(), m_pHero->getPosition(),m_pHero->getFacing());
             this->addChild(pBullet);
         }
     }
@@ -106,7 +106,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
             log("Hero shot");
             if (body2->getTag() == sk::tag::kHero)
             {
-                Hero::m_pPresentHero->reduceHealth(
+                Hero::getInstance()->reduceHealth(
                         dynamic_cast<Bullet* >(body1->getParent())->getDamage());
             }
             if (body1->getTag() == sk::tag::kMonsterBullet)
@@ -120,7 +120,7 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
             log("Hero shot");
             if (body1->getTag() == sk::tag::kHero)
             {
-                Hero::m_pPresentHero->reduceHealth(
+                Hero::getInstance()->reduceHealth(
                         dynamic_cast<Bullet* >(body2->getParent())->getDamage());
             }
             if (body2->getTag() == sk::tag::kMonsterBullet)
@@ -131,4 +131,9 @@ bool BulletLayer::onContactBegin(PhysicsContact& contact)
         }
     }
     return true;
+}
+
+BulletLayer *BulletLayer::getInstance()
+{
+    return m_pPresentBulletLayer;
 }
