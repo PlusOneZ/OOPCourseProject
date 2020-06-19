@@ -229,52 +229,6 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
     return false;
 }
 
-void RoomMap::addPlayer(sk::HeroID id)
-{
-	PolygonInfo fig;
-	Hero* hero;
-	if (id == sk::HeroID::kAssassin)
-	{
-		fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
-	}
-	else
-	{
-		fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
-	}
-	Sprite* heroSprite = Sprite::create(fig);
-
-	if (heroSprite == nullptr)
-	{
-		log("hero picture not found");
-	}
-	else
-	{
-		if (id == sk::HeroID::kAssassin)
-		{
-			hero = Assassin::create();
-		}
-		else
-		{
-			hero = Knight::create();
-		}
-		hero->bindSprite(heroSprite);
-		hero->generatePhysics();
-		hero->setPosition(640.f, 500.f);
-		this->addChild(hero, 4, sk::tag::kHero);
-		hero->rest();
-
-		BulletLayer* bulletLayer = BulletLayer::create();
-		bulletLayer->retain();
-		bulletLayer->bindHero(hero);
-		this->addChild(bulletLayer, 8, sk::tag::kBulletLayer);
-
-		auto keyBoardListenerHero = EventListenerKeyboard::create();
-		keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
-		keyBoardListenerHero->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
-	}
-}
-
 TMXTiledMap* RoomMap::createTiled(int mapNumber)
 {
     if (mapNumber == 1) return TMXTiledMap::create("map/BirthRoom.tmx");
@@ -300,7 +254,6 @@ void RoomMap::update(float dt)
         }
     }
 }
-<<<<<<< HEAD
 
 void RoomMap::addPlayer(sk::HeroID id)
 {
@@ -350,5 +303,3 @@ void RoomMap::addPlayer(sk::HeroID id)
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
     }
 }
-=======
->>>>>>> ZZY
