@@ -16,6 +16,7 @@
 #include "Item/Statue.h"
 #include "Item/Treasure.h"
 #include "Actor/Assassin.h"
+#include "Actor/Knight.h"
 #include "Component/Trap.h"
 #include "Item/HealthPotion.h"
 #include "Actor/DistantMonster.h"
@@ -96,6 +97,12 @@ public:
 	*@author 李嘉树
 	*/
 	void update(float dt) override;
+
+	/**
+	 *@brief 添加骑士 子弹层 键盘监控
+	*@author 肖杨  翟晨昊 卓正一
+	 */
+	void addPlayer(sk::HeroID id);
 
 	static int m_mapNumber;
 protected:
