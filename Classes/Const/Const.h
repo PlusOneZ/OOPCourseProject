@@ -150,8 +150,12 @@ namespace sk
         static const std::string kGunMessage = "Normal Gun\nDamage:1";
         static const std::string kShotgunMessage = "Shotgun\nDamage:3";
         static const std::string kSwordMessage = "Sword\nDamage:4";
+        static const std::string kSpearMessage = "Spear\nDamage:5";
         static const std::string kHealthPotionMessage = "Health Potion\nHP:++2";
-        static const std::string kMonsterMessage = "Monster\nHealth:10";
+        static const std::string kMonsterMessage = "Monster\nHealth:30";
+        static const std::string kMonsterCrawShootMessage = "MonsterCrawShoot\nbackUpDistance:100";
+        static const std::string kMonsterWithGunMessage = "MonsterWithGun\nbackUpDistance:100";
+        static const std::string kMonsterPigMessage = "MonsterPig\ndashSpeed:150\nattackRange:75";
     }
 }
 

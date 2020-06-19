@@ -316,6 +316,19 @@ int Hero::getBaseDamage()
 	return m_baseDamage;
 }
 
+void Hero::setSpeed(float speed)
+{
+	m_speed = speed;
+}
+
+void Hero::clearKeyPress()
+{
+	for (auto key : m_isKeyDown)
+	{
+		key = false;
+	}
+}
+
 sk::HeroID Hero::getHeroID()
 {
 	return m_ID;

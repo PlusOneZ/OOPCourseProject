@@ -10,7 +10,7 @@
 
 static const std::string kSpearMessage = "Spear";
 /**
-*@brief 初始剑类
+*@brief 初始长枪类
 *@author 翟晨昊
 */
 class Spear :public Weapon {

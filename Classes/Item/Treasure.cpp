@@ -9,6 +9,7 @@
 #include "Gun.h"
 #include "Shotgun.h"
 #include "Sword.h"
+#include "Spear.h"
 #include "Actor/Hero.h"
 
 static const std::string kTreasureMessage = "get an unknown item";
@@ -31,13 +32,14 @@ void Treasure::interact()
 		this->addChild(m_pSprite);
 		m_pMessage->setVisible(false);
 
-		int TagNumber = cocos2d::random(1001, 1003);
+		int TagNumber = cocos2d::random(1001, 1005);
 		switch (TagNumber)
 		{
 		case 1001:m_pUnknownItem = HealthPotion::create(); break;
 		case 1002:m_pUnknownItem = Gun::create(); break;
 		case 1003:m_pUnknownItem = Shotgun::create(); break;
 		case 1004:m_pUnknownItem = Sword::create(); break;
+		case 1005:m_pUnknownItem = Spear::create(); break;
 		default:log("treasureitem not found"); break;
 		}
 

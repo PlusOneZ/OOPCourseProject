@@ -142,6 +142,18 @@ public:
 	int getBaseDamage();
 
 	/**
+	*@brief 设置英雄速度
+	*@author 翟晨昊
+	*@return 速度
+	*/
+	void setSpeed(float speed);
+
+	/**
+	*@brief 清空按键情况
+	*@author 翟晨昊
+	*/
+	void clearKeyPress();
+	/**
 	*@brief 获取英雄ID
 	*@author 肖杨
 	*@return 英雄ID

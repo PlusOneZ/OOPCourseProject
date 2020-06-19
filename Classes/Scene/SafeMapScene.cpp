@@ -391,6 +391,8 @@ void SafeMap::removeKeyboard(Node* node)
 
 void Board::interact()
 {
+    Hero::getInstance()->setSpeed(0);
+    Hero::getInstance()->clearKeyPress();
     SafeMap::keyBoardListenerOne->setEnabled(false);
     SafeMap::keyBoardListenerTwo->setEnabled(true);
     m_pMessage->setVisible(false);
@@ -404,6 +406,7 @@ void Board::controlListener()
     m_message.at(curNumber)->setVisible(false);
     m_pMessage->setVisible(true);
     curNumber = 0;
+    Hero::getInstance()->setSpeed(gHeroSpeed);
 }
 
 void SafeMap::createBarrier()
