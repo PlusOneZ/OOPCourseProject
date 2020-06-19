@@ -321,6 +321,14 @@ bool SafeMap::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerBoard, this);
     keyBoardListenerBoard->setEnabled(false);
     SafeMap::keyBoardListenerTwo = keyBoardListenerBoard;
+
+    m_pMap = TMXTiledMap::create("map/SafeMap.tmx");
+    createBarrier();
+    createDoor();
+
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(SafeMap::onContactBegin, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
     
     return true;
 }
@@ -359,7 +367,7 @@ void SafeMap::addPlayer(sk::HeroID id)
 		hero->bindSprite(heroSprite);
 		hero->generatePhysics();
 		hero->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-			visibleSize.height / 2 + origin.y + 150.0)));
+			visibleSize.height / 2 + origin.y )));
 		this->addChild(hero, 4, sk::tag::kHero);
 		hero->rest();
 
@@ -396,4 +404,132 @@ void Board::controlListener()
     m_message.at(curNumber)->setVisible(false);
     m_pMessage->setVisible(true);
     curNumber = 0;
+}
+
+void SafeMap::createBarrier()
+{
+    auto group = m_pMap->getObjectGroup("barrier");
+    ValueVector barrierObjects = group->getObjects();
+
+    for (auto barrier : barrierObjects)
+    {
+        ValueMap& dict = barrier.asValueMap();
+        float x = dict["x"].asFloat();
+        float y = dict["y"].asFloat();
+        float width = dict["width"].asFloat();
+        float height = dict["height"].asFloat();
+
+        PhysicsBody* tmpPhysicsBody = PhysicsBody::createBox(Size(width, height));
+        tmpPhysicsBody->setDynamic(false);
+        tmpPhysicsBody->setCategoryBitmask(sk::bitMask::kMapCategory);
+        tmpPhysicsBody->setCollisionBitmask(sk::bitMask::kMapCollision);
+        tmpPhysicsBody->setContactTestBitmask(sk::bitMask::kMapContact);
+
+        Sprite* tmpSprite = Sprite::create();
+        tmpSprite->setPosition(Vec2(x, y));
+        tmpSprite->setAnchorPoint(Vec2::ZERO);
+        tmpSprite->setContentSize(Size(width, height));
+        tmpSprite->setPhysicsBody(tmpPhysicsBody);
+
+        this->addChild(tmpSprite, 2, sk::tag::kBarrier);
+    }
+}
+
+void SafeMap::createDoor()
+{
+    auto group = m_pMap->getObjectGroup("door");
+    ValueVector doorObjects = group->getObjects();
+
+    for (auto door : doorObjects)
+    {
+        ValueMap& dict = door.asValueMap();
+        float x = dict["x"].asFloat();
+        float y = dict["y"].asFloat();
+        float width = dict["width"].asFloat();
+        float height = dict["height"].asFloat();
+
+        PhysicsBody* tmpPhysicsBody = PhysicsBody::createBox(Size(width, height));
+        tmpPhysicsBody->setDynamic(false);
+        tmpPhysicsBody->setCategoryBitmask(sk::bitMask::kDoorCategory);
+        tmpPhysicsBody->setCollisionBitmask(sk::bitMask::kDoorCollision);
+        tmpPhysicsBody->setContactTestBitmask(sk::bitMask::kDoorContact);
+
+        Sprite* tmpSprite = Sprite::create();
+        tmpSprite->setPosition(Vec2(x, y));
+        tmpSprite->setAnchorPoint(Vec2::ZERO);
+        tmpSprite->setContentSize(Size(width, height));
+        tmpSprite->setPhysicsBody(tmpPhysicsBody);
+
+        this->addChild(tmpSprite, 2, sk::tag::kDoor);
+    }
+}
+
+bool SafeMap::onContactBegin(PhysicsContact& contact)
+{
+    auto nodeA = contact.getShapeA()->getBody()->getNode();
+    auto nodeB = contact.getShapeB()->getBody()->getNode();
+    if (nodeA != nullptr && nodeB != nullptr)
+    {
+        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kDoor)
+            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kDoor))
+        {
+            auto map = RoomMap::createTiled(1);
+            if (!map)
+            {
+                return false;
+            }
+            auto nextRoom = RoomMap::createScene(map);
+            auto hero = Hero::getInstance();
+            hero->retain();
+            hero->removeFromParentAndCleanup(false);
+            hero->setPosition(640.f, 100.f);
+            hero->generatePhysics();
+            nextRoom->addChild(Hero::getInstance(), 3);
+            auto keyBoardListener = EventListenerKeyboard::create();
+            keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
+            keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
+            _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, nextRoom);
+
+            BulletLayer* bulletLayer = BulletLayer::create();
+            bulletLayer->retain();
+            bulletLayer->bindHero(hero);
+            nextRoom->addChild(bulletLayer, 8, 450);
+            Director::getInstance()->replaceScene(nextRoom);
+
+            return true;
+        }
+        if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
+            || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kBarrier))
+        {
+            if (nodeA->getTag() == sk::tag::kHero)
+            {
+                auto v = nodeA->getPhysicsBody()->getVelocity();
+                nodeA->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+            else
+            {
+                auto v = nodeB->getPhysicsBody()->getVelocity();
+                nodeB->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+        }
+        if ((nodeA->getTag() == sk::tag::kMonster && nodeB->getTag() == sk::tag::kBarrier)
+            || (nodeB->getTag() == sk::tag::kMonster && nodeA->getTag() == sk::tag::kBarrier))
+        {
+            if (nodeA->getTag() == sk::tag::kMonster)
+            {
+                auto v = nodeA->getPhysicsBody()->getVelocity();
+                nodeA->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+            else
+            {
+                auto v = nodeB->getPhysicsBody()->getVelocity();
+                nodeB->getPhysicsBody()->setVelocity(-v);
+                return true;
+            }
+        }
+    }
+    return false;
 }

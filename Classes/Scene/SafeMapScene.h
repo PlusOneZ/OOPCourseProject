@@ -16,6 +16,7 @@
 #include "Component/Trap.h"
 #include "Item/Weapon.h"
 #include "Item/Board.h"
+#include "RoomMap.h"
 
 USING_NS_CC;
 
@@ -58,8 +59,28 @@ public:
 	*/
 	void removeKeyboard(Node* node);
 
+	/**
+	*@brief close all the barriers
+	*@author 李嘉树
+	*/
+	void createBarrier();
+
+	/**
+	*@brief create all the doors
+	*@author 李嘉树
+	*/
+	void createDoor();
+
+	/**
+	*@brief 触碰门切换房间
+	*@author 李嘉树
+	*/
+	bool onContactBegin(PhysicsContact& contact);
+
     static EventListenerKeyboard* keyBoardListenerOne;
     static EventListenerKeyboard* keyBoardListenerTwo;
+private:
+	TMXTiledMap* m_pMap;
 };
 
 #endif

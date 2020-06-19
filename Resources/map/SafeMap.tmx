@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="1280" tileheight="720" infinite="0" nextlayerid="5" nextobjectid="13">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="1280" tileheight="720" infinite="0" nextlayerid="6" nextobjectid="14">
  <tileset firstgid="1" source="SafeMap.tsx"/>
- <objectgroup id="3" name="Object1">
+ <objectgroup id="3" name="barrier">
   <object id="1" x="557" y="421" width="170" height="62"/>
   <object id="2" x="286" y="537" width="225" height="104"/>
   <object id="4" x="862" y="276" width="118" height="67"/>
@@ -12,5 +12,8 @@
   <object id="9" x="344" y="144" width="53" height="98"/>
   <object id="10" x="397" y="152" width="50" height="90"/>
   <object id="11" x="241" y="284" width="158" height="130"/>
+ </objectgroup>
+ <objectgroup id="5" name="door">
+  <object id="13" x="678.571" y="101.925" width="60.0382" height="61.4344"/>
  </objectgroup>
 </map>

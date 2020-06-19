@@ -110,8 +110,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // create a scene. it's an autorelease object
 //    auto map = TMXTiledMap::create("map/room1_1.tmx");
 //    log("%p", map);
-    //auto scene = Start::Scene;
-    auto scene = RoomMap::createScene(RoomMap::createTiled(1));
+    auto scene = Start::createScene();
+    //auto scene = RoomMap::createScene(RoomMap::createTiled(1));
 
 
     // run

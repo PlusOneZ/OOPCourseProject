@@ -55,7 +55,6 @@ bool RoomMap::init()
     ifDoor = false;
 
     createBarrier();
-    //createDoor();
 
 	if (Hero::getInstance() == nullptr)
 	{
