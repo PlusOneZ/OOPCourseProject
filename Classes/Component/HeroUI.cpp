@@ -21,7 +21,8 @@ bool HeroUI::init()
 	m_pHealth->setType(ProgressTimer::Type::BAR);
 	m_pHealth->setMidpoint(Point(0, 0.5));
 	m_pHealth->setBarChangeRate(Point(1, 0));
-	m_pHealth->setPercentage(100.f);
+	m_pHealth->setPercentage(static_cast<float>(m_pHero->m_health)
+		/ static_cast<float>(m_pHero->m_maxHealth) * 100);
 	this->addChild(m_pHealth, 2);
 
 	m_pArmor = ProgressTimer::create(Sprite::create("item/ui/ui_armor_bar.png"));
@@ -29,7 +30,8 @@ bool HeroUI::init()
 	m_pArmor->setType(ProgressTimer::Type::BAR);
 	m_pArmor->setMidpoint(Point(0, 0.5));
 	m_pArmor->setBarChangeRate(Point(1, 0));
-	m_pArmor->setPercentage(100.f);
+	m_pArmor->setPercentage(static_cast<float>(m_pHero->m_armor)
+		/ static_cast<float>(m_pHero->m_maxArmor) * 100);
 	this->addChild(m_pArmor, 2);
 
 	std::string healthMessage = std::to_string(m_pHero->m_health) + "/" +
