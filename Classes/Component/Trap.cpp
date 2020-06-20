@@ -7,9 +7,8 @@
 
 void Trap::update(float dt)
 {
-	static float time = m_trapTime;
-	time -= dt;
-	if (time <= 0)
+	m_time -= dt;
+	if (m_time <= 0)
 	{
 		trapEnd();
 	}
@@ -26,6 +25,7 @@ bool Trap::onContactBegin(PhysicsContact& contact)
 			&& (nodeA->getTag() == this->getTag() || nodeB->getTag() == this->getTag()))
 		{
 			this->scheduleUpdate();
+			m_time = m_trapTime;
 			this->trapStart();
 			_eventDispatcher->pauseEventListenersForTarget(this, true);
 		}
@@ -101,16 +101,14 @@ void FlameTrap::trapEnd()
 
 void FlameTrap::update(float dt)
 {
-	static float time = m_trapTime;
-	static float flameTime = 0;
-	time -= dt;
-	flameTime += dt;
-	if (flameTime >= 1)
+	m_time -= dt;
+	m_flameTime += dt;
+	if (m_flameTime >= 1)
 	{
-		flameTime -= 1;
+		m_flameTime -= 1;
         Hero::getInstance()->reduceHealth();
 	}
-	if (time <= 0)
+	if (m_time <= 0)
 	{
 		trapEnd();
 	}

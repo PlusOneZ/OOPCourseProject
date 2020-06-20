@@ -296,11 +296,23 @@ bool SafeMap::init()
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
 
+	FreezeTrap* testFreeze1 = FreezeTrap::create();
+	testFreeze1->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+		visibleSize.height / 2 + origin.y)));
+	testFreeze1->getChildByTag(sk::tag::kFreezeTrap)->setTag(sk::tag::kFreezeTrap + 50);
+	this->addChild(testFreeze1, 3, sk::tag::kFreezeTrap + 50);
+
 	FlameTrap* testFlame = FlameTrap::create();
 	testFlame->setTrapTime(8);
 	testFlame->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
 		visibleSize.height / 2 + origin.y - 75.0)));
 	this->addChild(testFlame, 3, sk::tag::kFlameTrap);
+
+	FlameTrap* testFlame1 = FlameTrap::create();
+	testFlame1->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 150.0,
+		visibleSize.height / 2 + origin.y - 75.0)));
+	testFlame1->getChildByTag(sk::tag::kFlameTrap)->setTag(sk::tag::kFlameTrap + 50);
+	this->addChild(testFlame1, 3, sk::tag::kFlameTrap + 50);
 
 	WarStatue* testWar = WarStatue::create();
 	testWar->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
