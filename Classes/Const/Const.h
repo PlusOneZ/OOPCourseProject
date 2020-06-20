@@ -61,6 +61,7 @@ namespace sk
         static const char kTakePotion[]   = "Audio/fx_health_potion.mp3";
         static const char kBuy[]          = "Audio/fx_buy.mp3";
         static const char kMonThorn[]     = "Audio/fx_mon_atk1.mp3";
+        static const char kMonQuake[]     = "Audio/fx_shock.mp3";
         static const char kCoin[]         = "Audio/fx_coin.mp3";
         static const char kIceTrap[]      = "Audio/fx_ice.mp3";
         static const char kFireTrap[]     = "Audio/fx_fire.mp3";
@@ -81,6 +82,10 @@ namespace sk
 
         static const char kPigMove[] = "Actor/Monster/pig_monster";
         static const char kPigDie[]  = "Actor/Monster/pig_monster_dead.png";
+
+        static const char kSnowMove[] = "Actor/Monster/snow_monster_move";
+        static const char kSnowStay[] = "Actor/Monster/snow_monster_stay";
+        static const char kSnowDie[]  = "Actor/Monster/snow_monster_dead.png";
 
         static const char kHeroAvatar[2][40] = {
                 "interface/ui2_knight.png",

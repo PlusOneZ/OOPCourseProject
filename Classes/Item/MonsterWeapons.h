@@ -1,7 +1,3 @@
-//
-// Created by Zhengyi on 2020/6/11.
-//
-
 #ifndef __MONSTER_WEAPONS_H__
 #define __MONSTER_WEAPONS_H__
 
@@ -10,7 +6,8 @@
 #include "MonsterBullets.h"
 
 
-class MonInvisibleWithFiveWayGun : public Weapon {
+class MonInvisibleWithFiveWayGun : public Weapon
+{
 public:
 
     CREATE_FUNC(MonInvisibleWithFiveWayGun);
@@ -30,7 +27,8 @@ public:
 
 };
 
-class MonOneShotGun : public Weapon {
+class MonOneShotGun : public Weapon
+{
 public:
 
     CREATE_FUNC(MonOneShotGun);
@@ -49,10 +47,29 @@ public:
 
 };
 
-class MonInvisiblePigDash : public Weapon {
-
+class MonInvisiblePigDash : public Weapon
+{
 public:
     CREATE_FUNC(MonInvisiblePigDash);
+
+    /**
+    *@brief  创造子弹
+    *@author 卓正一
+    */
+    Bullet* createBullet() override;
+
+    /**
+    *@brief  初始化
+    *@author 卓正一
+    */
+    bool init() override;
+};
+
+
+class MonInvisibleSnowQuake : public Weapon
+{
+public:
+    CREATE_FUNC(MonInvisibleSnowQuake);
 
     /**
     *@brief  创造子弹

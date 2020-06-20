@@ -104,7 +104,8 @@ bool MonPigDashAttack::init()
     }
     auto fig ="item/bullets/effect_dash1.png";
     m_pBulletSprite = Sprite::create(fig);
-    bindSprite(m_pBulletSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle, sk::tag::kMonsterClose);
+    bindSprite(m_pBulletSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle,
+            sk::tag::kMonsterClose);
     return true;
 }
 
@@ -145,3 +146,54 @@ void MonPigDashAttack::attack(float mouseX, float mouseY, Point heroPoint, int c
     m_pBulletSprite->runAction(seq);
     log("Pig dash!");
 }
+
+
+/// ----------- SnowQuake ------------
+bool MonSnowQuakeAttack::init()
+{
+    if (!Bullet::init())
+        return false;
+    int actionStep = 4;
+    SpriteFrame* frame = nullptr;
+    for (int i = 1; i <= actionStep; i++)
+    {
+        frame = SpriteFrame::create(StringUtils::format("item/bullets/shock_%d.png", i),
+                                      Rect(0, 0, 60, 60));
+        if (frame == nullptr)
+        {
+            log("animate shock_%d.png lost", i);
+        }
+        else
+        {
+            frame->setAnchorPoint(Vec2(0.5f, 0.f));
+            m_ActionVec.pushBack(frame);
+        }
+    }
+    auto fig ="item/bullets/shock.png";
+    m_pBulletSprite = Sprite::create(fig);
+    m_pBulletSprite->setAnchorPoint(Vec2(0.5f, 0.f));
+    bindSprite(m_pBulletSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle,
+               sk::tag::kMonsterClose);
+    return true;
+}
+
+void MonSnowQuakeAttack::attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite)
+{
+    m_pBulletSprite->setPosition(heroPoint);
+
+    Animation* animation = Animation::createWithSpriteFrames(m_ActionVec);
+
+    animation->setLoops(1);
+    animation->setDelayPerUnit(0.2f);
+    Animate* actionOne = Animate::create(animation);
+    auto end = CallFunc::create([&](){
+//        getScene()->getPhysicsWorld()->removeJoint(joint);
+        this->removeFromParentAndCleanup(true);
+    });
+    actionOne->retain();
+    auto seq = Sequence::create(actionOne, end, nullptr);
+    m_pBulletSprite->runAction(seq);
+    log("Snow Quake!");
+}
+
+

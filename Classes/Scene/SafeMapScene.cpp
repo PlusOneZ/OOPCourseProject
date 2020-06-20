@@ -253,7 +253,7 @@ bool SafeMap::init()
 	this->addChild(testChangeHero, 3, sk::tag::kChangeHero);
 
 	Monster::loadAllAnimate();
-	auto dm = MonsterPig::create();
+	auto dm = MonsterSnow::create();
 
 
 	dm->setPosition(500, 500);
@@ -380,7 +380,7 @@ void SafeMap::addPlayer(sk::HeroID id)
 		BulletLayer* bulletLayer = BulletLayer::create();
 		bulletLayer->retain();
 		bulletLayer->bindHero(hero);
-		this->addChild(bulletLayer, 8, sk::tag::kBulletLayer);
+		this->addChild(bulletLayer, 10, sk::tag::kBulletLayer);
 
 		auto keyBoardListenerHero = EventListenerKeyboard::create();
 		keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);

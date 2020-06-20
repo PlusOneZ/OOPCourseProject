@@ -68,4 +68,25 @@ protected:
     Vector<SpriteFrame*> m_leftActionVec;
 };
 
+class MonSnowQuakeAttack : public Bullet
+{
+public:
+    CREATE_FUNC(MonSnowQuakeAttack);
+
+    /**
+    *@brief 初始化
+    *@author
+    */
+    bool init() override;
+
+    /**
+    *@brief 子弹攻击
+    *@author
+    */
+    void attack(float mouseX, float mouseY, Point heroPoint, int curFacing, Node *p_sprite) override;
+
+protected:
+    Vector<SpriteFrame*> m_ActionVec;
+};
+
 #endif // MONSTER_BULLETS_H

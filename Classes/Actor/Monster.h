@@ -99,7 +99,7 @@ public:
      * @brief  播放移动动画
      * @author 卓正一
      */
-    void move();
+    virtual void move();
 
 protected:
     Weapon *m_pWeapon = nullptr;
@@ -108,7 +108,7 @@ protected:
     int  m_curHealth  = 30;
     int  m_fullHealth = 30;
 
-    Animate* m_pMoveAnimation   = nullptr;
+    Animate* m_pMoveAnimation = nullptr;
     std::string m_pDieSprite ;
 
     Vec2 m_curSpeed = Vec2::ZERO;

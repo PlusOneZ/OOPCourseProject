@@ -91,8 +91,16 @@ void Monster::die()
     }
     else
     {
+        // 移除关节
+        for (auto &joint : getPhysicsBody()->getJoints())
+        {
+            if (joint != nullptr)
+            {
+                joint->removeFormWorld();
+            }
+        }
         dieSprite->setPosition(this->getPosition());
-        this->getScene()->addChild(dieSprite);
+        this->getParent()->addChild(dieSprite);
     }
 
     this->removeFromParentAndCleanup(true);
