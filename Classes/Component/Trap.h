@@ -48,7 +48,8 @@ public:
 	void generatePhysicalBody(const int trapTag);
 protected:
 	Sprite* m_pSprite = nullptr;
-    float m_trapTime  = 0.;
+    float m_trapTime  = 0.f;
+	float m_time = 0.f;
 };
 
 
@@ -109,6 +110,8 @@ public:
 	*@author 肖杨
 	*/
 	void trapEnd()override;
+protected:
+	float m_flameTime = 0.f;
 };
 
 #endif // !_TRAP_H_
