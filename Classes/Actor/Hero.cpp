@@ -90,7 +90,6 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_E)
 	{
-		// TODO: Shift weapon here.
 		this->shiftWeapon();
 	}
 	else if (keyCode == EventKeyboard::KeyCode::KEY_F)
@@ -151,7 +150,6 @@ void Hero::update(float dt)
         getPhysicsBody()->setVelocity(v);
     }
     m_ifStateChanged = false;
-    getPhysicsBody()->setAngularVelocity(0);
 
     if (v.x < 0 && m_curFacing == sk::kRight)
     {
@@ -264,6 +262,7 @@ bool Hero::reduceHealth(int damage)
 		{
 			m_health = 0;
 			m_alive = false;
+			die();
 			return false;
 		}
 		else
@@ -357,6 +356,11 @@ Item *Hero::getPresentContactItem()
 void Hero::setPresentContactItem(Item *pItem)
 {
     m_pPresentContactItem = pItem;
+}
+
+void Hero::setStateChanged(bool state)
+{
+    m_ifStateChanged = state;
 }
 
 //Item中函数的实现

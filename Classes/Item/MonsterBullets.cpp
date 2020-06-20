@@ -4,10 +4,10 @@ bool MonFiveWayBullet::init()
 {
     if (!Bullet::init())
         return false;
-    Sprite* pSprite = Sprite::create("item/bullets/monster_bullet_1.png");
+    Sprite* pSprite = Sprite::create("item/bullets/bullet_square.png");
     if (pSprite == nullptr)
     {
-        log("monster_bullet_1.png not found");
+        log("bullet_square.png not found");
     }
     bindSprite(pSprite, sk::Kind::kMonster, sk::BulletShape::kRectangle, sk::tag::kMonsterBullet);
     setSpeed(200);

@@ -43,6 +43,8 @@ public:
 	*/
 	void rest();
 
+	void die();
+
 	/**
 	 * @note   Modified : 卓正一
 	 * @return 主武器
@@ -175,7 +177,7 @@ public:
 
     static void setPresentContactItem(Item *pItem);
 
-
+    void setStateChanged(bool state);
 
 protected:
 
@@ -211,6 +213,7 @@ protected:
     float m_skillRemainTime = 0;         // 技能剩余时间
 
 	int m_coinNumber = 0;
+	std::string m_dieFrame;
 
     /// 移动状态
 	bool m_ifMoved        = false;

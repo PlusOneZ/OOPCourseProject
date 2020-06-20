@@ -80,6 +80,9 @@ public:
 
     static EventListenerKeyboard* keyBoardListenerOne;
     static EventListenerKeyboard* keyBoardListenerTwo;
+
+    static bool m_isReenter;
+
 private:
 	TMXTiledMap* m_pMap;
 };

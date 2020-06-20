@@ -17,6 +17,7 @@ bool Actor::generatePhysics()
     body->setMass(1e10);
     body->setPositionOffset(Vec2(0.f, m_sprite->getContentSize().height / 2));
     body->setGravityEnable(false);
+    body->setRotationEnable(false);
 	body->setCategoryBitmask(sk::bitMask::kHeroCategory);
 	body->setCollisionBitmask(sk::bitMask::kHeroCollision);
 	body->setContactTestBitmask(sk::bitMask::kHeroContact);

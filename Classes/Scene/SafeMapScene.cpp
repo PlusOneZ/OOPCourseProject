@@ -15,6 +15,8 @@
 #include "Item/Treasure.h"
 #include "Item/ChangeHero.h"
 
+bool SafeMap::m_isReenter = false;
+
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
 Scene *SafeMap::createScene()
@@ -245,7 +247,10 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-	addPlayer(sk::HeroID::kAssassin);
+    if (!m_isReenter)
+	{
+	    addPlayer(sk::HeroID::kAssassin);
+    }
 
 	ChangeHero* testChangeHero = ChangeHero::create();
 	testChangeHero->setPosition(Vec2(visibleSize.width / 2 + origin.x + 280.0,
@@ -522,16 +527,19 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
         if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
             || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kBarrier))
         {
+            auto p = nodeA->getPosition();
+            auto v = nodeA->getPhysicsBody()->getVelocity();
+            v.normalize();
             if (nodeA->getTag() == sk::tag::kHero)
             {
-                auto v = nodeA->getPhysicsBody()->getVelocity();
-                nodeA->getPhysicsBody()->setVelocity(-v);
+                nodeA->setPosition(-50*v);
+                nodeA->getPhysicsBody()->setVelocity(-10*v);
                 return true;
             }
             else
             {
-                auto v = nodeB->getPhysicsBody()->getVelocity();
-                nodeB->getPhysicsBody()->setVelocity(-v);
+                nodeB->setPosition(-50*v);
+                nodeB->getPhysicsBody()->setVelocity(-10*v);
                 return true;
             }
         }
@@ -553,4 +561,41 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
         }
     }
     return false;
+}
+
+
+void Hero::die()
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto deadSprite = Sprite::create(m_dieFrame);
+    if (deadSprite == nullptr) {
+        log("Cannot load die");
+    }
+    else
+    {
+        this->getParent()->addChild(deadSprite, 7);
+    }
+    SafeMap::m_isReenter = true;
+    auto safeMap = SafeMap::createScene();
+    this->retain();
+    this->removeFromParentAndCleanup(false);
+    this->generatePhysics();
+    setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
+                                 visibleSize.height / 2 + origin.y )));
+    this->m_health = m_maxHealth;
+    this->m_armor  = m_maxArmor;
+    safeMap->addChild(this, 3);
+    auto keyBoardListener = EventListenerKeyboard::create();
+    keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, this);
+    keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, safeMap);
+
+    BulletLayer* bulletLayer = BulletLayer::create();
+    bulletLayer->retain();
+    bulletLayer->bindHero(this);
+    safeMap->addChild(bulletLayer, 8, 450);
+    Director::getInstance()->replaceScene(safeMap);
+
+    m_alive = true;
 }
