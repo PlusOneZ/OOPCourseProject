@@ -12,6 +12,8 @@
 #include "../Const/Const.h"
 #include "../Scene/BulletLayer.h"
 #include <string>
+#include "../Const/Const.h"
+#include "../Component/Coin.h"
 
 
 

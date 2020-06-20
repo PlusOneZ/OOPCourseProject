@@ -34,6 +34,12 @@ public:
 	*/
 	bool onContactBegin(PhysicsContact& contact);
 
+	/**
+	 * @author 卓正一
+	 * @param  tag
+	 */
+	void setTag(int tag) override ;
+
 	static Animate* pCoinAnimate;
 protected:
 	Sprite* m_pSprite;

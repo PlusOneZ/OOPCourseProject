@@ -4,7 +4,6 @@
  */
 
 #include "Monster.h"
-#include "Const/Const.h"
 
 bool Monster::init() {
     m_curHealth = m_fullHealth;
@@ -102,6 +101,22 @@ void Monster::die()
         dieSprite->setPosition(this->getPosition());
         this->getParent()->addChild(dieSprite);
     }
+
+    // 掉落金币
+    int amount = RandomHelper::random_int(0, m_fullHealth / 10);
+    auto coin = Coin::create();
+    coin->setCoinAmount(amount);
+    coin->setPosition(getPosition());
+    int tag = sk::tag::kCoin;
+    auto scene = getParent();
+    if (scene)
+    {
+        while (scene->getChildByTag(tag) != nullptr)
+            tag += 50;
+        coin->setTag(tag);
+        scene->addChild(coin);
+    }
+
 
     this->removeFromParentAndCleanup(true);
 }

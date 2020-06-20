@@ -56,3 +56,10 @@ void Coin::setCoinAmount(int amount)
 {
 	m_coinAmount = amount;
 }
+
+void Coin::setTag(int tag)
+{
+    Node::setTag(tag);
+    if (m_pSprite)
+        m_pSprite->setTag(tag);
+}
