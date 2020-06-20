@@ -16,6 +16,7 @@ bool Board::init()
 	m_message.pushBack(putMessage(sk::message::kSwordMessage));
 	m_message.pushBack(putMessage(sk::message::kSpearMessage));
 	m_message.pushBack(putMessage(sk::message::kHealthPotionMessage));
+	m_message.pushBack(putMessage(sk::message::kArmorPotionMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterCrawShootMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterWithGunMessage));

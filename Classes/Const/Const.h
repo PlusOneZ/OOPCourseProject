@@ -130,10 +130,11 @@ namespace sk
 		static const int kFlameTrap      = 1050;
 		static const int kCoin           = 40;
 		static const int kHealthPotion   = 1001;
-		static const int kGunWeapon      = 1002;
-		static const int kShotgunWeapon  = 1003;
-		static const int kSwordWeapon    = 1004;
-        static const int kSpearWeapon    = 1005;
+        static const int kArmorPotion    = 1002;
+		static const int kGunWeapon      = 1003;
+		static const int kShotgunWeapon  = 1004;
+		static const int kSwordWeapon    = 1005;
+        static const int kSpearWeapon    = 1006;
 		static const int kTreasure       = 1030;
 		static const int kWarStatue      = 31;
 		static const int kAssassinStatue = 32;
@@ -152,6 +153,7 @@ namespace sk
         static const std::string kSwordMessage = "Sword\nDamage:4";
         static const std::string kSpearMessage = "Spear\nDamage:5";
         static const std::string kHealthPotionMessage = "Health Potion\nHP:++2";
+        static const std::string kArmorPotionMessage = "Armor Potion\nArmor:++1";
         static const std::string kMonsterMessage = "Monster\nHealth:30";
         static const std::string kMonsterCrawShootMessage = "MonsterCrawShoot\nbackUpDistance:100";
         static const std::string kMonsterWithGunMessage = "MonsterWithGun\nbackUpDistance:100";

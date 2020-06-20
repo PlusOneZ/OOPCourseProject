@@ -113,6 +113,13 @@ public:
 	void recoverHealth(int healAmount = 1);
 
 	/**
+	* @brief 增加护甲
+	* @param 增加数值
+	* @author 翟晨昊
+	*/
+	void addArmor(int addAmount);
+
+	/**
 	*@brief 是否受伤
 	*@author 肖杨
 	*@return 是否受伤

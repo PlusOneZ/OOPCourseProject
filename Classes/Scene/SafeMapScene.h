@@ -11,6 +11,7 @@
 #include "Actor/Knight.h"
 #include "Actor/Assassin.h"
 #include "Item/HealthPotion.h"
+#include "Item/ArmorPotion.h"
 #include "Component/Coin.h"
 #include "Actor/DistantMonster.h"
 #include "Component/Trap.h"

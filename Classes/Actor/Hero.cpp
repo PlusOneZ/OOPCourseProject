@@ -288,6 +288,11 @@ void Hero::recoverHealth(int healAmount)
 	}
 }
 
+void Hero::addArmor(int addAmount)
+{
+	m_maxArmor += addAmount;
+}
+
 bool Hero::ifInjured()
 {
 	return m_health < m_maxHealth;

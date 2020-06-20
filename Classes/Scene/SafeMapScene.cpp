@@ -266,6 +266,12 @@ bool SafeMap::init()
 	testHP->setShopItem(1);
 	this->addChild(testHP, 3, sk::tag::kHealthPotion);
 
+    ArmorPotion* testAP = ArmorPotion::create();
+    testAP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 125.0,
+        visibleSize.height / 2 + origin.y)));
+    testAP->setShopItem(1);
+    this->addChild(testAP, 3, sk::tag::kArmorPotion);
+
     Weapon* testWeapon = Gun::create();
     testWeapon->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
         visibleSize.height / 2 + origin.y - 150.0)));
