@@ -34,6 +34,8 @@ public:
 		m_pFlaming = creatBuffAnimate("item/flame_effect");
 	}
 
+	Buff &operator=(Buff& ) = default;
+
 	Animate* creatBuffAnimate(const char * pAnimateName)
 	{
 		log("Trying to create buff effect");

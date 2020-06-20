@@ -81,7 +81,7 @@ public:
     static EventListenerKeyboard* keyBoardListenerOne;
     static EventListenerKeyboard* keyBoardListenerTwo;
 
-    static bool m_isReenter;
+    static sk::HeroID m_nowID;
 
 private:
 	TMXTiledMap* m_pMap;

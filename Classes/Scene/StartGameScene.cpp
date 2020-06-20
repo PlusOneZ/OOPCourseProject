@@ -40,19 +40,12 @@ bool TitleScene::init()
     }
 
     // 播放音乐
-    static bool recorded = false;
-    if (!recorded)
-    {
-        gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm1, true, .5);
-        AudioEngine::preload(sk::files::kBtnPressed);
-        recorded = true;
-        gIsMusicPlaying  = true;
-        gIsEffectPlaying = true;
-    }
-    else
-    {
-        AudioEngine::resume(gBackgroundMusicID);
-    }
+
+    gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm1, true, .5);
+    AudioEngine::preload(sk::files::kBtnPressed);
+    gIsMusicPlaying  = true;
+    gIsEffectPlaying = true;
+
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -154,7 +147,10 @@ void TitleScene::menuStartCallback(Ref* pSender)
     auto scene = SafeMap::createScene();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     AudioEngine::pause(gBackgroundMusicID);
-    gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm2);
+    
+    gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm2, true, 0.5f);
+    if (!gIsMusicPlaying)
+        AudioEngine::pause(gBackgroundMusicID);
     Director::getInstance()->replaceScene(scene);
 }
 

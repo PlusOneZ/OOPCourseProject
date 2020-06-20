@@ -15,7 +15,7 @@
 #include "Item/Treasure.h"
 #include "Item/ChangeHero.h"
 
-bool SafeMap::m_isReenter = false;
+sk::HeroID SafeMap::m_nowID = sk::kAssassin;
 
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
@@ -247,10 +247,9 @@ bool SafeMap::init()
         addChild(canBed, 3, 113);
     }
 
-    if (!m_isReenter)
-	{
-	    addPlayer(sk::HeroID::kAssassin);
-    }
+
+    addPlayer(m_nowID);
+
 
 	ChangeHero* testChangeHero = ChangeHero::create();
 	testChangeHero->setPosition(Vec2(visibleSize.width / 2 + origin.x + 280.0,
@@ -566,36 +565,13 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
 
 void Hero::die()
 {
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    auto deadSprite = Sprite::create(m_dieFrame);
-    if (deadSprite == nullptr) {
-        log("Cannot load die");
-    }
-    else
-    {
-        this->getParent()->addChild(deadSprite, 7);
-    }
-    SafeMap::m_isReenter = true;
-    auto safeMap = SafeMap::createScene();
-    this->retain();
+    SafeMap::m_nowID = Hero::m_ID;
+    m_pPresentHero = nullptr;
     this->removeFromParentAndCleanup(false);
-    this->generatePhysics();
-    setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-                                 visibleSize.height / 2 + origin.y )));
-    this->m_health = m_maxHealth;
-    this->m_armor  = m_maxArmor;
-    safeMap->addChild(this, 3);
-    auto keyBoardListener = EventListenerKeyboard::create();
-    keyBoardListener->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, this);
-    keyBoardListener->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, this);
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, safeMap);
-
-    BulletLayer* bulletLayer = BulletLayer::create();
-    bulletLayer->retain();
-    bulletLayer->bindHero(this);
-    safeMap->addChild(bulletLayer, 8, 450);
+    auto safeMap = SafeMap::createScene();
     Director::getInstance()->replaceScene(safeMap);
 
+    // todo: 复活之后陷阱没有火焰效果
+    HeroBuff = *(new Buff());
     m_alive = true;
 }
