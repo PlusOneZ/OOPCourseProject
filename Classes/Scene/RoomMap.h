@@ -11,6 +11,9 @@
 #include "BulletLayer.h"
 #include "Const/Const.h"
 #include "Item/Gun.h"
+#include "Item/Shotgun.h"
+#include "Item/Sword.h"
+#include "Item/Spear.h"
 #include <iostream>
 #include "Component/HeroUI.h"
 #include "Item/Statue.h"
@@ -19,6 +22,7 @@
 #include "Actor/Knight.h"
 #include "Component/Trap.h"
 #include "Item/HealthPotion.h"
+#include "Item/ArmorPotion.h"
 #include "Actor/DistantMonster.h"
 #include "Actor/Monster.h"
 

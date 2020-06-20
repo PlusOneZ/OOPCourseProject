@@ -69,30 +69,127 @@ bool RoomMap::init()
     testUI->setPosition(118.5f, 661.5f);
     this->addChild(testUI, 5, sk::tag::kHeroUI);
 
-    Monster::loadAllAnimate();
-    auto dm1 = MonsterWithGun::create();
-    dm1->generatePhysics(20.f);
+    if (m_mapNumber == 2)
+    {
+        Monster::loadAllAnimate();
+        auto dm1 = MonsterWithGun::create();
+        dm1->generatePhysics(20.f);
 
-    dm1->setPosition(500, 400);
-    this->addChild(dm1, 9, sk::tag::kMonster);
+        dm1->setPosition(500, 400);
+        this->addChild(dm1, 9, sk::tag::kMonster);
 
-    auto dm2 = MonsterWithGun::create();
-    dm2->generatePhysics(20.f);
+        auto dm2 = MonsterWithGun::create();
+        dm2->generatePhysics(20.f);
 
-    dm2->setPosition(700, 400);
-    this->addChild(dm2, 9, sk::tag::kMonster);
+        dm2->setPosition(700, 400);
+        this->addChild(dm2, 9, sk::tag::kMonster);
 
-    auto dm3 = MonsterCrawShoot::create();
-    dm3->generatePhysics(20.f);
+        auto dm3 = MonsterCrawShoot::create();
+        dm3->generatePhysics(20.f);
 
-    dm3->setPosition(300, 200);
-    this->addChild(dm3, 9, sk::tag::kMonster);
+        dm3->setPosition(300, 200);
+        this->addChild(dm3, 9, sk::tag::kMonster);
 
-    auto dm4 = MonsterCrawShoot::create();
-    dm4->generatePhysics(20.f);
+        auto dm4 = MonsterCrawShoot::create();
+        dm4->generatePhysics(20.f);
 
-    dm4->setPosition(900, 200);
-    this->addChild(dm4, 9, sk::tag::kMonster);
+        dm4->setPosition(900, 200);
+        this->addChild(dm4, 9, sk::tag::kMonster);
+
+        FreezeTrap* testFreeze = FreezeTrap::create();
+        testFreeze->setPosition(200, 400);
+        this->addChild(testFreeze, 3, sk::tag::kFreezeTrap);
+
+        FreezeTrap* testFreeze1 = FreezeTrap::create();
+        testFreeze1->setPosition(900, 200);
+        testFreeze1->getChildByTag(sk::tag::kFreezeTrap)->setTag(sk::tag::kFreezeTrap + 50);
+        this->addChild(testFreeze1, 3, sk::tag::kFreezeTrap + 50);
+    }
+    else if (m_mapNumber == 3)
+    {
+        Monster::loadAllAnimate();
+        auto dm1 = MonsterWithGun::create();
+        dm1->generatePhysics(20.f);
+
+        dm1->setPosition(500, 400);
+        this->addChild(dm1, 9, sk::tag::kMonster);
+
+        auto dm2 = MonsterWithGun::create();
+        dm2->generatePhysics(20.f);
+
+        dm2->setPosition(700, 400);
+        this->addChild(dm2, 9, sk::tag::kMonster);
+
+        auto dm3 = MonsterCrawShoot::create();
+        dm3->generatePhysics(20.f);
+
+        dm3->setPosition(300, 200);
+        this->addChild(dm3, 9, sk::tag::kMonster);
+
+        auto dm4 = MonsterCrawShoot::create();
+        dm4->generatePhysics(20.f);
+
+        dm4->setPosition(900, 200);
+        this->addChild(dm4, 9, sk::tag::kMonster);
+
+        FlameTrap* testFlame = FlameTrap::create();
+        testFlame->setTrapTime(8);
+        testFlame->setPosition(200, 400);
+        this->addChild(testFlame, 3, sk::tag::kFlameTrap);
+
+        FlameTrap* testFlame1 = FlameTrap::create();
+        testFlame1->setPosition(900, 200);
+        testFlame1->getChildByTag(sk::tag::kFlameTrap)->setTag(sk::tag::kFlameTrap + 50);
+        this->addChild(testFlame1, 3, sk::tag::kFlameTrap + 50);
+    }
+    else if (m_mapNumber == 4)
+    {
+        int randNumber = cocos2d::random(1, 2);
+        if (randNumber == 1)
+        {
+            auto potion = HealthPotion::create();
+            potion->setPosition(440, 280);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kHealthPotion);
+        }
+        else
+        {
+            auto potion = ArmorPotion::create();
+            potion->setPosition(440, 280);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kArmorPotion);
+        }
+        randNumber = cocos2d::random(1, 2);
+        if (randNumber == 1)
+        {
+            auto potion = Gun::create();;
+            potion->setPosition(640, 250);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kGunWeapon);
+        }
+        else
+        {
+            auto potion = Shotgun::create();
+            potion->setPosition(640, 250);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kShotgunWeapon);
+        }
+        randNumber = cocos2d::random(1, 2);
+        if (randNumber == 1)
+        {
+            auto potion = Sword::create();
+            potion->setPosition(840, 280);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kSwordWeapon);
+        }
+        else
+        {
+            auto potion = Spear::create();
+            potion->setPosition(840, 280);
+            potion->setShopItem(5);
+            this->addChild(potion, 10, sk::tag::kSpearWeapon);
+        }
+    }
 
     this->scheduleUpdate();
 
@@ -152,6 +249,14 @@ void RoomMap::createDoor()
         tmpSprite->setAnchorPoint(Vec2::ZERO);
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
+        
+        if (m_mapNumber == 3)
+        {
+            auto transferGate = Sprite::create("map/transfergate.png");
+            transferGate->setPosition(Vec2(x - 20, y - 25));
+            transferGate->setAnchorPoint(Vec2::ZERO);
+            this->addChild(transferGate, 6);
+        }
 
         this->addChild(tmpSprite, 2, sk::tag::kDoor);
     }
@@ -245,9 +350,12 @@ void RoomMap::update(float dt)
     {
         if (!ifDoor)
         {
-            Treasure* testTreasure = Treasure::create();
-            testTreasure->setPosition(640, 200);
-            this->addChild(testTreasure, 3, sk::tag::kTreasure);
+            if (m_mapNumber == 2 || m_mapNumber == 3)
+            {
+                Treasure* testTreasure = Treasure::create();
+                testTreasure->setPosition(640, 200);
+                this->addChild(testTreasure, 3, sk::tag::kTreasure);
+            }
             createDoor();
             ifDoor = true;
         }
