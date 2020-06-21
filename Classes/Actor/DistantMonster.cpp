@@ -175,3 +175,96 @@ void MonsterWithGun::attack(float dt)
 }
 
 
+bool Boss::init()
+{
+    if (!Monster::init())
+        return false;
+
+    m_wanderSpeed = 0;
+    m_curHealth = 1000;
+    m_fullHealth = 1000;
+    m_vision = 800.;
+    m_shootRange = 800.;
+
+    schedule(CC_SCHEDULE_SELECTOR(Boss::wanderSpeed), 0.5);
+    schedule(CC_SCHEDULE_SELECTOR(Boss::followSpeed), 1.5f);
+    schedule(CC_SCHEDULE_SELECTOR(Boss::attack), 0.5);
+    // TODO 参数化
+    m_pMoveAnimation = creatActorAnimate("Actor/Monster/boss",
+        91, 112, 1);
+    m_pDieSprite = "\0";
+    this->setTag(sk::tag::kMonster);
+
+    auto dms = Sprite::create("Actor/Monster/boss1.png");
+    bindSprite(dms);
+    Monster::move();
+
+    m_pWeapon = MonInvisibleWithFiveWayGun::create();
+    addChild(m_pWeapon);
+    return true;
+}
+
+void Boss::followSpeed(float dt)
+{
+    if (Hero::getInstance() == nullptr)
+        return;
+    auto targetPos = Hero::getInstance()->getPosition();
+    auto selfPos = getPosition();
+
+    auto d = targetPos - selfPos;
+    if (d.length() < m_vision)
+    {
+        m_canFollow = true;
+        auto v = d;
+        v.normalize();
+        v *= m_wanderSpeed;
+
+        if (d.getLength() < m_backUpDistance)
+            v = -v;
+        m_curSpeed = v;
+        getPhysicsBody()->setVelocity(m_curSpeed);
+        m_facing = (v.x > 0 ? sk::kRight : sk::kLeft);
+        if (m_facing == sk::kRight)
+        {
+            m_sprite->setFlippedX(false);
+        }
+        else
+        {
+            m_sprite->setFlippedX(true);
+        }
+        log("following");
+    }
+    else
+    {
+        m_canFollow = false;
+    }
+}
+
+void Boss::attack(float dt)
+{
+    log("Try attacking.");
+    if (!m_canFollow || m_pWeapon == nullptr || Hero::getInstance() == nullptr
+        || BulletLayer::getInstance() == nullptr)
+        return;
+    const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
+
+    log("att");
+    if (gIsEffectPlaying)
+        AudioEngine::play2d(sk::files::kMonThorn, false, 0.25);
+    auto num = m_pWeapon->getBulletCount();
+    for (int i = 0; i < num; i++)
+    {
+        Bullet* pBullet = m_pWeapon->createBullet();
+
+        auto pos = Hero::getInstance()->getPosition();
+        pBullet->attack(pos.x, pos.y, getPosition() + kOffSet, m_facing);
+        BulletLayer::getInstance()->addChild(pBullet);
+    }
+}
+
+void Boss::update(float dt)
+{
+    // empty
+}
+
+

@@ -89,4 +89,43 @@ protected:
 
 };
 
+class Boss : public Monster
+{
+public:
+
+    CREATE_FUNC(Boss);
+
+    /**
+     * @brief 更新函数
+     * @param dt
+     * @author 卓正一
+     */
+    void update(float dt) override;
+
+    /**
+     * @brief  重载初始化
+     * @return true for success
+     * @author 卓正一
+     */
+    bool init() override;
+
+
+    /**
+     * @brief  见基类
+     * @author 卓正一
+     */
+    void followSpeed(float dt) override;
+
+    /**
+     * @brief  见基类
+     * @param  dt
+     * @author 卓正一
+     */
+    void attack(float dt) override;
+
+protected:
+    float m_backUpDistance = 100.;
+
+};
+
 #endif // DISTANT_MONSTER_H

@@ -189,7 +189,7 @@ bool RoomMap::init()
             this->addChild(potion, 10, sk::tag::kSpearWeapon);
         }
     }
-    else if (m_mapNumber == 4 || m_mapNumber == 9)
+    else if (m_mapNumber == 4)
     {
         auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
@@ -208,6 +208,14 @@ bool RoomMap::init()
 
         dm3->setPosition(980, 360);
         this->addChild(dm3, 9, sk::tag::kMonster);
+    }
+    else if (m_mapNumber == 9)
+    {
+        auto boss = Boss::create();
+        boss->generatePhysics(20.f);
+
+        boss->setPosition(655, 330);
+        this->addChild(boss, 9, sk::tag::kMonster);
     }
 
     this->scheduleUpdate();
