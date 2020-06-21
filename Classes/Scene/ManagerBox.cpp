@@ -52,6 +52,10 @@ void ManagerBox::editBoxReturn(EditBox* editBox)
         Hero::getInstance()->addArmor(1000);
         Hero::getInstance()->addCurrentArmor(1000);
     }
+	else if (curText == "become ljs")
+    {
+        Hero::getInstance()->raiseDamage(50);
+    }
 	log("editbox return"); 
 }
 
