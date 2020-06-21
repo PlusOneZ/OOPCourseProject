@@ -568,6 +568,7 @@ void Hero::die()
     SafeMap::m_nowID = Hero::m_ID;
     m_pPresentHero = nullptr;
     this->removeFromParentAndCleanup(false);
+    RoomMap::m_mapNumber = 1;
     auto safeMap = SafeMap::createScene();
     Director::getInstance()->replaceScene(safeMap);
 

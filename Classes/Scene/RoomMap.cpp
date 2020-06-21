@@ -5,7 +5,6 @@
 */
 
 #include "RoomMap.h"
-#include "Actor/Knight.h"
 
 int RoomMap::m_mapNumber = 1;
 
@@ -104,6 +103,10 @@ bool RoomMap::init()
         testFreeze1->setPosition(900, 200);
         testFreeze1->getChildByTag(sk::tag::kFreezeTrap)->setTag(sk::tag::kFreezeTrap + 50);
         this->addChild(testFreeze1, 3, sk::tag::kFreezeTrap + 50);
+
+        AssassinStatue* testSpeed = AssassinStatue::create();
+        testSpeed->setPosition(880, 500);
+        this->addChild(testSpeed, 3, sk::tag::kAssassinStatue);
     }
     else if (m_mapNumber == 3)
     {
@@ -141,6 +144,10 @@ bool RoomMap::init()
         testFlame1->setPosition(900, 200);
         testFlame1->getChildByTag(sk::tag::kFlameTrap)->setTag(sk::tag::kFlameTrap + 50);
         this->addChild(testFlame1, 3, sk::tag::kFlameTrap + 50);
+
+        WarStatue* testWar = WarStatue::create();
+        testWar->setPosition(400, 600);
+        this->addChild(testWar, 3, sk::tag::kWarStatue);
     }
     else if (m_mapNumber == 4)
     {
@@ -189,6 +196,27 @@ bool RoomMap::init()
             potion->setShopItem(5);
             this->addChild(potion, 10, sk::tag::kSpearWeapon);
         }
+    }
+    else if (m_mapNumber == 5)
+    {
+        Monster::loadAllAnimate();
+        auto dm1 = MonsterSnow::create();
+        dm1->generatePhysics(20.f);
+
+        dm1->setPosition(640, 600);
+        this->addChild(dm1, 9, sk::tag::kMonster);
+
+        auto dm2 = MonsterPig::create();
+        dm2->generatePhysics(20.f);
+
+        dm2->setPosition(300, 360);
+        this->addChild(dm2, 9, sk::tag::kMonster);
+
+        auto dm3 = MonsterPig::create();
+        dm3->generatePhysics(20.f);
+
+        dm3->setPosition(980, 360);
+        this->addChild(dm3, 9, sk::tag::kMonster);
     }
 
     this->scheduleUpdate();
@@ -272,6 +300,10 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
             || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kDoor))
         {
             m_mapNumber++;
+            if (m_mapNumber == 6)
+            {
+                return true;
+            }
             auto map = createTiled(m_mapNumber);
             if (!map)
             {
@@ -345,6 +377,11 @@ TMXTiledMap* RoomMap::createTiled(int mapNumber)
 
 void RoomMap::update(float dt)
 {
+    if (m_mapNumber == 6)
+    {
+        auto hero = Hero::getInstance();
+        hero->die();
+    }
     auto node = this->getChildByTag(sk::tag::kMonster);
     if (node == nullptr)
     {
@@ -355,6 +392,13 @@ void RoomMap::update(float dt)
                 Treasure* testTreasure = Treasure::create();
                 testTreasure->setPosition(640, 200);
                 this->addChild(testTreasure, 3, sk::tag::kTreasure);
+            }
+            if (m_mapNumber == 5)
+            {
+                auto transferGate = Sprite::create("map/transfergate.png");
+                transferGate->setPosition(600, 320);
+                transferGate->setAnchorPoint(Vec2::ZERO);
+                this->addChild(transferGate, 6);
             }
             createDoor();
             ifDoor = true;
