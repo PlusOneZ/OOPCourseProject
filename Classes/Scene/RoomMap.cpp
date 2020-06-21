@@ -65,7 +65,6 @@ bool RoomMap::init()
 
     if (m_mapNumber == 2 || m_mapNumber == 6)
     {
-        Monster::loadAllAnimate();
         auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 
@@ -105,7 +104,6 @@ bool RoomMap::init()
     }
     else if (m_mapNumber == 3 || m_mapNumber == 7)
     {
-        Monster::loadAllAnimate();
         auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 
@@ -193,7 +191,6 @@ bool RoomMap::init()
     }
     else if (m_mapNumber == 4 || m_mapNumber == 9)
     {
-        Monster::loadAllAnimate();
         auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 

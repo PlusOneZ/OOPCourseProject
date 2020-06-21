@@ -66,22 +66,6 @@ public:
     void reduceHealth(int amount);
 
     /**
-     * @brief  创建动画
-     * @param  textureName 用在 plist 里的名字做模板
-     * @param  num 有几张
-     * @return 一个动画
-     * @author 卓正一
-     */
-    static Animate *creatMonsterAnimate(const std::string &textureName, int num);
-
-    /**
-     * @brief  在初始场景加载所有的怪物动画
-     * @return 是否成功
-     * @author 卓正一
-     */
-    static bool loadAllAnimate();
-
-    /**
      * @brief 用质量创建物理体积
      * @param mass
      * @return
