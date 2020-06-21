@@ -25,6 +25,9 @@
 #include "Item/ArmorPotion.h"
 #include "Actor/DistantMonster.h"
 #include "Actor/CloseMonster.h"
+#include "Actor/Monster.h"
+#include "SafeMapScene.h"
+
 
 USING_NS_CC;
 
