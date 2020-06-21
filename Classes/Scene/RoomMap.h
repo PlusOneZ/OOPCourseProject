@@ -99,11 +99,6 @@ public:
 	*/
 	void update(float dt) override;
 
-	/**
-	 *@brief 添加骑士 子弹层 键盘监控
-	*@author 肖杨  翟晨昊 卓正一
-	 */
-	void addPlayer(sk::HeroID id);
 
 	/**
 	*@brief 随即创建怪物

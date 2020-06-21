@@ -61,21 +61,7 @@ void Monster::die()
         this->removeFromParentAndCleanup(true);
         return;
     }
-    auto coin = Coin::create();
-    coin->setCoinAmount(amount);
-    int tag = sk::tag::kCoin;
-    auto scene = getParent();
-    log("Monster die: %f, %f", this->getPosition().x, this->getPosition().y);
-    if (scene)
-    {
-        while (scene->getChildByTag(tag) != nullptr)
-            tag += 50;
-        coin->setTag(tag);
-        coin->setPosition(this->getPosition());
-
-        scene->addChild(coin, 9, tag);
-    }
-
+	Hero::getInstance()->gainCoins(amount);
     this->removeFromParentAndCleanup(true);
 }
 
