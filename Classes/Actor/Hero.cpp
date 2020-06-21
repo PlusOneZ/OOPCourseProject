@@ -163,6 +163,10 @@ void Hero::update(float dt)
         {
             m_pMainWeapon->getSprite()->setRotation(60.f);
         }
+		if (m_pSecWeapon->getSprite()->getTag() == sk::tag::kSwordWeapon)
+		{
+			m_pSecWeapon->getSprite()->setRotation(60.f);
+		}
         m_curFacing = sk::kLeft;
     }
     else if (v.x > 0 && m_curFacing == sk::kLeft)
@@ -176,6 +180,10 @@ void Hero::update(float dt)
         {
             m_pMainWeapon->getSprite()->setRotation(-60.f);
         }
+		if (m_pSecWeapon->getSprite()->getTag() == sk::tag::kSwordWeapon)
+		{
+			m_pSecWeapon->getSprite()->setRotation(-60.f);
+		}
         m_curFacing = sk::kRight;
     }
 
