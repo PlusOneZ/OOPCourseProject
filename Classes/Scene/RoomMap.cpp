@@ -55,11 +55,6 @@ bool RoomMap::init()
 
     createBarrier();
 
-	if (Hero::getInstance() == nullptr)
-	{
-		addPlayer(sk::HeroID::kAssassin);
-	}
-
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(RoomMap::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -325,6 +320,10 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
 			bulletLayer->bindHero(hero);
 			nextRoom->addChild(bulletLayer, 8, 450);
             Director::getInstance()->replaceScene(nextRoom);
+
+			Buff::HeroBuff->flamingEnd();
+			Buff::HeroBuff->flamingEnd();
+			Buff::HeroBuff->rootedEnd(100.f);
 
             return true;
         }

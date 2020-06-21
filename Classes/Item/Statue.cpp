@@ -29,7 +29,7 @@ void WarStatue::interact()
 {
 	if (buyItem())
 	{
-		HeroBuff.increaseATK(m_damage);
+		Buff::HeroBuff->increaseATK(m_damage);
 		m_pSprite->getPhysicsBody()->setEnabled(false);
 		Hero::setPresentContactItem(nullptr);
 		m_pMessage->setVisible(false);
@@ -56,7 +56,7 @@ void AssassinStatue::interact()
 {
 	if (buyItem())
 	{
-		HeroBuff.speedUp(m_increaseSpeed);
+		Buff::HeroBuff->speedUp(m_increaseSpeed);
 		m_pSprite->getPhysicsBody()->setEnabled(false);
 		Hero::setPresentContactItem(nullptr);
 		m_pMessage->setVisible(false);

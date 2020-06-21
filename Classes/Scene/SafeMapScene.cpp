@@ -17,6 +17,7 @@
 
 sk::HeroID SafeMap::m_nowID = sk::kAssassin;
 
+
 EventListenerKeyboard* SafeMap::keyBoardListenerOne = nullptr;
 EventListenerKeyboard* SafeMap::keyBoardListenerTwo = nullptr;
 Scene *SafeMap::createScene()
@@ -249,6 +250,8 @@ bool SafeMap::init()
 
 
     addPlayer(m_nowID);
+	Buff myBuff;
+	myBuff = *(new Buff);
 
 
 	ChangeHero* testChangeHero = ChangeHero::create();
@@ -521,6 +524,10 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
             nextRoom->addChild(bulletLayer, 8, 450);
             Director::getInstance()->replaceScene(nextRoom);
 
+			Buff::HeroBuff->flamingEnd();
+			Buff::HeroBuff->flamingEnd();
+			Buff::HeroBuff->rootedEnd(100.f);
+
             return true;
         }
         if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
@@ -572,7 +579,5 @@ void Hero::die()
     auto safeMap = SafeMap::createScene();
     Director::getInstance()->replaceScene(safeMap);
 
-    // todo: 复活之后陷阱没有火焰效果
-    HeroBuff = *(new Buff());
     m_alive = true;
 }

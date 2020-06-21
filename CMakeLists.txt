@@ -100,6 +100,7 @@ list(APPEND GAME_SOURCE
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
         Classes/Component/HeroUI.cpp
+       Classes/Component/Buff.cpp
 
         )
 list(APPEND GAME_HEADER
