@@ -68,6 +68,7 @@ list(APPEND GAME_SOURCE
         Classes/Scene/StartGameScene.cpp
         Classes/Scene/BulletLayer.cpp
         Classes/Scene/RoomMap.cpp
+        Classes/Scene/ManagerBox.cpp
 
         Classes/Actor/Actor.cpp
         Classes/Actor/Hero.cpp
@@ -100,7 +101,7 @@ list(APPEND GAME_SOURCE
         Classes/Component/Coin.cpp
         Classes/Component/Trap.cpp
         Classes/Component/HeroUI.cpp
-       Classes/Component/Buff.cpp
+        Classes/Component/Buff.cpp
 
         )
 list(APPEND GAME_HEADER
@@ -112,6 +113,7 @@ list(APPEND GAME_HEADER
         Classes/Scene/StartGameScene.h
         Classes/Scene/BulletLayer.h
         Classes/Scene/RoomMap.h
+        Classes/Scene/ManagerBox.h
 
         Classes/Actor/Actor.h
         Classes/Actor/Hero.h

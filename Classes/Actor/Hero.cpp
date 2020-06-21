@@ -320,6 +320,11 @@ int Hero::getBaseDamage()
 	return m_baseDamage;
 }
 
+void Hero::raiseDamage(int raiseAmount)
+{
+    m_baseDamage += raiseAmount;
+}
+
 void Hero::setSpeed(float speed)
 {
 	m_speed = speed;

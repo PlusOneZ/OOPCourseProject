@@ -5,6 +5,7 @@
  */
 
 #include "PauseMenu.h"
+#include "ManagerBox.h"
 
 using namespace cocos2d;
 int  gBackgroundMusicID;
@@ -187,6 +188,10 @@ bool PauseMenu::init() {
         this->addChild(effectBtn, 1); this->addChild(effectImg, 2, 88);
         this->addChild(musicBtn, 1);  this->addChild(musicImg, 2, 77);
     }
+
+	ManagerBox* test = ManagerBox::create();
+    test->retain();
+    this->addChild(test, 5);
 
     return true;
 }
