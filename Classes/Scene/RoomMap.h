@@ -24,7 +24,7 @@
 #include "Item/HealthPotion.h"
 #include "Item/ArmorPotion.h"
 #include "Actor/DistantMonster.h"
-#include "Actor/Monster.h"
+#include "Actor/CloseMonster.h"
 
 USING_NS_CC;
 

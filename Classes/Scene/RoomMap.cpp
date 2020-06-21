@@ -126,14 +126,13 @@ bool RoomMap::init()
         dm3->setPosition(300, 200);
         this->addChild(dm3, 9, sk::tag::kMonster);
 
-        auto dm4 = MonsterCrawShoot::create();
+        auto dm4 = MonsterSnow::create();
         dm4->generatePhysics(20.f);
 
         dm4->setPosition(900, 200);
         this->addChild(dm4, 9, sk::tag::kMonster);
 
         FlameTrap* testFlame = FlameTrap::create();
-        testFlame->setTrapTime(8);
         testFlame->setPosition(200, 400);
         this->addChild(testFlame, 3, sk::tag::kFlameTrap);
 

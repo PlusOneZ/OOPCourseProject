@@ -140,7 +140,7 @@ bool MonsterSnow::init()
                                          42, 52, 4);
     m_pStayAnimation = creatActorAnimate(sk::files::kSnowStay,
                                          42, 52, 4);
-    m_pDieSprite = sk::files::kPigDie;
+    m_pDieSprite = sk::files::kSnowDie;
     this->setTag(sk::tag::kMonster);
 
     auto dms = Sprite::create(StringUtils::format("%s1.png", sk::files::kSnowStay));

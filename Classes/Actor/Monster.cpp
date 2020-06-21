@@ -113,13 +113,19 @@ void Monster::die()
     coin->setCoinAmount(amount);
     int tag = sk::tag::kCoin;
     auto scene = getScene();
+    log("Monster die: %f, %f", this->getPosition().x, this->getPosition().y);
     if (scene)
     {
         while (scene->getChildByTag(tag) != nullptr)
             tag += 50;
         coin->setTag(tag);
-        coin->setPosition(getPosition());
+        if (this->getPosition() != Vec2::ZERO)
+            coin->setPosition(this->getPosition());
+        else
+            coin->setPosition(Vec2(720, 540));
+        coin->retain();
         scene->addChild(coin);
+        coin->setPosition(this->getPosition());
     }
 
     this->removeFromParentAndCleanup(true);
@@ -156,7 +162,6 @@ bool Monster::generatePhysics(float mass)
 
 bool Monster::onContactBegin(PhysicsContact &contact)
 {
-    // TODO 碰墙判断
     m_curSpeed = Vec2(0, 0);
     return false;
 }
