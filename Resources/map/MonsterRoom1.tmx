@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="4" nextobjectid="15">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="28" tileheight="28" infinite="0" nextlayerid="4" nextobjectid="16">
  <tileset firstgid="1" source="tiles1.tsx"/>
  <layer id="1" name="图块层 1" width="45" height="25">
   <data encoding="base64" compression="zlib">
@@ -19,6 +19,7 @@
   <object id="10" x="503.801" y="250.928" width="218.833" height="28.2051"/>
   <object id="11" x="448.364" y="31.1229" width="27.2325" height="80.7249"/>
   <object id="12" x="560.211" y="32.0954" width="26.2599" height="77.8071"/>
+  <object id="15" x="476.924" y="-21.9907" width="76.9675" height="16.493"/>
  </objectgroup>
  <objectgroup id="3" name="door">
   <object id="14" x="480.459" y="3.89036" width="74.8894" height="46.6843"/>
