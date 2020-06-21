@@ -8,8 +8,8 @@
 | --- | --- | :-----: | :----: | :---: |
 | 卓正一 | 1850384 | 100% | 25% | 朱老师 |
 | 肖　杨 | 1950430 | 100% | 25% | 赵老师 |
-| 李嘉树 | 1952101 | 100% | 25% | 赵老师 |
-| 翟晨昊 | 1952216 | 100% | 25% | 朱老师 |
+| 李嘉树 | 1952101 | 100% | 25% | 朱老师 |
+| 翟晨昊 | 1952216 | 100% | 25% | 赵老师 |
 
 ##项目地址
 [PlusOneZ/Course project of Tongji SSE OOP course 2020](https://github.com/PlusOneZ/OOPCourseProject)
@@ -94,8 +94,29 @@
 5. 新增了秘籍（作弊码）的实现，让手残的我也能轻易通关。
 6. 用了一个 Const.h 管理全部的常量，在代码中尽量不使用裸值。
 
+## 基本项
+已全部完成
+
+## 加分项
++ 随机道具、敌人（Roguelike!)
++ 两名主角 Knight / Assassin，各自技能、属性不同
++ buff / debuff，由雕塑、陷阱实现
++ 金币，击杀怪物会掉落
++ 商店系统，在安全屋和游戏地图中都有
++ 地形机关（陷阱）
++ 一个 Boss
++ 秘籍！(欢迎尝试 become zch / become ljs)
+
 ## 截图
 ![安全地图](images/screenShot1.png)
 ![游戏场景](images/screenShot2.png)
 ![商店](images/screenShot3.png)
 ![传送门](images/screenShot4.png)
+
+## C++11 特性
+* [初始化列表]()
+* [lamda 表达式]()
+* [类型推断（auto）]()
+* [范围 for 循环]()
+
+~~~*以上链接暂不可用，请关注 git 版本*~~~
