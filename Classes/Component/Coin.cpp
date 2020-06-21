@@ -1,10 +1,11 @@
-﻿/**
+/**
 *@file Coin.cpp
 *@author 肖杨
 *@date 6/11/2020
 */
 
 #include "Coin.h"
+#include "Scene/PauseMenu.h"
 
 bool Coin::init()
 {
@@ -12,12 +13,12 @@ bool Coin::init()
 	m_pSprite->setTag(sk::tag::kCoin);
 	auto size = m_pSprite->getContentSize();
 	auto body = PhysicsBody::createBox(size);
-	body->setDynamic(false);
+//	body->setDynamic(false);
 	body->setGravityEnable(false);
 	body->setCategoryBitmask(sk::bitMask::kItemCategory);
 	body->setCollisionBitmask(sk::bitMask::kItemCollision);
 	body->setContactTestBitmask(sk::bitMask::kItemContact);
-	m_pSprite->setPhysicsBody(body);
+	this->setPhysicsBody(body);
     m_pCoinAnimate = Actor::creatActorAnimate("item/coin_", 7, 9);
 	m_pSprite->runAction(m_pCoinAnimate);
 
@@ -44,7 +45,8 @@ bool Coin::onContactBegin(PhysicsContact& contact)
             Hero::getInstance()->gainCoins(m_coinAmount);
             m_pSprite->stopAllActions();
 			this->removeFromParentAndCleanup(true);
-			AudioEngine::play2d(sk::files::kCoin);
+            if (gIsEffectPlaying)
+    			AudioEngine::play2d(sk::files::kCoin);
 			log("coin collected");
 		}
 	}

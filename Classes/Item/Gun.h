@@ -7,6 +7,7 @@
 #define _GUN_H_
 
 #include "Weapon.h"
+#include "Scene/PauseMenu.h"
 
 using namespace cocos2d;
 

@@ -6,7 +6,8 @@
 #ifndef _TRAP_H_
 #define _TRAP_H_
 
-#include "Component/Buff.h"
+#include "Buff.h"
+#include "../Scene/PauseMenu.h"
 
 /**
 *@brief 陷阱类

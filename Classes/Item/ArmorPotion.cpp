@@ -5,6 +5,7 @@
 */
 #include "ArmorPotion.h"
 #include "../Actor/Hero.h"
+#include "Scene/PauseMenu.h"
 
 static const std::string kArmorPotionMessage = "Armor Potion";
 bool ArmorPotion::init()
@@ -22,7 +23,8 @@ void ArmorPotion::interact()
 		Hero::getInstance()->addArmor(1);
 		log("Armor++");
 		this->removeFromParentAndCleanup(true);//用完就释放
-		AudioEngine::play2d(sk::files::kTakePotion);
+        if (gIsEffectPlaying)
+    		AudioEngine::play2d(sk::files::kTakePotion);
 		Hero::setPresentContactItem(nullptr);
 	}
 }

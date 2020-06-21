@@ -14,7 +14,7 @@
 #include <string>
 #include "../Const/Const.h"
 #include "../Component/Coin.h"
-
+#include "../Scene/PauseMenu.h"
 
 
 class Monster : public Actor

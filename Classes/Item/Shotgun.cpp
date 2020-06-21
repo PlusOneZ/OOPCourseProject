@@ -24,6 +24,7 @@ bool Shotgun::init()
 Bullet* Shotgun::createBullet()
 {
 	Bullet* pBullet = ShotgunBullet::create();
-	AudioEngine::play2d(sk::files::kShotGunShot);
+    if (gIsEffectPlaying)
+    	AudioEngine::play2d(sk::files::kShotGunShot);
 	return pBullet;
 }
