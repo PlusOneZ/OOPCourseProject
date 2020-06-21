@@ -105,6 +105,12 @@ public:
 	 */
 	void addPlayer(sk::HeroID id);
 
+	/**
+	*@brief 随即创建怪物
+	*@author 李嘉树
+	*/
+	Monster* createMonsterRand();
+
 	static int m_mapNumber;
 protected:
 	TMXTiledMap* m_pMap;
