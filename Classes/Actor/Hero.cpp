@@ -76,7 +76,7 @@ void Hero::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		m_isKeyDown[sk::kDown] = true;
 	}
-	else if (keyCode == EventKeyboard::KeyCode::KEY_Q)
+	else if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
 	{
 		if (m_skillTime >= m_skillCD)
 		{
