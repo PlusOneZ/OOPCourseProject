@@ -293,7 +293,7 @@ bool SafeMap::init()
     Board* informationBoard = Board::create();
     informationBoard->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 100.0,
         visibleSize.height / 2 + origin.y - 225.0)));
-    this->addChild(informationBoard, 3, sk::tag::kBoard);
+    this->addChild(informationBoard, 10, sk::tag::kBoard);
     auto keyBoardListenerBoard = EventListenerKeyboard::create();
     keyBoardListenerBoard->onKeyPressed = CC_CALLBACK_2(Board::onKeyPressed, informationBoard);
     //keyBoardListenerBoard->onKeyReleased = CC_CALLBACK_2(Board::onKeyReleased, informationBoard);
