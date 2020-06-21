@@ -8,7 +8,6 @@
 bool ManagerBox::init()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	auto EsotericaBox = EditBox::create(Size(250, 50), Scale9Sprite::create("interface/voidboard.png"));
 	EsotericaBox->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2));
 	EsotericaBox->setFontColor(Color3B(0, 0, 0));

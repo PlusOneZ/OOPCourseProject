@@ -322,7 +322,6 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
         if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
             || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kBarrier))
         {
-            auto p = nodeA->getPosition();
             auto v = nodeA->getPhysicsBody()->getVelocity();
             v.normalize();
             if (nodeA->getTag() == sk::tag::kHero)
@@ -473,4 +472,5 @@ Monster* RoomMap::createMonsterRand()
     {
         return MonsterWithGun::create();
     }
+    return nullptr;
 }

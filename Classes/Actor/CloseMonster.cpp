@@ -69,7 +69,8 @@ void MonsterPig::attack(float dt)
         || BulletLayer::getInstance() == nullptr || m_isDashing)
         return;
 
-    AudioEngine::play2d(sk::files::kGunShot, false, 0.25);
+    if (gIsEffectPlaying)
+        AudioEngine::play2d(sk::files::kGunShot, false, 0.25);
 
     Bullet *pBullet = m_pWeapon->createBullet();
 
@@ -228,7 +229,8 @@ void MonsterSnow::attack(float dt)
     m_canAttack = false;
     auto pos = Hero::getInstance()->getPosition();
     auto attackFunc = CallFunc::create([&](){
-        AudioEngine::play2d(sk::files::kMonQuake, false, 0.25);
+        if (gIsEffectPlaying)
+            AudioEngine::play2d(sk::files::kMonQuake, false, 0.25);
         Bullet *pBullet = m_pWeapon->createBullet();
         pBullet->attack(pos.x, pos.y, getPosition(), m_facing);
         BulletLayer::getInstance()->addChild(pBullet);

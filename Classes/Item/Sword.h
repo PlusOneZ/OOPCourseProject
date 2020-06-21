@@ -7,6 +7,7 @@
 #define _SWORD_H_
 
 #include "Weapon.h"
+#include "Scene/PauseMenu.h"
 
 static const std::string kSwordMessage = "Sword";
 /**

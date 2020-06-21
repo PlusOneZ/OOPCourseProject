@@ -25,6 +25,7 @@ Bullet* Gun::createBullet()
 {
 
 	Bullet* pBullet = NormalBullet::create();
-	AudioEngine::play2d(sk::files::kGunShot);
+    if (gIsEffectPlaying)
+    	AudioEngine::play2d(sk::files::kGunShot);
 	return pBullet;
 }

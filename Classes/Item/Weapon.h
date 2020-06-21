@@ -1,4 +1,4 @@
-﻿/**
+/**
 *@file Weapon.h
 *@author 翟晨昊
 *@date 5/30/2020

@@ -72,7 +72,8 @@ void MonsterCrawShoot::attack(float dt)
     const auto kOffSet = Vec2(0, m_sprite->getContentSize().height / 2);
 
     log("att");
-    AudioEngine::play2d(sk::files::kMonThorn, false, 0.25);
+    if (gIsEffectPlaying)
+        AudioEngine::play2d(sk::files::kMonThorn, false, 0.25);
     auto num = m_pWeapon->getBulletCount();
     for (int i = 0; i < num; i++)
     {
@@ -163,7 +164,8 @@ void MonsterWithGun::attack(float dt)
         || BulletLayer::getInstance() == nullptr)
         return;
 
-    AudioEngine::play2d(sk::files::kGunShot, false, 0.25);
+    if (gIsEffectPlaying)
+        AudioEngine::play2d(sk::files::kGunShot, false, 0.25);
 
     Bullet *pBullet = m_pWeapon->createBullet();
 

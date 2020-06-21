@@ -213,7 +213,7 @@ void PauseMenu::changEffectPlayEvent() {
 
 void PauseMenu::changMusicPlayEvent() {
     playClickEffect();
-    // TODO: 在这里开关音乐
+
     if (gIsMusicPlaying) {
         gIsMusicPlaying = false;
         this->getChildByTag(77)->setColor(Color3B(20, 20, 20));

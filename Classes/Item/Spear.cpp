@@ -32,6 +32,7 @@ Bullet* Spear::createBullet()
 	auto seq = Sequence::create(begin, delay, end, nullptr);
 	Bullet* pBullet = SpearBullet::create();
 	m_pSprite->runAction(seq);
-	AudioEngine::play2d(sk::files::kSwordAttack);
+    if (gIsEffectPlaying)
+    	AudioEngine::play2d(sk::files::kSwordAttack);
 	return pBullet;
 }

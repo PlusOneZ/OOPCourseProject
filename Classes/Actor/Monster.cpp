@@ -112,18 +112,16 @@ void Monster::die()
     auto coin = Coin::create();
     coin->setCoinAmount(amount);
     int tag = sk::tag::kCoin;
-    auto scene = getScene();
+    auto scene = getParent();
     log("Monster die: %f, %f", this->getPosition().x, this->getPosition().y);
     if (scene)
     {
         while (scene->getChildByTag(tag) != nullptr)
             tag += 50;
         coin->setTag(tag);
-        if (this->getPosition() != Vec2::ZERO)
-            coin->setPosition(this->getPosition());
-        else
-            coin->setPosition(Vec2(720, 540));
-        scene->addChild(coin);
+        coin->setPosition(this->getPosition());
+
+        scene->addChild(coin, 9, tag);
     }
 
     this->removeFromParentAndCleanup(true);
