@@ -13,7 +13,7 @@ bool MonsterPig::init()
     schedule(CC_SCHEDULE_SELECTOR(MonsterPig::followSpeed), .5f);
     schedule(CC_SCHEDULE_SELECTOR(MonsterPig::attack), 2.f);
     m_pMoveAnimation = creatActorAnimate(sk::files::kPigMove,
-                                         50, 48, 5);
+                                         60, 48, 5);
     m_pDieSprite = sk::files::kPigDie;
     this->setTag(sk::tag::kMonster);
 

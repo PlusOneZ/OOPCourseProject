@@ -145,7 +145,7 @@ bool TitleScene::init()
 void TitleScene::menuStartCallback(Ref* pSender)
 {
     auto scene = SafeMap::createScene();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     AudioEngine::pause(gBackgroundMusicID);
     
     gBackgroundMusicID = AudioEngine::play2d(sk::files::kBgm2, true, 0.5f);
