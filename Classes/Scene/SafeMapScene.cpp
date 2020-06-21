@@ -508,18 +508,20 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
         if ((nodeA->getTag() == sk::tag::kHero && nodeB->getTag() == sk::tag::kBarrier)
             || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kBarrier))
         {
-            auto v = nodeA->getPhysicsBody()->getVelocity();
-            v.normalize();
             if (nodeA->getTag() == sk::tag::kHero)
             {
-                nodeA->setPosition(-50*v);
-                nodeA->getPhysicsBody()->setVelocity(-10*v);
+                auto v = nodeA->getPhysicsBody()->getVelocity();
+                v.normalize();
+                nodeA->setPosition(-50 * v);
+                nodeA->getPhysicsBody()->setVelocity(-10 * v);
                 return true;
             }
             else
             {
-                nodeB->setPosition(-50*v);
-                nodeB->getPhysicsBody()->setVelocity(-10*v);
+                auto v = nodeB->getPhysicsBody()->getVelocity();
+                v.normalize();
+                nodeB->setPosition(-50 * v);
+                nodeB->getPhysicsBody()->setVelocity(-10 * v);
                 return true;
             }
         }

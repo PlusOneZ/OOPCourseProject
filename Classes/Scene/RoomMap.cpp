@@ -321,20 +321,18 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
         {
             if (nodeA->getTag() == sk::tag::kHero)
             {
-                auto p = nodeA->getPosition();
                 auto v = nodeA->getPhysicsBody()->getVelocity();
                 v.normalize();
-                nodeA->setPosition(-50*v);
-                nodeA->getPhysicsBody()->setVelocity(-10*v);
+                nodeA->setPosition(-50 * v);
+                nodeA->getPhysicsBody()->setVelocity(-10 * v);
                 return true;
             }
             else
             {
-                auto p = nodeB->getPosition();
                 auto v = nodeB->getPhysicsBody()->getVelocity();
                 v.normalize();
-                nodeB->setPosition(-50*v);
-                nodeB->getPhysicsBody()->setVelocity(-10*v);
+                nodeB->setPosition(-50 * v);
+                nodeB->getPhysicsBody()->setVelocity(-10 * v);
                 return true;
             }
         }
