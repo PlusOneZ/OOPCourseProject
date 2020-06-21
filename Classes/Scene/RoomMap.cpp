@@ -313,9 +313,9 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
 			nextRoom->addChild(bulletLayer, 8, 450);
             Director::getInstance()->replaceScene(nextRoom);
 
-			Buff::HeroBuff->flamingEnd();
-			Buff::HeroBuff->flamingEnd();
-			Buff::HeroBuff->rootedEnd(100.f);
+			Buff::getInstance()->flamingEnd();
+			Buff::getInstance()->flamingEnd();
+			Buff::getInstance()->rootedEnd(100.f);
 
             return true;
         }
