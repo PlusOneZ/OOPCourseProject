@@ -181,8 +181,8 @@ bool Boss::init()
         return false;
 
     m_wanderSpeed = 0;
-    m_curHealth = 1000;
-    m_fullHealth = 1000;
+    m_curHealth = 300;
+    m_fullHealth = 300;
     m_vision = 800.;
     m_shootRange = 800.;
 
