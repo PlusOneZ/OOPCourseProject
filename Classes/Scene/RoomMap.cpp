@@ -434,4 +434,5 @@ Monster* RoomMap::createMonsterRand()
     {
         return MonsterWithGun::create();
     }
+    return nullptr;
 }
