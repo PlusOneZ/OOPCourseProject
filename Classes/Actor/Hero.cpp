@@ -368,6 +368,18 @@ void Hero::setStateChanged(bool state)
     m_ifStateChanged = state;
 }
 
+void Hero::addCurrentArmor(int num)
+{
+    if (num >= m_maxArmor - m_armor)
+    {
+        m_armor = m_maxArmor;
+    }
+    else
+    {
+        m_armor += num;
+    }
+}
+
 //Item中函数的实现
 bool Item::onContactSeparate(PhysicsContact& contact)
 {

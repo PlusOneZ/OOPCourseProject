@@ -47,6 +47,12 @@ void ManagerBox::editBoxReturn(EditBox* editBox)
 	{
 		Hero::getInstance()->addArmor(3);
 	}
+	else if (curText == "become zch")
+    {
+        Hero::getInstance()->gainCoins(10000);
+        Hero::getInstance()->addArmor(1000);
+        Hero::getInstance()->addCurrentArmor(1000);
+    }
 	log("editbox return"); 
 }
 
