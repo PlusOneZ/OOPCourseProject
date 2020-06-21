@@ -15,12 +15,12 @@
 + git init
 + git status
 + git add / commit
-![](areas.png)
+![](../images/areas.png)
 + git rm / mv
 + git log
 + git remote
 + git fetch / pull /push
-![](lifecycle.png)
+![](../images/lifecycle.png)
 
 
 ### Sourcetree
