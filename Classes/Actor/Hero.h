@@ -163,6 +163,12 @@ public:
 	int getBaseDamage();
 
 	/**
+	*@brief  提高英雄攻击力
+	*@author 翟晨昊
+	*/
+	void raiseDamage(int raiseAmount);
+
+	/**
 	*@brief 设置英雄速度
 	*@author 翟晨昊
 	*@return 速度
