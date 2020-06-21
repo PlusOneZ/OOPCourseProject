@@ -43,7 +43,19 @@ public:
 	*/
 	void rest();
 
+	/**
+	 * @author 卓正一
+	 * @date   6/20/2020
+	 * @note   定义在 SafeMap
+	 */
 	void die();
+
+	/**
+	 * @author 卓正一
+	 * @date   6/21/2020
+	 * @note   定义在 StartScene
+	 */
+	void dieToStartMenu();
 
 	/**
 	 * @note   Modified : 卓正一

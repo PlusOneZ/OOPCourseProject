@@ -5,7 +5,7 @@
  */
 
 #include "StartScene.h"
-
+#include "Actor/Hero.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -67,4 +67,12 @@ bool Start::init()
 void Start::onKeyPressed(EventKeyboard::KeyCode keyCode, Event *event) {
     log("Key with keyCode %d pressed", keyCode);
     Director::getInstance()->replaceScene(TitleScene::create());
+}
+
+void Hero::dieToStartMenu()
+{
+    m_pPresentHero = nullptr;
+    this->removeFromParentAndCleanup(false);
+    auto start = Start::createScene();
+    Director::getInstance()->replaceScene(start);
 }

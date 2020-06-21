@@ -8,6 +8,7 @@
 #include "ui/CocosGUI.h"
 #include "AudioEngine.h"
 #include "StartScene.h"
+#include "Actor/Hero.h"
 
 USING_NS_CC;
 

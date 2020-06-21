@@ -165,16 +165,17 @@ bool PauseMenu::init() {
         resumeBtn->addClickEventListener([&](Ref*){
             playClickEffect();
             // 恢复游戏就是退出设置界面
-            log("Clicked");
+            log("Going back");
             Director::getInstance()->resume();
             Director::getInstance()->popScene();
         });
 
         homeBtn->addClickEventListener([&](Ref* ){
             playClickEffect();
-            // TODO: 如果有存档功能的话，在这里存档并退出（或是每过一个房间就存一次档）
             AudioEngine::pauseAll();
-            Director::getInstance()->replaceScene(Start::create());
+            log("Going to start scene.");
+            if (Hero::getInstance())
+                Hero::getInstance()->dieToStartMenu();
         });
 
         effectBtn->addClickEventListener([&](Ref*){ changEffectPlayEvent(); });

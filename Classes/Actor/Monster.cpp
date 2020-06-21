@@ -104,19 +104,23 @@ void Monster::die()
 
     // 掉落金币
     int amount = RandomHelper::random_int(0, m_fullHealth / 10);
+    if (amount <= 0)
+    {
+        this->removeFromParentAndCleanup(true);
+        return;
+    }
     auto coin = Coin::create();
     coin->setCoinAmount(amount);
-    coin->setPosition(getPosition());
     int tag = sk::tag::kCoin;
-    auto scene = getParent();
+    auto scene = getScene();
     if (scene)
     {
         while (scene->getChildByTag(tag) != nullptr)
             tag += 50;
         coin->setTag(tag);
+        coin->setPosition(getPosition());
         scene->addChild(coin);
     }
-
 
     this->removeFromParentAndCleanup(true);
 }

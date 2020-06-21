@@ -6,8 +6,6 @@
 
 #include "Coin.h"
 
-Animate* Coin::pCoinAnimate = Actor::creatActorAnimate("item/coin_", 7, 9);
-
 bool Coin::init()
 {
 	m_pSprite = Sprite::create("item/HealthPotion.png");
@@ -20,10 +18,10 @@ bool Coin::init()
 	body->setCollisionBitmask(sk::bitMask::kItemCollision);
 	body->setContactTestBitmask(sk::bitMask::kItemContact);
 	m_pSprite->setPhysicsBody(body);
-	m_pSprite->runAction(pCoinAnimate);
+    m_pCoinAnimate = Actor::creatActorAnimate("item/coin_", 7, 9);
+	m_pSprite->runAction(m_pCoinAnimate);
 
 	this->addChild(m_pSprite);
-
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(Coin::onContactBegin, this);
@@ -44,6 +42,7 @@ bool Coin::onContactBegin(PhysicsContact& contact)
 			//确保其中一个是英雄一个是金币的时候执行
 		{
             Hero::getInstance()->gainCoins(m_coinAmount);
+            m_pSprite->stopAllActions();
 			this->removeFromParentAndCleanup(true);
 			AudioEngine::play2d(sk::files::kCoin);
 			log("coin collected");

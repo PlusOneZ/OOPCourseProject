@@ -40,8 +40,8 @@ public:
 	 */
 	void setTag(int tag) override ;
 
-	static Animate* pCoinAnimate;
 protected:
+    Animate* m_pCoinAnimate;
 	Sprite* m_pSprite;
 	int m_coinAmount = 1;
 };
