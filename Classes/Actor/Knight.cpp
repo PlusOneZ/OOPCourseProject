@@ -34,11 +34,11 @@ bool Knight::init()
 
 float Knight::skill()
 {
-	HeroBuff.increaseATK(m_increaseAmount);
+	Buff::HeroBuff->increaseATK(m_increaseAmount);
 	return m_skillLastTime;
 }
 
 void Knight::skillEnd()
 {
-	HeroBuff.increaseATKEnd(m_increaseAmount);
+	Buff::HeroBuff->increaseATKEnd(m_increaseAmount);
 }
