@@ -50,8 +50,8 @@ float Assassin::skill()
 	{
 		move();
 	}
-	Buff::HeroBuff->immortal();
-	Buff::HeroBuff->speedUp(m_speedUP);
+	Buff::getInstance()->immortal();
+	Buff::getInstance()->speedUp(m_speedUP);
 	return m_skillLastTime;
 }
 
@@ -65,6 +65,6 @@ void Assassin::skillEnd()
 	{
 		move();
 	}
-	Buff::HeroBuff->immortalEnd();
-	Buff::HeroBuff->speedUpEnd(m_speedUP);
+	Buff::getInstance()->immortalEnd();
+	Buff::getInstance()->speedUpEnd(m_speedUP);
 }

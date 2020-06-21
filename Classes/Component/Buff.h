@@ -28,6 +28,8 @@ private:
 	int m_flaming = 0;
 
 	Animate* m_pFlaming;
+
+	static Buff* HeroBuff;
 public:
 	Buff()
 	{
@@ -53,14 +55,13 @@ public:
 
 	void increaseATK(int amount);
 	
-
 	void increaseATKEnd(int amount);
 
 	void flaming();	
 
 	void flamingEnd();
 
-	static Buff* HeroBuff;
+	static Buff* getInstance();
 };
 
 

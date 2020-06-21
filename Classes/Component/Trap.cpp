@@ -68,13 +68,13 @@ bool FreezeTrap::init()
 void FreezeTrap::trapStart()
 {
     AudioEngine::play2d(sk::files::kIceTrap);
-	Buff::HeroBuff->rooted(m_trapTime);
+	Buff::getInstance()->rooted(m_trapTime);
 	m_pSprite->setVisible(false);
 }
 
 void FreezeTrap::trapEnd()
 {
-	Buff::HeroBuff->rootedEnd(m_trapTime);
+	Buff::getInstance()->rootedEnd(m_trapTime);
 	this->removeFromParentAndCleanup(true);
 }
 
@@ -89,13 +89,13 @@ bool FlameTrap::init()
 void FlameTrap::trapStart()
 {
     AudioEngine::play2d(sk::files::kFireTrap);
-	Buff::HeroBuff->flaming();
+	Buff::getInstance()->flaming();
 	m_pSprite->setVisible(false);
 }
 
 void FlameTrap::trapEnd()
 {
-	Buff::HeroBuff->flamingEnd();
+	Buff::getInstance()->flamingEnd();
 	this->removeFromParentAndCleanup(true);
 }
 

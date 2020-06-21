@@ -250,8 +250,12 @@ bool SafeMap::init()
 
 
     addPlayer(m_nowID);
-	Buff myBuff;
-	myBuff = *(new Buff);
+	Buff* myBuff = nullptr;
+	if (myBuff != nullptr)
+	{
+		delete myBuff;
+	}
+	myBuff = new Buff;
 
 
 	ChangeHero* testChangeHero = ChangeHero::create();
@@ -524,9 +528,9 @@ bool SafeMap::onContactBegin(PhysicsContact& contact)
             nextRoom->addChild(bulletLayer, 8, 450);
             Director::getInstance()->replaceScene(nextRoom);
 
-			Buff::HeroBuff->flamingEnd();
-			Buff::HeroBuff->flamingEnd();
-			Buff::HeroBuff->rootedEnd(100.f);
+			Buff::getInstance()->flamingEnd();
+			Buff::getInstance()->flamingEnd();
+			Buff::getInstance()->rootedEnd(100.f);
 
             return true;
         }
