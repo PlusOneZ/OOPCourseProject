@@ -257,6 +257,7 @@ bool SafeMap::init()
 	}
 	myBuff = new Buff;
 
+    RoomMap::m_mapNumber = 1;
 
 	ChangeHero* testChangeHero = ChangeHero::create();
 	testChangeHero->setPosition(Vec2(visibleSize.width / 2 + origin.x + 280.0,
