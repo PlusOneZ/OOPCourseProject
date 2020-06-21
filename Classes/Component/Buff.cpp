@@ -182,3 +182,8 @@ void Buff::flamingEnd()
 		m_flaming--;
 	}
 }
+
+Buff* Buff::getInstance()
+{
+	return HeroBuff;
+}
