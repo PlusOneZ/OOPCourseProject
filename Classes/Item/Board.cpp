@@ -22,6 +22,7 @@ bool Board::init()
 	m_message.pushBack(putMessage(sk::message::kMonsterWithGunMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterPigMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterSnowMessage));
+	m_message.pushBack(putMessage(sk::message::kMonsterBossMessage));
 	for (auto num : m_message)
 	{
 		num->setVisible(false);
@@ -37,7 +38,7 @@ ui::Scale9Sprite* putMessage(const std::string& message)
 	board->retain();
 	board->setContentSize(Size(message.size() * 5, 40));
 
-	auto showMessage = Label::createWithTTF(message, "Font/IRANYekanBold.ttf", 20.);
+	auto showMessage = Label::createWithTTF(message, "Font/IRANYekanBold.ttf", 15.);
 
 	const Vec2 messagePos = { message.size() * (float)2.5,25 };
 
