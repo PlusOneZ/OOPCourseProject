@@ -9,7 +9,7 @@
 
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
-#include "ui\CocosGUI.h"
+#include "ui/CocosGUI.h"
 #include "Actor/Hero.h"
 
 USING_NS_CC;
@@ -36,10 +36,10 @@ public:
 	*@brief 输入框的交互
 	*@author 翟晨昊
 	*/
-	virtual void editBoxEditingDidBegin(EditBox* editBox);    
-	virtual void editBoxEditingDidEnd(EditBox* editBox);    
-	virtual void editBoxTextChanged(EditBox* editBox, const std::string& text);   
-	virtual void editBoxReturn(EditBox* editBox);
+	void editBoxEditingDidBegin(EditBox* editBox) override ;
+	virtual void editBoxEditingDidEnd(EditBox* editBox);
+	void editBoxTextChanged(EditBox* editBox, const std::string& text) override ;
+	void editBoxReturn(EditBox* editBox) override ;
 private:
 	std::string curText;
 };

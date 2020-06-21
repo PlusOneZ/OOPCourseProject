@@ -197,6 +197,8 @@ public:
 
     void setStateChanged(bool state);
 
+    void addCurrentArmor(int num);
+
 protected:
 
     static Hero* m_pPresentHero;

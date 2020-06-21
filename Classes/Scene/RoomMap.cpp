@@ -63,28 +63,28 @@ bool RoomMap::init()
     testUI->setPosition(118.5f, 661.5f);
     this->addChild(testUI, 5, sk::tag::kHeroUI);
 
-    if (m_mapNumber == 2)
+    if (m_mapNumber == 2 || m_mapNumber == 6)
     {
         Monster::loadAllAnimate();
-        auto dm1 = MonsterWithGun::create();
+        auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 
-        dm1->setPosition(500, 400);
+        dm1->setPosition(500, 370);
         this->addChild(dm1, 9, sk::tag::kMonster);
 
-        auto dm2 = MonsterWithGun::create();
+        auto dm2 = createMonsterRand();
         dm2->generatePhysics(20.f);
 
-        dm2->setPosition(700, 400);
+        dm2->setPosition(700, 370);
         this->addChild(dm2, 9, sk::tag::kMonster);
 
-        auto dm3 = MonsterCrawShoot::create();
+        auto dm3 = createMonsterRand();
         dm3->generatePhysics(20.f);
 
         dm3->setPosition(300, 200);
         this->addChild(dm3, 9, sk::tag::kMonster);
 
-        auto dm4 = MonsterCrawShoot::create();
+        auto dm4 = createMonsterRand();
         dm4->generatePhysics(20.f);
 
         dm4->setPosition(900, 200);
@@ -103,28 +103,28 @@ bool RoomMap::init()
         testSpeed->setPosition(880, 500);
         this->addChild(testSpeed, 3, sk::tag::kAssassinStatue);
     }
-    else if (m_mapNumber == 3)
+    else if (m_mapNumber == 3 || m_mapNumber == 7)
     {
         Monster::loadAllAnimate();
-        auto dm1 = MonsterWithGun::create();
+        auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 
-        dm1->setPosition(500, 400);
+        dm1->setPosition(500, 370);
         this->addChild(dm1, 9, sk::tag::kMonster);
 
-        auto dm2 = MonsterWithGun::create();
+        auto dm2 = createMonsterRand();
         dm2->generatePhysics(20.f);
 
         dm2->setPosition(700, 400);
         this->addChild(dm2, 9, sk::tag::kMonster);
 
-        auto dm3 = MonsterCrawShoot::create();
+        auto dm3 = createMonsterRand();
         dm3->generatePhysics(20.f);
 
         dm3->setPosition(300, 200);
         this->addChild(dm3, 9, sk::tag::kMonster);
 
-        auto dm4 = MonsterSnow::create();
+        auto dm4 = createMonsterRand();
         dm4->generatePhysics(20.f);
 
         dm4->setPosition(900, 200);
@@ -143,7 +143,7 @@ bool RoomMap::init()
         testWar->setPosition(400, 600);
         this->addChild(testWar, 3, sk::tag::kWarStatue);
     }
-    else if (m_mapNumber == 4)
+    else if (m_mapNumber == 5 || m_mapNumber == 8)
     {
         int randNumber = cocos2d::random(1, 2);
         if (randNumber == 1)
@@ -163,7 +163,7 @@ bool RoomMap::init()
         randNumber = cocos2d::random(1, 2);
         if (randNumber == 1)
         {
-            auto potion = Gun::create();;
+            auto potion = Gun::create();
             potion->setPosition(640, 250);
             potion->setShopItem(5);
             this->addChild(potion, 10, sk::tag::kGunWeapon);
@@ -191,22 +191,22 @@ bool RoomMap::init()
             this->addChild(potion, 10, sk::tag::kSpearWeapon);
         }
     }
-    else if (m_mapNumber == 5)
+    else if (m_mapNumber == 4 || m_mapNumber == 9)
     {
         Monster::loadAllAnimate();
-        auto dm1 = MonsterSnow::create();
+        auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
 
         dm1->setPosition(640, 600);
         this->addChild(dm1, 9, sk::tag::kMonster);
 
-        auto dm2 = MonsterPig::create();
+        auto dm2 = createMonsterRand();
         dm2->generatePhysics(20.f);
 
         dm2->setPosition(300, 360);
         this->addChild(dm2, 9, sk::tag::kMonster);
 
-        auto dm3 = MonsterPig::create();
+        auto dm3 = createMonsterRand();
         dm3->generatePhysics(20.f);
 
         dm3->setPosition(980, 360);
@@ -271,14 +271,6 @@ void RoomMap::createDoor()
         tmpSprite->setAnchorPoint(Vec2::ZERO);
         tmpSprite->setContentSize(Size(width, height));
         tmpSprite->setPhysicsBody(tmpPhysicsBody);
-        
-        if (m_mapNumber == 3)
-        {
-            auto transferGate = Sprite::create("map/transfergate.png");
-            transferGate->setPosition(Vec2(x - 20, y - 25));
-            transferGate->setAnchorPoint(Vec2::ZERO);
-            this->addChild(transferGate, 6);
-        }
 
         this->addChild(tmpSprite, 2, sk::tag::kDoor);
     }
@@ -294,7 +286,7 @@ bool RoomMap::onContactBegin(PhysicsContact& contact)
             || (nodeB->getTag() == sk::tag::kHero && nodeA->getTag() == sk::tag::kDoor))
         {
             m_mapNumber++;
-            if (m_mapNumber == 6)
+            if (m_mapNumber == 10)
             {
                 return true;
             }
@@ -368,14 +360,18 @@ TMXTiledMap* RoomMap::createTiled(int mapNumber)
     if (mapNumber == 1) return TMXTiledMap::create("map/BirthRoom.tmx");
     if (mapNumber == 2) return TMXTiledMap::create("map/MonsterRoom1.tmx");
     if (mapNumber == 3) return TMXTiledMap::create("map/MonsterRoom2.tmx");
-    if (mapNumber == 4) return TMXTiledMap::create("map/ShopRoom.tmx");
-    if (mapNumber == 5) return TMXTiledMap::create("map/BossRoom.tmx");
+    if (mapNumber == 4) return TMXTiledMap::create("map/BossRoom.tmx");
+    if (mapNumber == 5) return TMXTiledMap::create("map/ShopRoom.tmx");
+    if (mapNumber == 6) return TMXTiledMap::create("map/MonsterRoom1.tmx");
+    if (mapNumber == 7) return TMXTiledMap::create("map/MonsterRoom2.tmx");
+    if (mapNumber == 8) return TMXTiledMap::create("map/ShopRoom.tmx");
+    if (mapNumber == 9) return TMXTiledMap::create("map/BossRoom.tmx");
     return nullptr;
 }
 
 void RoomMap::update(float dt)
 {
-    if (m_mapNumber == 6)
+    if (m_mapNumber == 10)
     {
         auto hero = Hero::getInstance();
         hero->die();
@@ -385,13 +381,15 @@ void RoomMap::update(float dt)
     {
         if (!ifDoor)
         {
-            if (m_mapNumber == 2 || m_mapNumber == 3)
+            if (m_mapNumber == 2 || m_mapNumber == 3
+                || m_mapNumber == 4 || m_mapNumber == 6
+                || m_mapNumber == 7)
             {
                 Treasure* testTreasure = Treasure::create();
                 testTreasure->setPosition(640, 200);
                 this->addChild(testTreasure, 3, sk::tag::kTreasure);
             }
-            if (m_mapNumber == 5)
+            if (m_mapNumber == 4 || m_mapNumber == 9)
             {
                 auto transferGate = Sprite::create("map/transfergate.png");
                 transferGate->setPosition(600, 320);
@@ -450,5 +448,26 @@ void RoomMap::addPlayer(sk::HeroID id)
         keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
         keyBoardListenerHero->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
         _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
+    }
+}
+
+Monster* RoomMap::createMonsterRand()
+{
+    int randNumber = cocos2d::random(1, 4);
+    if (randNumber == 1)
+    {
+        return MonsterSnow::create();
+    }
+    else if (randNumber == 2)
+    {
+        return MonsterPig::create();
+    }
+    else if (randNumber == 3)
+    {
+        return MonsterCrawShoot::create();
+    }
+    else if (randNumber == 4)
+    {
+        return MonsterWithGun::create();
     }
 }

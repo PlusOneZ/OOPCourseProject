@@ -123,9 +123,7 @@ void Monster::die()
             coin->setPosition(this->getPosition());
         else
             coin->setPosition(Vec2(720, 540));
-        coin->retain();
         scene->addChild(coin);
-        coin->setPosition(this->getPosition());
     }
 
     this->removeFromParentAndCleanup(true);
