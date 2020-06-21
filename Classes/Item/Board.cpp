@@ -21,6 +21,7 @@ bool Board::init()
 	m_message.pushBack(putMessage(sk::message::kMonsterCrawShootMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterWithGunMessage));
 	m_message.pushBack(putMessage(sk::message::kMonsterPigMessage));
+	m_message.pushBack(putMessage(sk::message::kMonsterSnowMessage));
 	for (auto num : m_message)
 	{
 		num->setVisible(false);

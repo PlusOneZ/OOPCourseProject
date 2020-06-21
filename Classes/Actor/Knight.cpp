@@ -7,6 +7,7 @@
 #include "Item/Gun.h"
 #include "Item/Shotgun.h"
 #include "Item/Sword.h"
+#include "Item/Spear.h"
 #include "Component/Buff.h"
 
 bool Knight::init()
@@ -15,7 +16,7 @@ bool Knight::init()
 	{
 		m_pPresentHero = this;
 		scheduleUpdate();
-		setMainWeapon(Shotgun::create());
+		setMainWeapon(Gun::create());
 		setSecondWeapon(Sword::create());
 		m_pSecWeapon->setVisible(false);
 		m_pMoveAnimate = creatActorAnimate(sk::files::kKnightMove);
