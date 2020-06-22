@@ -189,7 +189,7 @@ bool RoomMap::init()
             this->addChild(potion, 10, sk::tag::kSpearWeapon);
         }
     }
-    else if (m_mapNumber == 4 || m_mapNumber == 9)
+    else if (m_mapNumber == 4)
     {
         auto dm1 = createMonsterRand();
         dm1->generatePhysics(20.f);
@@ -208,6 +208,14 @@ bool RoomMap::init()
 
         dm3->setPosition(980, 360);
         this->addChild(dm3, 9, sk::tag::kMonster);
+    }
+    else if (m_mapNumber == 9)
+    {
+        auto boss = Boss::create();
+        boss->generatePhysics(20.f);
+
+        boss->setPosition(655, 330);
+        this->addChild(boss, 9, sk::tag::kMonster);
     }
 
     this->scheduleUpdate();
@@ -389,6 +397,10 @@ void RoomMap::update(float dt)
                 Treasure* testTreasure = Treasure::create();
                 testTreasure->setPosition(640, 200);
                 this->addChild(testTreasure, 3, sk::tag::kTreasure);
+				Coin* testCoin = Coin::create();
+				testCoin->setCoinAmount(cocos2d::random(1, 4));
+				testCoin->setPosition(640, 120);
+				this->addChild(testCoin, 3, sk::tag::kCoin);
             }
             if (m_mapNumber == 4 || m_mapNumber == 9)
             {
@@ -400,55 +412,6 @@ void RoomMap::update(float dt)
             createDoor();
             ifDoor = true;
         }
-    }
-}
-
-void RoomMap::addPlayer(sk::HeroID id)
-{
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    PolygonInfo fig;
-    Hero* hero;
-    if (id == sk::HeroID::kAssassin)
-    {
-        fig = AutoPolygon::generatePolygon("Actor/assassin_rest1.png");
-    }
-    else
-    {
-        fig = AutoPolygon::generatePolygon("Actor/knight_rest1.png");
-    }
-    Sprite* heroSprite = Sprite::create(fig);
-
-    if (heroSprite == nullptr)
-    {
-        log("hero picture not found");
-    }
-    else
-    {
-        if (id == sk::HeroID::kAssassin)
-        {
-            hero = Assassin::create();
-        }
-        else
-        {
-            hero = Knight::create();
-        }
-        hero->bindSprite(heroSprite);
-        hero->generatePhysics();
-        hero->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-            visibleSize.height / 2 + origin.y + 150.0)));
-        this->addChild(hero, 4, sk::tag::kHero);
-        hero->rest();
-
-        BulletLayer* bulletLayer = BulletLayer::create();
-        bulletLayer->retain();
-        bulletLayer->bindHero(hero);
-        this->addChild(bulletLayer, 8, sk::tag::kBulletLayer);
-
-        auto keyBoardListenerHero = EventListenerKeyboard::create();
-        keyBoardListenerHero->onKeyPressed = CC_CALLBACK_2(Hero::onKeyPressed, hero);
-        keyBoardListenerHero->onKeyReleased = CC_CALLBACK_2(Hero::onKeyReleased, hero);
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListenerHero, this);
     }
 }
 
@@ -471,4 +434,5 @@ Monster* RoomMap::createMonsterRand()
     {
         return MonsterWithGun::create();
     }
+    return nullptr;
 }

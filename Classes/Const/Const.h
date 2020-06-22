@@ -164,6 +164,7 @@ namespace sk
         static const std::string kMonsterWithGunMessage = "MonsterWithGun\nbackUpDistance:100";
         static const std::string kMonsterPigMessage = "MonsterPig\ndashSpeed:150\nattackRange:75";
         static const std::string kMonsterSnowMessage = "MonsterSnow\njumpDistance:50\nattackRange:75";
+        static const std::string kMonsterBossMessage = "Boss\nHealth:300\nattackRange:800\nbackUpDistance:100";
     }
 }
 

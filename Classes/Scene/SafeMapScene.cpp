@@ -264,28 +264,8 @@ bool SafeMap::init()
 		visibleSize.height / 2 + origin.y));
 	this->addChild(testChangeHero, 3, sk::tag::kChangeHero);
 
-
-	HealthPotion* testHP = HealthPotion::create();
-	testHP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-		visibleSize.height / 2 + origin.y)));
-	testHP->setShopItem(1);
-	this->addChild(testHP, 3, sk::tag::kHealthPotion);
-
-    ArmorPotion* testAP = ArmorPotion::create();
-    testAP->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 125.0,
-        visibleSize.height / 2 + origin.y)));
-    testAP->setShopItem(1);
-    this->addChild(testAP, 3, sk::tag::kArmorPotion);
-
-    Weapon* testWeapon = Gun::create();
-    testWeapon->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 75.0,
-        visibleSize.height / 2 + origin.y - 150.0)));
-    testWeapon->setState(false);
-    testWeapon->setTag(sk::tag::kGunWeapon);
-    this->addChild(testWeapon, 3, sk::tag::kGunWeapon);
-
 	Coin* testCoin = Coin::create();
-	testCoin->setCoinAmount(20);
+	testCoin->setCoinAmount(10);
 	testCoin->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x,
 		visibleSize.height / 2 + origin.y)));
 	this->addChild(testCoin, 3, sk::tag::kCoin);
@@ -298,12 +278,12 @@ bool SafeMap::init()
 
 	WarStatue* testWar = WarStatue::create();
 	testWar->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 150.0,
-		visibleSize.height / 2 + origin.y - 200.0)));
+		visibleSize.height / 2 + origin.y - 25.0)));
 	this->addChild(testWar, 3, sk::tag::kWarStatue);
 
 	AssassinStatue* testSpeed = AssassinStatue::create();
-	testSpeed->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 100.0,
-		visibleSize.height / 2 + origin.y - 200.0)));
+	testSpeed->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x - 50.0,
+		visibleSize.height / 2 + origin.y + 75.0)));
 	this->addChild(testSpeed, 3, sk::tag::kAssassinStatue);
 
 	HeroUI* testUI = HeroUI::create();
@@ -313,7 +293,7 @@ bool SafeMap::init()
     Board* informationBoard = Board::create();
     informationBoard->setPosition(Point(Vec2(visibleSize.width / 2 + origin.x + 100.0,
         visibleSize.height / 2 + origin.y - 225.0)));
-    this->addChild(informationBoard, 3, sk::tag::kBoard);
+    this->addChild(informationBoard, 10, sk::tag::kBoard);
     auto keyBoardListenerBoard = EventListenerKeyboard::create();
     keyBoardListenerBoard->onKeyPressed = CC_CALLBACK_2(Board::onKeyPressed, informationBoard);
     //keyBoardListenerBoard->onKeyReleased = CC_CALLBACK_2(Board::onKeyReleased, informationBoard);
