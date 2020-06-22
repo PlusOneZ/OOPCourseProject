@@ -21,3 +21,17 @@ To my teammates: [zch](https://github.com/1918190), [ljs](https://github.com/LJS
 
 And to teachers and teaching assistants.
 
+## FYI: controls of the game
+| Key | Action |
+| --- | --- |
+| In Game: |
+| Left Click | Attack |
+| W A S D <br> or arrows | Move |
+| F         | Interact|
+| SPACE     | Use skill|
+| E         | Shift Weapon|
+| ESC       | Pause Menu |
+| In information Board:
+| A / D     | Previous / Next Page|
+| Z         | Exit |
+
